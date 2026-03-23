@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Converter from "../components/Converter.svelte";
+---
+
+<Layout
+  title="JSON to CSV Converter"
+  description="Convert JSON arrays to CSV format online. Export JSON data to spreadsheet-friendly CSV. Free, instant, private."
+  activeToolId="json-to-csv"
+>
+  <Converter client:load fromFormat="json" toFormat="csv" />
+</Layout>

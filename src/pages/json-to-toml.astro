@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Converter from "../components/Converter.svelte";
+---
+
+<Layout
+  title="JSON to TOML Converter"
+  description="Convert JSON to TOML format online. Clean TOML output for config files. Free, instant, 100% client-side."
+  activeToolId="json-to-toml"
+>
+  <Converter client:load fromFormat="json" toFormat="toml" />
+</Layout>

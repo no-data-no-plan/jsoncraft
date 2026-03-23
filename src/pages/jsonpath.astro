@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import JsonPathTool from "../components/JsonPathTool.svelte";
+---
+
+<Layout
+  title="JSONPath Tester"
+  description="Test JSONPath expressions interactively. Evaluate queries against your JSON data with instant results. Free online JSONPath playground."
+  activeToolId="jsonpath"
+>
+  <JsonPathTool client:load />
+</Layout>

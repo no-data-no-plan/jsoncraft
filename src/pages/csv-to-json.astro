@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Converter from "../components/Converter.svelte";
+---
+
+<Layout
+  title="CSV to JSON Converter"
+  description="Convert CSV data to JSON format online. Automatic header detection and type inference. Free, fast, no tracking."
+  activeToolId="csv-to-json"
+>
+  <Converter client:load fromFormat="csv" toFormat="json" />
+</Layout>

@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import JsonDiff from "../components/JsonDiff.svelte";
+---
+
+<Layout
+  title="JSON Diff"
+  description="Compare two JSON documents side by side. See additions, deletions, and changes highlighted. Free, fast, no tracking."
+  activeToolId="diff"
+>
+  <JsonDiff client:load />
+</Layout>

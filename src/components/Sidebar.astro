@@ -1,0 +1,72 @@
+---
+import { tools } from "../lib/tools";
+
+interface Props {
+  activeToolId: string;
+}
+
+const { activeToolId } = Astro.props;
+
+const groups = [
+  { label: "Core", ids: ["formatter", "diff", "viewer", "jsonpath"] },
+  {
+    label: "Converters",
+    ids: [
+      "yaml-to-json",
+      "json-to-yaml",
+      "json-to-csv",
+      "csv-to-json",
+      "json-to-toml",
+      "toml-to-json",
+    ],
+  },
+];
+---
+
+<aside
+  id="sidebar"
+  class="w-56 shrink-0 bg-[var(--color-bg-secondary)] border-r border-[var(--color-border)] flex flex-col
+         fixed lg:static inset-y-0 left-0 z-40 -translate-x-full lg:translate-x-0 transition-transform"
+>
+  <!-- Logo -->
+  <a href="/" class="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border)]">
+    <span class="text-xl font-bold text-[var(--color-accent)]">{ }</span>
+    <span class="text-lg font-bold text-[var(--color-text-primary)]">JSONCraft</span>
+  </a>
+
+  <!-- Navigation -->
+  <nav class="flex-1 overflow-y-auto py-2">
+    {
+      groups.map((group) => (
+        <div class="mb-2">
+          <div class="px-4 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+            {group.label}
+          </div>
+          {group.ids.map((id) => {
+            const tool = tools.find((t) => t.id === id)!;
+            const isActive = tool.id === activeToolId;
+            return (
+              <a
+                href={tool.path}
+                class:list={[
+                  "flex items-center gap-2 px-4 py-1.5 mx-2 rounded text-sm transition-colors",
+                  isActive
+                    ? "bg-[var(--color-accent)]/15 text-[var(--color-accent)] font-medium"
+                    : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)]",
+                ]}
+              >
+                <span class="w-7 text-center font-mono text-xs opacity-70">{tool.icon}</span>
+                <span>{tool.name}</span>
+              </a>
+            );
+          })}
+        </div>
+      ))
+    }
+  </nav>
+
+  <!-- Bottom info -->
+  <div class="px-4 py-3 border-t border-[var(--color-border)] text-[11px] text-[var(--color-text-muted)]">
+    100% client-side. No data sent to any server.
+  </div>
+</aside>

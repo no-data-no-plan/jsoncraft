@@ -1,0 +1,151 @@
+<script lang="ts">
+  import CodeEditor from "./CodeEditor.svelte";
+  import { JSONPath } from "jsonpath-plus";
+
+  let input = "";
+  let query = "$.store.book[*].author";
+  let result = "";
+  let error = "";
+
+  const examples = [
+    { label: "All authors", path: "$.store.book[*].author" },
+    { label: "All prices", path: "$..price" },
+    { label: "First book", path: "$.store.book[0]" },
+    { label: "Books with ISBN", path: "$.store.book[?(@.isbn)]" },
+    { label: "Books under 10", path: "$.store.book[?(@.price<10)]" },
+    { label: "All items", path: "$..*" },
+  ];
+
+  function evaluate() {
+    error = "";
+    result = "";
+    if (!input.trim() || !query.trim()) return;
+    try {
+      const parsed = JSON.parse(input);
+      const matches = JSONPath({ path: query, json: parsed });
+      result = JSON.stringify(matches, null, 2);
+    } catch (e: any) {
+      error = e.message;
+    }
+  }
+
+  function handleInput(value: string) {
+    input = value;
+    evaluate();
+  }
+
+  function setQuery(path: string) {
+    query = path;
+    evaluate();
+  }
+
+  function loadSample() {
+    input = JSON.stringify(
+      {
+        store: {
+          book: [
+            { category: "reference", author: "Nigel Rees", title: "Sayings of the Century", price: 8.95 },
+            { category: "fiction", author: "Evelyn Waugh", title: "Sword of Honour", price: 12.99 },
+            {
+              category: "fiction",
+              author: "Herman Melville",
+              title: "Moby Dick",
+              isbn: "0-553-21311-3",
+              price: 8.99,
+            },
+            {
+              category: "fiction",
+              author: "J. R. R. Tolkien",
+              title: "The Lord of the Rings",
+              isbn: "0-395-19395-8",
+              price: 22.99,
+            },
+          ],
+          bicycle: { color: "red", price: 19.95 },
+        },
+      },
+      null,
+      2
+    );
+    evaluate();
+  }
+</script>
+
+<div class="flex flex-col h-full">
+  <!-- Toolbar -->
+  <div
+    class="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
+  >
+    <div class="flex items-center gap-2 flex-1 min-w-0">
+      <label for="jsonpath-input" class="text-sm text-[var(--color-text-secondary)] shrink-0">Path:</label>
+      <input
+        id="jsonpath-input"
+        type="text"
+        bind:value={query}
+        on:input={evaluate}
+        class="flex-1 min-w-0 px-3 py-1.5 rounded text-sm font-mono bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] border border-[var(--color-border)] focus:border-[var(--color-accent)] focus:outline-none"
+        placeholder="$.path.to.value"
+      />
+    </div>
+    <button
+      on:click={evaluate}
+      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+    >
+      Evaluate
+    </button>
+    <button
+      on:click={loadSample}
+      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
+    >
+      Sample
+    </button>
+    {#if error}
+      <span class="text-xs text-[var(--color-error)]">{error}</span>
+    {/if}
+  </div>
+
+  <!-- Examples -->
+  <div
+    class="flex flex-wrap items-center gap-1 px-4 py-1.5 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
+  >
+    <span class="text-xs text-[var(--color-text-muted)]">Examples:</span>
+    {#each examples as ex}
+      <button
+        on:click={() => setQuery(ex.path)}
+        class="px-2 py-0.5 rounded text-xs font-mono bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] hover:text-[var(--color-text-primary)] transition-colors"
+      >
+        {ex.label}
+      </button>
+    {/each}
+  </div>
+
+  <!-- Panels -->
+  <div class="flex-1 flex flex-col lg:flex-row min-h-0">
+    <div class="flex-1 flex flex-col min-h-0 p-2">
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">JSON Input</div>
+      <div class="flex-1 min-h-0">
+        <CodeEditor
+          value={input}
+          lang="json"
+          placeholder="Paste JSON to query with JSONPath..."
+          onchange={handleInput}
+        />
+      </div>
+    </div>
+
+    <div class="w-px bg-[var(--color-border)] hidden lg:block"></div>
+    <div class="h-px bg-[var(--color-border)] lg:hidden"></div>
+
+    <div class="flex-1 flex flex-col min-h-0 p-2">
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">
+        Result
+        {#if result}
+          <span class="ml-1">({JSON.parse(result).length} matches)</span>
+        {/if}
+      </div>
+      <div class="flex-1 min-h-0">
+        <CodeEditor value={result} lang="json" placeholder="Query results will appear here..." readonly={true} />
+      </div>
+    </div>
+  </div>
+</div>

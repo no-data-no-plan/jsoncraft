@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Converter from "../components/Converter.svelte";
+---
+
+<Layout
+  title="YAML to JSON Converter"
+  description="Convert YAML to JSON online for free. Instant, accurate conversion with validation. No data sent to servers."
+  activeToolId="yaml-to-json"
+>
+  <Converter client:load fromFormat="yaml" toFormat="json" />
+</Layout>

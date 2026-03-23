@@ -1,0 +1,143 @@
+---
+import "../styles/global.css";
+import Sidebar from "../components/Sidebar.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  activeToolId: string;
+}
+
+const { title, description, activeToolId } = Astro.props;
+const fullTitle = `${title} - JSONCraft`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href={`https://jsoncraft.dev${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>{fullTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JSONCraft" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="flex min-h-screen">
+    <Sidebar activeToolId={activeToolId} />
+
+    <div class="flex flex-1 flex-col min-w-0">
+      <!-- Header -->
+      <header
+        class="flex items-center justify-between px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
+      >
+        <div class="flex items-center gap-3">
+          <button
+            id="menu-toggle"
+            class="lg:hidden p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
+            aria-label="Toggle menu"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <h1 class="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="hidden sm:inline text-xs text-[var(--color-text-muted)]">
+            Your data never leaves your browser
+          </span>
+          <button
+            id="theme-toggle"
+            class="p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
+            aria-label="Toggle theme"
+          >
+            <svg id="icon-dark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+            <svg id="icon-light" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main content -->
+      <main class="flex-1 flex flex-col overflow-hidden">
+        <slot />
+      </main>
+
+      <!-- Footer with ad slot -->
+      <footer
+        class="flex items-center justify-between px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-muted)]"
+      >
+        <span>JSONCraft &mdash; Free, fast, private JSON tools</span>
+        <div id="ad-slot" class="text-center">
+          <!-- Ad slot placeholder - AdSense banner will go here -->
+        </div>
+        <a
+          href="https://buymeacoffee.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-[var(--color-accent)] transition-colors"
+        >
+          Buy me a coffee
+        </a>
+      </footer>
+    </div>
+
+    <script is:inline>
+      // Theme toggle
+      const theme = localStorage.getItem("jsoncraft-theme") || "dark";
+      if (theme === "light") document.body.classList.add("light");
+
+      document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        document.body.classList.toggle("light");
+        const isLight = document.body.classList.contains("light");
+        localStorage.setItem("jsoncraft-theme", isLight ? "light" : "dark");
+        document.getElementById("icon-dark")?.classList.toggle("hidden", isLight);
+        document.getElementById("icon-light")?.classList.toggle("hidden", !isLight);
+        window.dispatchEvent(new CustomEvent("theme-changed", { detail: { light: isLight } }));
+      });
+
+      // Update icons on load
+      const isLight = document.body.classList.contains("light");
+      document.getElementById("icon-dark")?.classList.toggle("hidden", isLight);
+      document.getElementById("icon-light")?.classList.toggle("hidden", !isLight);
+
+      // Mobile menu toggle
+      document.getElementById("menu-toggle")?.addEventListener("click", () => {
+        document.getElementById("sidebar")?.classList.toggle("-translate-x-full");
+      });
+    </script>
+  </body>
+</html>
