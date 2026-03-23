@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
+import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
@@ -9,4 +10,9 @@ import Converter from "../components/Converter.svelte";
   activeToolId="csv-to-json"
 >
   <Converter client:load fromFormat="csv" toFormat="json" />
+  <SeoBlock
+    heading="About CSV to JSON conversion"
+    text="Transform CSV and spreadsheet data into structured JSON. Automatically detects delimiters (comma, tab, semicolon), infers data types, and handles edge cases like embedded JSON in cells."
+    features={["Auto-detects comma, tab, and semicolon delimiters", "Numbers and booleans converted to proper JSON types", "Headerless CSV detected and handled", "Embedded JSON in cells parsed automatically", "Upload .csv files directly"]}
+  />
 </Layout>

@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import JsonPathTool from "../components/JsonPathTool.svelte";
+import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
@@ -9,4 +10,15 @@ import JsonPathTool from "../components/JsonPathTool.svelte";
   activeToolId="jsonpath"
 >
   <JsonPathTool client:load />
+  <SeoBlock
+    heading="About JSONPath Tester"
+    text="Test and debug JSONPath expressions against your data in real time. Instantly see matching results with a count of matches. Includes quick-access example queries to learn the syntax."
+    features={[
+      "Real-time evaluation as you type",
+      "Match count displayed automatically",
+      "Built-in examples: filters, wildcards, recursive descent",
+      "Supports the full JSONPath specification",
+      "Clear error messages for invalid expressions",
+    ]}
+  />
 </Layout>

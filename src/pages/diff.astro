@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import JsonDiff from "../components/JsonDiff.svelte";
+import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
@@ -9,4 +10,15 @@ import JsonDiff from "../components/JsonDiff.svelte";
   activeToolId="diff"
 >
   <JsonDiff client:load />
+  <SeoBlock
+    heading="About JSON Diff"
+    text="Compare two JSON documents semantically — key order doesn't matter. See exactly what was added, removed, or changed with color-coded highlighting and a summary of total changes."
+    features={[
+      "Semantic comparison (key order independent)",
+      "Color-coded additions and deletions",
+      "Change summary with line counts",
+      "Swap sides with one click",
+      "Identifies identical documents",
+    ]}
+  />
 </Layout>

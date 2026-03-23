@@ -10,6 +10,19 @@ interface Props {
 
 const { title, description, activeToolId } = Astro.props;
 const fullTitle = `${title} - JSONCraft`;
+const canonicalUrl = `https://jsoncraft.dev${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`;
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSONCraft",
+  "url": "https://jsoncraft.dev",
+  "description": "Free, fast, private JSON tools. Format, validate, convert, diff, and explore JSON in your browser.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires a modern web browser",
+});
 ---
 
 <!doctype html>
@@ -21,7 +34,7 @@ const fullTitle = `${title} - JSONCraft`;
     <meta name="theme-color" content="#0f172a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="canonical" href={`https://jsoncraft.dev${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,11 +48,27 @@ const fullTitle = `${title} - JSONCraft`;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JSONCraft" />
+    <meta property="og:url" content={canonicalUrl} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={jsonLd} />
+
+    <!-- Blocking: apply theme before body paints to prevent flash -->
+    <script is:inline>
+      if (localStorage.getItem("jsoncraft-theme") === "light") {
+        document.documentElement.classList.add("light");
+      }
+    </script>
+
+    <!--
+      AdSense: uncomment when approved
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXX" crossorigin="anonymous"></script>
+    -->
   </head>
   <body class="flex min-h-screen">
     <Sidebar activeToolId={activeToolId} />
@@ -102,7 +131,14 @@ const fullTitle = `${title} - JSONCraft`;
       >
         <span>JSONCraft &mdash; Free, fast, private JSON tools</span>
         <div id="ad-slot" class="text-center">
-          <!-- Ad slot placeholder - AdSense banner will go here -->
+          <!--
+            AdSense responsive ad unit: uncomment when approved
+            <ins class="adsbygoogle"
+              style="display:inline-block;width:468px;height:60px"
+              data-ad-client="ca-pub-XXXXXXX"
+              data-ad-slot="YYYYYYY"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          -->
         </div>
         <a
           href="https://buymeacoffee.com"
@@ -116,13 +152,9 @@ const fullTitle = `${title} - JSONCraft`;
     </div>
 
     <script is:inline>
-      // Theme toggle
-      const theme = localStorage.getItem("jsoncraft-theme") || "dark";
-      if (theme === "light") document.body.classList.add("light");
-
       document.getElementById("theme-toggle")?.addEventListener("click", () => {
-        document.body.classList.toggle("light");
-        const isLight = document.body.classList.contains("light");
+        document.documentElement.classList.toggle("light");
+        const isLight = document.documentElement.classList.contains("light");
         localStorage.setItem("jsoncraft-theme", isLight ? "light" : "dark");
         document.getElementById("icon-dark")?.classList.toggle("hidden", isLight);
         document.getElementById("icon-light")?.classList.toggle("hidden", !isLight);
@@ -130,7 +162,7 @@ const fullTitle = `${title} - JSONCraft`;
       });
 
       // Update icons on load
-      const isLight = document.body.classList.contains("light");
+      const isLight = document.documentElement.classList.contains("light");
       document.getElementById("icon-dark")?.classList.toggle("hidden", isLight);
       document.getElementById("icon-light")?.classList.toggle("hidden", !isLight);
 

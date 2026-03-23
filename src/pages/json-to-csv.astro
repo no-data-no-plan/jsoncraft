@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
+import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
@@ -9,4 +10,9 @@ import Converter from "../components/Converter.svelte";
   activeToolId="json-to-csv"
 >
   <Converter client:load fromFormat="json" toFormat="csv" />
+  <SeoBlock
+    heading="About JSON to CSV conversion"
+    text="Convert JSON data to CSV for use in spreadsheets and data tools. Handles nested objects by flattening keys with dot notation, and automatically extracts arrays from API response wrappers."
+    features={["Flat arrays of objects convert directly to CSV", "Nested objects flattened with dot notation (e.g. address.city)", "API wrappers like {data: [...]} auto-extracted", "Single objects converted to one-row CSV", "Download result as .csv file"]}
+  />
 </Layout>

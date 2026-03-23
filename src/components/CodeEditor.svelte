@@ -69,7 +69,7 @@
   }
 
   function isLight() {
-    return document.body.classList.contains("light");
+    return document.documentElement.classList.contains("light");
   }
 
   onMount(() => {

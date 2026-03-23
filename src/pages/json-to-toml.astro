@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
+import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
@@ -9,4 +10,9 @@ import Converter from "../components/Converter.svelte";
   activeToolId="json-to-toml"
 >
   <Converter client:load fromFormat="json" toFormat="toml" />
+  <SeoBlock
+    heading="About JSON to TOML conversion"
+    text="Convert JSON data into TOML configuration format. Handles TOML-specific limitations automatically: null values are replaced, mixed-type arrays are normalized, and root arrays are wrapped."
+    features={["Nested objects mapped to TOML sections", "null values replaced with empty strings (with warnings)", "Mixed-type arrays safely converted to strings", "Root arrays wrapped in an [items] table", "Download result as .toml file"]}
+  />
 </Layout>

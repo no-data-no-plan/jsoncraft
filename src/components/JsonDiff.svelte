@@ -1,28 +1,47 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
   import { diffJson } from "diff";
+  import { friendlyError } from "../lib/fileutils";
 
   let left = "";
   let right = "";
   let diffResult: Array<{ added?: boolean; removed?: boolean; value: string }> = [];
   let error = "";
+  let hasDifferences = false;
 
   function compare() {
     error = "";
+    hasDifferences = false;
+    if (!left.trim() && !right.trim()) {
+      diffResult = [];
+      return;
+    }
     if (!left.trim() || !right.trim()) {
+      diffResult = [];
+      error = !left.trim() ? "Enter JSON in the left panel" : "Enter JSON in the right panel";
+      return;
+    }
+
+    let parsedLeft: unknown;
+    let parsedRight: unknown;
+    try {
+      parsedLeft = JSON.parse(left);
+    } catch (e: any) {
+      error = "Left: " + friendlyError(e.message);
       diffResult = [];
       return;
     }
     try {
-      const parsedLeft = JSON.parse(left);
-      const parsedRight = JSON.parse(right);
-      const formattedLeft = JSON.stringify(parsedLeft, null, 2);
-      const formattedRight = JSON.stringify(parsedRight, null, 2);
-      diffResult = diffJson(formattedLeft, formattedRight);
+      parsedRight = JSON.parse(right);
     } catch (e: any) {
-      error = e.message;
+      error = "Right: " + friendlyError(e.message);
       diffResult = [];
+      return;
     }
+
+    // Pass objects directly so diffJson canonicalizes keys (semantic diff)
+    diffResult = diffJson(parsedLeft as object, parsedRight as object);
+    hasDifferences = diffResult.some((part) => part.added || part.removed);
   }
 
   function handleLeft(value: string) {
@@ -54,6 +73,7 @@
     right = "";
     diffResult = [];
     error = "";
+    hasDifferences = false;
   }
 
   function swap() {
@@ -123,17 +143,27 @@
   <!-- Diff output -->
   {#if diffResult.length > 0}
     <div
-      class="border-t border-[var(--color-border)] max-h-64 overflow-auto bg-[var(--color-bg-secondary)]"
+      class="border-t border-[var(--color-border)] max-h-80 overflow-auto bg-[var(--color-bg-secondary)]"
     >
-      <div class="text-xs text-[var(--color-text-muted)] px-4 py-1 border-b border-[var(--color-border)]">
-        Differences
+      <div class="text-xs text-[var(--color-text-muted)] px-4 py-1 border-b border-[var(--color-border)] flex items-center justify-between">
+        {#if hasDifferences}
+          <span>
+            Differences:
+            +{diffResult.filter(p => p.added).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} lines,
+            -{diffResult.filter(p => p.removed).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} lines
+          </span>
+        {:else}
+          <span class="text-[var(--color-success)]">No differences — JSONs are identical</span>
+        {/if}
       </div>
-      <pre class="px-4 py-2 text-sm font-mono">{#each diffResult as part}<span
-            class={part.added
-              ? "bg-green-900/40 text-[var(--color-success)]"
-              : part.removed
-                ? "bg-red-900/40 text-[var(--color-error)]"
-                : "text-[var(--color-text-secondary)]"}>{part.value}</span>{/each}</pre>
+      {#if hasDifferences}
+        <pre class="px-4 py-2 text-sm font-mono">{#each diffResult as part}<span
+              class={part.added
+                ? "bg-green-900/40 text-[var(--color-success)]"
+                : part.removed
+                  ? "bg-red-900/40 text-[var(--color-error)]"
+                  : "text-[var(--color-text-secondary)]"}>{part.value}</span>{/each}</pre>
+      {/if}
     </div>
   {/if}
 </div>

@@ -1,0 +1,30 @@
+# JSONCraft Caddyfile — deploy on Oracle ARM server
+# Replace jsoncraft.dev with actual domain
+
+jsoncraft.dev {
+    root * /var/www/jsoncraft
+    file_server
+
+    # Security headers
+    header {
+        # Prevent XSS
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        # CSP: allow self, fonts, and AdSense when ready
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'"
+        # Remove server info
+        -Server
+    }
+
+    # Cache static assets aggressively
+    @assets path /_astro/*
+    header @assets Cache-Control "public, max-age=31536000, immutable"
+
+    # Cache HTML with revalidation
+    @html path *.html
+    header @html Cache-Control "public, max-age=3600, must-revalidate"
+
+    # SPA fallback for clean URLs
+    try_files {path} {path}/index.html
+}

@@ -13,15 +13,6 @@
   --color-success: #4ade80;
   --color-error: #f87171;
   --color-warning: #fbbf24;
-
-  --color-bg-primary-light: #ffffff;
-  --color-bg-secondary-light: #f8fafc;
-  --color-bg-tertiary-light: #e2e8f0;
-  --color-border-light: #cbd5e1;
-  --color-text-primary-light: #0f172a;
-  --color-text-secondary-light: #475569;
-  --color-text-muted-light: #94a3b8;
-  --color-accent-light: #0284c7;
 }
 
 html {
@@ -34,9 +25,19 @@ body {
   min-height: 100vh;
 }
 
-body.light {
-  background-color: var(--color-bg-primary-light);
-  color: var(--color-text-primary-light);
+html.light {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #e2e8f0;
+  --color-border: #cbd5e1;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-accent: #0284c7;
+  --color-accent-hover: #0369a1;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-warning: #d97706;
 }
 
 /* CodeMirror overrides */

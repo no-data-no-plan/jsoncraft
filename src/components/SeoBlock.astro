@@ -1,0 +1,24 @@
+---
+interface Props {
+  heading: string;
+  text: string;
+  features?: string[];
+}
+
+const { heading, text, features } = Astro.props;
+---
+
+<details class="px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-sm">
+  <summary class="cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] select-none">
+    {heading}
+  </summary>
+  <div class="mt-2 text-[var(--color-text-muted)] space-y-2 pb-2">
+    <p>{text}</p>
+    {features && features.length > 0 && (
+      <ul class="list-disc list-inside space-y-1">
+        {features.map((f) => <li>{f}</li>)}
+      </ul>
+    )}
+    <p class="text-xs">100% client-side. Your data never leaves your browser. No tracking, no cookies.</p>
+  </div>
+</details>

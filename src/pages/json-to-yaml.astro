@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
+import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
@@ -9,4 +10,9 @@ import Converter from "../components/Converter.svelte";
   activeToolId="json-to-yaml"
 >
   <Converter client:load fromFormat="json" toFormat="yaml" />
+  <SeoBlock
+    heading="About JSON to YAML conversion"
+    text="Transform JSON data into clean, human-readable YAML. Perfect for creating configuration files from JSON API responses or converting between data formats."
+    features={["Clean 2-space indentation", "Handles nested objects, arrays, and all JSON types", "Primitive values converted with type warnings", "Upload JSON files directly"]}
+  />
 </Layout>

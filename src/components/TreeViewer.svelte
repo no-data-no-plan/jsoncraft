@@ -5,6 +5,16 @@
   let parsed: unknown = null;
   let error = "";
 
+  function collectFirstLevelPaths(data: unknown): Set<string> {
+    const paths = new Set<string>();
+    if (Array.isArray(data)) {
+      data.forEach((_, i) => paths.add(`$[${i}]`));
+    } else if (typeof data === "object" && data !== null) {
+      Object.keys(data).forEach((k) => paths.add(`$.${k}`));
+    }
+    return paths;
+  }
+
   function handleInput(value: string) {
     input = value;
     if (!value.trim()) {
@@ -15,6 +25,8 @@
     try {
       parsed = JSON.parse(value);
       error = "";
+      allExpanded = false;
+      expandedPaths = collectFirstLevelPaths(parsed);
     } catch (e: any) {
       error = e.message;
       parsed = null;
@@ -89,8 +101,10 @@
       on:click={() => isExpandable && togglePath(path)}
     >
       {#if isExpandable}
-        <span class="w-4 text-center text-xs text-[var(--color-text-muted)] select-none">
-          {expanded ? "v" : ">"}
+        <span class="w-4 text-center text-xs text-[var(--color-text-muted)] select-none transition-transform"
+          class:rotate-90={expanded}
+        >
+          >
         </span>
       {:else}
         <span class="w-4"></span>
@@ -100,11 +114,11 @@
       <span class="text-[var(--color-text-muted)] text-sm">:</span>
 
       {#if type === "string"}
-        <span class="text-green-400 text-sm">"{value}"</span>
+        <span class="tree-string text-sm">"{value}"</span>
       {:else if type === "number"}
-        <span class="text-yellow-400 text-sm">{value}</span>
+        <span class="tree-number text-sm">{value}</span>
       {:else if type === "boolean"}
-        <span class="text-purple-400 text-sm">{value}</span>
+        <span class="tree-boolean text-sm">{value}</span>
       {:else if type === "null"}
         <span class="text-[var(--color-text-muted)] text-sm italic">null</span>
       {:else if type === "array"}
@@ -120,7 +134,7 @@
         on:click|stopPropagation={() => copyPath(path)}
         title="Copy path"
       >
-        path
+        copy path
       </button>
     </div>
 
@@ -191,13 +205,21 @@
         {#if parsed !== null}
           {#if typeof parsed === "object" && parsed !== null}
             {#if Array.isArray(parsed)}
-              {#each parsed as item, i}
-                {@render renderNode(String(i), item, `$[${i}]`, 0)}
-              {/each}
+              {#if parsed.length === 0}
+                <span class="text-sm text-[var(--color-text-muted)]">Empty array []</span>
+              {:else}
+                {#each parsed as item, i}
+                  {@render renderNode(String(i), item, `$[${i}]`, 0)}
+                {/each}
+              {/if}
             {:else}
-              {#each Object.entries(parsed) as [k, v]}
-                {@render renderNode(k, v, `$.${k}`, 0)}
-              {/each}
+              {#if Object.keys(parsed).length === 0}
+                <span class="text-sm text-[var(--color-text-muted)]">Empty object {"{}"}</span>
+              {:else}
+                {#each Object.entries(parsed) as [k, v]}
+                  {@render renderNode(k, v, `$.${k}`, 0)}
+                {/each}
+              {/if}
             {/if}
           {:else}
             <span class="text-sm text-[var(--color-text-secondary)]">{JSON.stringify(parsed)}</span>
@@ -209,3 +231,12 @@
     </div>
   </div>
 </div>
+
+<style>
+  .tree-string { color: #4ade80; }
+  .tree-number { color: #fbbf24; }
+  .tree-boolean { color: #a78bfa; }
+  :global(html.light) .tree-string { color: #16a34a; }
+  :global(html.light) .tree-number { color: #b45309; }
+  :global(html.light) .tree-boolean { color: #7c3aed; }
+</style>

@@ -1,11 +1,12 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { uploadFile, downloadFile, friendlyError } from "../lib/fileutils";
 
   let input = "";
   let output = "";
   let status: "idle" | "valid" | "error" = "idle";
   let errorMsg = "";
-  let indent = 2;
+  let indent: number | string = 2;
 
   function validate(text: string): { valid: boolean; error?: string; parsed?: unknown } {
     if (!text.trim()) return { valid: true };
@@ -13,7 +14,7 @@
       const parsed = JSON.parse(text);
       return { valid: true, parsed };
     } catch (e: any) {
-      return { valid: false, error: e.message };
+      return { valid: false, error: friendlyError(e.message) };
     }
   }
 
@@ -42,7 +43,6 @@
     const result = validate(input);
     if (result.valid) {
       output = JSON.stringify(result.parsed, null, indent);
-      input = output;
     }
   }
 
@@ -50,14 +50,12 @@
     if (!input.trim()) return;
     const result = validate(input);
     if (result.valid) {
-      const minified = JSON.stringify(result.parsed);
-      output = minified;
-      input = minified;
+      output = JSON.stringify(result.parsed);
     }
   }
 
-  function copyOutput() {
-    if (output) navigator.clipboard.writeText(output);
+  function copyText(text: string) {
+    if (text) navigator.clipboard.writeText(text);
   }
 
   function clear() {
@@ -91,18 +89,30 @@
     input = sample;
   }
 
+  async function handleUpload() {
+    try {
+      const text = await uploadFile(".json");
+      handleInput(text);
+      input = text;
+    } catch {}
+  }
+
   function handleDrop(e: DragEvent) {
     e.preventDefault();
     const file = e.dataTransfer?.files[0];
-    if (file && (file.type === "application/json" || file.name.endsWith(".json"))) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const text = reader.result as string;
-        handleInput(text);
-        input = text;
-      };
-      reader.readAsText(file);
+    if (!file) return;
+    if (!file.name.endsWith(".json") && file.type !== "application/json") {
+      errorMsg = "Only .json files are supported";
+      status = "error";
+      return;
     }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const text = reader.result as string;
+      handleInput(text);
+      input = text;
+    };
+    reader.readAsText(file);
   }
 
   function handleDragOver(e: DragEvent) {
@@ -128,10 +138,10 @@
       Minify
     </button>
     <button
-      on:click={copyOutput}
+      on:click={handleUpload}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Copy
+      Upload
     </button>
     <button
       on:click={clear}
@@ -156,7 +166,7 @@
       >
         <option value={2}>2 spaces</option>
         <option value={4}>4 spaces</option>
-        <option value={1}>1 tab</option>
+        <option value={"\t"}>Tab</option>
       </select>
     </div>
 
@@ -188,8 +198,18 @@
 
   <!-- Editor panels -->
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
+    <!-- Input panel -->
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Input</div>
+      <div class="flex items-center justify-between mb-1 px-1">
+        <span class="text-xs text-[var(--color-text-muted)]">Input</span>
+        <button
+          on:click={() => copyText(input)}
+          class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          title="Copy input"
+        >
+          Copy
+        </button>
+      </div>
       <div class="flex-1 min-h-0">
         <CodeEditor
           value={input}
@@ -203,8 +223,27 @@
     <div class="w-px bg-[var(--color-border)] hidden lg:block"></div>
     <div class="h-px bg-[var(--color-border)] lg:hidden"></div>
 
+    <!-- Output panel -->
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Output</div>
+      <div class="flex items-center justify-between mb-1 px-1">
+        <span class="text-xs text-[var(--color-text-muted)]">Output</span>
+        <div class="flex items-center gap-2">
+          <button
+            on:click={() => copyText(output)}
+            class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            title="Copy output"
+          >
+            Copy
+          </button>
+          <button
+            on:click={() => output && downloadFile(output, "formatted.json")}
+            class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            title="Download output as .json"
+          >
+            Download
+          </button>
+        </div>
+      </div>
       <div class="flex-1 min-h-0">
         <CodeEditor value={output} lang="json" placeholder="Formatted output will appear here..." readonly={true} />
       </div>

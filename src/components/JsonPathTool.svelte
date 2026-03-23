@@ -1,11 +1,13 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
   import { JSONPath } from "jsonpath-plus";
+  import { friendlyError } from "../lib/fileutils";
 
   let input = "";
   let query = "$.store.book[*].author";
   let result = "";
   let error = "";
+  let matchCount = 0;
 
   const examples = [
     { label: "All authors", path: "$.store.book[*].author" },
@@ -19,13 +21,27 @@
   function evaluate() {
     error = "";
     result = "";
-    if (!input.trim() || !query.trim()) return;
+    matchCount = 0;
+    if (!input.trim()) {
+      if (query.trim()) error = "Paste JSON in the input panel first";
+      return;
+    }
+    if (!query.trim()) return;
+
+    let parsed: unknown;
     try {
-      const parsed = JSON.parse(input);
+      parsed = JSON.parse(input);
+    } catch (e: any) {
+      error = "Invalid JSON: " + friendlyError(e.message);
+      return;
+    }
+
+    try {
       const matches = JSONPath({ path: query, json: parsed });
+      matchCount = matches.length;
       result = JSON.stringify(matches, null, 2);
     } catch (e: any) {
-      error = e.message;
+      error = "JSONPath error: " + (e.message || "Invalid expression");
     }
   }
 
@@ -140,7 +156,7 @@
       <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">
         Result
         {#if result}
-          <span class="ml-1">({JSON.parse(result).length} matches)</span>
+          <span class="ml-1">({matchCount} {matchCount === 1 ? "match" : "matches"})</span>
         {/if}
       </div>
       <div class="flex-1 min-h-0">
