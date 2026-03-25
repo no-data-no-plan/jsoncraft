@@ -20,7 +20,6 @@
     error = "";
     if (!pattern || !testString) { highlighted = escapeHtml(testString); return; }
     try {
-      const re = new RegExp(pattern, flags);
       const results: typeof matches = [];
       if (flags.includes("g")) {
         for (const match of testString.matchAll(new RegExp(pattern, flags))) {

@@ -95,15 +95,30 @@
   }
 
   function describe(): string {
-    const p = parts;
-    const descs: string[] = [];
-    if (p[0] !== "*") descs.push(`minute ${p[0]}`);
-    if (p[1] !== "*") descs.push(`hour ${p[1]}`);
-    if (p[2] !== "*") descs.push(`day ${p[2]}`);
-    if (p[3] !== "*") descs.push(`month ${p[3]}`);
-    if (p[4] !== "*") descs.push(`weekday ${p[4]}`);
-    if (descs.length === 0) return "Every minute";
-    return "At " + descs.join(", ");
+    const [min, hr, dom, mon, dow] = parts;
+    if (parts.every(p => p === "*")) return "Every minute";
+    const pieces: string[] = [];
+    // Time
+    if (min.startsWith("*/")) pieces.push(`every ${min.slice(2)} minutes`);
+    else if (hr.startsWith("*/")) pieces.push(`every ${hr.slice(2)} hours at minute ${min}`);
+    else if (hr !== "*" && min !== "*") pieces.push(`at ${hr.padStart(2, "0")}:${min.padStart(2, "0")}`);
+    else if (min !== "*") pieces.push(`at minute ${min}`);
+    else if (hr !== "*") pieces.push(`during hour ${hr}`);
+    // Day
+    if (dow === "1-5") pieces.push("on weekdays");
+    else if (dow === "6,0" || dow === "0,6") pieces.push("on weekends");
+    else if (dow !== "*") {
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const d = parseInt(dow);
+      pieces.push(`on ${days[d] ?? `day ${dow}`}`);
+    }
+    if (dom !== "*") pieces.push(`on day ${dom} of the month`);
+    if (mon !== "*") {
+      const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const m = parseInt(mon);
+      pieces.push(`in ${months[m] ?? `month ${mon}`}`);
+    }
+    return pieces.join(", ").replace(/^./, c => c.toUpperCase());
   }
 
   updateFromExpression();
