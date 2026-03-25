@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UrlEncodeTool from "../components/UrlEncodeTool.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+---
+
+<Layout
+  title="URL Encoder & Decoder Online Free"
+  description="Encode or decode URLs and query strings for safe transmission. Supports encodeURIComponent and encodeURI modes. Free, private, browser-based."
+  activeToolId="url-encode"
+>
+  <UrlEncodeTool client:load />
+  <SeoContent
+    heading="URL Percent-Encoding Tool"
+    text="Encode special characters in URLs for safe transmission, or decode percent-encoded strings back to readable text. Choose between Component mode (encodes everything) and Full URI mode (preserves URL structure)."
+    relatedToolIds={["base64", "hash", "regex"]}
+  />
+  <SeoBlock
+    heading="About this tool"
+    text="URL encoding (percent-encoding) replaces unsafe characters with % followed by two hex digits. Component mode encodes all special characters, while URI mode preserves characters like :, /, and ? that are valid in URLs."
+    features={[
+      "encodeURIComponent and encodeURI modes",
+      "Real-time encoding/decoding",
+      "Swap input and output",
+      "Copy result to clipboard",
+    ]}
+  />
+</Layout>

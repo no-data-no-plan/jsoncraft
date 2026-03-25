@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HashGenerator from "../components/HashGenerator.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+---
+
+<Layout
+  title="Hash Generator Online Free — MD5, SHA-1, SHA-256, SHA-512"
+  description="Generate MD5, SHA-1, SHA-256, SHA-384 and SHA-512 hashes from any text. Free online hash generator using Web Crypto API — runs in your browser."
+  activeToolId="hash"
+>
+  <HashGenerator client:load />
+  <SeoContent
+    heading="Generate Cryptographic Hashes Instantly"
+    text="Paste any text to generate its MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hash values simultaneously. Uses the browser's native Web Crypto API for SHA hashes. Your data never leaves your browser."
+    relatedToolIds={["base64", "uuid", "url-encode"]}
+  />
+  <SeoBlock
+    heading="About this tool"
+    text="Cryptographic hash functions produce a fixed-size digest from arbitrary input. SHA-256 and SHA-512 are widely used for data integrity verification, password storage, and digital signatures."
+    features={[
+      "MD5, SHA-1, SHA-256, SHA-384, SHA-512",
+      "Real-time hashing as you type",
+      "Uses native Web Crypto API",
+      "Copy individual hash values",
+    ]}
+  />
+</Layout>

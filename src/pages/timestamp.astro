@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TimestampTool from "../components/TimestampTool.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+---
+
+<Layout
+  title="Unix Timestamp Converter Online Free"
+  description="Convert Unix timestamps to human-readable dates and dates to timestamps. Live clock, UTC/local/ISO display. Free, private, browser-based."
+  activeToolId="timestamp"
+>
+  <TimestampTool client:load />
+  <SeoContent
+    heading="Convert Unix Timestamps & Dates"
+    text="Convert between Unix timestamps (epoch time) and human-readable dates. See the current timestamp live, convert in both directions, and copy results in multiple formats including UTC, local time, and ISO 8601."
+    relatedToolIds={["uuid", "hash", "cron"]}
+  />
+  <SeoBlock
+    heading="About this tool"
+    text="Unix timestamps count the seconds since January 1, 1970 (the Unix epoch). They're widely used in APIs, databases, and log files. This tool handles both second and millisecond precision timestamps."
+    features={[
+      "Two-way conversion (timestamp ↔ date)",
+      "Live current timestamp display",
+      "UTC, local, ISO 8601, relative formats",
+      "Handles seconds and milliseconds",
+    ]}
+  />
+</Layout>
