@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
+
   let timestamp = Math.floor(Date.now() / 1000).toString();
   let dateInput = "";
   let liveTimestamp = Math.floor(Date.now() / 1000);
@@ -6,10 +8,11 @@
   let fromDate: number | null = null;
   let error = "";
 
-  // Live clock
   const interval = setInterval(() => {
     liveTimestamp = Math.floor(Date.now() / 1000);
   }, 1000);
+
+  onDestroy(() => clearInterval(interval));
 
   function convertTimestamp() {
     error = "";

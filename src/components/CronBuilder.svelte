@@ -3,8 +3,6 @@
   let parts = ["*", "*", "*", "*", "*"];
   let nextRuns: string[] = [];
   let error = "";
-  let customMode = false;
-
   const fields = [
     { name: "Minute", range: "0-59", presets: ["*", "0", "15", "30", "45", "*/5", "*/10", "*/15", "*/30"] },
     { name: "Hour", range: "0-23", presets: ["*", "0", "6", "8", "12", "18", "*/2", "*/4", "*/6"] },
@@ -54,7 +52,6 @@
       let current = new Date(now);
       current.setSeconds(0, 0);
       for (let runs = 0; runs < 5 && nextRuns.length < 5; runs++) {
-        current = new Date(current.getTime() + 60000);
         let found = false;
         for (let attempts = 0; attempts < 525960 && !found; attempts++) {
           if (matchesCron(current, parts)) {

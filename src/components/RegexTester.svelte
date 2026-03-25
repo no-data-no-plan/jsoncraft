@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CodeEditor from "./CodeEditor.svelte";
   import { debounce } from "../lib/fileutils";
 
   let pattern = "";
@@ -7,6 +6,7 @@
   let testString = "";
   let matches: { full: string; index: number; groups: string[] }[] = [];
   let error = "";
+  let highlighted = "";
 
   const debouncedTest = debounce(runTest, 200);
 
@@ -18,13 +18,11 @@
   function runTest() {
     matches = [];
     error = "";
-    if (!pattern || !testString) return;
+    if (!pattern || !testString) { highlighted = escapeHtml(testString); return; }
     try {
       const re = new RegExp(pattern, flags);
-      let m: RegExpExecArray | null;
       const results: typeof matches = [];
       if (flags.includes("g")) {
-        // Use matchAll for global matching
         for (const match of testString.matchAll(new RegExp(pattern, flags))) {
           results.push({ full: match[0], index: match.index ?? 0, groups: Array.from(match).slice(1) });
         }
@@ -35,20 +33,29 @@
         }
       }
       matches = results;
-      updateHighlight();
+      highlighted = buildHighlightedHtml(testString, pattern, flags);
     } catch (e: any) {
       error = e.message;
-      updateHighlight();
+      highlighted = escapeHtml(testString);
     }
   }
 
-  function getHighlightedHtml(text: string, pat: string, fl: string): string {
+  function buildHighlightedHtml(text: string, pat: string, fl: string): string {
     if (!pat || !text) return escapeHtml(text);
     try {
       const re = new RegExp(pat, fl.includes("g") ? fl : fl + "g");
-      return text.replace(re, (m) =>
-        m ? `<mark class="bg-[var(--color-warning)]/40 text-[var(--color-text-primary)] rounded px-0.5">${escapeHtml(m)}</mark>` : ""
-      );
+      let result = "";
+      let lastIndex = 0;
+      for (const match of text.matchAll(re)) {
+        if (match.index === undefined) continue;
+        result += escapeHtml(text.slice(lastIndex, match.index));
+        if (match[0]) {
+          result += `<mark class="bg-[var(--color-warning)]/40 text-[var(--color-text-primary)] rounded px-0.5">${escapeHtml(match[0])}</mark>`;
+        }
+        lastIndex = match.index + match[0].length;
+      }
+      result += escapeHtml(text.slice(lastIndex));
+      return result;
     } catch {
       return escapeHtml(text);
     }
@@ -56,11 +63,6 @@
 
   function escapeHtml(s: string) {
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-
-  let highlighted = "";
-  function updateHighlight() {
-    highlighted = getHighlightedHtml(testString, pattern, flags);
   }
 </script>
 

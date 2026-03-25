@@ -7,8 +7,9 @@
   generate();
 
   function generate() {
+    const n = Math.max(1, Math.min(1000, count));
     uuids = [];
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < n; i++) {
       let id = crypto.randomUUID();
       if (noDashes) id = id.replace(/-/g, "");
       if (uppercase) id = id.toUpperCase();
