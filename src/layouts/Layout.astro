@@ -48,6 +48,7 @@ const jsonLd = JSON.stringify({
     <link rel="canonical" href={canonicalUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
@@ -104,8 +105,8 @@ const jsonLd = JSON.stringify({
           <h1 class="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
         </div>
 
-        <div class="flex items-center gap-2">
-          <span class="hidden sm:inline text-xs text-[var(--color-text-muted)]">
+        <div class="flex items-center gap-2" style="min-height: 36px;">
+          <span class="hidden sm:inline text-xs text-[var(--color-text-muted)]" style="min-width: 195px;">
             Your data never leaves your browser
           </span>
           <button
