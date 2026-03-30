@@ -2,14 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import SeoContent from "../components/SeoContent.astro";
 ---
 
 <Layout
-  title="YAML to JSON Converter"
-  description="Convert YAML to JSON online for free. Instant, accurate conversion with validation. No data sent to servers."
+  title="YAML to JSON Converter Online Free"
+  description="Convert YAML to JSON online for free. Instant, accurate conversion with full YAML support including multi-document files, anchors, and nested structures. No data sent to servers."
   activeToolId="yaml-to-json"
 >
   <Converter client:load fromFormat="yaml" toFormat="json" />
+  <SeoContent
+    heading="Convert YAML to JSON Instantly"
+    text="Paste or upload your YAML configuration files to convert them to JSON format. Supports multi-document YAML, complex nested structures, and automatically detects if you paste the wrong format."
+    relatedToolIds={["json-to-yaml", "formatter", "viewer"]}
+  />
   <SeoBlock
     heading="About YAML to JSON conversion"
     text="Convert YAML configuration files and data to JSON format instantly. Supports multi-document YAML, nested structures, anchors, and all standard YAML features."

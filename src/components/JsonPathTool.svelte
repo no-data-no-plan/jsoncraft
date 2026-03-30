@@ -1,7 +1,8 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
   import { JSONPath } from "jsonpath-plus";
-  import { friendlyError } from "../lib/fileutils";
+  import { friendlyError, debounce } from "../lib/fileutils";
+  import { shouldUseWorker, jsonpathInWorker } from "../lib/worker-api";
 
   let input = "";
   let query = "$.store.book[*].author";
@@ -18,7 +19,9 @@
     { label: "All items", path: "$..*" },
   ];
 
-  function evaluate() {
+  let processing = false;
+
+  async function evaluate() {
     error = "";
     result = "";
     matchCount = 0;
@@ -27,6 +30,20 @@
       return;
     }
     if (!query.trim()) return;
+
+    if (shouldUseWorker(input)) {
+      processing = true;
+      try {
+        const res = await jsonpathInWorker(input, query);
+        result = res.output;
+        matchCount = res.matchCount || 0;
+      } catch (e: any) {
+        error = friendlyError(e.message);
+      } finally {
+        processing = false;
+      }
+      return;
+    }
 
     let parsed: unknown;
     try {
@@ -45,9 +62,11 @@
     }
   }
 
+  const debouncedEvaluate = debounce(() => evaluate(), 300);
+
   function handleInput(value: string) {
     input = value;
-    evaluate();
+    debouncedEvaluate();
   }
 
   function setQuery(path: string) {
@@ -98,7 +117,7 @@
         id="jsonpath-input"
         type="text"
         bind:value={query}
-        on:input={evaluate}
+        on:input={debouncedEvaluate}
         class="flex-1 min-w-0 px-3 py-1.5 rounded text-sm font-mono bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] border border-[var(--color-border)] focus:border-[var(--color-accent)] focus:outline-none"
         placeholder="$.path.to.value"
       />
@@ -115,7 +134,9 @@
     >
       Sample
     </button>
-    {#if error}
+    {#if processing}
+      <span class="text-xs text-[var(--color-accent)] animate-pulse">Evaluating...</span>
+    {:else if error}
       <span class="text-xs text-[var(--color-error)]">{error}</span>
     {/if}
   </div>

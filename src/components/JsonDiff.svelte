@@ -1,7 +1,8 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
   import { diffJson } from "diff";
-  import { friendlyError } from "../lib/fileutils";
+  import { friendlyError, debounce } from "../lib/fileutils";
+  import { shouldUseWorker, diffInWorker } from "../lib/worker-api";
 
   let left = "";
   let right = "";
@@ -9,7 +10,9 @@
   let error = "";
   let hasDifferences = false;
 
-  function compare() {
+  let processing = false;
+
+  async function compare() {
     error = "";
     hasDifferences = false;
     if (!left.trim() && !right.trim()) {
@@ -19,6 +22,21 @@
     if (!left.trim() || !right.trim()) {
       diffResult = [];
       error = !left.trim() ? "Enter JSON in the left panel" : "Enter JSON in the right panel";
+      return;
+    }
+
+    if (shouldUseWorker(left) || shouldUseWorker(right)) {
+      processing = true;
+      try {
+        const result = await diffInWorker(left, right);
+        diffResult = JSON.parse(result.output);
+        hasDifferences = diffResult.some((part) => part.added || part.removed);
+      } catch (e: any) {
+        error = friendlyError(e.message);
+        diffResult = [];
+      } finally {
+        processing = false;
+      }
       return;
     }
 
@@ -39,19 +57,20 @@
       return;
     }
 
-    // Pass objects directly so diffJson canonicalizes keys (semantic diff)
     diffResult = diffJson(parsedLeft as object, parsedRight as object);
     hasDifferences = diffResult.some((part) => part.added || part.removed);
   }
 
+  const debouncedCompare = debounce(() => compare(), 300);
+
   function handleLeft(value: string) {
     left = value;
-    compare();
+    debouncedCompare();
   }
 
   function handleRight(value: string) {
     right = value;
-    compare();
+    debouncedCompare();
   }
 
   function loadSample() {
@@ -113,7 +132,9 @@
     >
       Sample
     </button>
-    {#if error}
+    {#if processing}
+      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">Comparing...</span>
+    {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
   </div>

@@ -1,5 +1,7 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { debounce } from "../lib/fileutils";
+  import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
 
   let input = "";
   let parsed: unknown = null;
@@ -15,22 +17,48 @@
     return paths;
   }
 
-  function handleInput(value: string) {
-    input = value;
+  let processing = false;
+
+  async function processInput(value: string) {
     if (!value.trim()) {
       parsed = null;
       error = "";
       return;
     }
-    try {
-      parsed = JSON.parse(value);
-      error = "";
-      allExpanded = false;
-      expandedPaths = collectFirstLevelPaths(parsed);
-    } catch (e: any) {
-      error = e.message;
-      parsed = null;
+    if (shouldUseWorker(value)) {
+      processing = true;
+      try {
+        const result = await parseInWorker(value);
+        parsed = JSON.parse(result.output);
+        error = "";
+        allExpanded = false;
+        expandedPaths = collectFirstLevelPaths(parsed);
+        visibleLimits = new Map();
+      } catch (e: any) {
+        error = e.message;
+        parsed = null;
+      } finally {
+        processing = false;
+      }
+    } else {
+      try {
+        parsed = JSON.parse(value);
+        error = "";
+        allExpanded = false;
+        expandedPaths = collectFirstLevelPaths(parsed);
+        visibleLimits = new Map();
+      } catch (e: any) {
+        error = e.message;
+        parsed = null;
+      }
     }
+  }
+
+  const debouncedProcess = debounce((v: string) => processInput(v), 300);
+
+  function handleInput(value: string) {
+    input = value;
+    debouncedProcess(value);
   }
 
   function loadSample() {
@@ -85,20 +113,31 @@
   function copyPath(path: string) {
     navigator.clipboard.writeText(path);
   }
-</script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<!-- svelte-ignore a11y_click_events_have_key_events -->
+  const PAGE_SIZE = 100;
+  let visibleLimits = new Map<string, number>();
+
+  function getVisibleLimit(path: string): number {
+    return visibleLimits.get(path) || PAGE_SIZE;
+  }
+
+  function showMore(path: string) {
+    visibleLimits.set(path, getVisibleLimit(path) + PAGE_SIZE);
+    visibleLimits = new Map(visibleLimits);
+  }
+</script>
 
 {#snippet renderNode(key: string, value: unknown, path: string, depth: number)}
   {@const type = getType(value)}
   {@const isExpandable = type === "object" || type === "array"}
   {@const expanded = isExpandable && isExpanded(path)}
 
-  <div style="padding-left: {depth * 16}px">
+  <div style="padding-left: {depth * 16}px" role="treeitem" aria-expanded={isExpandable ? expanded : undefined}>
     <div
       class="flex items-center gap-1 py-0.5 px-1 rounded hover:bg-[var(--color-bg-tertiary)] group cursor-default"
+      tabindex={isExpandable ? 0 : -1}
       on:click={() => isExpandable && togglePath(path)}
+      on:keydown={(e) => { if (isExpandable && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); togglePath(path); } }}
     >
       {#if isExpandable}
         <span class="w-4 text-center text-xs text-[var(--color-text-muted)] select-none transition-transform"
@@ -139,14 +178,37 @@
     </div>
 
     {#if expanded}
+      {@const limit = getVisibleLimit(path)}
       {#if type === "array"}
-        {#each value as item, i}
+        {@const items = value as unknown[]}
+        {#each items.slice(0, limit) as item, i}
           {@render renderNode(String(i), item, `${path}[${i}]`, depth + 1)}
         {/each}
+        {#if items.length > limit}
+          <div style="padding-left: {(depth + 1) * 16}px">
+            <button
+              class="text-xs text-[var(--color-accent)] hover:underline py-1"
+              on:click|stopPropagation={() => showMore(path)}
+            >
+              Show more ({items.length - limit} remaining)
+            </button>
+          </div>
+        {/if}
       {:else if type === "object"}
-        {#each Object.entries(value as object) as [k, v]}
+        {@const entries = Object.entries(value as object)}
+        {#each entries.slice(0, limit) as [k, v]}
           {@render renderNode(k, v, `${path}.${k}`, depth + 1)}
         {/each}
+        {#if entries.length > limit}
+          <div style="padding-left: {(depth + 1) * 16}px">
+            <button
+              class="text-xs text-[var(--color-accent)] hover:underline py-1"
+              on:click|stopPropagation={() => showMore(path)}
+            >
+              Show more ({entries.length - limit} remaining)
+            </button>
+          </div>
+        {/if}
       {/if}
     {/if}
   </div>
@@ -175,7 +237,9 @@
     >
       Sample
     </button>
-    {#if error}
+    {#if processing}
+      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">Parsing...</span>
+    {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
   </div>
@@ -200,6 +264,7 @@
     <div class="flex-1 flex flex-col min-h-0 p-2">
       <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Tree</div>
       <div
+        role="tree"
         class="flex-1 min-h-0 overflow-auto rounded border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-2 font-mono"
       >
         {#if parsed !== null}
@@ -208,17 +273,36 @@
               {#if parsed.length === 0}
                 <span class="text-sm text-[var(--color-text-muted)]">Empty array []</span>
               {:else}
-                {#each parsed as item, i}
+                {@const rootLimit = getVisibleLimit("$")}
+                {#each parsed.slice(0, rootLimit) as item, i}
                   {@render renderNode(String(i), item, `$[${i}]`, 0)}
                 {/each}
+                {#if parsed.length > rootLimit}
+                  <button
+                    class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
+                    on:click={() => showMore("$")}
+                  >
+                    Show more ({parsed.length - rootLimit} remaining)
+                  </button>
+                {/if}
               {/if}
             {:else}
-              {#if Object.keys(parsed).length === 0}
+              {@const rootEntries = Object.entries(parsed)}
+              {#if rootEntries.length === 0}
                 <span class="text-sm text-[var(--color-text-muted)]">Empty object {"{}"}</span>
               {:else}
-                {#each Object.entries(parsed) as [k, v]}
+                {@const rootLimit = getVisibleLimit("$")}
+                {#each rootEntries.slice(0, rootLimit) as [k, v]}
                   {@render renderNode(k, v, `$.${k}`, 0)}
                 {/each}
+                {#if rootEntries.length > rootLimit}
+                  <button
+                    class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
+                    on:click={() => showMore("$")}
+                  >
+                    Show more ({rootEntries.length - rootLimit} remaining)
+                  </button>
+                {/if}
               {/if}
             {/if}
           {:else}

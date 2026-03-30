@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
+import { tools } from "../lib/tools";
 
 interface Props {
   title: string;
@@ -9,19 +10,26 @@ interface Props {
 }
 
 const { title, description, activeToolId } = Astro.props;
-const fullTitle = `${title} - JSONCraft`;
+const fullTitle = `${title} | JSONCraft`;
 const canonicalUrl = `https://jsoncraft.dev${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`;
+const activeTool = tools.find((t) => t.id === activeToolId);
+const pageKeywords = activeTool?.keywords.join(", ") || "";
 
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "JSONCraft",
-  "url": "https://jsoncraft.dev",
-  "description": "Free, fast, private JSON tools. Format, validate, convert, diff, and explore JSON in your browser.",
+  "@type": "SoftwareApplication",
+  "name": title,
+  "url": canonicalUrl,
+  "description": description,
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "browserRequirements": "Requires a modern web browser",
+  "isPartOf": {
+    "@type": "WebApplication",
+    "name": "JSONCraft",
+    "url": "https://jsoncraft.dev",
+  },
 });
 ---
 
@@ -31,7 +39,10 @@ const jsonLd = JSON.stringify({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {pageKeywords && <meta name="keywords" content={pageKeywords} />}
     <meta name="theme-color" content="#0f172a" />
+    <meta name="google-adsense-account" content="ca-pub-8761907366448308" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8761907366448308" crossorigin="anonymous"></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href={canonicalUrl} />
@@ -49,11 +60,13 @@ const jsonLd = JSON.stringify({
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JSONCraft" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content="https://jsoncraft.dev/og-image.png" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://jsoncraft.dev/og-image.png" />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={jsonLd} />
@@ -126,28 +139,16 @@ const jsonLd = JSON.stringify({
       </main>
 
       <!-- Footer with ad slot -->
-      <footer
-        class="flex items-center justify-between px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-muted)]"
-      >
-        <span>JSONCraft &mdash; Free, fast, private JSON tools</span>
-        <div id="ad-slot" class="text-center">
-          <!--
-            AdSense responsive ad unit: uncomment when approved
-            <ins class="adsbygoogle"
-              style="display:inline-block;width:468px;height:60px"
-              data-ad-client="ca-pub-XXXXXXX"
-              data-ad-slot="YYYYYYY"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          -->
+      <footer class="px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-muted)]">
+        <div class="flex items-center justify-between mb-2">
+          <span>JSONCraft &mdash; Free, fast, private JSON tools</span>
+          <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">Buy me a coffee</a>
         </div>
-        <a
-          href="https://buymeacoffee.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-[var(--color-accent)] transition-colors"
-        >
-          Buy me a coffee
-        </a>
+        <form action="https://formspree.io/f/mpqoddwl" method="POST" class="flex gap-2">
+          <input type="hidden" name="app" value="JSONCraft" />
+          <input type="text" name="message" placeholder="Bug, idea, or feedback..." required class="flex-1 !py-1 !px-2 !text-[11px]" />
+          <button type="submit" class="px-2 py-1 rounded text-[10px] bg-[var(--color-bg-tertiary)] hover:text-[var(--color-accent)] transition-colors" style="cursor: pointer;">Send</button>
+        </form>
       </footer>
     </div>
 

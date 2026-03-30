@@ -1,15 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import JsonFormatter from "../components/JsonFormatter.svelte";
+import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
-  title="JSON Formatter & Validator"
-  description="Free online JSON formatter, validator, and minifier. Format, validate, and beautify JSON instantly. No ads, no tracking, 100% client-side."
+  title="JSON Formatter & Validator Online Free"
+  description="Format, validate, beautify and minify JSON online for free. Real-time syntax validation, multiple indent styles, drag-and-drop file upload. 100% private — runs entirely in your browser."
   activeToolId="formatter"
 >
   <JsonFormatter client:load />
+  <SeoContent
+    heading="Format, Validate & Beautify JSON Instantly"
+    text="Paste or upload your JSON to instantly format it with proper indentation, validate its syntax, or minify it for production. JSONCraft detects errors in real time and shows the exact line and column. Supports 2-space, 4-space, and tab indentation."
+    relatedToolIds={["viewer", "diff", "json-to-yaml"]}
+  />
   <SeoBlock
     heading="About this tool"
     text="JSONCraft's formatter instantly validates, beautifies, and minifies your JSON. Paste or drop a file and get real-time syntax validation with clear error messages pointing to the exact line and column."

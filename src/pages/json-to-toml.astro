@@ -2,14 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import SeoContent from "../components/SeoContent.astro";
 ---
 
 <Layout
-  title="JSON to TOML Converter"
-  description="Convert JSON to TOML format online. Clean TOML output for config files. Free, instant, 100% client-side."
+  title="JSON to TOML Converter Online Free"
+  description="Convert JSON to TOML configuration format online for free. Clean TOML output with proper sections and typed values. Handles null values and mixed arrays automatically."
   activeToolId="json-to-toml"
 >
   <Converter client:load fromFormat="json" toFormat="toml" />
+  <SeoContent
+    heading="Convert JSON to TOML Configuration"
+    text="Transform JSON data into TOML configuration format. Nested objects become TOML sections, typed values are preserved, and TOML-specific limitations like null values and mixed arrays are handled automatically."
+    relatedToolIds={["toml-to-json", "formatter", "json-to-yaml"]}
+  />
   <SeoBlock
     heading="About JSON to TOML conversion"
     text="Convert JSON data into TOML configuration format. Handles TOML-specific limitations automatically: null values are replaced, mixed-type arrays are normalized, and root arrays are wrapped."

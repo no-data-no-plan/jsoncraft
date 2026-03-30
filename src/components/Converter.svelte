@@ -1,6 +1,7 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { uploadFile, downloadFile, friendlyError } from "../lib/fileutils";
+  import { uploadFile, downloadFile, friendlyError, debounce } from "../lib/fileutils";
+  import { shouldUseWorker, convertInWorker } from "../lib/worker-api";
   import * as yaml from "js-yaml";
   import * as toml from "smol-toml";
   import Papa from "papaparse";
@@ -12,7 +13,7 @@
   let output = "";
   let error = "";
   let warning = "";
-  let wrongFormatHint = "";
+  let wrongFormatHint: { message: string; linkHref?: string; linkText?: string } | null = null;
 
   function flatten(obj: unknown, prefix = ""): Record<string, unknown> {
     const result: Record<string, unknown> = {};
@@ -188,14 +189,15 @@
     const fallbackPath = suggestPaths[detected]?.json;
     // Also check reverse: if user wants toFormat=json and detected has a json path
     const toJsonPath = suggestPaths[detected]?.json;
+    const base = `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}.`;
     if (exactPath) {
-      wrongFormatHint = `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}. Try <a href="${exactPath}" class="underline">${formatNames[detected]} to ${formatNames[toFormat]}</a> instead.`;
+      wrongFormatHint = { message: base + " Try", linkHref: exactPath, linkText: `${formatNames[detected]} to ${formatNames[toFormat]}` };
     } else if (toJsonPath && toFormat === "json") {
-      wrongFormatHint = `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}. Try <a href="${toJsonPath}" class="underline">${formatNames[detected]} to JSON</a> instead.`;
+      wrongFormatHint = { message: base + " Try", linkHref: toJsonPath, linkText: `${formatNames[detected]} to JSON` };
     } else if (fallbackPath) {
-      wrongFormatHint = `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}. Try <a href="${fallbackPath}" class="underline">${formatNames[detected]} to JSON</a> first, then convert.`;
+      wrongFormatHint = { message: base + " Try", linkHref: fallbackPath, linkText: `${formatNames[detected]} to JSON` };
     } else {
-      wrongFormatHint = `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}.`;
+      wrongFormatHint = { message: base };
     }
   }
 
@@ -203,7 +205,7 @@
 
   function parseInput(text: string): unknown {
     if (!text.trim()) return undefined;
-    wrongFormatHint = "";
+    wrongFormatHint = null;
     switch (fromFormat) {
       case "json":
         return JSON.parse(text);
@@ -417,33 +419,49 @@
     return prefix + toml.stringify(tomlData as Record<string, unknown>);
   }
 
-  function convert() {
+  let processing = false;
+
+  async function convert() {
     error = "";
     output = "";
     warning = "";
-    wrongFormatHint = "";
+    wrongFormatHint = null;
     if (!input.trim()) return;
-    try {
-      // For lenient parsers (CSV, YAML), check if input looks like another format
-      // CSV accepts anything without erroring; YAML accepts JSON and CSV as strings
-      if (fromFormat === "csv" || fromFormat === "yaml") {
-        checkWrongFormat(input);
-        if (wrongFormatHint) {
-          // Don't produce garbage output — just show the hint
-          return;
-        }
-      }
-      const data = parseInput(input);
-      output = formatOutput(data);
-    } catch (e: any) {
-      error = friendlyError(e.message);
+
+    // For lenient parsers, check if input looks like another format
+    if (fromFormat === "csv" || fromFormat === "yaml") {
       checkWrongFormat(input);
+      if (wrongFormatHint) return;
+    }
+
+    if (shouldUseWorker(input)) {
+      processing = true;
+      try {
+        const result = await convertInWorker(input, fromFormat, toFormat);
+        output = result.output;
+        if (result.warnings.length) warning = result.warnings.join(". ");
+      } catch (e: any) {
+        error = friendlyError(e.message);
+        checkWrongFormat(input);
+      } finally {
+        processing = false;
+      }
+    } else {
+      try {
+        const data = parseInput(input);
+        output = formatOutput(data);
+      } catch (e: any) {
+        error = friendlyError(e.message);
+        checkWrongFormat(input);
+      }
     }
   }
 
+  const debouncedConvert = debounce(() => convert(), 300);
+
   function handleInput(value: string) {
     input = value;
-    convert();
+    debouncedConvert();
   }
 
   function copyText(text: string) {
@@ -455,7 +473,7 @@
     output = "";
     error = "";
     warning = "";
-    wrongFormatHint = "";
+    wrongFormatHint = null;
   }
 
   async function handleUpload() {
@@ -463,7 +481,11 @@
       const text = await uploadFile(extMap[fromFormat]);
       input = text;
       convert();
-    } catch {}
+    } catch (e: any) {
+      if (e?.message && e.message !== "No file selected") {
+        error = e.message;
+      }
+    }
   }
 
   function handleDownload() {
@@ -552,8 +574,15 @@ Charlie,35,Berlin,true`;
     >
       Sample
     </button>
-    {#if wrongFormatHint}
-      <span class="text-xs text-[var(--color-warning)] ml-auto">{@html wrongFormatHint}</span>
+    {#if processing}
+      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">Processing large file...</span>
+    {:else if wrongFormatHint}
+      <span class="text-xs text-[var(--color-warning)] ml-auto">
+        {wrongFormatHint.message}
+        {#if wrongFormatHint.linkHref}
+          <a href={wrongFormatHint.linkHref} class="underline">{wrongFormatHint.linkText}</a> instead.
+        {/if}
+      </span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {:else if warning}

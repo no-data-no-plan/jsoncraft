@@ -1,6 +1,7 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { uploadFile, downloadFile, friendlyError } from "../lib/fileutils";
+  import { uploadFile, downloadFile, friendlyError, debounce } from "../lib/fileutils";
+  import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
 
   let input = "";
   let output = "";
@@ -18,24 +19,50 @@
     }
   }
 
-  function handleInput(value: string) {
-    input = value;
+  let processing = false;
+
+  async function processInput(value: string) {
     if (!value.trim()) {
       status = "idle";
       output = "";
       errorMsg = "";
       return;
     }
-    const result = validate(value);
-    if (result.valid) {
-      status = "valid";
-      errorMsg = "";
-      output = JSON.stringify(result.parsed, null, indent);
+    if (shouldUseWorker(value)) {
+      processing = true;
+      status = "idle";
+      try {
+        const result = await parseInWorker(value);
+        const parsed = JSON.parse(result.output);
+        status = "valid";
+        errorMsg = "";
+        output = JSON.stringify(parsed, null, indent);
+      } catch (e: any) {
+        status = "error";
+        errorMsg = friendlyError(e.message);
+        output = "";
+      } finally {
+        processing = false;
+      }
     } else {
-      status = "error";
-      errorMsg = result.error || "Invalid JSON";
-      output = "";
+      const result = validate(value);
+      if (result.valid) {
+        status = "valid";
+        errorMsg = "";
+        output = JSON.stringify(result.parsed, null, indent);
+      } else {
+        status = "error";
+        errorMsg = result.error || "Invalid JSON";
+        output = "";
+      }
     }
+  }
+
+  const debouncedProcess = debounce((v: string) => processInput(v), 300);
+
+  function handleInput(value: string) {
+    input = value;
+    debouncedProcess(value);
   }
 
   function format() {
@@ -94,7 +121,12 @@
       const text = await uploadFile(".json");
       handleInput(text);
       input = text;
-    } catch {}
+    } catch (e: any) {
+      if (e?.message && e.message !== "No file selected") {
+        errorMsg = e.message;
+        status = "error";
+      }
+    }
   }
 
   function handleDrop(e: DragEvent) {
@@ -171,7 +203,9 @@
     </div>
 
     <!-- Status indicator -->
-    {#if status === "valid"}
+    {#if processing}
+      <span class="text-xs text-[var(--color-accent)] animate-pulse">Processing...</span>
+    {:else if status === "valid"}
       <span class="flex items-center gap-1 text-xs text-[var(--color-success)]">
         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
           <path

@@ -2,14 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import SeoContent from "../components/SeoContent.astro";
 ---
 
 <Layout
-  title="CSV to JSON Converter"
-  description="Convert CSV data to JSON format online. Automatic header detection and type inference. Free, fast, no tracking."
+  title="CSV to JSON Converter Online Free"
+  description="Convert CSV data to JSON online for free. Automatic header detection, delimiter inference, and type conversion. Transform spreadsheet data into structured JSON instantly."
   activeToolId="csv-to-json"
 >
   <Converter client:load fromFormat="csv" toFormat="json" />
+  <SeoContent
+    heading="Convert CSV Spreadsheet Data to JSON"
+    text="Transform CSV and spreadsheet data into structured JSON. Automatically detects delimiters, infers data types (numbers, booleans), and handles edge cases like embedded JSON in cells."
+    relatedToolIds={["json-to-csv", "formatter", "viewer"]}
+  />
   <SeoBlock
     heading="About CSV to JSON conversion"
     text="Transform CSV and spreadsheet data into structured JSON. Automatically detects delimiters (comma, tab, semicolon), infers data types, and handles edge cases like embedded JSON in cells."

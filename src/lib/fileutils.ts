@@ -1,3 +1,5 @@
+const MAX_FILE_SIZE_MB = 50;
+
 export function uploadFile(accept: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const input = document.createElement("input");
@@ -6,6 +8,9 @@ export function uploadFile(accept: string): Promise<string> {
     input.onchange = () => {
       const file = input.files?.[0];
       if (!file) return reject(new Error("No file selected"));
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        return reject(new Error(`File too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Maximum: ${MAX_FILE_SIZE_MB} MB`));
+      }
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result as string);
       reader.onerror = () => reject(new Error("Failed to read file"));
@@ -13,6 +18,10 @@ export function uploadFile(accept: string): Promise<string> {
     };
     input.click();
   });
+}
+
+export function isLargeInput(text: string): boolean {
+  return text.length > 5 * 1024 * 1024; // > 5MB
 }
 
 export function downloadFile(content: string, filename: string) {
@@ -32,7 +41,15 @@ export function downloadFile(content: string, filename: string) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
+}
+
+export function debounce<T extends (...args: any[]) => void>(fn: T, ms = 300): T {
+  let timer: ReturnType<typeof setTimeout>;
+  return ((...args: any[]) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), ms);
+  }) as unknown as T;
 }
 
 export function friendlyError(raw: string): string {

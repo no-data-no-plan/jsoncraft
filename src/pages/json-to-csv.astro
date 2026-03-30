@@ -2,14 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import SeoContent from "../components/SeoContent.astro";
 ---
 
 <Layout
-  title="JSON to CSV Converter"
-  description="Convert JSON arrays to CSV format online. Export JSON data to spreadsheet-friendly CSV. Free, instant, private."
+  title="JSON to CSV Converter Online — Export to Spreadsheet"
+  description="Convert JSON arrays to CSV format online for free. Export JSON data to spreadsheet-friendly CSV. Handles nested objects with dot notation flattening. No upload to servers."
   activeToolId="json-to-csv"
 >
   <Converter client:load fromFormat="json" toFormat="csv" />
+  <SeoContent
+    heading="Export JSON Data to CSV"
+    text="Convert JSON arrays to CSV for use in Excel, Google Sheets, and other data tools. Nested objects are flattened with dot notation (e.g. address.city) and API wrappers are auto-extracted."
+    relatedToolIds={["csv-to-json", "formatter", "json-to-yaml"]}
+  />
   <SeoBlock
     heading="About JSON to CSV conversion"
     text="Convert JSON data to CSV for use in spreadsheets and data tools. Handles nested objects by flattening keys with dot notation, and automatically extracts arrays from API response wrappers."

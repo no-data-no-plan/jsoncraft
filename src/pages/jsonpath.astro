@@ -1,15 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import JsonPathTool from "../components/JsonPathTool.svelte";
+import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
-  title="JSONPath Tester"
-  description="Test JSONPath expressions interactively. Evaluate queries against your JSON data with instant results. Free online JSONPath playground."
+  title="JSONPath Tester Online — Query & Filter JSON Data"
+  description="Test JSONPath expressions online with instant results. Evaluate queries against your JSON data, see match counts, and learn JSONPath syntax with built-in examples. Free JSONPath playground."
   activeToolId="jsonpath"
 >
   <JsonPathTool client:load />
+  <SeoContent
+    heading="Test JSONPath Expressions Interactively"
+    text="Evaluate JSONPath queries against your JSON data in real time. See matching results instantly with a count of matches. Includes built-in examples for filters, wildcards, recursive descent, and more to help you learn the syntax."
+    relatedToolIds={["viewer", "formatter", "diff"]}
+  />
   <SeoBlock
     heading="About JSONPath Tester"
     text="Test and debug JSONPath expressions against your data in real time. Instantly see matching results with a count of matches. Includes quick-access example queries to learn the syntax."

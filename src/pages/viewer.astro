@@ -1,15 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import TreeViewer from "../components/TreeViewer.svelte";
+import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 ---
 
 <Layout
-  title="JSON Tree Viewer"
-  description="Explore JSON as an interactive collapsible tree. Navigate complex structures, copy paths, expand and collapse nodes. Free online tool."
+  title="JSON Tree Viewer Online — Interactive JSON Explorer"
+  description="Explore JSON as an interactive collapsible tree online. Navigate complex nested structures, see data types at a glance, and copy JSONPath expressions. Free, fast, private."
   activeToolId="viewer"
 >
   <TreeViewer client:load />
+  <SeoContent
+    heading="Explore JSON as an Interactive Tree"
+    text="Visualize any JSON structure as a collapsible tree. Navigate deeply nested data, see types and array lengths at a glance, and click any node to copy its JSONPath expression. Handles large JSON files efficiently."
+    relatedToolIds={["formatter", "jsonpath", "diff"]}
+  />
   <SeoBlock
     heading="About JSON Tree Viewer"
     text="Visualize any JSON structure as an interactive, collapsible tree. Quickly navigate deeply nested data, see types and array lengths at a glance, and copy JSONPath expressions for any node."

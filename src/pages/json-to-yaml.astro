@@ -2,14 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import SeoContent from "../components/SeoContent.astro";
 ---
 
 <Layout
-  title="JSON to YAML Converter"
-  description="Convert JSON to YAML online for free. Clean, readable YAML output with proper indentation. 100% client-side."
+  title="JSON to YAML Converter Online Free"
+  description="Convert JSON to YAML online for free. Get clean, readable YAML output with proper indentation. Perfect for creating configuration files from JSON data. 100% client-side."
   activeToolId="json-to-yaml"
 >
   <Converter client:load fromFormat="json" toFormat="yaml" />
+  <SeoContent
+    heading="Convert JSON to Clean YAML"
+    text="Transform your JSON data into human-readable YAML with clean 2-space indentation. Ideal for creating configuration files from JSON API responses or converting between data formats."
+    relatedToolIds={["yaml-to-json", "formatter", "json-to-toml"]}
+  />
   <SeoBlock
     heading="About JSON to YAML conversion"
     text="Transform JSON data into clean, human-readable YAML. Perfect for creating configuration files from JSON API responses or converting between data formats."
