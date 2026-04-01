@@ -2,16 +2,23 @@
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
 import { tools } from "../lib/tools";
+import type { Lang } from "../i18n/index";
+import { getAlternatePath } from "../i18n/index";
+import { t } from "../i18n/common";
 
 interface Props {
   title: string;
   description: string;
   activeToolId: string;
+  lang?: Lang;
 }
 
-const { title, description, activeToolId } = Astro.props;
+const { title, description, activeToolId, lang = "en" } = Astro.props;
 const fullTitle = `${title} | JSONCraft`;
-const canonicalUrl = `https://jsoncraft.dev${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`;
+const pathWithoutTrailing = Astro.url.pathname.replace(/\/$/, '') || '';
+const canonicalUrl = `https://jsoncraft.dev${pathWithoutTrailing}`;
+const alternatePath = getAlternatePath(Astro.url.pathname);
+const alternateUrl = `https://jsoncraft.dev${alternatePath.replace(/\/$/, '') || ''}`;
 const activeTool = tools.find((t) => t.id === activeToolId);
 const pageKeywords = activeTool?.keywords.join(", ") || "";
 
@@ -34,9 +41,8 @@ const jsonLd = JSON.stringify({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
-    <script is:inline>if(location.hostname.endsWith('.pages.dev'))location.replace('https://jsoncraft.dev'+location.pathname+location.search)</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
@@ -47,6 +53,9 @@ const jsonLd = JSON.stringify({
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={lang === "en" ? canonicalUrl : alternateUrl} />
+    <link rel="alternate" hreflang="es" href={lang === "es" ? canonicalUrl : alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={lang === "en" ? canonicalUrl : alternateUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin />
@@ -79,14 +88,9 @@ const jsonLd = JSON.stringify({
         document.documentElement.classList.add("light");
       }
     </script>
-
-    <!--
-      AdSense: uncomment when approved
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXX" crossorigin="anonymous"></script>
-    -->
   </head>
   <body class="flex min-h-screen">
-    <Sidebar activeToolId={activeToolId} />
+    <Sidebar activeToolId={activeToolId} lang={lang} />
 
     <div class="flex flex-1 flex-col min-w-0">
       <!-- Header -->
@@ -97,7 +101,7 @@ const jsonLd = JSON.stringify({
           <button
             id="menu-toggle"
             class="lg:hidden p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
-            aria-label="Toggle menu"
+            aria-label={t(lang, "toggleMenu")}
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -108,12 +112,19 @@ const jsonLd = JSON.stringify({
 
         <div class="flex items-center gap-2" style="min-height: 36px;">
           <span class="hidden sm:inline text-xs text-[var(--color-text-muted)]" style="min-width: 195px;">
-            Your data never leaves your browser
+            {t(lang, "headerBadge")}
           </span>
+          <a
+            href={alternatePath}
+            class="px-2 py-1 rounded text-xs font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+            title={t(lang, "langToggleTitle")}
+          >
+            {t(lang, "langToggleLabel")}
+          </a>
           <button
             id="theme-toggle"
             class="p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
-            aria-label="Toggle theme"
+            aria-label={t(lang, "toggleTheme")}
           >
             <svg id="icon-dark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -155,13 +166,14 @@ const jsonLd = JSON.stringify({
       <!-- Footer -->
       <footer class="px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-muted)]">
         <div class="flex items-center justify-between mb-2">
-          <span>JSONCraft &mdash; Free, fast, private JSON tools</span>
-          <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">Buy me a coffee</a>
+          <span>{t(lang, "footerTagline")}</span>
+          <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerCoffee")}</a>
         </div>
         <form action="https://formspree.io/f/mpqoddwl" method="POST" class="flex gap-2">
           <input type="hidden" name="app" value="JSONCraft" />
-          <input type="text" name="message" placeholder="Bug, idea, or feedback..." required class="flex-1 !py-1 !px-2 !text-[11px]" />
-          <button type="submit" class="px-2 py-1 rounded text-[10px] bg-[var(--color-bg-tertiary)] hover:text-[var(--color-accent)] transition-colors" style="cursor: pointer;">Send</button>
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="text" name="message" placeholder={t(lang, "feedbackPlaceholder")} required class="flex-1 !py-1 !px-2 !text-[11px]" />
+          <button type="submit" class="px-2 py-1 rounded text-[10px] bg-[var(--color-bg-tertiary)] hover:text-[var(--color-accent)] transition-colors" style="cursor: pointer;">{t(lang, "feedbackSend")}</button>
         </form>
       </footer>
     </div>
