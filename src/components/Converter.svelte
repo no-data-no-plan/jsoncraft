@@ -47,11 +47,29 @@
     warning = warning ? warning + ". " + msg : msg;
   }
 
+  const warnMap: Record<string, string> = {
+    "Primitive value wrapped as single-cell CSV": "Valor primitivo envuelto como CSV de una celda",
+    "Single object converted to one-row CSV (nested keys flattened)": "Objeto convertido a CSV de una fila (claves anidadas aplanadas)",
+    "Empty array produces empty CSV": "Array vacío produce CSV vacío",
+    "Array of primitives converted to single-column CSV": "Array de primitivos convertido a CSV de una columna",
+    "Array of arrays: first row used as headers (if strings), otherwise indexed columns": "Array de arrays: primera fila usada como encabezados (si son strings), o columnas indexadas",
+    "Nested objects flattened with dot notation (e.g. server.host)": "Objetos anidados aplanados con notación de punto (ej. server.host)",
+    "Tab-separated values detected": "Valores separados por tabulación detectados",
+    "Semicolon-separated values detected": "Valores separados por punto y coma detectados",
+    "Null/empty value converted to YAML null": "Valor nulo/vacío convertido a YAML null",
+    "Root array wrapped in 'items' key": "Array raíz envuelto en clave 'items'",
+    "...and more null values": "...y más valores nulos",
+  };
+
+  function tw(en: string): string {
+    return lang === "es" ? (warnMap[en] ?? en) : en;
+  }
+
   function jsonToCsv(data: unknown): string {
 
     // Primitive value
     if (data === null || typeof data !== "object") {
-      addWarning("Primitive value wrapped as single-cell CSV");
+      addWarning(tw("Primitive value wrapped as single-cell CSV"));
       return Papa.unparse([{ value: data }]);
     }
 
@@ -63,30 +81,30 @@
       if (keys.length === 1 && Array.isArray(obj[keys[0]])) {
         const inner = obj[keys[0]] as unknown[];
         if (inner.length > 0 && inner.some((item) => item !== null && typeof item === "object" && !Array.isArray(item))) {
-          addWarning(`Array extracted from "${keys[0]}" key`);
+          addWarning(lang === "es" ? `Array extraído de la clave "${keys[0]}"` : `Array extracted from "${keys[0]}" key`);
           return jsonToCsv(inner);
         }
       }
       // Otherwise flatten as a single row
-      addWarning("Single object converted to one-row CSV (nested keys flattened)");
+      addWarning(tw("Single object converted to one-row CSV (nested keys flattened)"));
       return Papa.unparse([flatten(data)]);
     }
 
     // Empty array
     if (data.length === 0) {
-      addWarning("Empty array produces empty CSV");
+      addWarning(tw("Empty array produces empty CSV"));
       return "";
     }
 
     // Array of primitives
     if (data.every((item: unknown) => item === null || typeof item !== "object")) {
-      addWarning("Array of primitives converted to single-column CSV");
+      addWarning(tw("Array of primitives converted to single-column CSV"));
       return Papa.unparse(data.map((v: unknown) => ({ value: v })));
     }
 
     // Array of arrays
     if (data.every((item: unknown) => Array.isArray(item))) {
-      addWarning("Array of arrays: first row used as headers (if strings), otherwise indexed columns");
+      addWarning(tw("Array of arrays: first row used as headers (if strings), otherwise indexed columns"));
       const first = data[0] as unknown[];
       const isHeaderRow = first.every((v: unknown) => typeof v === "string");
       if (isHeaderRow) {
@@ -116,7 +134,7 @@
       )
     );
     if (hasNested) {
-      addWarning("Nested objects flattened with dot notation (e.g. server.host)");
+      addWarning(tw("Nested objects flattened with dot notation (e.g. server.host)"));
     }
 
     return Papa.unparse(flattened);
@@ -236,7 +254,7 @@
       yaml.loadAll(text, (doc: unknown) => docs.push(doc));
       const valid = docs.filter((d) => d !== undefined && d !== null);
       if (valid.length > 1) {
-        warning = `Multi-document YAML: ${valid.length} documents merged into an array`;
+        warning = lang === "es" ? `YAML multi-documento: ${valid.length} documentos fusionados en un array` : `Multi-document YAML: ${valid.length} documents merged into an array`;
         return valid;
       }
       if (valid.length === 1) return valid[0];
@@ -245,7 +263,7 @@
     const result = yaml.load(text);
     // YAML can parse bare strings/numbers as primitives
     if (result !== null && typeof result !== "object") {
-      warning = `YAML parsed as primitive value (${typeof result})`;
+      warning = lang === "es" ? `YAML interpretado como valor primitivo (${typeof result})` : `YAML parsed as primitive value (${typeof result})`;
     }
     return result;
   }
@@ -256,10 +274,10 @@
     let delimiter = ",";
     if (firstLine.includes("\t") && !firstLine.includes(",")) {
       delimiter = "\t";
-      warning = "Tab-separated values detected";
+      warning = tw("Tab-separated values detected");
     } else if (firstLine.includes(";") && !firstLine.includes(",")) {
       delimiter = ";";
-      warning = "Semicolon-separated values detected";
+      warning = tw("Semicolon-separated values detected");
     }
 
     // Try with headers first
@@ -274,7 +292,7 @@
     if (withHeaders.meta.fields && withHeaders.meta.fields.length > 0) {
       const allNumericHeaders = withHeaders.meta.fields.every((f: string) => /^\d+(\.\d+)?$/.test(f.trim()));
       if (allNumericHeaders) {
-        warning = (warning ? warning + ". " : "") + "Headers look numeric — parsed without headers, columns named col1, col2, etc.";
+        warning = (warning ? warning + ". " : "") + (lang === "es" ? "Encabezados numéricos — parseado sin encabezados, columnas col1, col2, etc." : "Headers look numeric — parsed without headers, columns named col1, col2, etc.");
         const noHeaders = Papa.parse(text, {
           header: false,
           dynamicTyping: true,
@@ -293,7 +311,7 @@
       throw new Error(withHeaders.errors[0].message);
     }
     if (withHeaders.errors.length > 0) {
-      addWarning(`${withHeaders.errors.length} row(s) had parse warnings`);
+      addWarning(lang === "es" ? `${withHeaders.errors.length} fila(s) con advertencias de parseo` : `${withHeaders.errors.length} row(s) had parse warnings`);
     }
 
     let rows = withHeaders.data as Record<string, unknown>[];
@@ -305,7 +323,7 @@
       if (typeof val === "string" && /^\s*[\{\[]/.test(val)) {
         try {
           const parsed = JSON.parse(val);
-          addWarning(`Cell contained embedded JSON — extracted and parsed`);
+          addWarning(lang === "es" ? "Celda contenía JSON embebido — extraído y parseado" : "Cell contained embedded JSON — extracted and parsed");
           return parsed;
         } catch {}
       }
@@ -330,7 +348,7 @@
       return newRow;
     });
     if (jsonCellCount > 0) {
-      addWarning(`${jsonCellCount} cell(s) contained embedded JSON — parsed automatically`);
+      addWarning(lang === "es" ? `${jsonCellCount} celda(s) contenían JSON embebido — parseado automáticamente` : `${jsonCellCount} cell(s) contained embedded JSON — parsed automatically`);
     }
 
     return rows;
@@ -355,11 +373,11 @@
 
   function formatToYaml(data: unknown): string {
     if (data === undefined || data === null) {
-      addWarning("Null/empty value converted to YAML null");
+      addWarning(tw("Null/empty value converted to YAML null"));
       return "null\n";
     }
     if (typeof data !== "object") {
-      addWarning(`Primitive value (${typeof data}) converted to YAML`);
+      addWarning(lang === "es" ? `Valor primitivo (${typeof data}) convertido a YAML` : `Primitive value (${typeof data}) converted to YAML`);
     }
     return yaml.dump(data, { indent: 2, lineWidth: 120, noRefs: true });
   }
@@ -372,9 +390,9 @@
     if (obj === null || obj === undefined) {
       _tomlNullCount++;
       if (_tomlNullCount <= 3) {
-        addWarning(`null replaced with ""${path ? ` (at ${path})` : ""}`);
+        addWarning(lang === "es" ? `null reemplazado con ""${path ? ` (en ${path})` : ""}` : `null replaced with ""${path ? ` (at ${path})` : ""}`);
       } else if (_tomlNullCount === 4) {
-        addWarning("...and more null values");
+        addWarning(tw("...and more null values"));
       }
       return "";
     }
@@ -389,7 +407,7 @@
       }));
       // Mixed types (including objects+primitives) → convert all to strings
       if (types.size > 1) {
-        addWarning(`Mixed-type array converted to strings${path ? ` (at ${path})` : ""}`);
+        addWarning(lang === "es" ? `Array de tipos mixtos convertido a strings${path ? ` (en ${path})` : ""}` : `Mixed-type array converted to strings${path ? ` (at ${path})` : ""}`);
         return obj.map((item) => {
           if (item === null || item === undefined) return "";
           if (typeof item === "object") return JSON.stringify(item);
@@ -407,19 +425,19 @@
 
   function formatToToml(data: unknown): string {
     if (data === null || data === undefined) {
-      addWarning("Null value wrapped as value = \"\"");
+      addWarning(lang === "es" ? "Valor nulo envuelto como value = \"\"" : "Null value wrapped as value = \"\"");
       return 'value = ""\n';
     }
     if (typeof data !== "object") {
-      addWarning(`Primitive ${typeof data} wrapped in [value] key`);
+      addWarning(lang === "es" ? `Primitivo ${typeof data} envuelto en clave [value]` : `Primitive ${typeof data} wrapped in [value] key`);
       return toml.stringify({ value: data } as Record<string, unknown>);
     }
 
     let prefix = "";
     let tomlData: unknown;
     if (Array.isArray(data)) {
-      prefix = "# Array wrapped in [items] (TOML requires a root object)\n\n";
-      addWarning("Root array wrapped in 'items' key");
+      prefix = lang === "es" ? "# Array envuelto en [items] (TOML requiere un objeto raíz)\n\n" : "# Array wrapped in [items] (TOML requires a root object)\n\n";
+      addWarning(tw("Root array wrapped in 'items' key"));
       tomlData = { items: sanitizeForToml(data) };
     } else {
       tomlData = sanitizeForToml(data);
