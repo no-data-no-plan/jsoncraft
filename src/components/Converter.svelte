@@ -6,6 +6,11 @@
   import * as toml from "smol-toml";
   import Papa from "papaparse";
 
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  export let lang: Lang = "en";
   export let fromFormat: "json" | "yaml" | "toml" | "csv" = "json";
   export let toFormat: "json" | "yaml" | "toml" | "csv" = "yaml";
 
@@ -189,13 +194,17 @@
     const fallbackPath = suggestPaths[detected]?.json;
     // Also check reverse: if user wants toFormat=json and detected has a json path
     const toJsonPath = suggestPaths[detected]?.json;
-    const base = `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}.`;
+    const es = lang === "es";
+    const base = es
+      ? `Esto parece ${formatNames[detected]}, no ${formatNames[fromFormat]}.`
+      : `This looks like ${formatNames[detected]}, not ${formatNames[fromFormat]}.`;
+    const tryWord = es ? " Prueba" : " Try";
     if (exactPath) {
-      wrongFormatHint = { message: base + " Try", linkHref: exactPath, linkText: `${formatNames[detected]} to ${formatNames[toFormat]}` };
+      wrongFormatHint = { message: base + tryWord, linkHref: exactPath, linkText: `${formatNames[detected]} a ${formatNames[toFormat]}` };
     } else if (toJsonPath && toFormat === "json") {
-      wrongFormatHint = { message: base + " Try", linkHref: toJsonPath, linkText: `${formatNames[detected]} to JSON` };
+      wrongFormatHint = { message: base + tryWord, linkHref: toJsonPath, linkText: `${formatNames[detected]} a JSON` };
     } else if (fallbackPath) {
-      wrongFormatHint = { message: base + " Try", linkHref: fallbackPath, linkText: `${formatNames[detected]} to JSON` };
+      wrongFormatHint = { message: base + tryWord, linkHref: fallbackPath, linkText: `${formatNames[detected]} a JSON` };
     } else {
       wrongFormatHint = { message: base };
     }
@@ -554,33 +563,33 @@ Charlie,35,Berlin,true`;
       on:click={convert}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
-      Convert
+      {t(lang, "convert")}
     </button>
     <button
       on:click={handleUpload}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Upload
+      {t(lang, "upload")}
     </button>
     <button
       on:click={clear}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Clear
+      {t(lang, "clear")}
     </button>
     <button
       on:click={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Sample
+      {t(lang, "sample")}
     </button>
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">Processing large file...</span>
+      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "processingLarge")}</span>
     {:else if wrongFormatHint}
       <span class="text-xs text-[var(--color-warning)] ml-auto">
         {wrongFormatHint.message}
         {#if wrongFormatHint.linkHref}
-          <a href={wrongFormatHint.linkHref} class="underline">{wrongFormatHint.linkText}</a> instead.
+          <a href={wrongFormatHint.linkHref} class="underline">{wrongFormatHint.linkText}</a>{lang === "es" ? "." : " instead."}
         {/if}
       </span>
     {:else if error}
@@ -594,20 +603,20 @@ Charlie,35,Berlin,true`;
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <div class="flex-1 flex flex-col min-h-0 p-2">
       <div class="flex items-center justify-between mb-1 px-1">
-        <span class="text-xs text-[var(--color-text-muted)]">{formatLabels[fromFormat]} Input</span>
+        <span class="text-xs text-[var(--color-text-muted)]">{formatLabels[fromFormat]} {t(lang, "input")}</span>
         <button
           on:click={() => copyText(input)}
           class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-          title="Copy input"
+          title={tt("converter", lang, "copyInput")}
         >
-          Copy
+          {t(lang, "copy")}
         </button>
       </div>
       <div class="flex-1 min-h-0">
         <CodeEditor
           value={input}
           lang={langMap[fromFormat]}
-          placeholder={`Paste your ${formatLabels[fromFormat]} here...`}
+          placeholder={lang === "es" ? `Pega tu ${formatLabels[fromFormat]} aquí...` : `Paste your ${formatLabels[fromFormat]} here...`}
           onchange={handleInput}
         />
       </div>
@@ -618,21 +627,21 @@ Charlie,35,Berlin,true`;
 
     <div class="flex-1 flex flex-col min-h-0 p-2">
       <div class="flex items-center justify-between mb-1 px-1">
-        <span class="text-xs text-[var(--color-text-muted)]">{formatLabels[toFormat]} Output</span>
+        <span class="text-xs text-[var(--color-text-muted)]">{formatLabels[toFormat]} {t(lang, "output")}</span>
         <div class="flex items-center gap-2">
           <button
             on:click={() => copyText(output)}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-            title="Copy output"
+            title={tt("converter", lang, "copyOutput")}
           >
-            Copy
+            {t(lang, "copy")}
           </button>
           <button
             on:click={handleDownload}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-            title="Download output"
+            title={tt("converter", lang, "downloadOutput")}
           >
-            Download
+            {t(lang, "download")}
           </button>
         </div>
       </div>
@@ -640,7 +649,7 @@ Charlie,35,Berlin,true`;
         <CodeEditor
           value={output}
           lang={langMap[toFormat]}
-          placeholder={`${formatLabels[toFormat]} output will appear here...`}
+          placeholder={lang === "es" ? `La salida ${formatLabels[toFormat]} aparecerá aquí...` : `${formatLabels[toFormat]} output will appear here...`}
           readonly={true}
         />
       </div>

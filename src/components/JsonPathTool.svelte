@@ -3,6 +3,11 @@
   import { JSONPath } from "jsonpath-plus";
   import { friendlyError, debounce } from "../lib/fileutils";
   import { shouldUseWorker, jsonpathInWorker } from "../lib/worker-api";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let input = "";
   let query = "$.store.book[*].author";
@@ -10,14 +15,14 @@
   let error = "";
   let matchCount = 0;
 
-  const examples = [
-    { label: "All authors", path: "$.store.book[*].author" },
-    { label: "All prices", path: "$..price" },
-    { label: "First book", path: "$.store.book[0]" },
-    { label: "Books with ISBN", path: "$.store.book[?(@.isbn)]" },
-    { label: "Books under 10", path: "$.store.book[?(@.price<10)]" },
-    { label: "All items", path: "$..*" },
-  ];
+  const examples = $derived([
+    { label: tt("jsonpath", lang, "allAuthors"), path: "$.store.book[*].author" },
+    { label: tt("jsonpath", lang, "allPrices"), path: "$..price" },
+    { label: tt("jsonpath", lang, "firstBook"), path: "$.store.book[0]" },
+    { label: tt("jsonpath", lang, "booksWithIsbn"), path: "$.store.book[?(@.isbn)]" },
+    { label: tt("jsonpath", lang, "booksUnder10"), path: "$.store.book[?(@.price<10)]" },
+    { label: tt("jsonpath", lang, "allItems"), path: "$..*" },
+  ]);
 
   let processing = false;
 
@@ -26,7 +31,7 @@
     result = "";
     matchCount = 0;
     if (!input.trim()) {
-      if (query.trim()) error = "Paste JSON in the input panel first";
+      if (query.trim()) error = tt("jsonpath", lang, "pasteFirst");
       return;
     }
     if (!query.trim()) return;
@@ -49,7 +54,7 @@
     try {
       parsed = JSON.parse(input);
     } catch (e: any) {
-      error = "Invalid JSON: " + friendlyError(e.message);
+      error = (lang === "es" ? "JSON inválido: " : "Invalid JSON: ") + friendlyError(e.message);
       return;
     }
 
@@ -58,7 +63,7 @@
       matchCount = matches.length;
       result = JSON.stringify(matches, null, 2);
     } catch (e: any) {
-      error = "JSONPath error: " + (e.message || "Invalid expression");
+      error = (lang === "es" ? "Error JSONPath: " : "JSONPath error: ") + (e.message || (lang === "es" ? "Expresión inválida" : "Invalid expression"));
     }
   }
 
@@ -112,7 +117,7 @@
     class="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
   >
     <div class="flex items-center gap-2 flex-1 min-w-0">
-      <label for="jsonpath-input" class="text-sm text-[var(--color-text-secondary)] shrink-0">Path:</label>
+      <label for="jsonpath-input" class="text-sm text-[var(--color-text-secondary)] shrink-0">{tt("jsonpath", lang, "path")}</label>
       <input
         id="jsonpath-input"
         type="text"
@@ -126,16 +131,16 @@
       on:click={evaluate}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
-      Evaluate
+      {t(lang, "evaluate")}
     </button>
     <button
       on:click={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Sample
+      {t(lang, "sample")}
     </button>
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] animate-pulse">Evaluating...</span>
+      <span class="text-xs text-[var(--color-accent)] animate-pulse">{t(lang, "evaluating")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)]">{error}</span>
     {/if}
@@ -145,7 +150,7 @@
   <div
     class="flex flex-wrap items-center gap-1 px-4 py-1.5 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
   >
-    <span class="text-xs text-[var(--color-text-muted)]">Examples:</span>
+    <span class="text-xs text-[var(--color-text-muted)]">{tt("jsonpath", lang, "examples")}</span>
     {#each examples as ex}
       <button
         on:click={() => setQuery(ex.path)}
@@ -159,12 +164,12 @@
   <!-- Panels -->
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">JSON Input</div>
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">{tt("jsonpath", lang, "jsonInput")}</div>
       <div class="flex-1 min-h-0">
         <CodeEditor
           value={input}
           lang="json"
-          placeholder="Paste JSON to query with JSONPath..."
+          placeholder={tt("jsonpath", lang, "inputPlaceholder")}
           onchange={handleInput}
         />
       </div>
@@ -175,13 +180,13 @@
 
     <div class="flex-1 flex flex-col min-h-0 p-2">
       <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">
-        Result
+        {t(lang, "result")}
         {#if result}
-          <span class="ml-1">({matchCount} {matchCount === 1 ? "match" : "matches"})</span>
+          <span class="ml-1">({matchCount} {matchCount === 1 ? tt("jsonpath", lang, "match") : tt("jsonpath", lang, "matches")})</span>
         {/if}
       </div>
       <div class="flex-1 min-h-0">
-        <CodeEditor value={result} lang="json" placeholder="Query results will appear here..." readonly={true} />
+        <CodeEditor value={result} lang="json" placeholder={tt("jsonpath", lang, "resultPlaceholder")} readonly={true} />
       </div>
     </div>
   </div>

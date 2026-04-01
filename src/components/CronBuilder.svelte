@@ -1,29 +1,36 @@
 <script lang="ts">
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
+
   let expression = "* * * * *";
   let parts = ["*", "*", "*", "*", "*"];
   let nextRuns: string[] = [];
   let error = "";
-  const fields = [
-    { name: "Minute", range: "0-59", presets: ["*", "0", "15", "30", "45", "*/5", "*/10", "*/15", "*/30"] },
-    { name: "Hour", range: "0-23", presets: ["*", "0", "6", "8", "12", "18", "*/2", "*/4", "*/6"] },
-    { name: "Day of Month", range: "1-31", presets: ["*", "1", "15", "*/2"] },
-    { name: "Month", range: "1-12", presets: ["*", "1", "*/2", "*/3", "*/6"] },
-    { name: "Day of Week", range: "0-6", presets: ["*", "0", "1-5", "6,0"] },
+
+  const fieldDefs = [
+    { nameKey: "minute" as const, range: "0-59", presets: ["*", "0", "15", "30", "45", "*/5", "*/10", "*/15", "*/30"] },
+    { nameKey: "hour" as const, range: "0-23", presets: ["*", "0", "6", "8", "12", "18", "*/2", "*/4", "*/6"] },
+    { nameKey: "dayOfMonth" as const, range: "1-31", presets: ["*", "1", "15", "*/2"] },
+    { nameKey: "month" as const, range: "1-12", presets: ["*", "1", "*/2", "*/3", "*/6"] },
+    { nameKey: "dayOfWeek" as const, range: "0-6", presets: ["*", "0", "1-5", "6,0"] },
   ];
 
-  const quickPresets = [
-    { label: "Every minute", value: "* * * * *" },
-    { label: "Every 5 min", value: "*/5 * * * *" },
-    { label: "Every 15 min", value: "*/15 * * * *" },
-    { label: "Every 30 min", value: "*/30 * * * *" },
-    { label: "Every hour", value: "0 * * * *" },
-    { label: "Every 2 hours", value: "0 */2 * * *" },
-    { label: "Daily midnight", value: "0 0 * * *" },
-    { label: "Daily 9 AM", value: "0 9 * * *" },
-    { label: "Weekdays 9 AM", value: "0 9 * * 1-5" },
-    { label: "Weekly Sunday", value: "0 0 * * 0" },
-    { label: "Monthly 1st", value: "0 0 1 * *" },
-    { label: "Yearly Jan 1", value: "0 0 1 1 *" },
+  const quickPresetDefs = [
+    { labelKey: "everyMinute" as const, value: "* * * * *" },
+    { labelKey: "every5min" as const, value: "*/5 * * * *" },
+    { labelKey: "every15min" as const, value: "*/15 * * * *" },
+    { labelKey: "every30min" as const, value: "*/30 * * * *" },
+    { labelKey: "everyHour" as const, value: "0 * * * *" },
+    { labelKey: "every2hours" as const, value: "0 */2 * * *" },
+    { labelKey: "dailyMidnight" as const, value: "0 0 * * *" },
+    { labelKey: "daily9am" as const, value: "0 9 * * *" },
+    { labelKey: "weekdays9am" as const, value: "0 9 * * 1-5" },
+    { labelKey: "weeklySunday" as const, value: "0 0 * * 0" },
+    { labelKey: "monthly1st" as const, value: "0 0 1 * *" },
+    { labelKey: "yearlyJan1" as const, value: "0 0 1 1 *" },
   ];
 
   function updateFromParts() {
@@ -34,7 +41,7 @@
   function updateFromExpression() {
     error = "";
     const p = expression.trim().split(/\s+/);
-    if (p.length !== 5) { error = "Cron expression must have exactly 5 fields"; nextRuns = []; return; }
+    if (p.length !== 5) { error = tt("cron", lang, "mustHave5"); nextRuns = []; return; }
     parts = [...p];
     computeNextRuns();
   }
@@ -96,27 +103,30 @@
 
   function describe(): string {
     const [min, hr, dom, mon, dow] = parts;
-    if (parts.every(p => p === "*")) return "Every minute";
+    const es = lang === "es";
+    if (parts.every(p => p === "*")) return es ? "Cada minuto" : "Every minute";
     const pieces: string[] = [];
     // Time
-    if (min.startsWith("*/")) pieces.push(`every ${min.slice(2)} minutes`);
-    else if (hr.startsWith("*/")) pieces.push(`every ${hr.slice(2)} hours at minute ${min}`);
-    else if (hr !== "*" && min !== "*") pieces.push(`at ${hr.padStart(2, "0")}:${min.padStart(2, "0")}`);
-    else if (min !== "*") pieces.push(`at minute ${min}`);
-    else if (hr !== "*") pieces.push(`during hour ${hr}`);
+    if (min.startsWith("*/")) pieces.push(es ? `cada ${min.slice(2)} minutos` : `every ${min.slice(2)} minutes`);
+    else if (hr.startsWith("*/")) pieces.push(es ? `cada ${hr.slice(2)} horas en el minuto ${min}` : `every ${hr.slice(2)} hours at minute ${min}`);
+    else if (hr !== "*" && min !== "*") pieces.push(`${es ? "a las" : "at"} ${hr.padStart(2, "0")}:${min.padStart(2, "0")}`);
+    else if (min !== "*") pieces.push(es ? `en el minuto ${min}` : `at minute ${min}`);
+    else if (hr !== "*") pieces.push(es ? `durante la hora ${hr}` : `during hour ${hr}`);
     // Day
-    if (dow === "1-5") pieces.push("on weekdays");
-    else if (dow === "6,0" || dow === "0,6") pieces.push("on weekends");
+    if (dow === "1-5") pieces.push(es ? "entre semana" : "on weekdays");
+    else if (dow === "6,0" || dow === "0,6") pieces.push(es ? "los fines de semana" : "on weekends");
     else if (dow !== "*") {
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const days = es ? ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       const d = parseInt(dow);
-      pieces.push(`on ${days[d] ?? `day ${dow}`}`);
+      pieces.push(es ? `el ${days[d] ?? `día ${dow}`}` : `on ${days[d] ?? `day ${dow}`}`);
     }
-    if (dom !== "*") pieces.push(`on day ${dom} of the month`);
+    if (dom !== "*") pieces.push(es ? `el día ${dom} del mes` : `on day ${dom} of the month`);
     if (mon !== "*") {
-      const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const months = es
+        ? ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        : ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const m = parseInt(mon);
-      pieces.push(`in ${months[m] ?? `month ${mon}`}`);
+      pieces.push(es ? `en ${months[m] ?? `mes ${mon}`}` : `in ${months[m] ?? `month ${mon}`}`);
     }
     return pieces.join(", ").replace(/^./, c => c.toUpperCase());
   }
@@ -133,7 +143,7 @@
       oninput={updateFromExpression}
       class="flex-1 bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-accent)] px-3 py-2 rounded font-mono text-lg text-center tracking-wider"
     />
-    <button onclick={copy} class="px-3 py-2 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">Copy</button>
+    <button onclick={copy} class="px-3 py-2 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "copy")}</button>
   </div>
 
   {#if error}
@@ -149,16 +159,16 @@
     <div class="flex-1 p-4 space-y-4 overflow-auto">
       <!-- Quick presets -->
       <div>
-        <h3 class="text-xs font-semibold text-[var(--color-text-muted)] uppercase mb-2">Quick Presets</h3>
+        <h3 class="text-xs font-semibold text-[var(--color-text-muted)] uppercase mb-2">{tt("cron", lang, "quickPresets")}</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-          {#each quickPresets as preset}
+          {#each quickPresetDefs as preset}
             <button
               onclick={() => applyPreset(preset.value)}
               class="px-2 py-1.5 rounded text-xs text-left {expression === preset.value
                 ? 'bg-[var(--color-accent)]/15 text-[var(--color-accent)]'
                 : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]'}"
             >
-              <div class="font-medium">{preset.label}</div>
+              <div class="font-medium">{tt("cron", lang, preset.labelKey)}</div>
               <div class="font-mono text-[10px] opacity-60">{preset.value}</div>
             </button>
           {/each}
@@ -167,11 +177,11 @@
 
       <!-- Field editors -->
       <div>
-        <h3 class="text-xs font-semibold text-[var(--color-text-muted)] uppercase mb-2">Fields</h3>
+        <h3 class="text-xs font-semibold text-[var(--color-text-muted)] uppercase mb-2">{tt("cron", lang, "fields")}</h3>
         <div class="space-y-2">
-          {#each fields as field, i}
+          {#each fieldDefs as field, i}
             <div class="flex items-center gap-2">
-              <span class="text-xs text-[var(--color-text-muted)] w-28 shrink-0">{field.name} <span class="opacity-50">({field.range})</span></span>
+              <span class="text-xs text-[var(--color-text-muted)] w-28 shrink-0">{tt("cron", lang, field.nameKey)} <span class="opacity-50">({field.range})</span></span>
               <input
                 type="text"
                 bind:value={parts[i]}
@@ -196,7 +206,7 @@
 
     <!-- Next runs -->
     <div class="lg:w-72 p-4 space-y-3">
-      <h3 class="text-xs font-semibold text-[var(--color-text-muted)] uppercase">Next 5 Runs</h3>
+      <h3 class="text-xs font-semibold text-[var(--color-text-muted)] uppercase">{tt("cron", lang, "next5Runs")}</h3>
       {#if nextRuns.length > 0}
         <div class="space-y-1.5">
           {#each nextRuns as run, i}
@@ -207,7 +217,7 @@
           {/each}
         </div>
       {:else}
-        <p class="text-sm text-[var(--color-text-muted)]">No upcoming runs found</p>
+        <p class="text-sm text-[var(--color-text-muted)]">{tt("cron", lang, "noUpcoming")}</p>
       {/if}
     </div>
   </div>

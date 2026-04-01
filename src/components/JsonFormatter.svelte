@@ -2,6 +2,11 @@
   import CodeEditor from "./CodeEditor.svelte";
   import { uploadFile, downloadFile, friendlyError, debounce } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let input = "";
   let output = "";
@@ -52,7 +57,7 @@
         output = JSON.stringify(result.parsed, null, indent);
       } else {
         status = "error";
-        errorMsg = result.error || "Invalid JSON";
+        errorMsg = result.error || (lang === "es" ? "JSON inválido" : "Invalid JSON");
         output = "";
       }
     }
@@ -134,7 +139,7 @@
     const file = e.dataTransfer?.files[0];
     if (!file) return;
     if (!file.name.endsWith(".json") && file.type !== "application/json") {
-      errorMsg = "Only .json files are supported";
+      errorMsg = tt("formatter", lang, "onlyJson");
       status = "error";
       return;
     }
@@ -161,50 +166,50 @@
       on:click={format}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
-      Format
+      {t(lang, "format")}
     </button>
     <button
       on:click={minify}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Minify
+      {t(lang, "minify")}
     </button>
     <button
       on:click={handleUpload}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Upload
+      {t(lang, "upload")}
     </button>
     <button
       on:click={clear}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Clear
+      {t(lang, "clear")}
     </button>
     <button
       on:click={handleSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Sample
+      {t(lang, "sample")}
     </button>
 
     <div class="flex items-center gap-1 ml-auto">
-      <label for="indent-select" class="text-xs text-[var(--color-text-muted)]">Indent:</label>
+      <label for="indent-select" class="text-xs text-[var(--color-text-muted)]">{t(lang, "indent")}</label>
       <select
         id="indent-select"
         bind:value={indent}
         on:change={() => handleInput(input)}
         class="bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] text-xs rounded px-2 py-1 border border-[var(--color-border)]"
       >
-        <option value={2}>2 spaces</option>
-        <option value={4}>4 spaces</option>
-        <option value={"\t"}>Tab</option>
+        <option value={2}>{tt("formatter", lang, "spaces2")}</option>
+        <option value={4}>{tt("formatter", lang, "spaces4")}</option>
+        <option value={"\t"}>{tt("formatter", lang, "tab")}</option>
       </select>
     </div>
 
     <!-- Status indicator -->
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] animate-pulse">Processing...</span>
+      <span class="text-xs text-[var(--color-accent)] animate-pulse">{t(lang, "processing")}</span>
     {:else if status === "valid"}
       <span class="flex items-center gap-1 text-xs text-[var(--color-success)]">
         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -214,7 +219,7 @@
             clip-rule="evenodd"
           />
         </svg>
-        Valid JSON
+        {t(lang, "validJson")}
       </span>
     {:else if status === "error"}
       <span class="flex items-center gap-1 text-xs text-[var(--color-error)]" title={errorMsg}>
@@ -235,20 +240,20 @@
     <!-- Input panel -->
     <div class="flex-1 flex flex-col min-h-0 p-2">
       <div class="flex items-center justify-between mb-1 px-1">
-        <span class="text-xs text-[var(--color-text-muted)]">Input</span>
+        <span class="text-xs text-[var(--color-text-muted)]">{t(lang, "input")}</span>
         <button
           on:click={() => copyText(input)}
           class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-          title="Copy input"
+          title={tt("formatter", lang, "copyInput")}
         >
-          Copy
+          {t(lang, "copy")}
         </button>
       </div>
       <div class="flex-1 min-h-0">
         <CodeEditor
           value={input}
           lang="json"
-          placeholder="Paste your JSON here, or drag & drop a .json file..."
+          placeholder={tt("formatter", lang, "inputPlaceholder")}
           onchange={handleInput}
         />
       </div>
@@ -260,26 +265,26 @@
     <!-- Output panel -->
     <div class="flex-1 flex flex-col min-h-0 p-2">
       <div class="flex items-center justify-between mb-1 px-1">
-        <span class="text-xs text-[var(--color-text-muted)]">Output</span>
+        <span class="text-xs text-[var(--color-text-muted)]">{t(lang, "output")}</span>
         <div class="flex items-center gap-2">
           <button
             on:click={() => copyText(output)}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-            title="Copy output"
+            title={tt("formatter", lang, "copyOutput")}
           >
-            Copy
+            {t(lang, "copy")}
           </button>
           <button
             on:click={() => output && downloadFile(output, "formatted.json")}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-            title="Download output as .json"
+            title={tt("formatter", lang, "downloadOutput")}
           >
-            Download
+            {t(lang, "download")}
           </button>
         </div>
       </div>
       <div class="flex-1 min-h-0">
-        <CodeEditor value={output} lang="json" placeholder="Formatted output will appear here..." readonly={true} />
+        <CodeEditor value={output} lang="json" placeholder={tt("formatter", lang, "outputPlaceholder")} readonly={true} />
       </div>
     </div>
   </div>

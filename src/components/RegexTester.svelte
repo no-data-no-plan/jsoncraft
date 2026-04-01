@@ -1,5 +1,10 @@
 <script lang="ts">
   import { debounce } from "../lib/fileutils";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let pattern = "";
   let flags = "g";
@@ -26,7 +31,7 @@
           results.push({ full: match[0], index: match.index ?? 0, groups: Array.from(match).slice(1) });
         }
       } else {
-        const match = testString.match(re);
+        const match = testString.match(new RegExp(pattern, flags));
         if (match) {
           results.push({ full: match[0], index: match.index ?? 0, groups: Array.from(match).slice(1) });
         }
@@ -73,7 +78,7 @@
       type="text"
       bind:value={pattern}
       oninput={() => debouncedTest()}
-      placeholder="Enter regex pattern..."
+      placeholder={tt("regex", lang, "enterPattern")}
       class="flex-1 min-w-[200px] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] px-2 py-1 rounded text-sm font-mono"
     />
     <span class="text-sm text-[var(--color-text-muted)] font-mono">/</span>
@@ -88,7 +93,7 @@
       {/each}
     </div>
     <span class="text-xs text-[var(--color-text-muted)] ml-auto">
-      {matches.length} match{matches.length !== 1 ? "es" : ""}
+      {matches.length} {matches.length !== 1 ? tt("regex", lang, "matches") : tt("regex", lang, "matchSingular")}
     </span>
   </div>
 
@@ -103,7 +108,7 @@
     <!-- Test string -->
     <div class="flex-1 flex flex-col min-h-0">
       <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
-        Test String
+        {tt("regex", lang, "testString")}
       </div>
       <div class="flex-1 p-3 overflow-auto">
         <textarea
@@ -111,7 +116,7 @@
           oninput={() => debouncedTest()}
           rows="10"
           class="w-full h-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] rounded p-3 font-mono text-sm resize-none"
-          placeholder="Enter test string..."
+          placeholder={tt("regex", lang, "enterTestString")}
         ></textarea>
       </div>
     </div>
@@ -121,11 +126,11 @@
     <!-- Results -->
     <div class="flex-1 flex flex-col min-h-0">
       <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
-        Matches &amp; Highlighted
+        {tt("regex", lang, "matchesHighlighted")}
       </div>
       <div class="flex-1 p-3 overflow-auto space-y-3">
         <div class="p-3 rounded bg-[var(--color-bg-tertiary)] font-mono text-sm whitespace-pre-wrap break-all leading-relaxed">
-          {@html highlighted || '<span class="text-[var(--color-text-muted)]">Matches will be highlighted here</span>'}
+          {@html highlighted || `<span class="text-[var(--color-text-muted)]">${tt("regex", lang, "matchesPlaceholder")}</span>`}
         </div>
 
         {#if matches.length > 0}
@@ -135,7 +140,7 @@
                 <div class="flex items-center gap-2">
                   <span class="text-[var(--color-text-muted)] text-xs">#{i + 1}</span>
                   <span class="font-mono text-[var(--color-accent)]">"{m.full}"</span>
-                  <span class="text-xs text-[var(--color-text-muted)]">at index {m.index}</span>
+                  <span class="text-xs text-[var(--color-text-muted)]">{tt("regex", lang, "atIndex")} {m.index}</span>
                 </div>
                 {#if m.groups.length > 0}
                   <div class="mt-1 flex flex-wrap gap-1">

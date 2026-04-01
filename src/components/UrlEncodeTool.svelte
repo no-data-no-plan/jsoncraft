@@ -1,5 +1,10 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let input = "";
   let output = "";
@@ -17,7 +22,7 @@
         output = encodeMode === "component" ? decodeURIComponent(input) : decodeURI(input);
       }
     } catch (e: any) {
-      error = "Invalid input: " + e.message;
+      error = (lang === "es" ? "Entrada inválida: " : "Invalid input: ") + e.message;
       output = "";
     }
   }
@@ -44,25 +49,25 @@
     <button
       onclick={() => { mode = "encode"; process(); }}
       class="px-3 py-1 rounded text-sm {mode === 'encode' ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]'}"
-    >Encode</button>
+    >{t(lang, "encode")}</button>
     <button
       onclick={() => { mode = "decode"; process(); }}
       class="px-3 py-1 rounded text-sm {mode === 'decode' ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]'}"
-    >Decode</button>
+    >{t(lang, "decode")}</button>
     <span class="w-px h-5 bg-[var(--color-border)]"></span>
     <button
       onclick={() => { encodeMode = "component"; process(); }}
       class="px-3 py-1 rounded text-xs {encodeMode === 'component' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
-    >Component</button>
+    >{tt("urlEncode", lang, "component")}</button>
     <button
       onclick={() => { encodeMode = "uri"; process(); }}
       class="px-3 py-1 rounded text-xs {encodeMode === 'uri' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
-    >Full URI</button>
+    >{tt("urlEncode", lang, "fullUri")}</button>
     <button onclick={swap} class="px-3 py-1 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
-      ⇄ Swap
+      {t(lang, "swap")}
     </button>
     <button onclick={copy} class="ml-auto px-3 py-1 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
-      Copy
+      {t(lang, "copy")}
     </button>
   </div>
 
@@ -72,16 +77,16 @@
 
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <div class="flex-1 flex flex-col min-h-0">
-      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">Input</div>
+      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">{t(lang, "input")}</div>
       <div class="flex-1 p-2">
-        <CodeEditor value={input} onchange={handleInput} lang="text" placeholder="Enter text or URL to encode/decode..." />
+        <CodeEditor value={input} onchange={handleInput} lang="text" placeholder={tt("urlEncode", lang, "inputPlaceholder")} />
       </div>
     </div>
     <div class="w-px bg-[var(--color-border)] hidden lg:block"></div>
     <div class="flex-1 flex flex-col min-h-0">
-      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">Output</div>
+      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">{t(lang, "output")}</div>
       <div class="flex-1 p-2">
-        <CodeEditor value={output} lang="text" readonly={true} placeholder="Result..." />
+        <CodeEditor value={output} lang="text" readonly={true} placeholder={tt("urlEncode", lang, "resultPlaceholder")} />
       </div>
     </div>
   </div>

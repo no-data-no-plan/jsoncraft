@@ -3,6 +3,11 @@
   import { diffJson } from "diff";
   import { friendlyError, debounce } from "../lib/fileutils";
   import { shouldUseWorker, diffInWorker } from "../lib/worker-api";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let left = "";
   let right = "";
@@ -21,7 +26,7 @@
     }
     if (!left.trim() || !right.trim()) {
       diffResult = [];
-      error = !left.trim() ? "Enter JSON in the left panel" : "Enter JSON in the right panel";
+      error = !left.trim() ? tt("diff", lang, "enterLeft") : tt("diff", lang, "enterRight");
       return;
     }
 
@@ -45,14 +50,14 @@
     try {
       parsedLeft = JSON.parse(left);
     } catch (e: any) {
-      error = "Left: " + friendlyError(e.message);
+      error = tt("diff", lang, "leftOriginal") + ": " + friendlyError(e.message);
       diffResult = [];
       return;
     }
     try {
       parsedRight = JSON.parse(right);
     } catch (e: any) {
-      error = "Right: " + friendlyError(e.message);
+      error = tt("diff", lang, "rightModified") + ": " + friendlyError(e.message);
       diffResult = [];
       return;
     }
@@ -112,28 +117,28 @@
       on:click={compare}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
-      Compare
+      {t(lang, "compare")}
     </button>
     <button
       on:click={swap}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Swap
+      {t(lang, "swap")}
     </button>
     <button
       on:click={clear}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Clear
+      {t(lang, "clear")}
     </button>
     <button
       on:click={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Sample
+      {t(lang, "sample")}
     </button>
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">Comparing...</span>
+      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "comparing")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
@@ -143,9 +148,9 @@
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <!-- Left editor -->
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Left (Original)</div>
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">{tt("diff", lang, "leftOriginal")}</div>
       <div class="flex-1 min-h-0">
-        <CodeEditor value={left} lang="json" placeholder="Paste first JSON..." onchange={handleLeft} />
+        <CodeEditor value={left} lang="json" placeholder={tt("diff", lang, "leftPlaceholder")} onchange={handleLeft} />
       </div>
     </div>
 
@@ -154,9 +159,9 @@
 
     <!-- Right editor -->
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Right (Modified)</div>
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">{tt("diff", lang, "rightModified")}</div>
       <div class="flex-1 min-h-0">
-        <CodeEditor value={right} lang="json" placeholder="Paste second JSON..." onchange={handleRight} />
+        <CodeEditor value={right} lang="json" placeholder={tt("diff", lang, "rightPlaceholder")} onchange={handleRight} />
       </div>
     </div>
   </div>
@@ -169,12 +174,12 @@
       <div class="text-xs text-[var(--color-text-muted)] px-4 py-1 border-b border-[var(--color-border)] flex items-center justify-between">
         {#if hasDifferences}
           <span>
-            Differences:
-            +{diffResult.filter(p => p.added).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} lines,
-            -{diffResult.filter(p => p.removed).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} lines
+            {tt("diff", lang, "differences")}
+            +{diffResult.filter(p => p.added).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} {tt("diff", lang, "lines")},
+            -{diffResult.filter(p => p.removed).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} {tt("diff", lang, "lines")}
           </span>
         {:else}
-          <span class="text-[var(--color-success)]">No differences — JSONs are identical</span>
+          <span class="text-[var(--color-success)]">{tt("diff", lang, "noDifferences")}</span>
         {/if}
       </div>
       {#if hasDifferences}
