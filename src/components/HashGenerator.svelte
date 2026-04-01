@@ -1,5 +1,10 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let input = "";
   let hashes: { algo: string; value: string }[] = [];
@@ -81,28 +86,28 @@
 
 <div class="flex flex-col h-full">
   <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
-    <span class="text-sm text-[var(--color-text-secondary)]">Paste text to generate hashes</span>
+    <span class="text-sm text-[var(--color-text-secondary)]">{tt("hash", lang, "pasteToHash")}</span>
     {#if computing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto">Computing...</span>
+      <span class="text-xs text-[var(--color-accent)] ml-auto">{t(lang, "computing")}</span>
     {/if}
   </div>
 
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <div class="flex-1 flex flex-col min-h-0">
-      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">Input</div>
+      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">{t(lang, "input")}</div>
       <div class="flex-1 p-2">
-        <CodeEditor value={input} onchange={handleInput} lang="text" placeholder="Enter text to hash..." />
+        <CodeEditor value={input} onchange={handleInput} lang="text" placeholder={tt("hash", lang, "inputPlaceholder")} />
       </div>
     </div>
     <div class="w-px bg-[var(--color-border)] hidden lg:block"></div>
     <div class="flex-1 flex flex-col min-h-0 overflow-auto">
-      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">Hashes</div>
+      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">{tt("hash", lang, "hashes")}</div>
       <div class="p-3 space-y-3">
         {#each hashes as h}
           <div class="space-y-1">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold text-[var(--color-text-secondary)]">{h.algo}</span>
-              <button onclick={() => copy(h.value)} class="text-xs text-[var(--color-accent)] hover:underline">Copy</button>
+              <button onclick={() => copy(h.value)} class="text-xs text-[var(--color-accent)] hover:underline">{t(lang, "copy")}</button>
             </div>
             <div class="p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs text-[var(--color-text-primary)] break-all select-all">
               {h.value}
@@ -110,7 +115,7 @@
           </div>
         {/each}
         {#if hashes.length === 0}
-          <p class="text-sm text-[var(--color-text-muted)]">Enter text on the left to generate hash values.</p>
+          <p class="text-sm text-[var(--color-text-muted)]">{tt("hash", lang, "emptyHint")}</p>
         {/if}
       </div>
     </div>

@@ -2,6 +2,11 @@
   import CodeEditor from "./CodeEditor.svelte";
   import { debounce } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
 
   let input = "";
   let parsed: unknown = null;
@@ -171,9 +176,9 @@
       <button
         class="ml-auto opacity-0 group-hover:opacity-100 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)]"
         on:click|stopPropagation={() => copyPath(path)}
-        title="Copy path"
+        title={tt("viewer", lang, "copyPath")}
       >
-        copy path
+        {tt("viewer", lang, "copyPath")}
       </button>
     </div>
 
@@ -190,7 +195,7 @@
               class="text-xs text-[var(--color-accent)] hover:underline py-1"
               on:click|stopPropagation={() => showMore(path)}
             >
-              Show more ({items.length - limit} remaining)
+              {tt("viewer", lang, "showMore")} ({items.length - limit} {tt("viewer", lang, "remaining")})
             </button>
           </div>
         {/if}
@@ -205,7 +210,7 @@
               class="text-xs text-[var(--color-accent)] hover:underline py-1"
               on:click|stopPropagation={() => showMore(path)}
             >
-              Show more ({entries.length - limit} remaining)
+              {tt("viewer", lang, "showMore")} ({entries.length - limit} {tt("viewer", lang, "remaining")})
             </button>
           </div>
         {/if}
@@ -223,22 +228,22 @@
       on:click={expandAll}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
-      Expand All
+      {tt("viewer", lang, "expandAll")}
     </button>
     <button
       on:click={collapseAll}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Collapse All
+      {tt("viewer", lang, "collapseAll")}
     </button>
     <button
       on:click={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
-      Sample
+      {t(lang, "sample")}
     </button>
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">Parsing...</span>
+      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "parsing")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
@@ -247,12 +252,12 @@
   <!-- Content -->
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Input</div>
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">{t(lang, "input")}</div>
       <div class="flex-1 min-h-0">
         <CodeEditor
           value={input}
           lang="json"
-          placeholder="Paste JSON to explore as tree..."
+          placeholder={tt("viewer", lang, "inputPlaceholder")}
           onchange={handleInput}
         />
       </div>
@@ -262,7 +267,7 @@
     <div class="h-px bg-[var(--color-border)] lg:hidden"></div>
 
     <div class="flex-1 flex flex-col min-h-0 p-2">
-      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">Tree</div>
+      <div class="text-xs text-[var(--color-text-muted)] mb-1 px-1">{tt("viewer", lang, "tree")}</div>
       <div
         role="tree"
         class="flex-1 min-h-0 overflow-auto rounded border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-2 font-mono"
@@ -271,7 +276,7 @@
           {#if typeof parsed === "object" && parsed !== null}
             {#if Array.isArray(parsed)}
               {#if parsed.length === 0}
-                <span class="text-sm text-[var(--color-text-muted)]">Empty array []</span>
+                <span class="text-sm text-[var(--color-text-muted)]">{tt("viewer", lang, "emptyArray")}</span>
               {:else}
                 {@const rootLimit = getVisibleLimit("$")}
                 {#each parsed.slice(0, rootLimit) as item, i}
@@ -282,14 +287,14 @@
                     class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
                     on:click={() => showMore("$")}
                   >
-                    Show more ({parsed.length - rootLimit} remaining)
+                    {tt("viewer", lang, "showMore")} ({parsed.length - rootLimit} {tt("viewer", lang, "remaining")})
                   </button>
                 {/if}
               {/if}
             {:else}
               {@const rootEntries = Object.entries(parsed)}
               {#if rootEntries.length === 0}
-                <span class="text-sm text-[var(--color-text-muted)]">Empty object {"{}"}</span>
+                <span class="text-sm text-[var(--color-text-muted)]">{tt("viewer", lang, "emptyObject")}</span>
               {:else}
                 {@const rootLimit = getVisibleLimit("$")}
                 {#each rootEntries.slice(0, rootLimit) as [k, v]}
@@ -300,7 +305,7 @@
                     class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
                     on:click={() => showMore("$")}
                   >
-                    Show more ({rootEntries.length - rootLimit} remaining)
+                    {tt("viewer", lang, "showMore")} ({rootEntries.length - rootLimit} {tt("viewer", lang, "remaining")})
                   </button>
                 {/if}
               {/if}
@@ -309,7 +314,7 @@
             <span class="text-sm text-[var(--color-text-secondary)]">{JSON.stringify(parsed)}</span>
           {/if}
         {:else if !error}
-          <span class="text-sm text-[var(--color-text-muted)]">Paste JSON on the left to see the tree view.</span>
+          <span class="text-sm text-[var(--color-text-muted)]">{tt("viewer", lang, "pasteHint")}</span>
         {/if}
       </div>
     </div>

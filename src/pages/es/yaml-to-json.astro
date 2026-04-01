@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Converter from "../../components/Converter.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("yaml-to-json", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="yaml-to-json" lang="es">
+  <Converter client:load fromFormat="yaml" toFormat="json" lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-yaml", "formatter", "viewer"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

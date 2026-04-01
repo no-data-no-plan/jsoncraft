@@ -1,11 +1,16 @@
 ---
 import { tools } from "../lib/tools";
+import type { Lang } from "../i18n/index";
+import { localePath } from "../i18n/index";
+import { t, translateGroup } from "../i18n/common";
+import { getToolName } from "../i18n/tools";
 
 interface Props {
   activeToolId: string;
+  lang?: Lang;
 }
 
-const { activeToolId } = Astro.props;
+const { activeToolId, lang = "en" } = Astro.props;
 
 const groups = [
   { label: "Core", ids: ["formatter", "diff", "viewer", "jsonpath"] },
@@ -33,7 +38,7 @@ const groups = [
          fixed lg:static inset-y-0 left-0 z-40 -translate-x-full lg:translate-x-0 transition-transform"
 >
   <!-- Logo -->
-  <a href="/" class="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border)]">
+  <a href={localePath("/", lang)} class="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border)]">
     <span class="text-xl font-bold text-[var(--color-accent)]">{ }</span>
     <span class="text-lg font-bold text-[var(--color-text-primary)]">JSONCraft</span>
   </a>
@@ -44,14 +49,14 @@ const groups = [
       groups.map((group) => (
         <div class="mb-2">
           <div class="px-4 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-            {group.label}
+            {translateGroup(group.label, lang)}
           </div>
           {group.ids.map((id) => {
             const tool = tools.find((t) => t.id === id)!;
             const isActive = tool.id === activeToolId;
             return (
               <a
-                href={tool.path}
+                href={localePath(tool.path, lang)}
                 draggable="false"
                 class:list={[
                   "flex items-center gap-2 px-4 py-1.5 mx-2 rounded text-sm transition-colors",
@@ -61,7 +66,7 @@ const groups = [
                 ]}
               >
                 <span class="w-7 text-center font-mono text-xs opacity-70">{tool.icon}</span>
-                <span>{tool.name}</span>
+                <span>{getToolName(tool.id, lang)}</span>
               </a>
             );
           })}
@@ -72,6 +77,6 @@ const groups = [
 
   <!-- Bottom info -->
   <div class="px-4 border-t border-[var(--color-border)] text-[11px] text-[var(--color-text-muted)]" style="padding-top: 15px; padding-bottom: 15px;">
-    100% client-side. No data sent to any server.
+    {t(lang, "sidebarPrivacy")}
   </div>
 </aside>

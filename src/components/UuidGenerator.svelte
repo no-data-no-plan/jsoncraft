@@ -1,4 +1,10 @@
 <script lang="ts">
+  import { t } from "../i18n/common";
+  import { tt } from "../i18n/tools";
+  import type { Lang } from "../i18n/index";
+
+  let { lang = "en" as Lang } = $props();
+
   let count = 1;
   let uppercase = false;
   let noDashes = false;
@@ -30,7 +36,7 @@
 <div class="flex flex-col h-full">
   <div class="flex items-center gap-3 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex-wrap">
     <div class="flex items-center gap-2">
-      <label for="count" class="text-sm text-[var(--color-text-secondary)]">Count:</label>
+      <label for="count" class="text-sm text-[var(--color-text-secondary)]">{tt("uuid", lang, "count")}</label>
       <input
         id="count"
         type="number"
@@ -42,20 +48,20 @@
     </div>
     <label class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] cursor-pointer">
       <input type="checkbox" bind:checked={uppercase} class="accent-[var(--color-accent)]" />
-      Uppercase
+      {tt("uuid", lang, "uppercase")}
     </label>
     <label class="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] cursor-pointer">
       <input type="checkbox" bind:checked={noDashes} class="accent-[var(--color-accent)]" />
-      No dashes
+      {tt("uuid", lang, "noDashes")}
     </label>
     <button
       onclick={generate}
       class="px-3 py-1 rounded text-sm bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]"
-    >Generate</button>
+    >{t(lang, "generate")}</button>
     <button
       onclick={copyAll}
       class="ml-auto px-3 py-1 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-    >Copy All</button>
+    >{tt("uuid", lang, "copyAll")}</button>
   </div>
 
   <div class="flex-1 overflow-auto p-3">
@@ -68,7 +74,7 @@
           <button
             onclick={() => copySingle(uuid)}
             class="opacity-0 group-hover:opacity-100 px-2 py-1 rounded text-xs bg-[var(--color-bg-secondary)] text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-opacity"
-          >Copy</button>
+          >{t(lang, "copy")}</button>
         </div>
       {/each}
     </div>

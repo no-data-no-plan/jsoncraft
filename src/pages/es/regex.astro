@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RegexTester from "../../components/RegexTester.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("regex", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="regex" lang="es">
+  <RegexTester client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "diff", "url-encode"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HashGenerator from "../../components/HashGenerator.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("hash", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="hash" lang="es">
+  <HashGenerator client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["base64", "uuid", "url-encode"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

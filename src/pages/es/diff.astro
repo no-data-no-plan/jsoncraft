@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import JsonDiff from "../../components/JsonDiff.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("diff", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="diff" lang="es">
+  <JsonDiff client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "viewer", "jsonpath"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

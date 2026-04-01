@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Base64Tool from "../../components/Base64Tool.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("base64", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="base64" lang="es">
+  <Base64Tool client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["url-encode", "hash", "formatter"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

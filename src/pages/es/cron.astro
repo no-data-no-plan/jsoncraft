@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CronBuilder from "../../components/CronBuilder.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("cron", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="cron" lang="es">
+  <CronBuilder client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["timestamp", "formatter", "regex"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

@@ -1,11 +1,15 @@
 ---
+import type { Lang } from "../i18n/index";
+import { t } from "../i18n/common";
+
 interface Props {
   heading: string;
   text: string;
   features?: string[];
+  lang?: Lang;
 }
 
-const { heading, text, features } = Astro.props;
+const { heading, text, features, lang = "en" } = Astro.props;
 ---
 
 <details class="px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-sm">
@@ -19,6 +23,6 @@ const { heading, text, features } = Astro.props;
         {features.map((f) => <li>{f}</li>)}
       </ul>
     )}
-    <p class="text-xs">100% client-side. Your data never leaves your browser. No tracking, no cookies.</p>
+    <p class="text-xs">{t(lang, "seoBlockPrivacy")}</p>
   </div>
 </details>

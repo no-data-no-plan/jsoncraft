@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import JsonPathTool from "../../components/JsonPathTool.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("jsonpath", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="jsonpath" lang="es">
+  <JsonPathTool client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["viewer", "formatter", "diff"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

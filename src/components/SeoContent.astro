@@ -1,17 +1,18 @@
 ---
-/**
- * Visible SEO content block — renders H2 + description + related tool links
- * below the tool component. Not intrusive, informative footer style.
- */
 import { tools } from "../lib/tools";
+import type { Lang } from "../i18n/index";
+import { localePath } from "../i18n/index";
+import { t } from "../i18n/common";
+import { getToolName } from "../i18n/tools";
 
 interface Props {
   heading: string;
   text: string;
   relatedToolIds: string[];
+  lang?: Lang;
 }
 
-const { heading, text, relatedToolIds } = Astro.props;
+const { heading, text, relatedToolIds, lang = "en" } = Astro.props;
 const relatedTools = relatedToolIds
   .map((id) => tools.find((t) => t.id === id))
   .filter(Boolean) as typeof tools;
@@ -22,13 +23,13 @@ const relatedTools = relatedToolIds
   <p class="text-xs text-[var(--color-text-muted)] leading-relaxed mb-2">{text}</p>
   {relatedTools.length > 0 && (
     <div class="flex flex-wrap gap-2">
-      <span class="text-xs text-[var(--color-text-muted)]">Related:</span>
+      <span class="text-xs text-[var(--color-text-muted)]">{t(lang, "related")}</span>
       {relatedTools.map((tool) => (
         <a
-          href={tool.path}
+          href={localePath(tool.path, lang)}
           class="text-xs text-[var(--color-accent)] hover:underline"
         >
-          {tool.name}
+          {getToolName(tool.id, lang)}
         </a>
       ))}
     </div>
