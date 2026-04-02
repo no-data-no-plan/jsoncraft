@@ -58,6 +58,7 @@ const groups = [
               <a
                 href={localePath(tool.path, lang)}
                 draggable="false"
+                aria-current={isActive ? "page" : undefined}
                 class:list={[
                   "flex items-center gap-2 px-4 py-1.5 mx-2 rounded text-sm transition-colors",
                   isActive
