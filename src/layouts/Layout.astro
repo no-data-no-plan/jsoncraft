@@ -23,22 +23,42 @@ const alternateUrl = `https://jsoncraft.dev${alternatePath.replace(/\/$/, '') ||
 const activeTool = tools.find((t) => t.id === activeToolId);
 const pageKeywords = activeTool?.keywords.join(", ") || "";
 
-const jsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": title,
-  "url": canonicalUrl,
-  "description": description,
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Any",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "browserRequirements": "Requires a modern web browser",
-  "isPartOf": {
-    "@type": "WebApplication",
+const isHome = activeToolId === "formatter" && (Astro.url.pathname === "/" || Astro.url.pathname === "/es" || Astro.url.pathname === "/es/");
+
+const schemas: object[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "url": canonicalUrl,
+    "description": description,
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebApplication", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "JSONCraft", "item": `https://jsoncraft.dev${lang === "es" ? "/es" : ""}` },
+      ...(!isHome ? [{ "@type": "ListItem", "position": 2, "name": title, "item": canonicalUrl }] : []),
+    ],
+  },
+];
+
+if (isHome) {
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
     "name": "JSONCraft",
     "url": "https://jsoncraft.dev",
-  },
-});
+    "description": "Free online JSON, YAML, CSV, TOML tools. Format, diff, convert, validate — no signup, runs in your browser.",
+    "inLanguage": ["en", "es"],
+  });
+}
+
+const jsonLd = JSON.stringify(schemas);
 ---
 
 <!doctype html>
