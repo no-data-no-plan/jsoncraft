@@ -12,8 +12,6 @@
   let results: { valid: boolean; errors: string[] } | null = null;
   let parseError = "";
 
-  const ajv = new Ajv({ allErrors: true, verbose: true });
-
   function validate() {
     if (!jsonInput.trim() || !schemaInput.trim()) {
       results = null;
@@ -43,6 +41,7 @@
     parseError = "";
 
     try {
+      const ajv = new Ajv({ allErrors: true, verbose: true });
       const validateFn = ajv.compile(schema as object);
       const valid = validateFn(data);
 

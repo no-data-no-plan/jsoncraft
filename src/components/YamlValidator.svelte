@@ -50,7 +50,7 @@
   }
 
   async function upload() {
-    const text = await uploadFile({ yaml: ".yaml,.yml" });
+    const text = await uploadFile(".yaml,.yml");
     if (text) { input = text; validate(text); }
   }
 

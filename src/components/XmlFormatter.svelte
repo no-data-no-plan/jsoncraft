@@ -12,6 +12,8 @@
   let error = "";
   let indent = 2;
 
+  function escXml(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
   function prettyPrint(xml: string, indentSize: number): string {
     const parser = new DOMParser();
     const doc = parser.parseFromString(xml.trim(), "application/xml");
@@ -30,7 +32,7 @@
     function walk(node: Node, level: number) {
       if (node.nodeType === Node.TEXT_NODE) {
         const text = node.textContent?.trim();
-        if (text) result += pad.repeat(level) + text + "\n";
+        if (text) result += pad.repeat(level) + escXml(text) + "\n";
         return;
       }
 
@@ -56,7 +58,7 @@
       let attrs = "";
       for (let i = 0; i < el.attributes.length; i++) {
         const a = el.attributes[i];
-        attrs += ` ${a.name}="${a.value}"`;
+        attrs += ` ${a.name}="${escXml(a.value)}"`;
       }
 
       if (!el.childNodes.length) {
@@ -66,7 +68,7 @@
 
       if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
         const text = el.childNodes[0].textContent?.trim() || "";
-        result += pad.repeat(level) + `<${tag}${attrs}>${text}</${tag}>` + "\n";
+        result += pad.repeat(level) + `<${tag}${attrs}>${escXml(text)}</${tag}>` + "\n";
         return;
       }
 
@@ -127,7 +129,7 @@
   }
 
   async function upload() {
-    const text = await uploadFile({ xml: ".xml" });
+    const text = await uploadFile(".xml");
     if (text) { input = text; format(); }
   }
 
