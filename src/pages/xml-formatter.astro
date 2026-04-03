@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import XmlFormatter from "../components/XmlFormatter.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+---
+
+<Layout
+  title="XML Formatter & Prettifier Online Free"
+  description="Format, prettify and minify XML online for free. Proper indentation, syntax validation, and one-click minification. 100% private, browser-based."
+  activeToolId="xml-formatter"
+>
+  <XmlFormatter client:load />
+  <SeoContent
+    heading="Format & Prettify XML Instantly"
+    text="Paste or upload XML to instantly format it with proper indentation. Supports 2-space and 4-space indentation. Minify XML to a single line for production. Validates syntax and shows detailed error messages."
+    relatedToolIds={["formatter", "yaml-to-json", "json-to-toml"]}
+  />
+  <SeoBlock
+    heading="About XML formatting"
+    text="XML (eXtensible Markup Language) is used for configuration files, data exchange, and web services. Well-formatted XML with proper indentation makes it much easier to read and debug."
+    features={[
+      "Format with 2 or 4 spaces indentation",
+      "Minify to a single compact line",
+      "Syntax validation with error messages",
+      "Upload .xml files directly",
+      "Download formatted results",
+    ]}
+  />
+</Layout>

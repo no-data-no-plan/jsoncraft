@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import JsonSchemaValidator from "../components/JsonSchemaValidator.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+---
+
+<Layout
+  title="JSON Schema Validator Online Free"
+  description="Validate JSON data against a JSON Schema with detailed error reports. Supports Draft-07. All errors shown at once. Free, private, browser-based."
+  activeToolId="json-schema-validator"
+>
+  <JsonSchemaValidator client:load />
+  <SeoContent
+    heading="Validate JSON Against a Schema"
+    text="Paste JSON data and a JSON Schema to instantly validate compliance. See all validation errors at once with exact paths and descriptions. Powered by Ajv, the fastest JSON Schema validator."
+    relatedToolIds={["formatter", "viewer", "yaml-validator"]}
+  />
+  <SeoBlock
+    heading="About JSON Schema validation"
+    text="JSON Schema defines the structure, types, and constraints of JSON data. It's used for API request/response validation, configuration file validation, and data quality checks."
+    features={[
+      "Full JSON Schema Draft-07 support",
+      "All validation errors shown at once",
+      "Exact error paths and descriptions",
+      "Real-time validation as you type",
+      "Sample schema with common patterns",
+    ]}
+  />
+</Layout>

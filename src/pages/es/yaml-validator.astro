@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import YamlValidator from "../../components/YamlValidator.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("yaml-validator", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="yaml-validator" lang="es">
+  <YamlValidator client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["yaml-to-json", "formatter", "json-schema-validator"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

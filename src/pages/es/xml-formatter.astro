@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import XmlFormatter from "../../components/XmlFormatter.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("xml-formatter", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="xml-formatter" lang="es">
+  <XmlFormatter client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "yaml-to-json", "json-to-toml"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

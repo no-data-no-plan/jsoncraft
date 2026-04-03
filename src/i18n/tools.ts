@@ -18,6 +18,11 @@ const toolNames: Record<string, { en: string; es: string }> = {
   uuid: { en: "UUID Generator", es: "Generador de UUID" },
   timestamp: { en: "Timestamp Converter", es: "Conversor de Timestamp" },
   cron: { en: "Cron Expression Builder", es: "Constructor de Cron" },
+  "json-to-typescript": { en: "JSON to TypeScript", es: "JSON a TypeScript" },
+  "xml-formatter": { en: "XML Formatter", es: "Formateador XML" },
+  "json-to-html-table": { en: "JSON to HTML Table", es: "JSON a Tabla HTML" },
+  "yaml-validator": { en: "YAML Validator", es: "Validador YAML" },
+  "json-schema-validator": { en: "JSON Schema Validator", es: "Validador de JSON Schema" },
 };
 
 export function getToolName(id: string, lang: Lang): string {
@@ -313,6 +318,97 @@ const cron = {
   },
 };
 
+const jsonToTypescript = {
+  en: {
+    inputPlaceholder: "Paste JSON to generate TypeScript types...",
+    outputPlaceholder: "TypeScript interfaces will appear here...",
+  },
+  es: {
+    inputPlaceholder: "Pega JSON para generar tipos TypeScript...",
+    outputPlaceholder: "Las interfaces TypeScript aparecer\u00e1n aqu\u00ed...",
+  },
+};
+
+const xmlFormatter = {
+  en: {
+    spaces2: "2 spaces",
+    spaces4: "4 spaces",
+    inputPlaceholder: "Paste XML to format...",
+    outputPlaceholder: "Formatted XML will appear here...",
+  },
+  es: {
+    spaces2: "2 espacios",
+    spaces4: "4 espacios",
+    inputPlaceholder: "Pega XML para formatear...",
+    outputPlaceholder: "El XML formateado aparecer\u00e1 aqu\u00ed...",
+  },
+};
+
+const jsonToHtmlTable = {
+  en: {
+    inputPlaceholder: "Paste a JSON array to generate an HTML table...",
+    emptyHint: "Enter a JSON array on the left to generate an HTML table.",
+    showCode: "Show HTML code",
+    showPreview: "Show preview",
+    needsArrayOrObject: "Input must be a JSON array or object",
+    emptyArray: "Array is empty",
+    needsObjects: "Array items must be objects with keys",
+  },
+  es: {
+    inputPlaceholder: "Pega un array JSON para generar una tabla HTML...",
+    emptyHint: "Introduce un array JSON a la izquierda para generar una tabla HTML.",
+    showCode: "Ver c\u00f3digo HTML",
+    showPreview: "Ver previsualizaci\u00f3n",
+    needsArrayOrObject: "La entrada debe ser un array u objeto JSON",
+    emptyArray: "El array est\u00e1 vac\u00edo",
+    needsObjects: "Los elementos del array deben ser objetos con claves",
+  },
+};
+
+const yamlValidator = {
+  en: {
+    inputPlaceholder: "Paste YAML to validate...",
+    outputPlaceholder: "Parsed JSON output will appear here...",
+    validYaml: "Valid YAML",
+    invalidYaml: "Invalid YAML",
+    line: "line",
+    column: "col",
+    document: "document",
+    documents: "documents",
+  },
+  es: {
+    inputPlaceholder: "Pega YAML para validar...",
+    outputPlaceholder: "La salida JSON parseada aparecer\u00e1 aqu\u00ed...",
+    validYaml: "YAML v\u00e1lido",
+    invalidYaml: "YAML inv\u00e1lido",
+    line: "l\u00ednea",
+    column: "col",
+    document: "documento",
+    documents: "documentos",
+  },
+};
+
+const jsonSchemaValidator = {
+  en: {
+    jsonPlaceholder: "Paste JSON data to validate...",
+    schemaPlaceholder: "Paste JSON Schema...",
+    valid: "Valid \u2014 JSON matches the schema",
+    invalid: "Invalid",
+    error: "error",
+    errors: "errors",
+    validationErrors: "Validation Errors",
+  },
+  es: {
+    jsonPlaceholder: "Pega los datos JSON a validar...",
+    schemaPlaceholder: "Pega el JSON Schema...",
+    valid: "V\u00e1lido \u2014 JSON coincide con el schema",
+    invalid: "Inv\u00e1lido",
+    error: "error",
+    errors: "errores",
+    validationErrors: "Errores de Validaci\u00f3n",
+  },
+};
+
 const converter = {
   en: {
     copyInput: "Copy input",
@@ -330,6 +426,7 @@ type ToolTranslations = Record<string, Record<string, string>>;
 
 const allToolStrings: Record<string, { en: ToolTranslations[string]; es: ToolTranslations[string] }> = {
   formatter, diff, viewer, jsonpath, regex, base64, urlEncode, hash, uuid, timestamp, cron, converter,
+  jsonToTypescript, xmlFormatter, jsonToHtmlTable, yamlValidator, jsonSchemaValidator,
 };
 
 export function tt(tool: string, lang: Lang, key: string): string {

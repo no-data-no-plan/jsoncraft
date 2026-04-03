@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import JsonToHtmlTable from "../../components/JsonToHtmlTable.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("json-to-html-table", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="json-to-html-table" lang="es">
+  <JsonToHtmlTable client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-csv", "formatter", "viewer"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

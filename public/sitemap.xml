@@ -17,6 +17,11 @@
   <url><loc>https://jsoncraft.dev/uuid</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
   <url><loc>https://jsoncraft.dev/timestamp</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
   <url><loc>https://jsoncraft.dev/cron</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
+  <url><loc>https://jsoncraft.dev/json-to-typescript</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/xml-formatter</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/json-to-html-table</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/yaml-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/json-schema-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
   <url><loc>https://jsoncraft.dev/es/</loc><priority>1.0</priority><lastmod>2026-04-01</lastmod></url>
   <url><loc>https://jsoncraft.dev/es/diff</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
   <url><loc>https://jsoncraft.dev/es/viewer</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
@@ -34,4 +39,9 @@
   <url><loc>https://jsoncraft.dev/es/uuid</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
   <url><loc>https://jsoncraft.dev/es/timestamp</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
   <url><loc>https://jsoncraft.dev/es/cron</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
+  <url><loc>https://jsoncraft.dev/es/json-to-typescript</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/es/xml-formatter</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/es/json-to-html-table</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/es/yaml-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+  <url><loc>https://jsoncraft.dev/es/json-schema-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
 </urlset>

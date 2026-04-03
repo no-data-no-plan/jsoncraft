@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import JsonToTypescript from "../../components/JsonToTypescript.svelte";
+import SeoContent from "../../components/SeoContent.astro";
+import SeoBlock from "../../components/SeoBlock.astro";
+import { getPageSeo } from "../../i18n/pages";
+
+const seo = getPageSeo("json-to-typescript", "es")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="json-to-typescript" lang="es">
+  <JsonToTypescript client:load lang="es" />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "viewer", "json-to-yaml"]} lang="es" />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+</Layout>

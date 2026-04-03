@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import JsonToHtmlTable from "../components/JsonToHtmlTable.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+---
+
+<Layout
+  title="JSON to HTML Table Converter Online Free"
+  description="Convert JSON arrays to clean HTML tables with live preview. Download as HTML file or copy the code. Free, private, browser-based."
+  activeToolId="json-to-html-table"
+>
+  <JsonToHtmlTable client:load />
+  <SeoContent
+    heading="Convert JSON to HTML Tables"
+    text="Paste a JSON array of objects to instantly generate a clean HTML table. Preview the table live or view the generated HTML code. Download as a standalone HTML file with basic styling included."
+    relatedToolIds={["json-to-csv", "formatter", "viewer"]}
+  />
+  <SeoBlock
+    heading="About JSON to HTML table conversion"
+    text="Converting JSON data to HTML tables is common when building reports, dashboards, or documentation. This tool generates semantic HTML with thead, tbody, and proper escaping."
+    features={[
+      "Live table preview",
+      "Toggle between preview and HTML code",
+      "Download as standalone HTML file",
+      "Handles nested objects (serialized as JSON)",
+      "Proper HTML escaping for safe output",
+    ]}
+  />
+</Layout>
