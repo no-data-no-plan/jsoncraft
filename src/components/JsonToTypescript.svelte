@@ -14,10 +14,6 @@
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
-  function sanitizeKey(key: string): string {
-    return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : `"${key}"`;
-  }
-
   function needsQuotes(key: string): boolean {
     return !/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key);
   }
@@ -78,6 +74,9 @@
       const interfaces = new Map<string, string>();
 
       if (Array.isArray(parsed)) {
+        // NOTE: Interface is generated from the first element only. Objects with
+        // different shapes later in the array are not merged. This is a known
+        // design limitation — a full union/merge would add significant complexity.
         if (parsed.length > 0 && typeof parsed[0] === "object" && parsed[0] !== null) {
           generateInterface(parsed[0] as Record<string, unknown>, "RootItem", interfaces);
           const result = [...interfaces.values()].reverse().join("\n\n");

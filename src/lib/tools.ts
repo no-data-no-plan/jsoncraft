@@ -151,7 +151,7 @@ export const tools: Tool[] = [
     name: "JSON to TypeScript",
     path: "/json-to-typescript",
     description: "Generate TypeScript interfaces and types from JSON data instantly",
-    icon: "J>T",
+    icon: "TS",
     keywords: ["json to typescript", "json to ts", "typescript interface generator", "json to types"],
   },
   {
