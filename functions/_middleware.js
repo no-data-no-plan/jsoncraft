@@ -4,7 +4,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https://pagead2.googlesyndication.com https://formspree.io https://*.google.com https://*.cloudflareinsights.com",
+  "connect-src 'self' https://pagead2.googlesyndication.com https://formspree.io https://*.google.com https://*.adtrafficquality.google https://*.cloudflareinsights.com",
   "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://www.google.com",
   "worker-src 'self' blob:",
   "object-src 'none'",
