@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
 import CrossLinks from "../components/CrossLinks.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 import { tools } from "../lib/tools";
 import type { Lang } from "../i18n/index";
 import { getAlternatePath } from "../i18n/index";
@@ -70,7 +71,6 @@ const jsonLd = JSON.stringify(schemas);
     {pageKeywords && <meta name="keywords" content={pageKeywords} />}
     <meta name="theme-color" content="#0f172a" />
     <meta name="google-adsense-account" content="ca-pub-8761907366448308" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8761907366448308" crossorigin="anonymous"></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href={canonicalUrl} />
@@ -180,7 +180,6 @@ const jsonLd = JSON.stringify(schemas);
                  data-ad-slot="4228407316"
                  data-ad-format="horizontal"
                  data-full-width-responsive="true"></ins>
-            <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
         </div>
         <CrossLinks exclude="dev" lang={lang} />
@@ -200,6 +199,8 @@ const jsonLd = JSON.stringify(schemas);
         </form>
       </footer>
     </div>
+
+    <CookieConsent lang={lang} />
 
     <script is:inline>
       document.getElementById("theme-toggle")?.addEventListener("click", () => {
