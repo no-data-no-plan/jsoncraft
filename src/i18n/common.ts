@@ -59,7 +59,7 @@ const common = {
   es: {
     headerBadge: "Tus datos nunca salen de tu navegador",
     footerTagline: "JSONCraft \u2014 Herramientas JSON gratuitas, r\u00e1pidas y privadas",
-    footerCoffee: "Inv\u00edtame a un caf\u00e9",
+    footerCoffee: "Buy me a coffee",
     feedbackPlaceholder: "Error, idea o sugerencia...",
     feedbackSend: "Enviar",
     sidebarPrivacy: "100% en tu navegador. No se env\u00edan datos a ning\u00fan servidor.",
