@@ -9,17 +9,37 @@
   let input = "";
   let output = "";
   let mode: "encode" | "decode" = "encode";
+  let urlSafe = $state(false);
   let error = "";
+
+  function encodeText(text: string): string {
+    const std = btoa(unescape(encodeURIComponent(text)));
+    if (urlSafe) {
+      return std.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+    return std;
+  }
+
+  function decodeText(b64: string): string {
+    let s = b64.replace(/\s/g, "");
+    // Auto-detect URL-safe: if input contains - or _, treat as URL-safe.
+    // Otherwise, honor the user's toggle for ambiguous input.
+    const hasUrlSafeChars = /[-_]/.test(s);
+    const hasStdChars = /[+/]/.test(s);
+    const treatAsUrlSafe = hasUrlSafeChars || (!hasStdChars && urlSafe);
+    if (treatAsUrlSafe) {
+      s = s.replace(/-/g, "+").replace(/_/g, "/");
+    }
+    // Pad if missing
+    while (s.length % 4) s += "=";
+    return decodeURIComponent(escape(atob(s)));
+  }
 
   function process() {
     error = "";
     if (!input.trim()) { output = ""; return; }
     try {
-      if (mode === "encode") {
-        output = btoa(unescape(encodeURIComponent(input)));
-      } else {
-        output = decodeURIComponent(escape(atob(input.replace(/\s/g, ""))));
-      }
+      output = mode === "encode" ? encodeText(input) : decodeText(input);
     } catch (e: any) {
       error = mode === "decode" ? tt("base64", lang, "invalidBase64") : e.message;
       output = "";
@@ -28,6 +48,11 @@
 
   function handleInput(val: string) {
     input = val;
+    process();
+  }
+
+  function toggleUrlSafe() {
+    urlSafe = !urlSafe;
     process();
   }
 
@@ -44,7 +69,7 @@
 </script>
 
 <div class="flex flex-col h-full">
-  <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
+  <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex-wrap">
     <button
       onclick={() => { mode = "encode"; process(); }}
       class="px-3 py-1 rounded text-sm {mode === 'encode' ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]'}"
@@ -53,6 +78,11 @@
       onclick={() => { mode = "decode"; process(); }}
       class="px-3 py-1 rounded text-sm {mode === 'decode' ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]'}"
     >{t(lang, "decode")}</button>
+    <span class="w-px h-5 bg-[var(--color-border)]"></span>
+    <label class="flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] cursor-pointer select-none" title={tt("base64", lang, "urlSafeHint")}>
+      <input type="checkbox" checked={urlSafe} onchange={toggleUrlSafe} class="accent-[var(--color-accent)]" />
+      {tt("base64", lang, "urlSafe")}
+    </label>
     <button onclick={swap} class="px-3 py-1 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]" title={lang === "es" ? "Intercambiar entrada/salida" : "Swap input/output"}>
       {t(lang, "swap")}
     </button>

@@ -2,6 +2,11 @@ import * as yaml from "js-yaml";
 import * as toml from "smol-toml";
 import Papa from "papaparse";
 
+/** Strip UTF-8 BOM if present at start of string. Safe no-op otherwise. */
+function stripBom(s: string): string {
+  return s.charCodeAt(0) === 0xFEFF ? s.slice(1) : s;
+}
+
 type Format = "json" | "yaml" | "toml" | "csv";
 
 interface ConvertMsg { type: "convert"; id: number; from: Format; to: Format; input: string }
@@ -44,11 +49,12 @@ function flatten(obj: unknown, prefix = ""): Record<string, unknown> {
 // --- PARSE ---
 
 function parseInput(text: string, format: Format): unknown {
+  const clean = stripBom(text);
   switch (format) {
-    case "json": return JSON.parse(text);
-    case "yaml": return parseYaml(text);
-    case "toml": return toml.parse(text);
-    case "csv": return parseCsv(text);
+    case "json": return JSON.parse(clean);
+    case "yaml": return parseYaml(clean);
+    case "toml": return toml.parse(clean);
+    case "csv": return parseCsv(clean);
   }
 }
 
@@ -289,21 +295,21 @@ self.onmessage = async (e: MessageEvent<WorkerMsg>) => {
         break;
       }
       case "parse": {
-        const parsed = JSON.parse(msg.input);
+        const parsed = JSON.parse(stripBom(msg.input));
         self.postMessage({ type: "result", id: msg.id, output: JSON.stringify(parsed), warnings: [] });
         break;
       }
       case "diff": {
         const { diffJson } = await import("diff");
-        const leftParsed = JSON.parse(msg.left);
-        const rightParsed = JSON.parse(msg.right);
+        const leftParsed = JSON.parse(stripBom(msg.left));
+        const rightParsed = JSON.parse(stripBom(msg.right));
         const result = diffJson(leftParsed as object, rightParsed as object);
         self.postMessage({ type: "result", id: msg.id, output: JSON.stringify(result), warnings: [] });
         break;
       }
       case "jsonpath": {
         const { JSONPath } = await import("jsonpath-plus");
-        const parsed = JSON.parse(msg.input);
+        const parsed = JSON.parse(stripBom(msg.input));
         const matches = JSONPath({ path: msg.path, json: parsed });
         self.postMessage({ type: "result", id: msg.id, output: JSON.stringify(matches, null, 2), matchCount: matches.length, warnings: [] });
         break;

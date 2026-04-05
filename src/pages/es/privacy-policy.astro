@@ -1,0 +1,82 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Política de Privacidad"
+  description="Cómo JSONCraft trata tus datos. Todo el procesamiento se hace en tu navegador; no subimos, guardamos ni rastreamos datos."
+  activeToolId=""
+  lang="es"
+>
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-6 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Privacidad</p>
+        <h2 class="text-2xl font-bold mb-1">Política de Privacidad</h2>
+        <p class="text-xs" style="color: var(--color-text-muted);">Última actualización: 2026-04-05</p>
+      </div>
+
+      <div class="space-y-4 leading-relaxed" style="color: var(--color-text-secondary);">
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Resumen</h3>
+          <p>
+            JSONCraft es una colección de herramientas para desarrolladores (JSON, YAML, TOML, XML, CSV, regex, base64, hash, etc.) que se ejecutan íntegramente en tu navegador. No recogemos, guardamos ni transmitimos los datos que pegas en ninguna herramienta.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Datos que <em>no</em> recogemos</h3>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Sin analítica. Sin cookies de analítica o rastreo.</li>
+            <li>Sin registros en servidor de JSON, YAML, contraseñas, tokens ni ningún dato que proceses.</li>
+            <li>Sin sistema de cuentas — no nos proporcionas ninguna identidad.</li>
+            <li>Sin llamadas ocultas al servidor. Cada herramienta se ejecuta 100% en tu navegador.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Servicios de terceros que usamos</h3>
+          <p class="mb-2">JSONCraft está diseñado para ser 100% client-side. Usamos un conjunto mínimo de servicios externos solo para renderizado y entrega de anuncios:</p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong style="color: var(--color-text-primary);">Google Fonts</strong> (Google, EE.UU.) — carga las fuentes Inter y JetBrains Mono vía CSS.</li>
+            <li><strong style="color: var(--color-text-primary);">Google AdSense</strong> (Google, EE.UU.) — muestra anuncios. <em>Solo se carga después de que aceptes las cookies.</em></li>
+            <li><strong style="color: var(--color-text-primary);">Cloudflare</strong> (UE) — hosting y CDN. Cloudflare puede retener logs estándar de servidor web (IP, ruta, user-agent) según su política.</li>
+            <li><strong style="color: var(--color-text-primary);">Formspree</strong> (UE) — envíos del formulario de feedback. Solo se invoca al enviar el formulario del footer.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Publicidad (Google AdSense)</h3>
+          <p class="mb-2">
+            Usamos Google AdSense para mostrar anuncios. AdSense establece cookies y puede usar tu dirección IP para servir anuncios personalizados. Estas cookies solo se cargan <em>después</em> de que aceptes el banner de consentimiento. Si rechazas, no se carga ningún script de AdSense.
+          </p>
+          <p>
+            Más información: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">Política de privacidad de Google Ads</a>.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Almacenamiento local</h3>
+          <p>Guardamos dos valores pequeños en el localStorage de tu navegador:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><code>jsoncraft-theme</code> — tu tema de color preferido (claro u oscuro).</li>
+            <li><code>cookie-consent</code> — si aceptaste o rechazaste el banner de cookies.</li>
+          </ul>
+          <p class="mt-2">Estos valores nunca salen de tu navegador.</p>
+        </section>
+
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Tus derechos (RGPD)</h3>
+          <p>
+            Como no almacenamos datos personales, no hay nada que acceder, eliminar o exportar. Puedes retirar el consentimiento para las cookies de AdSense en cualquier momento borrando el localStorage de este sitio en tu navegador — el banner reaparecerá en tu próxima visita.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-base font-semibold mb-2" style="color: var(--color-text-primary);">Contacto</h3>
+          <p>¿Preguntas? Usa el formulario de feedback del footer.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>

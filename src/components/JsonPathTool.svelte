@@ -1,7 +1,7 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
   import { JSONPath } from "jsonpath-plus";
-  import { friendlyError, debounce } from "../lib/fileutils";
+  import { friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, jsonpathInWorker } from "../lib/worker-api";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
@@ -52,7 +52,7 @@
 
     let parsed: unknown;
     try {
-      parsed = JSON.parse(input);
+      parsed = JSON.parse(stripBom(input));
     } catch (e: any) {
       error = (lang === "es" ? "JSON inválido: " : "Invalid JSON: ") + friendlyError(e.message);
       return;

@@ -1,5 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { stripBom } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -67,7 +68,7 @@
   function convert() {
     if (!input.trim()) { htmlOutput = ""; error = ""; return; }
     try {
-      const parsed = JSON.parse(input);
+      const parsed = JSON.parse(stripBom(input));
       htmlOutput = jsonToTable(parsed);
       error = "";
     } catch (e: any) {
@@ -140,14 +141,19 @@
       <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">HTML {t(lang, "output")}</div>
       {#if htmlOutput && showPreview}
         <div class="flex-1 p-3 overflow-auto">
-          <div class="rounded border border-[var(--color-border)] overflow-auto">
-            {@html `<style>
-              .jc-preview table { border-collapse: collapse; width: 100%; font-size: 13px; }
-              .jc-preview th, .jc-preview td { border: 1px solid var(--color-border); padding: 6px 10px; text-align: left; }
-              .jc-preview th { background: var(--color-bg-tertiary); font-weight: 600; color: var(--color-text-primary); }
-              .jc-preview td { color: var(--color-text-secondary); }
-            </style>`}
-            <div class="jc-preview">{@html htmlOutput}</div>
+          <div class="rounded border border-[var(--color-border)] overflow-hidden bg-white">
+            <iframe
+              srcdoc={`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+                body { margin: 0; padding: 12px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #222; background: #fff; }
+                table { border-collapse: collapse; width: 100%; font-size: 13px; }
+                th, td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; }
+                th { background: #f2f2f2; font-weight: 600; }
+                tr:nth-child(even) td { background: #f9f9f9; }
+              </style></head><body>${htmlOutput}</body></html>`}
+              sandbox=""
+              title={tt("jsonToHtmlTable", lang, "showPreview")}
+              class="w-full h-full min-h-[300px] border-0"
+            ></iframe>
           </div>
         </div>
       {:else if htmlOutput}

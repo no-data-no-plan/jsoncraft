@@ -1,5 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { stripBom } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -23,7 +24,7 @@
     let schema: unknown;
 
     try {
-      data = JSON.parse(jsonInput);
+      data = JSON.parse(stripBom(jsonInput));
     } catch (e: any) {
       parseError = `JSON: ${e.message}`;
       results = null;
@@ -31,7 +32,7 @@
     }
 
     try {
-      schema = JSON.parse(schemaInput);
+      schema = JSON.parse(stripBom(schemaInput));
     } catch (e: any) {
       parseError = `Schema: ${e.message}`;
       results = null;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { debounce } from "../lib/fileutils";
+  import { debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
@@ -47,7 +47,7 @@
       }
     } else {
       try {
-        parsed = JSON.parse(value);
+        parsed = JSON.parse(stripBom(value));
         error = "";
         allExpanded = false;
         expandedPaths = collectFirstLevelPaths(parsed);

@@ -9,17 +9,29 @@
   let input = "";
   let output = "";
   let mode: "encode" | "decode" = "encode";
-  let encodeMode: "component" | "uri" = "component";
+  let encodeMode: "component" | "uri" | "form" = "component";
   let error = "";
+
+  function formEncode(s: string): string {
+    return encodeURIComponent(s).replace(/%20/g, "+");
+  }
+
+  function formDecode(s: string): string {
+    return decodeURIComponent(s.replace(/\+/g, " "));
+  }
 
   function process() {
     error = "";
     if (!input.trim()) { output = ""; return; }
     try {
       if (mode === "encode") {
-        output = encodeMode === "component" ? encodeURIComponent(input) : encodeURI(input);
+        if (encodeMode === "component") output = encodeURIComponent(input);
+        else if (encodeMode === "uri") output = encodeURI(input);
+        else output = formEncode(input);
       } else {
-        output = encodeMode === "component" ? decodeURIComponent(input) : decodeURI(input);
+        if (encodeMode === "component") output = decodeURIComponent(input);
+        else if (encodeMode === "uri") output = decodeURI(input);
+        else output = formDecode(input);
       }
     } catch (e: any) {
       error = (lang === "es" ? "Entrada inválida: " : "Invalid input: ") + e.message;
@@ -57,12 +69,23 @@
     <span class="w-px h-5 bg-[var(--color-border)]"></span>
     <button
       onclick={() => { encodeMode = "component"; process(); }}
+      title={tt("urlEncode", lang, "modeHint")}
       class="px-3 py-1 rounded text-xs {encodeMode === 'component' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
     >{tt("urlEncode", lang, "component")}</button>
     <button
       onclick={() => { encodeMode = "uri"; process(); }}
+      title={tt("urlEncode", lang, "modeHint")}
       class="px-3 py-1 rounded text-xs {encodeMode === 'uri' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
     >{tt("urlEncode", lang, "fullUri")}</button>
+    <button
+      onclick={() => { encodeMode = "form"; process(); }}
+      title={tt("urlEncode", lang, "modeHint")}
+      class="px-3 py-1 rounded text-xs {encodeMode === 'form' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
+    >{tt("urlEncode", lang, "form")}</button>
+    <span
+      class="text-xs text-[var(--color-text-muted)] cursor-help hidden md:inline"
+      title={tt("urlEncode", lang, "modeHint")}
+    >?</span>
     <button onclick={swap} class="px-3 py-1 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
       {t(lang, "swap")}
     </button>

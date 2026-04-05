@@ -3,28 +3,25 @@ import Layout from "../layouts/Layout.astro";
 import JsonFormatter from "../components/JsonFormatter.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("formatter", "en")!;
 ---
 
 <Layout
-  title="JSON Formatter & Validator Online Free"
-  description="Format, validate, beautify and minify JSON online for free. Real-time validation, multiple indent styles, drag-and-drop. 100% private."
+  title={seo.title}
+  description={seo.description}
   activeToolId="formatter"
 >
   <JsonFormatter client:load />
   <SeoContent
-    heading="Format, Validate & Beautify JSON Instantly"
-    text="Paste or upload your JSON to instantly format it with proper indentation, validate its syntax, or minify it for production. JSONCraft detects errors in real time and shows the exact line and column. Supports 2-space, 4-space, and tab indentation."
+    heading={seo.seoHeading}
+    text={seo.seoText}
     relatedToolIds={["viewer", "diff", "json-to-yaml"]}
   />
   <SeoBlock
-    heading="About this tool"
-    text="JSONCraft's formatter instantly validates, beautifies, and minifies your JSON. Paste or drop a file and get real-time syntax validation with clear error messages pointing to the exact line and column."
-    features={[
-      "Format with 2 spaces, 4 spaces, or tabs",
-      "Minify JSON to a single compact line",
-      "Real-time validation as you type",
-      "Upload .json files or drag and drop",
-      "Download formatted results",
-    ]}
+    heading={seo.seoBlockHeading}
+    text={seo.seoBlockText}
+    features={seo.seoFeatures}
   />
 </Layout>

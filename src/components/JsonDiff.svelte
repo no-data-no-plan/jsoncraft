@@ -1,7 +1,7 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
   import { diffJson } from "diff";
-  import { friendlyError, debounce } from "../lib/fileutils";
+  import { friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, diffInWorker } from "../lib/worker-api";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
@@ -48,14 +48,14 @@
     let parsedLeft: unknown;
     let parsedRight: unknown;
     try {
-      parsedLeft = JSON.parse(left);
+      parsedLeft = JSON.parse(stripBom(left));
     } catch (e: any) {
       error = tt("diff", lang, "leftOriginal") + ": " + friendlyError(e.message);
       diffResult = [];
       return;
     }
     try {
-      parsedRight = JSON.parse(right);
+      parsedRight = JSON.parse(stripBom(right));
     } catch (e: any) {
       error = tt("diff", lang, "rightModified") + ": " + friendlyError(e.message);
       diffResult = [];

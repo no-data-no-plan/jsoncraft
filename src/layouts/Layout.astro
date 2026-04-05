@@ -189,7 +189,10 @@ const jsonLd = JSON.stringify(schemas);
       <footer class="px-4 py-2 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-muted)]">
         <div class="flex items-center justify-between mb-2">
           <span>{t(lang, "footerTagline")}</span>
-          <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerCoffee")}</a>
+          <span class="flex items-center gap-3">
+            <a href={lang === "es" ? "/es/privacy-policy" : "/privacy-policy"} class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerPrivacy")}</a>
+            <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerCoffee")}</a>
+          </span>
         </div>
         <form action="https://formspree.io/f/mpqoddwl" method="POST" class="flex gap-2">
           <input type="hidden" name="app" value="JSONCraft" />

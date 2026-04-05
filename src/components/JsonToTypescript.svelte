@@ -1,5 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import { stripBom } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -23,6 +24,10 @@
     return capitalize(cleaned.replace(/_([a-z])/g, (_, c) => c.toUpperCase()));
   }
 
+  function isPlainObject(v: unknown): v is Record<string, unknown> {
+    return v !== null && typeof v === "object" && !Array.isArray(v);
+  }
+
   function getType(value: unknown, key: string, interfaces: Map<string, string>): string {
     if (value === null) return "null";
     if (value === undefined) return "undefined";
@@ -32,7 +37,15 @@
 
     if (Array.isArray(value)) {
       if (value.length === 0) return "unknown[]";
-      const types = new Set(value.map((item, i) => getType(item, `${key}Item`, interfaces)));
+
+      // If all elements are plain objects, merge their shapes into one interface
+      if (value.every(isPlainObject)) {
+        const itemName = toInterfaceName(`${key}Item`);
+        generateMergedInterface(value as Record<string, unknown>[], itemName, interfaces);
+        return `${itemName}[]`;
+      }
+
+      const types = new Set(value.map((item) => getType(item, `${key}Item`, interfaces)));
       if (types.size === 1) return `${[...types][0]}[]`;
       return `(${[...types].join(" | ")})[]`;
     }
@@ -62,6 +75,39 @@
     interfaces.set(name, lines.join("\n"));
   }
 
+  /**
+   * Generate an interface by merging the shapes of all objects in `objs`.
+   * Keys missing from any element are marked optional with `?:`.
+   * Types across elements are unioned when they differ.
+   */
+  function generateMergedInterface(
+    objs: Record<string, unknown>[],
+    name: string,
+    interfaces: Map<string, string>
+  ): void {
+    if (interfaces.has(name)) return;
+    // Reserve name to prevent recursion loops
+    interfaces.set(name, "");
+
+    const allKeys = new Set<string>();
+    for (const obj of objs) for (const k of Object.keys(obj)) allKeys.add(k);
+
+    const lines: string[] = [];
+    lines.push(`interface ${name} {`);
+
+    for (const key of allKeys) {
+      const present = objs.filter((obj) => key in obj);
+      const optional = present.length < objs.length;
+      const typeSet = new Set(present.map((obj) => getType(obj[key], key, interfaces)));
+      const type = typeSet.size === 1 ? [...typeSet][0] : [...typeSet].join(" | ");
+      const prop = needsQuotes(key) ? `"${key}"` : key;
+      lines.push(`  ${prop}${optional ? "?" : ""}: ${type};`);
+    }
+
+    lines.push("}");
+    interfaces.set(name, lines.join("\n"));
+  }
+
   function convert() {
     if (!input.trim()) {
       output = "";
@@ -70,15 +116,14 @@
     }
 
     try {
-      const parsed = JSON.parse(input);
+      const parsed = JSON.parse(stripBom(input));
       const interfaces = new Map<string, string>();
 
       if (Array.isArray(parsed)) {
-        // NOTE: Interface is generated from the first element only. Objects with
-        // different shapes later in the array are not merged. This is a known
-        // design limitation — a full union/merge would add significant complexity.
-        if (parsed.length > 0 && typeof parsed[0] === "object" && parsed[0] !== null) {
-          generateInterface(parsed[0] as Record<string, unknown>, "RootItem", interfaces);
+        if (parsed.length > 0 && parsed.every(isPlainObject)) {
+          // Merge shapes across all elements: collect all keys, mark missing as optional,
+          // union differing types.
+          generateMergedInterface(parsed as Record<string, unknown>[], "RootItem", interfaces);
           const result = [...interfaces.values()].reverse().join("\n\n");
           output = `${result}\n\ntype Root = RootItem[];`;
         } else {

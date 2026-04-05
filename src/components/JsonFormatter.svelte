@@ -1,6 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { uploadFile, downloadFile, friendlyError, debounce } from "../lib/fileutils";
+  import { uploadFile, downloadFile, friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
@@ -17,7 +17,7 @@
   function validate(text: string): { valid: boolean; error?: string; parsed?: unknown } {
     if (!text.trim()) return { valid: true };
     try {
-      const parsed = JSON.parse(text);
+      const parsed = JSON.parse(stripBom(text));
       return { valid: true, parsed };
     } catch (e: any) {
       return { valid: false, error: friendlyError(e.message) };

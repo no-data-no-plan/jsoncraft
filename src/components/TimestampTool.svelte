@@ -12,6 +12,14 @@
   let fromTs: { utc: string; local: string; iso: string; relative: string } | null = null;
   let fromDate: number | null = null;
   let error = "";
+  let unit: "auto" | "seconds" | "ms" = "auto";
+
+  function toMs(ts: number): number {
+    if (unit === "ms") return ts;
+    if (unit === "seconds") return ts * 1000;
+    // auto: legacy threshold
+    return ts > 1e12 ? ts : ts * 1000;
+  }
 
   const interval = setInterval(() => {
     liveTimestamp = Math.floor(Date.now() / 1000);
@@ -24,8 +32,8 @@
     fromTs = null;
     const ts = parseInt(timestamp);
     if (isNaN(ts)) { error = tt("timestamp", lang, "invalidTimestamp"); return; }
-    // Handle ms vs s
-    const ms = ts > 1e12 ? ts : ts * 1000;
+    // Handle ms vs s (explicit toggle with auto fallback)
+    const ms = toMs(ts);
     const d = new Date(ms);
     if (isNaN(d.getTime())) { error = tt("timestamp", lang, "invalidTimestamp"); return; }
     fromTs = {
@@ -92,6 +100,21 @@
           placeholder="1711234567"
         />
         <button onclick={useNow} class="px-3 py-2 rounded text-sm bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]">{tt("timestamp", lang, "now")}</button>
+      </div>
+      <div class="flex items-center gap-3 text-xs text-[var(--color-text-muted)]">
+        <span>{lang === "es" ? "Unidad:" : "Unit:"}</span>
+        <label class="flex items-center gap-1 cursor-pointer">
+          <input type="radio" bind:group={unit} value="auto" onchange={convertTimestamp} />
+          <span>Auto</span>
+        </label>
+        <label class="flex items-center gap-1 cursor-pointer">
+          <input type="radio" bind:group={unit} value="seconds" onchange={convertTimestamp} />
+          <span>{lang === "es" ? "Segundos" : "Seconds"}</span>
+        </label>
+        <label class="flex items-center gap-1 cursor-pointer">
+          <input type="radio" bind:group={unit} value="ms" onchange={convertTimestamp} />
+          <span>{lang === "es" ? "Milisegundos" : "Milliseconds"}</span>
+        </label>
       </div>
       {#if fromTs}
         <div class="space-y-2">

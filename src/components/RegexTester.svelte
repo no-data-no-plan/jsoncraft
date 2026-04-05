@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import { debounce } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import RegexWorker from "../workers/regex-worker.ts?worker";
 
   let { lang = "en" as Lang } = $props();
 
@@ -13,6 +15,9 @@
   let error = "";
   let highlighted = "";
 
+  let worker: Worker | null = null;
+  let workerTimeout: ReturnType<typeof setTimeout> | null = null;
+
   const debouncedTest = debounce(runTest, 200);
 
   function toggleFlag(f: string) {
@@ -20,54 +25,94 @@
     runTest();
   }
 
-  function runTest() {
-    matches = [];
-    error = "";
-    if (!pattern || !testString) { highlighted = escapeHtml(testString); return; }
-    try {
-      const results: typeof matches = [];
-      if (flags.includes("g")) {
-        for (const match of testString.matchAll(new RegExp(pattern, flags))) {
-          results.push({ full: match[0], index: match.index ?? 0, groups: Array.from(match).slice(1) });
-        }
-      } else {
-        const match = testString.match(new RegExp(pattern, flags));
-        if (match) {
-          results.push({ full: match[0], index: match.index ?? 0, groups: Array.from(match).slice(1) });
-        }
-      }
-      matches = results;
-      highlighted = buildHighlightedHtml(testString, pattern, flags);
-    } catch (e: any) {
-      error = e.message;
-      highlighted = escapeHtml(testString);
-    }
+  function cleanupWorker() {
+    if (workerTimeout) { clearTimeout(workerTimeout); workerTimeout = null; }
+    if (worker) { worker.terminate(); worker = null; }
   }
 
-  function buildHighlightedHtml(text: string, pat: string, fl: string): string {
-    if (!pat || !text) return escapeHtml(text);
-    try {
-      const re = new RegExp(pat, fl.includes("g") ? fl : fl + "g");
-      let result = "";
-      let lastIndex = 0;
-      for (const match of text.matchAll(re)) {
-        if (match.index === undefined) continue;
-        result += escapeHtml(text.slice(lastIndex, match.index));
-        if (match[0]) {
-          result += `<mark class="bg-[var(--color-warning)]/40 text-[var(--color-text-primary)] rounded px-0.5">${escapeHtml(match[0])}</mark>`;
-        }
-        lastIndex = match.index + match[0].length;
-      }
-      result += escapeHtml(text.slice(lastIndex));
-      return result;
-    } catch {
-      return escapeHtml(text);
+  function runTest() {
+    error = "";
+    if (!pattern || !testString) {
+      matches = [];
+      highlighted = escapeHtml(testString);
+      cleanupWorker();
+      return;
     }
+    // Validate regex syntax synchronously so we fail fast for obvious errors
+    try {
+      new RegExp(pattern, flags);
+    } catch (e: any) {
+      error = e.message;
+      matches = [];
+      highlighted = escapeHtml(testString);
+      cleanupWorker();
+      return;
+    }
+
+    cleanupWorker();
+    worker = new RegexWorker();
+    const currentText = testString;
+    worker.onmessage = (e: MessageEvent) => {
+      if (workerTimeout) { clearTimeout(workerTimeout); workerTimeout = null; }
+      const data = e.data as
+        | { ok: true; matches: typeof matches; highlightRanges: { index: number; length: number }[] }
+        | { ok: false; error: string };
+      if (data.ok) {
+        matches = data.matches;
+        highlighted = buildHighlightedHtmlFromRanges(currentText, data.highlightRanges);
+        error = "";
+      } else {
+        error = data.error;
+        matches = [];
+        highlighted = escapeHtml(currentText);
+      }
+      if (worker) { worker.terminate(); worker = null; }
+    };
+    worker.onerror = (ev) => {
+      if (workerTimeout) { clearTimeout(workerTimeout); workerTimeout = null; }
+      error = ev.message || "Worker error";
+      matches = [];
+      highlighted = escapeHtml(currentText);
+      if (worker) { worker.terminate(); worker = null; }
+    };
+    workerTimeout = setTimeout(() => {
+      if (worker) {
+        worker.terminate();
+        worker = null;
+        error = lang === "es"
+          ? "La regex tardó demasiado (posible backtracking catastrófico)."
+          : "Regex timed out (possible catastrophic backtracking).";
+        matches = [];
+        highlighted = escapeHtml(currentText);
+      }
+      workerTimeout = null;
+    }, 3000);
+    worker.postMessage({ pattern, flags, testString: currentText });
+  }
+
+  function buildHighlightedHtmlFromRanges(text: string, ranges: { index: number; length: number }[]): string {
+    if (!text) return "";
+    if (!ranges.length) return escapeHtml(text);
+    let result = "";
+    let lastIndex = 0;
+    for (const r of ranges) {
+      if (r.index < lastIndex) continue;
+      result += escapeHtml(text.slice(lastIndex, r.index));
+      const seg = text.slice(r.index, r.index + r.length);
+      if (seg) {
+        result += `<mark class="bg-[var(--color-warning)]/40 text-[var(--color-text-primary)] rounded px-0.5">${escapeHtml(seg)}</mark>`;
+      }
+      lastIndex = r.index + r.length;
+    }
+    result += escapeHtml(text.slice(lastIndex));
+    return result;
   }
 
   function escapeHtml(s: string) {
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
+
+  onDestroy(() => cleanupWorker());
 </script>
 
 <div class="flex flex-col h-full">

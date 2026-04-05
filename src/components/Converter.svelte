@@ -1,6 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { uploadFile, downloadFile, friendlyError, debounce } from "../lib/fileutils";
+  import { uploadFile, downloadFile, friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, convertInWorker } from "../lib/worker-api";
   import * as yaml from "js-yaml";
   import * as toml from "smol-toml";
@@ -233,15 +233,16 @@
   function parseInput(text: string): unknown {
     if (!text.trim()) return undefined;
     wrongFormatHint = null;
+    const clean = stripBom(text);
     switch (fromFormat) {
       case "json":
-        return JSON.parse(text);
+        return JSON.parse(clean);
       case "yaml":
-        return parseYaml(text);
+        return parseYaml(clean);
       case "toml":
-        return toml.parse(text);
+        return toml.parse(clean);
       case "csv":
-        return parseCsv(text);
+        return parseCsv(clean);
       default:
         throw new Error(`Unsupported input format: ${fromFormat}`);
     }

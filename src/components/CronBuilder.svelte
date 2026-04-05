@@ -9,6 +9,39 @@
   let parts = ["*", "*", "*", "*", "*"];
   let nextRuns: string[] = [];
   let error = "";
+  let validationError = "";
+
+  const fieldSpecs = [
+    { name: "minute", min: 0, max: 59 },
+    { name: "hour", min: 0, max: 23 },
+    { name: "dayOfMonth", min: 1, max: 31 },
+    { name: "month", min: 1, max: 12 },
+    { name: "dayOfWeek", min: 0, max: 7 }, // 7 allowed as Sunday alias
+  ];
+
+  function validateField(fieldStr: string, spec: { min: number; max: number; name: string }): string | null {
+    if (fieldStr === "*") return null;
+    const stepMatch = fieldStr.match(/^\*\/(\d+)$/);
+    if (stepMatch) {
+      const step = parseInt(stepMatch[1], 10);
+      if (step < 1) return `Step must be >= 1 in ${spec.name}`;
+      return null;
+    }
+    for (const part of fieldStr.split(",")) {
+      const rangeMatch = part.match(/^(\d+)(?:-(\d+))?(?:\/(\d+))?$/);
+      if (!rangeMatch) return `Invalid ${spec.name}: "${part}"`;
+      const a = parseInt(rangeMatch[1], 10);
+      const b = rangeMatch[2] !== undefined ? parseInt(rangeMatch[2], 10) : a;
+      if (a < spec.min || a > spec.max) return `${spec.name} out of range (${spec.min}-${spec.max}): ${a}`;
+      if (b < spec.min || b > spec.max) return `${spec.name} out of range (${spec.min}-${spec.max}): ${b}`;
+      if (b < a) return `Invalid range ${a}-${b} in ${spec.name}`;
+      if (rangeMatch[3] !== undefined) {
+        const step = parseInt(rangeMatch[3], 10);
+        if (step < 1) return `Step must be >= 1 in ${spec.name}`;
+      }
+    }
+    return null;
+  }
 
   const fieldDefs = [
     { nameKey: "minute" as const, range: "0-59", presets: ["*", "0", "15", "30", "45", "*/5", "*/10", "*/15", "*/30"] },
@@ -46,6 +79,18 @@
     computeNextRuns();
   }
 
+  function runValidation(): boolean {
+    validationError = "";
+    for (let i = 0; i < 5; i++) {
+      const err = validateField(parts[i], fieldSpecs[i]);
+      if (err) {
+        validationError = err;
+        return false;
+      }
+    }
+    return true;
+  }
+
   function applyPreset(val: string) {
     expression = val;
     updateFromExpression();
@@ -54,6 +99,7 @@
   function computeNextRuns() {
     error = "";
     nextRuns = [];
+    if (!runValidation()) { return; }
     try {
       const now = new Date();
       let current = new Date(now);
@@ -75,12 +121,14 @@
   }
 
   function matchesCron(d: Date, p: string[]): boolean {
+    // Normalize day-of-week: POSIX cron allows 7 as Sunday (same as 0)
+    const normalizedDow = p[4].replace(/\b7\b/g, "0");
     return (
       matchField(d.getMinutes(), p[0], 0, 59) &&
       matchField(d.getHours(), p[1], 0, 23) &&
       matchField(d.getDate(), p[2], 1, 31) &&
       matchField(d.getMonth() + 1, p[3], 1, 12) &&
-      matchField(d.getDay(), p[4], 0, 6)
+      matchField(d.getDay(), normalizedDow, 0, 6)
     );
   }
 
@@ -117,7 +165,9 @@
     else if (dow === "6,0" || dow === "0,6") pieces.push(es ? "los fines de semana" : "on weekends");
     else if (dow !== "*") {
       const days = es ? ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const d = parseInt(dow);
+      const raw = parseInt(dow);
+      // POSIX: 7 == 0 (Sunday)
+      const d = raw === 7 ? 0 : raw;
       pieces.push(es ? `el ${days[d] ?? `día ${dow}`}` : `on ${days[d] ?? `day ${dow}`}`);
     }
     if (dom !== "*") pieces.push(es ? `el día ${dom} del mes` : `on day ${dom} of the month`);
@@ -148,6 +198,10 @@
 
   {#if error}
     <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]">{error}</div>
+  {/if}
+
+  {#if validationError}
+    <div class="px-3 py-2 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)] font-mono">{validationError}</div>
   {/if}
 
   <div class="p-3 text-sm text-[var(--color-text-secondary)] text-center border-b border-[var(--color-border)]">
@@ -216,6 +270,8 @@
             </div>
           {/each}
         </div>
+      {:else if validationError}
+        <p class="text-sm text-[var(--color-error)]">{validationError}</p>
       {:else}
         <p class="text-sm text-[var(--color-text-muted)]">{tt("cron", lang, "noUpcoming")}</p>
       {/if}

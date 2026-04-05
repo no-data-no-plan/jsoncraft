@@ -1,6 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { uploadFile, downloadFile } from "../lib/fileutils";
+  import { uploadFile, downloadFile, stripBom } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -16,7 +16,7 @@
 
   function prettyPrint(xml: string, indentSize: number): string {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(xml.trim(), "application/xml");
+    const doc = parser.parseFromString(stripBom(xml).trim(), "application/xml");
 
     const parseError = doc.querySelector("parsererror");
     if (parseError) {
@@ -90,7 +90,7 @@
 
   function minifyXml(xml: string): string {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(xml.trim(), "application/xml");
+    const doc = parser.parseFromString(stripBom(xml).trim(), "application/xml");
     const parseError = doc.querySelector("parsererror");
     if (parseError) {
       const msg = parseError.textContent || "Invalid XML";

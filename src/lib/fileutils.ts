@@ -1,5 +1,10 @@
 const MAX_FILE_SIZE_MB = 50;
 
+/** Strip UTF-8 BOM if present at start of string. Safe no-op otherwise. */
+export function stripBom(s: string): string {
+  return s.charCodeAt(0) === 0xFEFF ? s.slice(1) : s;
+}
+
 export function uploadFile(accept: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const input = document.createElement("input");

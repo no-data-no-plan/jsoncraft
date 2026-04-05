@@ -1,6 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
-  import { uploadFile } from "../lib/fileutils";
+  import { uploadFile, stripBom } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -24,7 +24,7 @@
     }
 
     try {
-      const docs = yaml.loadAll(text);
+      const docs = yaml.loadAll(stripBom(text));
       docCount = docs.length;
       parsedPreview = docs.length === 1
         ? JSON.stringify(docs[0], null, 2)

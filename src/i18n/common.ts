@@ -7,6 +7,7 @@ const common = {
     // Footer
     footerTagline: "JSONCraft \u2014 Free, fast, private JSON tools",
     footerCoffee: "Buy me a coffee",
+    footerPrivacy: "Privacy",
     feedbackPlaceholder: "Bug, idea, or feedback...",
     feedbackSend: "Send",
     // Sidebar
@@ -60,6 +61,7 @@ const common = {
     headerBadge: "Tus datos nunca salen de tu navegador",
     footerTagline: "JSONCraft \u2014 Herramientas JSON gratuitas, r\u00e1pidas y privadas",
     footerCoffee: "Buy me a coffee",
+    footerPrivacy: "Privacidad",
     feedbackPlaceholder: "Error, idea o sugerencia...",
     feedbackSend: "Enviar",
     sidebarPrivacy: "100% en tu navegador. No se env\u00edan datos a ning\u00fan servidor.",
