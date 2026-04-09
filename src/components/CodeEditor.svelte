@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { EditorView, keymap, placeholder as cmPlaceholder, lineNumbers } from "@codemirror/view";
   import { EditorState } from "@codemirror/state";
   import { json } from "@codemirror/lang-json";
@@ -8,14 +8,16 @@
   import { lintGutter } from "@codemirror/lint";
   import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 
-  export let value: string = "";
-  export let lang: "json" | "yaml" | "text" = "json";
-  export let placeholder: string = "";
-  export let readonly: boolean = false;
-  export let onchange: ((value: string) => void) | undefined = undefined;
+  let { value = "", lang = "json", placeholder = "", readonly = false, onchange = undefined }: {
+    value?: string;
+    lang?: "json" | "yaml" | "text";
+    placeholder?: string;
+    readonly?: boolean;
+    onchange?: (value: string) => void;
+  } = $props();
 
-  let container: HTMLDivElement;
-  let view: EditorView;
+  let container = $state<HTMLDivElement>(null!);
+  let view: EditorView; // imperative, not reactive
 
   function getLangExtension() {
     if (lang === "json") return json();
@@ -94,23 +96,22 @@
 
     return () => {
       window.removeEventListener("theme-changed", handleThemeChange);
+      view?.destroy();
     };
   });
 
-  onDestroy(() => {
-    view?.destroy();
-  });
-
   // Update editor when value changes externally
-  $: if (view && value !== view.state.doc.toString()) {
-    view.dispatch({
-      changes: {
-        from: 0,
-        to: view.state.doc.length,
-        insert: value,
-      },
-    });
-  }
+  $effect(() => {
+    if (view && value !== view.state.doc.toString()) {
+      view.dispatch({
+        changes: {
+          from: 0,
+          to: view.state.doc.length,
+          insert: value,
+        },
+      });
+    }
+  });
 </script>
 
 <div bind:this={container} class="h-full w-full overflow-hidden rounded border border-[var(--color-border)]"></div>

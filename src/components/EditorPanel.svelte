@@ -1,18 +1,20 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
 
-  export let label: string;
-  export let value: string;
-  export let lang: "json" | "yaml" | "text";
-  export let placeholder: string;
-  export let readonly: boolean = false;
-  export let copyLabel: string;
-  export let copyTitle: string;
-  export let downloadLabel: string | undefined = undefined;
-  export let downloadTitle: string | undefined = undefined;
-  export let onchange: ((value: string) => void) | undefined = undefined;
-  export let onCopy: () => void;
-  export let onDownload: (() => void) | undefined = undefined;
+  let { label, value, lang, placeholder, readonly = false, copyLabel, copyTitle, downloadLabel, downloadTitle, onchange, onCopy, onDownload }: {
+    label: string;
+    value: string;
+    lang: "json" | "yaml" | "text";
+    placeholder: string;
+    readonly?: boolean;
+    copyLabel: string;
+    copyTitle: string;
+    downloadLabel?: string;
+    downloadTitle?: string;
+    onchange?: (value: string) => void;
+    onCopy: () => void;
+    onDownload?: () => void;
+  } = $props();
 </script>
 
 <div class="flex-1 flex flex-col min-h-0 p-2">
@@ -20,7 +22,7 @@
     <span class="text-xs text-[var(--color-text-muted)]">{label}</span>
     <div class="flex items-center gap-2">
       <button
-        on:click={onCopy}
+        onclick={onCopy}
         class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
         title={copyTitle}
       >
@@ -28,7 +30,7 @@
       </button>
       {#if onDownload && downloadLabel}
         <button
-          on:click={onDownload}
+          onclick={onDownload}
           class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
           title={downloadTitle}
         >

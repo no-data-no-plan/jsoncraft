@@ -11,16 +11,18 @@
   import ConverterToolbar from "./ConverterToolbar.svelte";
   import EditorPanel from "./EditorPanel.svelte";
 
-  export let lang: Lang = "en";
-  export let fromFormat: Format = "json";
-  export let toFormat: Format = "yaml";
+  let { lang = "en", fromFormat = "json", toFormat = "yaml" }: {
+    lang?: Lang;
+    fromFormat?: Format;
+    toFormat?: Format;
+  } = $props();
 
-  let input = "";
-  let output = "";
-  let error = "";
-  let warning = "";
-  let wrongFormatHint: WrongFormatHint | null = null;
-  let processing = false;
+  let input = $state("");
+  let output = $state("");
+  let error = $state("");
+  let warning = $state("");
+  let wrongFormatHint: WrongFormatHint | null = $state(null);
+  let processing = $state(false);
 
   const engine = new ConversionEngine();
 
