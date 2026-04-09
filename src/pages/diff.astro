@@ -3,28 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import JsonDiff from "../components/JsonDiff.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("diff", "en")!;
 ---
 
-<Layout
-  title="JSON Diff — Compare JSON Online Side by Side"
-  description="Compare two JSON documents online for free. See additions, deletions, and changes highlighted side by side. Semantic comparison — key order doesn't matter. No upload needed."
-  activeToolId="diff"
->
+<Layout title={seo.title} description={seo.description} activeToolId="diff">
   <JsonDiff client:load />
-  <SeoContent
-    heading="Compare JSON Documents Side by Side"
-    text="Paste two JSON documents to instantly see what changed. JSONCraft compares semantically, so different key ordering won't produce false differences. Additions are highlighted in green, deletions in red, with a summary of total changes."
-    relatedToolIds={["formatter", "viewer", "jsonpath"]}
-  />
-  <SeoBlock
-    heading="About JSON Diff"
-    text="Compare two JSON documents semantically — key order doesn't matter. See exactly what was added, removed, or changed with color-coded highlighting and a summary of total changes."
-    features={[
-      "Semantic comparison (key order independent)",
-      "Color-coded additions and deletions",
-      "Change summary with line counts",
-      "Swap sides with one click",
-      "Identifies identical documents",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "viewer", "jsonpath"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

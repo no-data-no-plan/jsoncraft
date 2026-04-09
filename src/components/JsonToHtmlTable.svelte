@@ -7,10 +7,10 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let htmlOutput = "";
-  let error = "";
-  let showPreview = true;
+  let input = $state("");
+  let htmlOutput = $state("");
+  let error = $state("");
+  let showPreview = $state(true);
 
   function escapeHtml(str: string): string {
     return String(str)

@@ -8,11 +8,11 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let output = "";
-  let status: "idle" | "valid" | "error" = "idle";
-  let errorMsg = "";
-  let indent: number | string = 2;
+  let input = $state("");
+  let output = $state("");
+  let status = $state<"idle" | "valid" | "error">("idle");
+  let errorMsg = $state("");
+  let indent = $state<number | string>(2);
 
   function validate(text: string): { valid: boolean; error?: string; parsed?: unknown } {
     if (!text.trim()) return { valid: true };
@@ -24,7 +24,7 @@
     }
   }
 
-  let processing = false;
+  let processing = $state(false);
 
   async function processInput(value: string) {
     if (!value.trim()) {

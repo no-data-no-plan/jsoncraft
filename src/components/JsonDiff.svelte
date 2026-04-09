@@ -9,13 +9,13 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let left = "";
-  let right = "";
-  let diffResult: Array<{ added?: boolean; removed?: boolean; value: string }> = [];
-  let error = "";
-  let hasDifferences = false;
+  let left = $state("");
+  let right = $state("");
+  let diffResult = $state<Array<{ added?: boolean; removed?: boolean; value: string }>>([]);
+  let error = $state("");
+  let hasDifferences = $state(false);
 
-  let processing = false;
+  let processing = $state(false);
 
   async function compare() {
     error = "";

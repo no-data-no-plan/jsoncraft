@@ -3,27 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import RegexTester from "../components/RegexTester.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("regex", "en")!;
 ---
 
-<Layout
-  title="Regex Tester Online Free"
-  description="Test regular expressions with real-time matching, capture groups, and highlighted results. Free regex playground — runs entirely in your browser."
-  activeToolId="regex"
->
+<Layout title={seo.title} description={seo.description} activeToolId="regex">
   <RegexTester client:load />
-  <SeoContent
-    heading="Test Regular Expressions Instantly"
-    text="Enter a regex pattern and test string to see matches highlighted in real time. Supports all JavaScript regex flags (global, case-insensitive, multiline, dotAll, unicode). View capture groups and match positions."
-    relatedToolIds={["formatter", "diff", "url-encode"]}
-  />
-  <SeoBlock
-    heading="About this tool"
-    text="A real-time regex playground for testing and debugging regular expressions. See matches highlighted as you type with support for capture groups and all standard flags."
-    features={[
-      "Real-time matching as you type",
-      "Capture group display",
-      "All JS regex flags (g, i, m, s, u)",
-      "Match highlighting with positions",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "diff", "url-encode"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

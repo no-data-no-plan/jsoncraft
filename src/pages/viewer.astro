@@ -3,28 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import TreeViewer from "../components/TreeViewer.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("viewer", "en")!;
 ---
 
-<Layout
-  title="JSON Tree Viewer Online — Interactive JSON Explorer"
-  description="Explore JSON as an interactive collapsible tree online. Navigate complex nested structures, see data types at a glance, and copy JSONPath expressions. Free, fast, private."
-  activeToolId="viewer"
->
+<Layout title={seo.title} description={seo.description} activeToolId="viewer">
   <TreeViewer client:load />
-  <SeoContent
-    heading="Explore JSON as an Interactive Tree"
-    text="Visualize any JSON structure as a collapsible tree. Navigate deeply nested data, see types and array lengths at a glance, and click any node to copy its JSONPath expression. Handles large JSON files efficiently."
-    relatedToolIds={["formatter", "jsonpath", "diff"]}
-  />
-  <SeoBlock
-    heading="About JSON Tree Viewer"
-    text="Visualize any JSON structure as an interactive, collapsible tree. Quickly navigate deeply nested data, see types and array lengths at a glance, and copy JSONPath expressions for any node."
-    features={[
-      "Auto-expands the first level for quick overview",
-      "Expand or collapse all nodes at once",
-      "Shows data types, array lengths, and object sizes",
-      "Click any node to copy its JSONPath",
-      "Handles empty objects and arrays gracefully",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "jsonpath", "diff"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

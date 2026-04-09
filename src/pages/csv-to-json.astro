@@ -3,22 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
 import SeoContent from "../components/SeoContent.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("csv-to-json", "en")!;
 ---
 
-<Layout
-  title="CSV to JSON Converter Online Free"
-  description="Convert CSV data to JSON online for free. Automatic header detection, delimiter inference, and type conversion. Transform spreadsheet data into structured JSON instantly."
-  activeToolId="csv-to-json"
->
+<Layout title={seo.title} description={seo.description} activeToolId="csv-to-json">
   <Converter client:load fromFormat="csv" toFormat="json" />
-  <SeoContent
-    heading="Convert CSV Spreadsheet Data to JSON"
-    text="Transform CSV and spreadsheet data into structured JSON. Automatically detects delimiters, infers data types (numbers, booleans), and handles edge cases like embedded JSON in cells."
-    relatedToolIds={["json-to-csv", "formatter", "viewer"]}
-  />
-  <SeoBlock
-    heading="About CSV to JSON conversion"
-    text="Transform CSV and spreadsheet data into structured JSON. Automatically detects delimiters (comma, tab, semicolon), infers data types, and handles edge cases like embedded JSON in cells."
-    features={["Auto-detects comma, tab, and semicolon delimiters", "Numbers and booleans converted to proper JSON types", "Headerless CSV detected and handled", "Embedded JSON in cells parsed automatically", "Upload .csv files directly"]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-csv", "formatter", "viewer"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

@@ -3,22 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
 import SeoContent from "../components/SeoContent.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("toml-to-json", "en")!;
 ---
 
-<Layout
-  title="TOML to JSON Converter Online Free"
-  description="Convert TOML configuration files to JSON online for free. Full TOML v1.0 support with tables, arrays of tables, and all typed values. Instant conversion, no data sent to servers."
-  activeToolId="toml-to-json"
->
+<Layout title={seo.title} description={seo.description} activeToolId="toml-to-json">
   <Converter client:load fromFormat="toml" toFormat="json" />
-  <SeoContent
-    heading="Convert TOML Configuration to JSON"
-    text="Parse TOML configuration files and convert them to JSON. Supports all TOML v1.0 features including tables, arrays of tables, inline tables, and typed values like dates and integers."
-    relatedToolIds={["json-to-toml", "formatter", "yaml-to-json"]}
-  />
-  <SeoBlock
-    heading="About TOML to JSON conversion"
-    text="Parse TOML configuration files and convert them to JSON. Supports all TOML features including tables, arrays of tables, inline tables, and typed values."
-    features={["Full TOML v1.0 support", "Tables and arrays of tables mapped to JSON objects", "Typed values preserved (strings, integers, floats, booleans, dates)", "Clear error messages for invalid TOML syntax"]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-toml", "formatter", "yaml-to-json"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

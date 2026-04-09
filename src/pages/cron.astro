@@ -3,27 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import CronBuilder from "../components/CronBuilder.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("cron", "en")!;
 ---
 
-<Layout
-  title="Cron Expression Builder & Tester Online Free"
-  description="Build and test cron expressions with a visual editor. See next 5 scheduled runs, use quick presets, or type expressions manually. Free cron generator."
-  activeToolId="cron"
->
+<Layout title={seo.title} description={seo.description} activeToolId="cron">
   <CronBuilder client:load />
-  <SeoContent
-    heading="Build Cron Expressions Visually"
-    text="Create cron schedules with a visual builder or type expressions directly. See the next 5 scheduled runs in real time. Quick presets for common schedules like every 5 minutes, daily, weekly, and monthly."
-    relatedToolIds={["timestamp", "formatter", "regex"]}
-  />
-  <SeoBlock
-    heading="About this tool"
-    text="Cron expressions define recurring schedules using 5 fields: minute, hour, day of month, month, and day of week. They're used in Unix crontab, CI/CD pipelines, Kubernetes CronJobs, and cloud schedulers."
-    features={[
-      "Visual field-by-field editor",
-      "12 quick preset schedules",
-      "Next 5 runs preview",
-      "Human-readable description",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["timestamp", "formatter", "regex"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

@@ -6,11 +6,11 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let output = "";
-  let mode: "encode" | "decode" = "encode";
-  let encodeMode: "component" | "uri" | "form" = "component";
-  let error = "";
+  let input = $state("");
+  let output = $state("");
+  let mode = $state<"encode" | "decode">("encode");
+  let encodeMode = $state<"component" | "uri" | "form">("component");
+  let error = $state("");
 
   function formEncode(s: string): string {
     return encodeURIComponent(s).replace(/%20/g, "+");

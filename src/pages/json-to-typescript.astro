@@ -3,28 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import JsonToTypescript from "../components/JsonToTypescript.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("json-to-typescript", "en")!;
 ---
 
-<Layout
-  title="JSON to TypeScript Converter Online Free"
-  description="Convert JSON to TypeScript interfaces and types instantly. Generates clean, typed interfaces from any JSON structure. Free, private, browser-based."
-  activeToolId="json-to-typescript"
->
+<Layout title={seo.title} description={seo.description} activeToolId="json-to-typescript">
   <JsonToTypescript client:load />
-  <SeoContent
-    heading="Generate TypeScript Types from JSON"
-    text="Paste any JSON data to instantly generate TypeScript interfaces. Handles nested objects, arrays, optional fields, and union types. Perfect for quickly typing API responses or configuration objects."
-    relatedToolIds={["formatter", "viewer", "json-to-yaml"]}
-  />
-  <SeoBlock
-    heading="About JSON to TypeScript conversion"
-    text="TypeScript interfaces describe the shape of JavaScript objects. Generating them from JSON samples saves time when typing API responses, configuration files, or database records."
-    features={[
-      "Generates clean TypeScript interfaces",
-      "Handles nested objects and arrays",
-      "Detects union types in arrays",
-      "Download as .ts file",
-      "Real-time conversion as you type",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "viewer", "json-to-yaml"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

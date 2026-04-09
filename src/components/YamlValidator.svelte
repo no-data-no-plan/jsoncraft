@@ -8,11 +8,11 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let status: "idle" | "valid" | "error" = "idle";
-  let errorMsg = "";
-  let docCount = 0;
-  let parsedPreview = "";
+  let input = $state("");
+  let status = $state<"idle" | "valid" | "error">("idle");
+  let errorMsg = $state("");
+  let docCount = $state(0);
+  let parsedPreview = $state("");
 
   function validate(text: string) {
     if (!text.trim()) {

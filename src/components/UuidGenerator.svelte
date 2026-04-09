@@ -5,10 +5,10 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let count = 1;
-  let uppercase = false;
-  let noDashes = false;
-  let uuids: string[] = [];
+  let count = $state(1);
+  let uppercase = $state(false);
+  let noDashes = $state(false);
+  let uuids = $state<string[]>([]);
 
   generate();
 

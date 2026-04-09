@@ -7,9 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bash scripts/check-svelte-state.sh && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/svelte": "^8.0.3",
@@ -34,6 +36,7 @@
   },
   "devDependencies": {
     "@types/diff": "^7.0.2",
-    "@types/papaparse": "^5.5.2"
+    "@types/papaparse": "^5.5.2",
+    "vitest": "^4.1.3"
   }
 }

@@ -8,12 +8,12 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let pattern = "";
-  let flags = "g";
-  let testString = "";
-  let matches: { full: string; index: number; groups: string[] }[] = [];
-  let error = "";
-  let highlighted = "";
+  let pattern = $state("");
+  let flags = $state("g");
+  let testString = $state("");
+  let matches = $state<{ full: string; index: number; groups: string[] }[]>([]);
+  let error = $state("");
+  let highlighted = $state("");
 
   let worker: Worker | null = null;
   let workerTimeout: ReturnType<typeof setTimeout> | null = null;

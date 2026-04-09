@@ -1,47 +1,400 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://jsoncraft.dev/</loc><priority>1.0</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/diff</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/viewer</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/jsonpath</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/yaml-to-json</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/json-to-yaml</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/json-to-csv</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/csv-to-json</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/json-to-toml</loc><priority>0.7</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/toml-to-json</loc><priority>0.7</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/regex</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/base64</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/url-encode</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/hash</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/uuid</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/timestamp</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/cron</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/json-to-typescript</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/xml-formatter</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/json-to-html-table</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/yaml-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/json-schema-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/</loc><priority>1.0</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/diff</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/viewer</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/jsonpath</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/yaml-to-json</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/json-to-yaml</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/json-to-csv</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/csv-to-json</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/json-to-toml</loc><priority>0.7</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/toml-to-json</loc><priority>0.7</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/regex</loc><priority>0.9</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/base64</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/url-encode</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/hash</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/uuid</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/timestamp</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/cron</loc><priority>0.8</priority><lastmod>2026-04-01</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/json-to-typescript</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/xml-formatter</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/json-to-html-table</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/yaml-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
-  <url><loc>https://jsoncraft.dev/es/json-schema-validator</loc><priority>0.8</priority><lastmod>2026-04-03</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://jsoncraft.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/" />
+    <priority>1.0</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/diff/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/diff/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/diff/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/diff/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/viewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/viewer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/viewer/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/jsonpath/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/jsonpath/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/jsonpath/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/jsonpath/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/yaml-to-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-to-json/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/json-to-yaml/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-yaml/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-yaml/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-yaml/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/json-to-csv/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-csv/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/csv-to-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/csv-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/csv-to-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/csv-to-json/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/json-to-toml/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-toml/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-toml/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-toml/" />
+    <priority>0.7</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/toml-to-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/toml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/toml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/toml-to-json/" />
+    <priority>0.7</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/regex/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/regex/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/regex/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/regex/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/base64/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/base64/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/base64/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/url-encode/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/url-encode/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/url-encode/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/url-encode/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/hash/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/hash/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/hash/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/hash/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/uuid/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/uuid/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/uuid/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/uuid/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/timestamp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/timestamp/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/timestamp/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/timestamp/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/cron/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/cron/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/cron/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/cron/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/json-to-typescript/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-typescript/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-typescript/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-typescript/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/xml-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/xml-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/xml-formatter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/xml-formatter/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/json-to-html-table/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-html-table/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-html-table/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-html-table/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/yaml-validator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-validator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-validator/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-validator/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/json-schema-validator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-schema-validator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-schema-validator/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-schema-validator/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/" />
+    <priority>1.0</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/diff/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/diff/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/diff/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/diff/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/viewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/viewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/viewer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/viewer/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/jsonpath/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/jsonpath/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/jsonpath/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/jsonpath/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/yaml-to-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-to-json/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/json-to-yaml/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-yaml/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-yaml/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-yaml/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/json-to-csv/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-csv/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/csv-to-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/csv-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/csv-to-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/csv-to-json/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/json-to-toml/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-toml/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-toml/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-toml/" />
+    <priority>0.7</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/toml-to-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/toml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/toml-to-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/toml-to-json/" />
+    <priority>0.7</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/regex/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/regex/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/regex/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/regex/" />
+    <priority>0.9</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/base64/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/base64/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/base64/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/url-encode/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/url-encode/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/url-encode/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/url-encode/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/hash/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/hash/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/hash/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/hash/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/uuid/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/uuid/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/uuid/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/uuid/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/timestamp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/timestamp/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/timestamp/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/timestamp/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/cron/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/cron/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/cron/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/cron/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/json-to-typescript/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-typescript/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-typescript/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-typescript/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/xml-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/xml-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/xml-formatter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/xml-formatter/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/json-to-html-table/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-html-table/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-html-table/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-html-table/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/yaml-validator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-validator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-validator/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-validator/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jsoncraft.dev/es/json-schema-validator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-schema-validator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-schema-validator/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-schema-validator/" />
+    <priority>0.8</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
 </urlset>

@@ -3,28 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import YamlValidator from "../components/YamlValidator.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("yaml-validator", "en")!;
 ---
 
-<Layout
-  title="YAML Validator & Linter Online Free"
-  description="Validate YAML syntax online with detailed error messages and line numbers. See parsed JSON output. Supports multi-document YAML. Free, private, browser-based."
-  activeToolId="yaml-validator"
->
+<Layout title={seo.title} description={seo.description} activeToolId="yaml-validator">
   <YamlValidator client:load />
-  <SeoContent
-    heading="Validate YAML Syntax Instantly"
-    text="Paste YAML to instantly validate its syntax. See exact error positions with line and column numbers. View the parsed result as JSON. Supports multi-document YAML files separated by --- delimiters."
-    relatedToolIds={["yaml-to-json", "formatter", "json-schema-validator"]}
-  />
-  <SeoBlock
-    heading="About YAML validation"
-    text="YAML is a human-readable data serialization format used for configuration files (Docker Compose, Kubernetes, CI/CD). Syntax errors in YAML can be hard to spot due to indentation-based structure."
-    features={[
-      "Real-time validation as you type",
-      "Error messages with line and column numbers",
-      "Parsed JSON output preview",
-      "Multi-document YAML support (--- separators)",
-      "Upload .yaml/.yml files",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["yaml-to-json", "formatter", "json-schema-validator"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

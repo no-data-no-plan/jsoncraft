@@ -5,11 +5,11 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let expression = "* * * * *";
-  let parts = ["*", "*", "*", "*", "*"];
-  let nextRuns: string[] = [];
-  let error = "";
-  let validationError = "";
+  let expression = $state("* * * * *");
+  let parts = $state(["*", "*", "*", "*", "*"]);
+  let nextRuns = $state<string[]>([]);
+  let error = $state("");
+  let validationError = $state("");
 
   const fieldSpecs = [
     { name: "minute", min: 0, max: 59 },

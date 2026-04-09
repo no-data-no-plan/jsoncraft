@@ -36,7 +36,7 @@ const groups = [
 
 <aside
   id="sidebar"
-  class="w-56 shrink-0 bg-[var(--color-bg-secondary)] border-r border-[var(--color-border)] flex flex-col
+  class="w-60 shrink-0 bg-[var(--color-bg-secondary)] border-r border-[var(--color-border)] flex flex-col
          fixed lg:static inset-y-0 left-0 z-40 -translate-x-full lg:translate-x-0 transition-transform"
 >
   <!-- Logo -->
@@ -46,7 +46,7 @@ const groups = [
   </a>
 
   <!-- Navigation -->
-  <nav class="flex-1 overflow-y-auto py-2">
+  <nav class="flex-1 overflow-y-auto overflow-x-hidden py-2">
     {
       groups.map((group) => (
         <div class="mb-2">

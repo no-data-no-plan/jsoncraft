@@ -9,11 +9,11 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let query = "$.store.book[*].author";
-  let result = "";
-  let error = "";
-  let matchCount = 0;
+  let input = $state("");
+  let query = $state("$.store.book[*].author");
+  let result = $state("");
+  let error = $state("");
+  let matchCount = $state(0);
 
   const examples = $derived([
     { label: tt("jsonpath", lang, "allAuthors"), path: "$.store.book[*].author" },
@@ -24,7 +24,7 @@
     { label: tt("jsonpath", lang, "allItems"), path: "$..*" },
   ]);
 
-  let processing = false;
+  let processing = $state(false);
 
   async function evaluate() {
     error = "";

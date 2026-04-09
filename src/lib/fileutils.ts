@@ -94,7 +94,7 @@ export function friendlyError(raw: string): string {
   }
 
   // TOML errors — smol-toml format
-  match = raw.match(/Invalid TOML document:(.+?)(?:at line (\d+))?/i);
+  match = raw.match(/Invalid TOML document:\s*(.+?)(?:\s+at line (\d+))?$/i);
   if (match) {
     const detail = match[1].trim();
     const line = match[2] ? ` (line ${match[2]})` : "";

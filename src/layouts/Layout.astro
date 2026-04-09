@@ -17,10 +17,10 @@ interface Props {
 
 const { title, description, activeToolId, lang = "en" } = Astro.props;
 const fullTitle = `${title} | JSONCraft`;
-const pathWithoutTrailing = Astro.url.pathname.replace(/\/$/, '') || '';
-const canonicalUrl = `https://jsoncraft.dev${pathWithoutTrailing}`;
+const pathWithTrailing = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
+const canonicalUrl = `https://jsoncraft.dev${pathWithTrailing}`;
 const alternatePath = getAlternatePath(Astro.url.pathname);
-const alternateUrl = `https://jsoncraft.dev${alternatePath.replace(/\/$/, '') || ''}`;
+const alternateUrl = `https://jsoncraft.dev${alternatePath.endsWith('/') ? alternatePath : alternatePath + '/'}`;
 const activeTool = tools.find((t) => t.id === activeToolId);
 const pageKeywords = activeTool?.keywords.join(", ") || "";
 
@@ -77,12 +77,7 @@ const jsonLd = JSON.stringify(schemas);
     <link rel="alternate" hreflang="en" href={lang === "en" ? canonicalUrl : alternateUrl} />
     <link rel="alternate" hreflang="es" href={lang === "es" ? canonicalUrl : alternateUrl} />
     <link rel="alternate" hreflang="x-default" href={lang === "en" ? canonicalUrl : alternateUrl} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
     <title>{fullTitle}</title>
 
     <!-- Open Graph -->

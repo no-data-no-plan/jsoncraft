@@ -6,13 +6,13 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let timestamp = Math.floor(Date.now() / 1000).toString();
-  let dateInput = "";
-  let liveTimestamp = Math.floor(Date.now() / 1000);
-  let fromTs: { utc: string; local: string; iso: string; relative: string } | null = null;
-  let fromDate: number | null = null;
-  let error = "";
-  let unit: "auto" | "seconds" | "ms" = "auto";
+  let timestamp = $state(Math.floor(Date.now() / 1000).toString());
+  let dateInput = $state("");
+  let liveTimestamp = $state(Math.floor(Date.now() / 1000));
+  let fromTs = $state<{ utc: string; local: string; iso: string; relative: string } | null>(null);
+  let fromDate = $state<number | null>(null);
+  let error = $state("");
+  let unit = $state<"auto" | "seconds" | "ms">("auto");
 
   function toMs(ts: number): number {
     if (unit === "ms") return ts;

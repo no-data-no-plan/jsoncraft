@@ -8,10 +8,10 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let jsonInput = "";
-  let schemaInput = "";
-  let results: { valid: boolean; errors: string[] } | null = null;
-  let parseError = "";
+  let jsonInput = $state("");
+  let schemaInput = $state("");
+  let results = $state<{ valid: boolean; errors: string[] } | null>(null);
+  let parseError = $state("");
 
   function validate() {
     if (!jsonInput.trim() || !schemaInput.trim()) {

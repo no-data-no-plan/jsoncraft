@@ -3,28 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import JsonPathTool from "../components/JsonPathTool.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("jsonpath", "en")!;
 ---
 
-<Layout
-  title="JSONPath Tester Online — Query & Filter JSON Data"
-  description="Test JSONPath expressions online with instant results. Evaluate queries against your JSON data, see match counts, and learn JSONPath syntax with built-in examples. Free JSONPath playground."
-  activeToolId="jsonpath"
->
+<Layout title={seo.title} description={seo.description} activeToolId="jsonpath">
   <JsonPathTool client:load />
-  <SeoContent
-    heading="Test JSONPath Expressions Interactively"
-    text="Evaluate JSONPath queries against your JSON data in real time. See matching results instantly with a count of matches. Includes built-in examples for filters, wildcards, recursive descent, and more to help you learn the syntax."
-    relatedToolIds={["viewer", "formatter", "diff"]}
-  />
-  <SeoBlock
-    heading="About JSONPath Tester"
-    text="Test and debug JSONPath expressions against your data in real time. Instantly see matching results with a count of matches. Includes quick-access example queries to learn the syntax."
-    features={[
-      "Real-time evaluation as you type",
-      "Match count displayed automatically",
-      "Built-in examples: filters, wildcards, recursive descent",
-      "Supports the full JSONPath specification",
-      "Clear error messages for invalid expressions",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["viewer", "formatter", "diff"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

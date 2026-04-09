@@ -3,27 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import UuidGenerator from "../components/UuidGenerator.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("uuid", "en")!;
 ---
 
-<Layout
-  title="UUID Generator Online Free — UUID v4"
-  description="Generate random UUID v4 identifiers instantly. Bulk generation, uppercase option, copy to clipboard. Free, private, browser-based."
-  activeToolId="uuid"
->
+<Layout title={seo.title} description={seo.description} activeToolId="uuid">
   <UuidGenerator client:load />
-  <SeoContent
-    heading="Generate Random UUIDs"
-    text="Generate one or hundreds of cryptographically random UUID v4 identifiers. Choose uppercase or lowercase, with or without dashes. Uses the browser's native crypto.randomUUID() for true randomness."
-    relatedToolIds={["hash", "base64", "timestamp"]}
-  />
-  <SeoBlock
-    heading="About this tool"
-    text="UUID (Universally Unique Identifier) v4 generates 128-bit identifiers using cryptographic randomness. They're virtually guaranteed to be unique and are widely used as database primary keys, session tokens, and correlation IDs."
-    features={[
-      "Cryptographically random UUID v4",
-      "Bulk generation (up to 1000)",
-      "Uppercase and no-dashes options",
-      "Copy individual or all UUIDs",
-    ]}
-  />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["hash", "base64", "timestamp"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
 </Layout>

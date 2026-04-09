@@ -8,9 +8,9 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let parsed: unknown = null;
-  let error = "";
+  let input = $state("");
+  let parsed = $state<unknown>(null);
+  let error = $state("");
 
   function collectFirstLevelPaths(data: unknown): Set<string> {
     const paths = new Set<string>();
@@ -22,7 +22,7 @@
     return paths;
   }
 
-  let processing = false;
+  let processing = $state(false);
 
   async function processInput(value: string) {
     if (!value.trim()) {
@@ -82,8 +82,8 @@
     input = sample;
   }
 
-  let expandedPaths = new Set<string>();
-  let allExpanded = false;
+  let expandedPaths = $state(new Set<string>());
+  let allExpanded = $state(false);
 
   function togglePath(path: string) {
     if (expandedPaths.has(path)) {
@@ -120,7 +120,7 @@
   }
 
   const PAGE_SIZE = 100;
-  let visibleLimits = new Map<string, number>();
+  let visibleLimits = $state(new Map<string, number>());
 
   function getVisibleLimit(path: string): number {
     return visibleLimits.get(path) || PAGE_SIZE;

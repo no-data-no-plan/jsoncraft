@@ -7,10 +7,10 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let output = "";
-  let error = "";
-  let indent = 2;
+  let input = $state("");
+  let output = $state("");
+  let error = $state("");
+  let indent = $state(2);
 
   function escXml(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 

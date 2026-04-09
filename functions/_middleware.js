@@ -11,8 +11,8 @@ function buildCSP(nonce) {
   return [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' ${SCRIPT_ALLOW}`,
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com",
+    "style-src 'self' 'unsafe-inline'",
+    "font-src 'self'",
     `img-src 'self' data: blob: ${AD_IMG}`,
     "connect-src 'self' https://pagead2.googlesyndication.com https://formspree.io https://*.google.com https://*.adtrafficquality.google https://*.cloudflareinsights.com",
     "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://www.google.com https://*.adtrafficquality.google",
@@ -30,8 +30,8 @@ function buildCSP(nonce) {
 const CSP_STATIC = [
   "default-src 'self'",
   `script-src 'self' ${SCRIPT_ALLOW}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   `img-src 'self' data: blob: ${AD_IMG}`,
   "connect-src 'self' https://pagead2.googlesyndication.com https://formspree.io https://*.google.com https://*.adtrafficquality.google https://*.cloudflareinsights.com",
   "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://www.google.com https://*.adtrafficquality.google",
@@ -108,7 +108,7 @@ export async function onRequest(context) {
   newHeaders.set('X-Content-Type-Options', 'nosniff');
   newHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   newHeaders.set('Permissions-Policy', PERMISSIONS_POLICY);
-  newHeaders.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  newHeaders.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   // HTML responses get the strict nonce-based CSP matching what HTMLRewriter stamped.
   // Non-HTML (JS/CSS/images/etc.) get the static policy without nonce.
   newHeaders.set('Content-Security-Policy', isHtml ? buildCSP(nonce) : CSP_STATIC);

@@ -7,9 +7,9 @@
 
   let { lang = "en" as Lang } = $props();
 
-  let input = "";
-  let output = "";
-  let error = "";
+  let input = $state("");
+  let output = $state("");
+  let error = $state("");
 
   function capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
