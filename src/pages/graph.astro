@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import JsonGraph from "../components/JsonGraph.svelte";
+import SeoContent from "../components/SeoContent.astro";
+import SeoBlock from "../components/SeoBlock.astro";
+import { getPageSeo } from "../i18n/pages";
+
+const seo = getPageSeo("graph", "en")!;
+---
+
+<Layout title={seo.title} description={seo.description} activeToolId="graph">
+  <JsonGraph client:load />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["viewer", "formatter", "jsonpath"]} />
+  <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
+</Layout>

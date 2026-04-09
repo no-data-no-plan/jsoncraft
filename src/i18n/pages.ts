@@ -107,6 +107,38 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
       ],
     },
   },
+  graph: {
+    en: {
+      title: "JSON Graph Visualizer \u2014 Interactive Tree Diagram",
+      description: "Visualize JSON data as an interactive graph diagram. Explore nodes, collapse branches, pan and zoom. Free, private, no upload.",
+      seoHeading: "Visualize JSON as an Interactive Graph",
+      seoText: "Turn any JSON into an interactive node-based graph diagram. Each key becomes a node connected to its children. Collapse branches to focus on what matters, pan and zoom to navigate large structures, and see data types at a glance with color-coded nodes.",
+      seoBlockHeading: "About JSON Graph Visualizer",
+      seoBlockText: "The JSON Graph Visualizer renders your JSON as an SVG-based tree diagram with clickable nodes. Unlike flat text views, the graph makes nested relationships immediately visible and lets you explore data interactively.",
+      seoFeatures: [
+        "SVG-based graph with nodes and connections",
+        "Collapse and expand any branch",
+        "Pan and zoom for large JSON structures",
+        "Color-coded nodes by data type",
+        "Node count and depth info at a glance",
+      ],
+    },
+    es: {
+      title: "Visualizador de Grafo JSON \u2014 Diagrama de \u00c1rbol Interactivo",
+      description: "Visualiza datos JSON como un diagrama de grafo interactivo. Explora nodos, colapsa ramas, despl\u00e1zate y haz zoom. Gratis, privado, sin subida.",
+      seoHeading: "Visualiza JSON como un Grafo Interactivo",
+      seoText: "Convierte cualquier JSON en un diagrama de grafo interactivo basado en nodos. Cada clave se convierte en un nodo conectado a sus hijos. Colapsa ramas para enfocarte en lo importante, despl\u00e1zate y haz zoom para navegar estructuras grandes, y ve los tipos de datos de un vistazo con nodos codificados por color.",
+      seoBlockHeading: "Sobre el Visualizador de Grafo JSON",
+      seoBlockText: "El Visualizador de Grafo JSON renderiza tu JSON como un diagrama de \u00e1rbol basado en SVG con nodos clicables. A diferencia de las vistas de texto plano, el grafo hace las relaciones anidadas inmediatamente visibles y te permite explorar datos interactivamente.",
+      seoFeatures: [
+        "Grafo basado en SVG con nodos y conexiones",
+        "Colapsar y expandir cualquier rama",
+        "Desplazamiento y zoom para estructuras JSON grandes",
+        "Nodos codificados por color seg\u00fan tipo de dato",
+        "Conteo de nodos y profundidad de un vistazo",
+      ],
+    },
+  },
   jsonpath: {
     en: {
       title: "JSONPath Tester Online \u2014 Query & Filter JSON Data",

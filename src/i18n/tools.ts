@@ -4,6 +4,7 @@ const toolNames: Record<string, { en: string; es: string }> = {
   formatter: { en: "JSON Formatter", es: "Formateador JSON" },
   diff: { en: "JSON Diff", es: "Diff JSON" },
   viewer: { en: "JSON Tree Viewer", es: "Visor de \u00c1rbol JSON" },
+  graph: { en: "JSON Graph Visualizer", es: "Visualizador de Grafo JSON" },
   jsonpath: { en: "JSONPath Tester", es: "Tester JSONPath" },
   "yaml-to-json": { en: "YAML to JSON", es: "YAML a JSON" },
   "json-to-yaml": { en: "JSON to YAML", es: "JSON a YAML" },
@@ -105,6 +106,33 @@ const viewer = {
     emptyObject: "Objeto vac\u00edo {}",
     pasteHint: "Pega JSON a la izquierda para ver la vista de \u00e1rbol.",
     inputPlaceholder: "Pega JSON para explorar como \u00e1rbol...",
+  },
+};
+
+const graph = {
+  en: {
+    expandAll: "Expand All",
+    collapseAll: "Collapse All",
+    fitView: "Fit View",
+    graph: "Graph",
+    nodes: "Nodes",
+    depth: "Depth",
+    zoomLevel: "Zoom",
+    inputPlaceholder: "Paste JSON to visualize as a graph...",
+    pasteHint: "Paste JSON on the left to see an interactive graph diagram.",
+    graphAria: "Interactive JSON graph visualization",
+  },
+  es: {
+    expandAll: "Expandir Todo",
+    collapseAll: "Colapsar Todo",
+    fitView: "Ajustar Vista",
+    graph: "Grafo",
+    nodes: "Nodos",
+    depth: "Profundidad",
+    zoomLevel: "Zoom",
+    inputPlaceholder: "Pega JSON para visualizar como grafo...",
+    pasteHint: "Pega JSON a la izquierda para ver un diagrama de grafo interactivo.",
+    graphAria: "Visualizaci\u00f3n interactiva de grafo JSON",
   },
 };
 
@@ -459,7 +487,7 @@ const converter = {
 type ToolTranslations = Record<string, Record<string, string>>;
 
 const allToolStrings: Record<string, { en: ToolTranslations[string]; es: ToolTranslations[string] }> = {
-  formatter, diff, viewer, jsonpath, regex, base64, urlEncode, hash, uuid, timestamp, cron, converter,
+  formatter, diff, viewer, graph, jsonpath, regex, base64, urlEncode, hash, uuid, timestamp, cron, converter,
   jsonToTypescript, xmlFormatter, jsonToHtmlTable, yamlValidator, jsonSchemaValidator,
 };
 

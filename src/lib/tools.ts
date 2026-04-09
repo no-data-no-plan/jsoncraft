@@ -33,6 +33,14 @@ export const tools: Tool[] = [
     keywords: ["json viewer", "json tree", "json explorer", "json visualizer"],
   },
   {
+    id: "graph",
+    name: "JSON Graph Visualizer",
+    path: "/graph",
+    description: "Visualize JSON data as an interactive graph diagram with nodes and connections",
+    icon: "G{}",
+    keywords: ["json graph", "json visualizer", "json diagram", "json graph viewer", "json node graph", "json crack alternative"],
+  },
+  {
     id: "jsonpath",
     name: "JSONPath Tester",
     path: "/jsonpath",
