@@ -1,0 +1,131 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faq = [
+  {
+    question: "Is JSONCraft better than CodeBeautify for JSON formatting?",
+    answer: "JSONCraft processes all data entirely in your browser using Web Workers, so nothing is uploaded to a server. CodeBeautify sends some operations to its servers. For JSON formatting specifically, JSONCraft offers a CodeMirror 6 editor with syntax highlighting, real-time validation, and minification — all client-side.",
+  },
+  {
+    question: "Does CodeBeautify have more tools than JSONCraft?",
+    answer: "Yes. CodeBeautify offers over 100 tools spanning JSON, XML, YAML, CSV, SQL, HTML, CSS, and JavaScript formatting and conversion. JSONCraft focuses on 22 developer tools centered on JSON, YAML, CSV, TOML, and common utilities like regex, hash, UUID, and base64.",
+  },
+  {
+    question: "Which is more private, JSONCraft or CodeBeautify?",
+    answer: "JSONCraft runs 100% client-side — your data never leaves the browser. CodeBeautify processes some operations server-side and displays ads with third-party trackers. If data privacy is a concern, JSONCraft is the safer choice.",
+  },
+  {
+    question: "Can JSONCraft replace CodeBeautify?",
+    answer: "For JSON, YAML, CSV, TOML, and XML tasks, JSONCraft covers the same ground with better privacy and a cleaner interface. However, CodeBeautify's SQL, HTML, CSS, and JavaScript beautifiers have no equivalent in JSONCraft.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title="JSONCraft vs CodeBeautify"
+  description="Detailed comparison between JSONCraft and CodeBeautify. Privacy, tool count, UI, and performance compared side by side."
+  activeToolId="compare"
+  lang="en"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Comparison</p>
+        <h2 class="text-2xl font-bold mb-2">JSONCraft vs CodeBeautify</h2>
+        <p style="color: var(--color-text-secondary);">An honest comparison between two developer tool suites. Last updated: 2026-04-09.</p>
+      </div>
+
+      <!-- Overview -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Overview</h3>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONCraft</strong> is a free, open collection of 22 developer tools focused on JSON, YAML, CSV, TOML, and common dev utilities. Every tool runs entirely in the browser — no data is uploaded to any server.
+        </p>
+        <p>
+          <strong style="color: var(--color-text-primary);">CodeBeautify</strong> is a large web platform offering 100+ online tools for formatting, converting, and validating JSON, XML, YAML, CSV, SQL, HTML, CSS, and JavaScript. Some tools process data server-side.
+        </p>
+      </section>
+
+      <!-- Comparison table -->
+      <section>
+        <h3 class="text-lg font-semibold mb-3" style="color: var(--color-text-primary);">Feature Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-[var(--color-border)] rounded">
+            <thead>
+              <tr class="bg-[var(--color-bg-tertiary)]">
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">Feature</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONCraft</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">CodeBeautify</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--color-text-secondary);">
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Tool count</td><td class="px-4 py-2 border-b border-[var(--color-border)]">22</td><td class="px-4 py-2 border-b border-[var(--color-border)]">100+</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Processing</td><td class="px-4 py-2 border-b border-[var(--color-border)]">100% client-side</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Mixed (client + server)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Code editor</td><td class="px-4 py-2 border-b border-[var(--color-border)]">CodeMirror 6</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Basic textarea / Ace</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Ads</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Minimal (1 banner)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Heavy (multiple placements)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">JSON tools</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Format, diff, tree, JSONPath, schema</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Format, validate, tree view</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Conversion formats</td><td class="px-4 py-2 border-b border-[var(--color-border)]">YAML, CSV, TOML, TypeScript, HTML table</td><td class="px-4 py-2 border-b border-[var(--color-border)]">YAML, CSV, XML, SQL, HTML, and more</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">SQL beautifier</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">HTML/CSS/JS beautifier</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Worker threads</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes (non-blocking)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Dark mode</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Price</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Free</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Free</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Where JSONCraft wins -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Where JSONCraft wins</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Privacy.</strong> All processing happens in your browser. No data is sent to any server, ever. CodeBeautify processes some operations server-side.</li>
+          <li><strong style="color: var(--color-text-primary);">Editor quality.</strong> CodeMirror 6 provides syntax highlighting, bracket matching, code folding, and error markers. CodeBeautify uses simpler editors.</li>
+          <li><strong style="color: var(--color-text-primary);">Cleaner interface.</strong> Minimal ads (one horizontal banner) vs CodeBeautify's heavy ad placements that can obscure content.</li>
+          <li><strong style="color: var(--color-text-primary);">Performance on large files.</strong> Worker threads keep the UI responsive when processing large documents.</li>
+          <li><strong style="color: var(--color-text-primary);">JSON-specific depth.</strong> JSONPath tester, JSON Schema validation, and side-by-side diff are not available on CodeBeautify.</li>
+        </ul>
+      </section>
+
+      <!-- Where CodeBeautify wins -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Where CodeBeautify wins</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Tool count.</strong> Over 100 tools covering SQL, HTML, CSS, JavaScript, and many more formats. JSONCraft has 22.</li>
+          <li><strong style="color: var(--color-text-primary);">Breadth.</strong> SQL beautifiers, HTML formatters, CSS minifiers, and JavaScript prettifiers are categories JSONCraft does not cover.</li>
+          <li><strong style="color: var(--color-text-primary);">Established platform.</strong> CodeBeautify has been around for years with a large user base and extensive documentation.</li>
+        </ul>
+      </section>
+
+      <!-- Verdict -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Verdict</h3>
+        <p>
+          If your work centers on JSON, YAML, CSV, and TOML and you value privacy and a clean editing experience, JSONCraft is the stronger choice. If you need a one-stop shop for SQL, HTML, CSS, and JavaScript formatting alongside data tools, CodeBeautify's broader coverage may serve you better.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-4" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Frequently Asked Questions</h3>
+        {faq.map((item) => (
+          <div>
+            <h4 class="font-medium mb-1" style="color: var(--color-text-primary);">{item.question}</h4>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  </div>
+</Layout>

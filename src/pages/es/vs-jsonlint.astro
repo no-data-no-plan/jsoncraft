@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const faq = [
+  {
+    question: "Es JSONCraft una buena alternativa a JSONLint?",
+    answer: "Si. JSONCraft incluye la misma validacion y formateo JSON que ofrece JSONLint, mas 21 herramientas adicionales: diff JSON, visor de arbol, probador JSONPath, validacion JSON Schema, conversores YAML/CSV/TOML, probador de regex, generador de hash, generador de UUID y mas. Todo el procesamiento es en el lado del cliente.",
+  },
+  {
+    question: "Es JSONLint mas rapido que JSONCraft para validar JSON?",
+    answer: "Ambas herramientas validan JSON en tiempo real mientras escribes. La simplicidad de JSONLint hace que la pagina cargue ligeramente mas rapido, pero la velocidad de validacion de JSONCraft es comparable ya que ambas parsean JSON en el lado del cliente. JSONCraft usa CodeMirror 6, que proporciona marcadores de error directamente en el editor.",
+  },
+  {
+    question: "Soporta JSONLint validacion de JSON Schema?",
+    answer: "No. JSONLint solo valida la sintaxis JSON. JSONCraft incluye un validador de JSON Schema dedicado que comprueba tus datos contra cualquier borrador de JSON Schema, reportando errores detallados con rutas y descripciones.",
+  },
+  {
+    question: "Por que elegiria JSONLint en vez de JSONCraft?",
+    answer: "JSONLint hace una cosa y la hace bien: validar y formatear JSON. Si quieres la experiencia mas rapida y simple posible sin distracciones, el minimalismo de JSONLint es una ventaja. Si necesitas herramientas adicionales mas alla de la validacion basica, JSONCraft ofrece mas valor.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title="JSONCraft vs JSONLint"
+  description="Comparacion detallada entre JSONCraft y JSONLint. Validacion, formateo, amplitud de herramientas y simplicidad comparados."
+  activeToolId="compare"
+  lang="es"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Comparacion</p>
+        <h2 class="text-2xl font-bold mb-2">JSONCraft vs JSONLint</h2>
+        <p style="color: var(--color-text-secondary);">Una comparacion honesta entre un validador enfocado y un kit de herramientas completo. Ultima actualizacion: 2026-04-09.</p>
+      </div>
+
+      <!-- Descripcion general -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Descripcion general</h3>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONCraft</strong> es una suite gratuita de 22 herramientas para desarrolladores que cubre formateo JSON, validacion, diff, conversion (YAML, CSV, TOML, TypeScript) y utilidades comunes como regex, hash, UUID y base64. Todo se ejecuta en el navegador.
+        </p>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONLint</strong> (jsonlint.com) es el clasico validador JSON. Valida la sintaxis JSON, le da formato con indentacion adecuada y muestra mensajes de error claros. Simple, rapido, gratuito y con anuncios.
+        </p>
+      </section>
+
+      <!-- Tabla comparativa -->
+      <section>
+        <h3 class="text-lg font-semibold mb-3" style="color: var(--color-text-primary);">Tabla comparativa</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-[var(--color-border)] rounded">
+            <thead>
+              <tr class="bg-[var(--color-bg-tertiary)]">
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">Caracteristica</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONCraft</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONLint</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--color-text-secondary);">
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Validacion JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (tiempo real, errores en linea)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (al enviar)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Formateo JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (formato + minificacion)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (solo formato)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Editor de codigo</td><td class="px-4 py-2 border-b border-[var(--color-border)]">CodeMirror 6</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Textarea basico</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Diff JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Visor de arbol</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Probador JSONPath</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Validacion JSON Schema</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Conversiones de formato</td><td class="px-4 py-2 border-b border-[var(--color-border)]">YAML, CSV, TOML, TypeScript, tabla HTML</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Utilidades dev</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Regex, hash, UUID, base64, cron, timestamps</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Modo oscuro</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Simplicidad</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Sidebar con 22 herramientas</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Una pagina, un textarea</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Precio</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Donde gana JSONCraft -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSONCraft</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Muchas mas herramientas.</strong> 22 herramientas mas alla de la validacion: diff, visor de arbol, JSONPath, validacion de schema, conversores, regex, hash, UUID, base64, cron, timestamps y mas.</li>
+          <li><strong style="color: var(--color-text-primary);">Mejor editor.</strong> CodeMirror 6 proporciona resaltado de sintaxis, emparejamiento de llaves, plegado de codigo, numeros de linea y marcadores de error en linea. JSONLint usa un textarea plano.</li>
+          <li><strong style="color: var(--color-text-primary);">Validacion en tiempo real.</strong> Los errores aparecen mientras escribes con marcadores de linea/columna. JSONLint requiere hacer clic en un boton para validar.</li>
+          <li><strong style="color: var(--color-text-primary);">JSON Schema.</strong> Valida JSON contra un schema, una funcion que JSONLint no ofrece.</li>
+          <li><strong style="color: var(--color-text-primary);">Conversiones de formato.</strong> Convierte JSON a YAML, CSV, TOML, TypeScript y tablas HTML sin salir del sitio.</li>
+        </ul>
+      </section>
+
+      <!-- Donde gana JSONLint -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSONLint</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Simplicidad.</strong> Una pagina, un textarea, un boton. Sin sidebar, sin navegacion. Si solo necesitas validar JSON, JSONLint es maximamente simple.</li>
+          <li><strong style="color: var(--color-text-primary);">Reconocimiento de marca.</strong> JSONLint existe desde 2011 y suele ser el primer resultado al buscar "json validator". Muchos desarrolladores lo tienen marcado.</li>
+          <li><strong style="color: var(--color-text-primary);">Pagina ligera.</strong> Una pagina mas simple significa una carga inicial mas rapida para un flujo rapido de pegar y validar.</li>
+        </ul>
+      </section>
+
+      <!-- Veredicto -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>
+        <p>
+          JSONLint es un clasico por una buena razon: valida JSON de forma simple y rapida. Pero si necesitas algo mas alla de la validacion basica — comparar dos archivos, probar consultas JSONPath, convertir a YAML o generar interfaces TypeScript — JSONCraft lo maneja todo en un solo lugar, con un editor moderno y privacidad completa.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-4" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Preguntas frecuentes</h3>
+        {faq.map((item) => (
+          <div>
+            <h4 class="font-medium mb-1" style="color: var(--color-text-primary);">{item.question}</h4>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  </div>
+</Layout>

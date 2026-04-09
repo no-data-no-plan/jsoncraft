@@ -1,0 +1,133 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const faq = [
+  {
+    question: "Cual es la diferencia entre JSONCraft y JSON Crack?",
+    answer: "JSON Crack es un editor JSON visual que muestra JSON como un diagrama de grafo interactivo. JSONCraft es una suite de 22 herramientas para desarrolladores que incluye formateo JSON, diff, conversion a YAML/CSV/TOML, pruebas de regex y mas. JSON Crack destaca en visualizar estructuras JSON complejas; JSONCraft destaca en transformar y validar datos.",
+  },
+  {
+    question: "Tiene JSONCraft una vista de grafo como JSON Crack?",
+    answer: "No. JSONCraft incluye un visor de arbol plegable para explorar JSON, pero no un grafo visual. La vista de grafo interactiva de JSON Crack es su funcion unica: muestra nodos, aristas y relaciones de una forma que hace que las estructuras JSON anidadas sean mas faciles de entender visualmente.",
+  },
+  {
+    question: "Es gratuito JSON Crack?",
+    answer: "JSON Crack tiene un plan gratuito para uso basico. El plan Premium ($6/mes) desbloquea soporte para archivos mas grandes, funciones de comparacion y opciones de exportacion adicionales. JSONCraft es completamente gratuito sin plan de pago.",
+  },
+  {
+    question: "Puede JSONCraft convertir JSON a otros formatos como JSON Crack?",
+    answer: "JSONCraft tiene mas opciones de conversion. Soporta conversion bidireccional entre JSON y YAML, CSV, TOML y TypeScript, mas JSON a tabla HTML. JSON Crack se centra en la visualizacion y no ofrece la misma amplitud de conversiones de formato.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title="JSONCraft vs JSON Crack"
+  description="Comparacion detallada entre JSONCraft y JSON Crack. Visualizacion, amplitud de herramientas, precios y casos de uso comparados."
+  activeToolId="compare"
+  lang="es"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Comparacion</p>
+        <h2 class="text-2xl font-bold mb-2">JSONCraft vs JSON Crack</h2>
+        <p style="color: var(--color-text-secondary);">Una comparacion honesta entre un kit de herramientas para desarrolladores y un editor JSON visual. Ultima actualizacion: 2026-04-09.</p>
+      </div>
+
+      <!-- Descripcion general -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Descripcion general</h3>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONCraft</strong> es una coleccion gratuita de 22 herramientas para desarrolladores para formateo JSON, diff, conversion (YAML, CSV, TOML, TypeScript) y utilidades comunes como regex, hash, UUID y base64. Todas las herramientas se ejecutan en el navegador.
+        </p>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSON Crack</strong> (jsoncrack.com) es un editor JSON visual que renderiza JSON como diagramas de grafo interactivos. Con mas de 30,000 estrellas en GitHub, es una de las herramientas de visualizacion JSON mas populares. Plan gratuito disponible; Premium a $6/mes.
+        </p>
+      </section>
+
+      <!-- Tabla comparativa -->
+      <section>
+        <h3 class="text-lg font-semibold mb-3" style="color: var(--color-text-primary);">Tabla comparativa</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-[var(--color-border)] rounded">
+            <thead>
+              <tr class="bg-[var(--color-bg-tertiary)]">
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">Caracteristica</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONCraft</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSON Crack</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--color-text-secondary);">
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Enfoque principal</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Suite multiherramienta (22 herramientas)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Editor JSON visual</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Visualizacion de grafo</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (nodos/aristas interactivas)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Visor de arbol</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (plegable)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (basado en grafo)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Formateo JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (CodeMirror 6)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Diff JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (lado a lado)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Solo Premium</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Probador JSONPath</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Validacion JSON Schema</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Conversiones de formato</td><td class="px-4 py-2 border-b border-[var(--color-border)]">YAML, CSV, TOML, TypeScript, tabla HTML</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Limitadas</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Utilidades dev</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Regex, hash, UUID, base64, cron, timestamps</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Exportar como imagen</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (PNG, SVG)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Codigo abierto</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Precio</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis + $6/mes Premium</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Donde gana JSONCraft -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSONCraft</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Amplitud de herramientas.</strong> 22 herramientas: diff JSON, conversores YAML/CSV/TOML, probador de regex, generador de hash, generador de UUID, constructor de cron y mas. JSON Crack se centra principalmente en visualizacion.</li>
+          <li><strong style="color: var(--color-text-primary);">Conversion de formatos.</strong> Conversores bidireccionales para YAML, CSV, TOML e interfaces TypeScript. JSON Crack no ofrece la misma cobertura de conversion.</li>
+          <li><strong style="color: var(--color-text-primary);">Validacion JSON Schema.</strong> Valida datos contra cualquier borrador de JSON Schema con rutas de error detalladas. No disponible en JSON Crack.</li>
+          <li><strong style="color: var(--color-text-primary);">Completamente gratis.</strong> Cada funcion esta disponible sin coste. JSON Crack bloquea diff y algunas funciones de exportacion detras de Premium.</li>
+          <li><strong style="color: var(--color-text-primary);">Probador JSONPath.</strong> Escribe y evalua expresiones JSONPath en tiempo real contra tus datos.</li>
+        </ul>
+      </section>
+
+      <!-- Donde gana JSON Crack -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSON Crack</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Vista de grafo visual.</strong> La funcion estrella de JSON Crack: ve tu JSON como un grafo interactivo con nodos y aristas. Esto hace que las estructuras profundamente anidadas sean mucho mas faciles de entender que el texto plano o una vista de arbol.</li>
+          <li><strong style="color: var(--color-text-primary);">Exportacion como imagen.</strong> Exporta tu visualizacion JSON como PNG o SVG para documentacion, presentaciones o compartir con companeros.</li>
+          <li><strong style="color: var(--color-text-primary);">Codigo abierto.</strong> JSON Crack es de codigo abierto con mas de 30,000 estrellas en GitHub y una comunidad activa contribuyendo mejoras.</li>
+          <li><strong style="color: var(--color-text-primary);">Comprender estructuras complejas.</strong> Cuando necesitas entender una respuesta de API profundamente anidada o un archivo de configuracion, un grafo visual es mas intuitivo que desplazarte por texto.</li>
+        </ul>
+      </section>
+
+      <!-- Veredicto -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>
+        <p>
+          Estas herramientas resuelven problemas diferentes. JSON Crack es la mejor opcion cuando necesitas entender visualmente la forma de JSON complejo o exportar diagramas. JSONCraft es la mejor opcion cuando necesitas transformar datos (convertir a YAML, CSV o TOML), validar contra schemas, comparar dos documentos o acceder a utilidades comunes de desarrollo, todo gratis y completamente en el lado del cliente.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-4" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Preguntas frecuentes</h3>
+        {faq.map((item) => (
+          <div>
+            <h4 class="font-medium mb-1" style="color: var(--color-text-primary);">{item.question}</h4>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  </div>
+</Layout>

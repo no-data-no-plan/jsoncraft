@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const faq = [
+  {
+    question: "What is the difference between JSONCraft and JSON Editor Online?",
+    answer: "JSON Editor Online is a dedicated JSON editor with tree view, code view, and table view that handles files up to 512MB. JSONCraft is a suite of 22 developer tools that includes JSON formatting, diffing, conversion to YAML/CSV/TOML, regex testing, hashing, and more. JSON Editor Online goes deeper on JSON editing; JSONCraft goes wider across developer utilities.",
+  },
+  {
+    question: "Does JSONCraft have a tree view like JSON Editor Online?",
+    answer: "Yes. JSONCraft includes a JSON Tree Viewer with collapsible nodes and search. However, JSON Editor Online's tree view is more advanced, with inline editing, drag-and-drop, and table mode for array data.",
+  },
+  {
+    question: "Is JSON Editor Online free?",
+    answer: "JSON Editor Online has a free tier with basic features. The paid plan ($7/month) unlocks larger file sizes, cloud storage, and additional features. JSONCraft is entirely free with no paid tier.",
+  },
+  {
+    question: "Which handles larger JSON files better?",
+    answer: "JSON Editor Online is specifically optimized for large files and supports up to 512MB. JSONCraft uses Web Workers to keep the UI responsive, but is better suited for typical development payloads rather than extremely large datasets.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title="JSONCraft vs JSON Editor Online"
+  description="Detailed comparison between JSONCraft and JSON Editor Online. Features, pricing, privacy, and use cases compared."
+  activeToolId="compare"
+  lang="en"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Comparison</p>
+        <h2 class="text-2xl font-bold mb-2">JSONCraft vs JSON Editor Online</h2>
+        <p style="color: var(--color-text-secondary);">An honest comparison between a multi-tool suite and a dedicated JSON editor. Last updated: 2026-04-09.</p>
+      </div>
+
+      <!-- Overview -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Overview</h3>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONCraft</strong> is a free collection of 22 developer tools covering JSON formatting, diffing, conversion (YAML, CSV, TOML, TypeScript), and common utilities like regex, hash, UUID, and base64. All tools run client-side in the browser.
+        </p>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSON Editor Online</strong> (jsoneditoronline.org) is a dedicated JSON editor featuring tree view, code view, and table view. It supports files up to 512MB and offers cloud storage. Free tier available; paid plan at $7/month.
+        </p>
+      </section>
+
+      <!-- Comparison table -->
+      <section>
+        <h3 class="text-lg font-semibold mb-3" style="color: var(--color-text-primary);">Feature Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-[var(--color-border)] rounded">
+            <thead>
+              <tr class="bg-[var(--color-bg-tertiary)]">
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">Feature</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONCraft</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSON Editor Online</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--color-text-secondary);">
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Primary focus</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Multi-tool suite (22 tools)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Dedicated JSON editor</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Tree view</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Collapsible tree with search</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Tree, table, and code views</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Inline editing in tree</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Max file size</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Browser memory limit</td><td class="px-4 py-2 border-b border-[var(--color-border)]">512MB (paid)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Cloud storage</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No (local only)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes (paid)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">JSON diff</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes (side-by-side)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Limited</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">JSONPath tester</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">JSON Schema validation</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Yes</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Format conversions</td><td class="px-4 py-2 border-b border-[var(--color-border)]">YAML, CSV, TOML, TypeScript, HTML</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Dev utilities</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Regex, hash, UUID, base64, cron, timestamps</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Processing</td><td class="px-4 py-2 border-b border-[var(--color-border)]">100% client-side</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Client-side + cloud sync</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Price</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Free</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Free + $7/month paid</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Where JSONCraft wins -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Where JSONCraft wins</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Tool breadth.</strong> 22 tools beyond JSON editing: YAML/CSV/TOML conversion, regex testing, UUID generation, hashing, diff, JSONPath, and schema validation.</li>
+          <li><strong style="color: var(--color-text-primary);">Format conversion.</strong> Bidirectional converters for YAML, CSV, TOML, and TypeScript interfaces. JSON Editor Online does not convert between formats.</li>
+          <li><strong style="color: var(--color-text-primary);">Completely free.</strong> Every feature is available at no cost. No premium tier required for advanced functionality.</li>
+          <li><strong style="color: var(--color-text-primary);">Privacy.</strong> No cloud storage means no data leaves your browser. JSON Editor Online's cloud sync feature means your data passes through their servers.</li>
+          <li><strong style="color: var(--color-text-primary);">JSON Schema validation.</strong> Validate any JSON document against a JSON Schema with detailed error reporting.</li>
+        </ul>
+      </section>
+
+      <!-- Where JSON Editor Online wins -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Where JSON Editor Online wins</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Tree and table views.</strong> Inline editing, drag-and-drop reordering, and a table view for array data make JSON Editor Online the superior pure JSON editor.</li>
+          <li><strong style="color: var(--color-text-primary);">Large file handling.</strong> Specifically optimized for files up to 512MB with streaming parsers and virtual rendering.</li>
+          <li><strong style="color: var(--color-text-primary);">Cloud sync.</strong> Save documents to the cloud and access them from any device (paid feature).</li>
+          <li><strong style="color: var(--color-text-primary);">Dedicated focus.</strong> Purpose-built for JSON editing with deeper features for that specific task.</li>
+        </ul>
+      </section>
+
+      <!-- Verdict -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Verdict</h3>
+        <p>
+          These tools serve different needs. If you spend your day editing and exploring large JSON files and want the best tree/table editing experience, JSON Editor Online is built for that. If you need a developer toolkit that handles JSON alongside YAML, CSV, TOML conversions, regex testing, and other utilities — all for free and fully private — JSONCraft is the better fit.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-4" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Frequently Asked Questions</h3>
+        {faq.map((item) => (
+          <div>
+            <h4 class="font-medium mb-1" style="color: var(--color-text-primary);">{item.question}</h4>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  </div>
+</Layout>

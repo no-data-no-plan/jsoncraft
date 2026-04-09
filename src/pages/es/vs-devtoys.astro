@@ -1,0 +1,139 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const faq = [
+  {
+    question: "Es JSONCraft una alternativa web a DevToys?",
+    answer: "Si. JSONCraft cubre muchas de las mismas utilidades para desarrolladores que DevToys — formateo JSON, base64, codificacion URL, generacion de hash, generacion de UUID, pruebas de regex y conversion de timestamps — pero se ejecuta completamente en el navegador. Sin instalacion necesaria.",
+  },
+  {
+    question: "Es DevToys mas rapido que JSONCraft?",
+    answer: "DevToys se ejecuta como una aplicacion de escritorio nativa, por lo que tiene menor latencia para operaciones individuales. JSONCraft funciona en el navegador y usa Web Workers, lo que ofrece buen rendimiento pero no puede igualar la velocidad de ejecucion nativa para entradas muy grandes.",
+  },
+  {
+    question: "Funciona JSONCraft sin conexion como DevToys?",
+    answer: "JSONCraft es una Progressive Web App (PWA) y funciona sin conexion despues de la carga inicial de la pagina. Sin embargo, DevToys es una aplicacion completamente nativa que nunca requiere conexion a internet.",
+  },
+  {
+    question: "Que herramientas tiene JSONCraft que DevToys no?",
+    answer: "JSONCraft incluye conversores YAML, CSV y TOML, un probador JSONPath, validacion JSON Schema, diff JSON, validacion YAML, formateo XML, un constructor de expresiones cron y generacion de JSON a TypeScript. DevToys se enfoca mas en herramientas de imagen, selectores de color y utilidades de red.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title="JSONCraft vs DevToys"
+  description="Comparacion detallada entre JSONCraft (web) y DevToys (escritorio). Funciones, accesibilidad, rendimiento y casos de uso comparados."
+  activeToolId="compare"
+  lang="es"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Comparacion</p>
+        <h2 class="text-2xl font-bold mb-2">JSONCraft vs DevToys</h2>
+        <p style="color: var(--color-text-secondary);">Una comparacion honesta entre un kit de herramientas en el navegador y una aplicacion de escritorio nativa. Ultima actualizacion: 2026-04-09.</p>
+      </div>
+
+      <!-- Descripcion general -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Descripcion general</h3>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONCraft</strong> es una coleccion gratuita de 22 herramientas para desarrolladores basada en el navegador, centrada en JSON, YAML, CSV, TOML y utilidades comunes. Todo el procesamiento es en el cliente, sin instalacion ni subida de datos.
+        </p>
+        <p>
+          <strong style="color: var(--color-text-primary);">DevToys</strong> (devtoys.app) es una aplicacion de escritorio de codigo abierto descrita como una "navaja suiza para desarrolladores." Se ejecuta nativamente en Windows, macOS y Linux, ofreciendo herramientas para JSON, base64, JWT, hash, UUID, regex, selector de color, procesamiento de imagenes y mas.
+        </p>
+      </section>
+
+      <!-- Tabla comparativa -->
+      <section>
+        <h3 class="text-lg font-semibold mb-3" style="color: var(--color-text-primary);">Tabla comparativa</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-[var(--color-border)] rounded">
+            <thead>
+              <tr class="bg-[var(--color-bg-tertiary)]">
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">Caracteristica</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONCraft</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">DevToys</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--color-text-secondary);">
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Plataforma</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Navegador (cualquier SO)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Escritorio (Windows, macOS, Linux)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Instalacion</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No necesaria</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Descargar + instalar</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Formateo JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (CodeMirror 6)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Diff JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (lado a lado)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Probador JSONPath</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Validacion JSON Schema</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Conversores YAML/CSV/TOML</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (bidireccional)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Solo JSON-YAML</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Constructor de cron</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Base64 / URL encode</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Generacion de hash</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (MD5, SHA-1/256/512)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Generacion de UUID</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (v4)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (v1, v4, v7)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Decodificador JWT</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Herramientas de imagen</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (comprimir, convertir)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Selector de color</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Soporte offline</td><td class="px-4 py-2 border-b border-[var(--color-border)]">PWA (tras primera carga)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Nativo completo</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Codigo abierto</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (MIT)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Precio</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Donde gana JSONCraft -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSONCraft</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Sin instalacion.</strong> Abre la URL y empieza a trabajar. Sin descargas, sin actualizaciones, sin requisitos del sistema mas alla de un navegador moderno.</li>
+          <li><strong style="color: var(--color-text-primary);">Funciona en cualquier lugar.</strong> Cualquier dispositivo con navegador: escritorio, tablet, telefono, Chromebook, la maquina de otra persona. DevToys requiere instalacion en cada dispositivo.</li>
+          <li><strong style="color: var(--color-text-primary);">Conversion de datos mas profunda.</strong> Conversores bidireccionales para YAML, CSV, TOML e interfaces TypeScript. DevToys solo maneja conversion JSON-YAML.</li>
+          <li><strong style="color: var(--color-text-primary);">Editor CodeMirror 6.</strong> Edicion de codigo de nivel profesional con resaltado de sintaxis, emparejamiento de llaves, plegado de codigo y marcadores de error en linea.</li>
+          <li><strong style="color: var(--color-text-primary);">Herramientas especificas de JSON.</strong> Diff JSON, probador JSONPath, validacion JSON Schema y JSON a tabla HTML no estan disponibles en DevToys.</li>
+        </ul>
+      </section>
+
+      <!-- Donde gana DevToys -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana DevToys</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Rendimiento nativo.</strong> Las aplicaciones de escritorio son inherentemente mas rapidas que las herramientas en el navegador, especialmente para operaciones con archivos grandes y procesamiento de imagenes.</li>
+          <li><strong style="color: var(--color-text-primary);">Completamente offline.</strong> Totalmente offline sin necesidad de conexion a internet inicial. El PWA de JSONCraft requiere una primera carga.</li>
+          <li><strong style="color: var(--color-text-primary);">Mas categorias de herramientas.</strong> Compresion de imagenes, selector de color, decodificacion JWT, utilidades de red y conversion de bases numericas cubren areas que JSONCraft no cubre.</li>
+          <li><strong style="color: var(--color-text-primary);">Codigo abierto.</strong> DevToys tiene licencia MIT en GitHub con una comunidad activa. Puedes inspeccionar, bifurcar y extenderlo.</li>
+          <li><strong style="color: var(--color-text-primary);">Integracion con el sistema.</strong> Portapapeles nativo, acceso al sistema de archivos y atajos de teclado a nivel de SO.</li>
+        </ul>
+      </section>
+
+      <!-- Veredicto -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>
+        <p>
+          DevToys y JSONCraft se complementan bien. DevToys es ideal como utilidad permanente en tu maquina de desarrollo principal, especialmente para herramientas de imagen y decodificacion JWT. JSONCraft es la mejor opcion cuando necesitas acceso desde el navegador en cualquier dispositivo, conversion mas profunda de JSON/YAML/CSV/TOML, o herramientas especificas de JSON como JSONPath y validacion de Schema.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-4" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Preguntas frecuentes</h3>
+        {faq.map((item) => (
+          <div>
+            <h4 class="font-medium mb-1" style="color: var(--color-text-primary);">{item.question}</h4>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  </div>
+</Layout>

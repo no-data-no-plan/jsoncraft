@@ -1,0 +1,133 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const faq = [
+  {
+    question: "Cual es la diferencia entre JSONCraft y JSON Editor Online?",
+    answer: "JSON Editor Online es un editor JSON dedicado con vista de arbol, vista de codigo y vista de tabla que maneja archivos de hasta 512MB. JSONCraft es una suite de 22 herramientas para desarrolladores que incluye formateo JSON, diff, conversion a YAML/CSV/TOML, pruebas de regex, hashing y mas. JSON Editor Online profundiza mas en edicion JSON; JSONCraft es mas amplio en utilidades para desarrolladores.",
+  },
+  {
+    question: "Tiene JSONCraft vista de arbol como JSON Editor Online?",
+    answer: "Si. JSONCraft incluye un visor de arbol JSON con nodos plegables y busqueda. Sin embargo, la vista de arbol de JSON Editor Online es mas avanzada, con edicion en linea, arrastrar y soltar, y modo tabla para datos de arrays.",
+  },
+  {
+    question: "Es gratuito JSON Editor Online?",
+    answer: "JSON Editor Online tiene un plan gratuito con funciones basicas. El plan de pago ($7/mes) desbloquea archivos mas grandes, almacenamiento en la nube y funciones adicionales. JSONCraft es completamente gratuito sin plan de pago.",
+  },
+  {
+    question: "Cual maneja mejor archivos JSON grandes?",
+    answer: "JSON Editor Online esta optimizado especificamente para archivos grandes y soporta hasta 512MB. JSONCraft usa Web Workers para mantener la interfaz fluida, pero esta mejor adaptado para cargas de trabajo de desarrollo tipicas que para conjuntos de datos extremadamente grandes.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+---
+
+<Layout
+  title="JSONCraft vs JSON Editor Online"
+  description="Comparacion detallada entre JSONCraft y JSON Editor Online. Funciones, precios, privacidad y casos de uso comparados."
+  activeToolId="compare"
+  lang="es"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <div class="flex-1 overflow-auto px-6 py-8">
+    <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">
+      <div>
+        <p class="text-xs uppercase tracking-wider mb-2" style="color: var(--color-accent);">Comparacion</p>
+        <h2 class="text-2xl font-bold mb-2">JSONCraft vs JSON Editor Online</h2>
+        <p style="color: var(--color-text-secondary);">Una comparacion honesta entre una suite multiherramienta y un editor JSON dedicado. Ultima actualizacion: 2026-04-09.</p>
+      </div>
+
+      <!-- Descripcion general -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Descripcion general</h3>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSONCraft</strong> es una coleccion gratuita de 22 herramientas para desarrolladores que cubre formateo JSON, diff, conversion (YAML, CSV, TOML, TypeScript) y utilidades comunes como regex, hash, UUID y base64. Todas las herramientas se ejecutan en el navegador.
+        </p>
+        <p>
+          <strong style="color: var(--color-text-primary);">JSON Editor Online</strong> (jsoneditoronline.org) es un editor JSON dedicado con vista de arbol, vista de codigo y vista de tabla. Soporta archivos de hasta 512MB y ofrece almacenamiento en la nube. Plan gratuito disponible; plan de pago a $7/mes.
+        </p>
+      </section>
+
+      <!-- Tabla comparativa -->
+      <section>
+        <h3 class="text-lg font-semibold mb-3" style="color: var(--color-text-primary);">Tabla comparativa</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-[var(--color-border)] rounded">
+            <thead>
+              <tr class="bg-[var(--color-bg-tertiary)]">
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">Caracteristica</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSONCraft</th>
+                <th class="text-left px-4 py-2 border-b border-[var(--color-border)]">JSON Editor Online</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--color-text-secondary);">
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Enfoque principal</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Suite multiherramienta (22 herramientas)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Editor JSON dedicado</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Vista de arbol</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Arbol plegable con busqueda</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Arbol, tabla y codigo</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Edicion en linea en arbol</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Tamano maximo de archivo</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Limite de memoria del navegador</td><td class="px-4 py-2 border-b border-[var(--color-border)]">512MB (de pago)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Almacenamiento en la nube</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No (solo local)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (de pago)</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Diff JSON</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si (lado a lado)</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Limitado</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Probador JSONPath</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Validacion JSON Schema</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Si</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Conversiones de formato</td><td class="px-4 py-2 border-b border-[var(--color-border)]">YAML, CSV, TOML, TypeScript, HTML</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Utilidades dev</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Regex, hash, UUID, base64, cron, timestamps</td><td class="px-4 py-2 border-b border-[var(--color-border)]">No</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Procesamiento</td><td class="px-4 py-2 border-b border-[var(--color-border)]">100% en el cliente</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Cliente + sincronizacion en la nube</td></tr>
+              <tr><td class="px-4 py-2 border-b border-[var(--color-border)]">Precio</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis</td><td class="px-4 py-2 border-b border-[var(--color-border)]">Gratis + $7/mes de pago</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Donde gana JSONCraft -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSONCraft</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Amplitud de herramientas.</strong> 22 herramientas mas alla de la edicion JSON: conversion YAML/CSV/TOML, pruebas de regex, generacion de UUID, hashing, diff, JSONPath y validacion de schema.</li>
+          <li><strong style="color: var(--color-text-primary);">Conversion de formatos.</strong> Conversores bidireccionales para YAML, CSV, TOML e interfaces TypeScript. JSON Editor Online no convierte entre formatos.</li>
+          <li><strong style="color: var(--color-text-primary);">Completamente gratis.</strong> Cada funcion esta disponible sin coste. No se necesita un plan premium para funcionalidad avanzada.</li>
+          <li><strong style="color: var(--color-text-primary);">Privacidad.</strong> Sin almacenamiento en la nube significa que tus datos no salen del navegador. La sincronizacion en la nube de JSON Editor Online implica que tus datos pasan por sus servidores.</li>
+          <li><strong style="color: var(--color-text-primary);">Validacion JSON Schema.</strong> Valida cualquier documento JSON contra un JSON Schema con informes de error detallados.</li>
+        </ul>
+      </section>
+
+      <!-- Donde gana JSON Editor Online -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Donde gana JSON Editor Online</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong style="color: var(--color-text-primary);">Vistas de arbol y tabla.</strong> Edicion en linea, reordenamiento con arrastrar y soltar, y una vista de tabla para datos de arrays hacen de JSON Editor Online el editor JSON puro superior.</li>
+          <li><strong style="color: var(--color-text-primary);">Manejo de archivos grandes.</strong> Optimizado especificamente para archivos de hasta 512MB con parsers de streaming y renderizado virtual.</li>
+          <li><strong style="color: var(--color-text-primary);">Sincronizacion en la nube.</strong> Guarda documentos en la nube y accede desde cualquier dispositivo (funcion de pago).</li>
+          <li><strong style="color: var(--color-text-primary);">Enfoque dedicado.</strong> Construido a proposito para la edicion JSON con funciones mas profundas para esa tarea especifica.</li>
+        </ul>
+      </section>
+
+      <!-- Veredicto -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>
+        <p>
+          Estas herramientas cubren necesidades diferentes. Si pasas el dia editando y explorando archivos JSON grandes y quieres la mejor experiencia de edicion arbol/tabla, JSON Editor Online esta construido para eso. Si necesitas un kit de herramientas que maneje JSON junto con conversiones YAML, CSV, TOML, pruebas de regex y otras utilidades, todo gratis y privado, JSONCraft encaja mejor.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="space-y-4" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Preguntas frecuentes</h3>
+        {faq.map((item) => (
+          <div>
+            <h4 class="font-medium mb-1" style="color: var(--color-text-primary);">{item.question}</h4>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  </div>
+</Layout>

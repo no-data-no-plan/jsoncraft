@@ -397,4 +397,95 @@
     <priority>0.8</priority>
     <lastmod>2026-04-03</lastmod>
   </url>
+
+  <!-- Comparison pages -->
+  <url>
+    <loc>https://jsoncraft.dev/vs-codebeautify/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-codebeautify/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-codebeautify/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-codebeautify/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/vs-json-editor-online/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-editor-online/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-editor-online/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-editor-online/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/vs-jsonlint/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-jsonlint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-jsonlint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-jsonlint/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/vs-devtoys/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-devtoys/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-devtoys/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-devtoys/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/vs-json-crack/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-crack/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-crack/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-crack/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/es/vs-codebeautify/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-codebeautify/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-codebeautify/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-codebeautify/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/es/vs-json-editor-online/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-editor-online/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-editor-online/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-editor-online/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/es/vs-jsonlint/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-jsonlint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-jsonlint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-jsonlint/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/es/vs-devtoys/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-devtoys/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-devtoys/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-devtoys/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
+
+  <url>
+    <loc>https://jsoncraft.dev/es/vs-json-crack/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-crack/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-crack/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-crack/" />
+    <priority>0.6</priority>
+    <lastmod>2026-04-09</lastmod>
+  </url>
 </urlset>
