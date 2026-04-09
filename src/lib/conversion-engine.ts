@@ -29,11 +29,12 @@ export class ConversionEngine {
   private lang: Lang;
   private tomlNullCount = 0;
 
-  constructor(lang: Lang) {
+  constructor(lang: Lang = 'en') {
     this.lang = lang;
   }
 
-  convert(input: string, fromFormat: Format, toFormat: Format): ConversionResult {
+  convert(input: string, fromFormat: Format, toFormat: Format, lang?: Lang): ConversionResult {
+    if (lang !== undefined) this.lang = lang;
     this.warnings = [];
     if (!input.trim()) return { output: "", warning: "" };
 

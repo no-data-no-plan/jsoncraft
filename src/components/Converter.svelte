@@ -22,7 +22,7 @@
   let wrongFormatHint: WrongFormatHint | null = null;
   let processing = false;
 
-  const engine = new ConversionEngine(lang);
+  const engine = new ConversionEngine();
 
   async function convert() {
     error = "";
@@ -51,7 +51,7 @@
       }
     } else {
       try {
-        const result = engine.convert(input, fromFormat, toFormat);
+        const result = engine.convert(input, fromFormat, toFormat, lang);
         output = result.output;
         warning = result.warning;
       } catch (e: any) {
