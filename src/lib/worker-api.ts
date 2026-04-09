@@ -28,10 +28,21 @@ function getWorker(): Worker {
   return worker;
 }
 
+const WORKER_TIMEOUT_MS = 30_000;
+
 function send(msg: Record<string, unknown>): Promise<WorkerResult> {
   const id = ++idCounter;
   return new Promise((resolve, reject) => {
-    pending.set(id, { resolve, reject });
+    const timer = setTimeout(() => {
+      if (!pending.has(id)) return;
+      pending.delete(id);
+      if (worker) { worker.terminate(); worker = null; }
+      reject(new Error("Conversion timed out — input may be too large or complex"));
+    }, WORKER_TIMEOUT_MS);
+    pending.set(id, {
+      resolve: (v) => { clearTimeout(timer); resolve(v); },
+      reject: (e) => { clearTimeout(timer); reject(e); },
+    });
     getWorker().postMessage({ ...msg, id });
   });
 }

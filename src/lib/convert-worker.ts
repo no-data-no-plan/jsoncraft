@@ -310,6 +310,7 @@ self.onmessage = async (e: MessageEvent<WorkerMsg>) => {
       case "jsonpath": {
         const { JSONPath } = await import("jsonpath-plus");
         const parsed = JSON.parse(stripBom(msg.input));
+        // eval defaults to 'safe' (jsep AST walker, CSP-compatible). Do NOT pass eval:'native'.
         const matches = JSONPath({ path: msg.path, json: parsed });
         self.postMessage({ type: "result", id: msg.id, output: JSON.stringify(matches, null, 2), matchCount: matches.length, warnings: [] });
         break;

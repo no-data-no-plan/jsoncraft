@@ -57,6 +57,66 @@ if (isHome) {
     "description": "Free online JSON, YAML, CSV, TOML tools. Format, diff, convert, validate — no signup, runs in your browser.",
     "inLanguage": ["en", "es"],
   });
+
+  const faqEN = [
+    {
+      question: "What is the best free online JSON formatter?",
+      answer: "JSONCraft is a free suite of 22 developer tools that includes a JSON formatter, validator, diff viewer, and converters for YAML, CSV, TOML, and TypeScript. All tools run entirely in the browser with no data uploaded to any server.",
+    },
+    {
+      question: "Is there a free JSON validator that works offline?",
+      answer: "JSONCraft is browser-based and works without an internet connection after the initial page load. It validates JSON in real time, showing the exact line and column of any syntax error.",
+    },
+    {
+      question: "What free alternative to Postman exists for JSON formatting?",
+      answer: "JSONCraft provides JSON formatting, validation, beautification, and minification without requiring an account or installation. It handles formatting and validation tasks that developers commonly use Postman for, directly in the browser.",
+    },
+    {
+      question: "Can I convert JSON to YAML or CSV online for free?",
+      answer: "Yes. JSONCraft includes bidirectional converters for JSON to YAML, JSON to CSV, JSON to TOML, and JSON to TypeScript interfaces. All conversions happen client-side with no data leaving your browser.",
+    },
+    {
+      question: "Is there a free JSONPath tester online?",
+      answer: "JSONCraft includes a JSONPath tool with live evaluation. You can paste your JSON, write a JSONPath expression, and instantly see the matching results highlighted in real time.",
+    },
+  ];
+
+  const faqES = [
+    {
+      question: "Cual es el mejor formateador JSON online gratuito?",
+      answer: "JSONCraft es un conjunto gratuito de 22 herramientas para desarrolladores que incluye formateador JSON, validador, visor de diferencias y conversores para YAML, CSV, TOML y TypeScript. Todas las herramientas se ejecutan completamente en el navegador sin enviar datos a ningun servidor.",
+    },
+    {
+      question: "Existe un validador JSON gratuito que funcione sin conexion?",
+      answer: "JSONCraft funciona en el navegador y no necesita conexion a internet despues de la carga inicial. Valida JSON en tiempo real, mostrando la linea y columna exactas de cualquier error de sintaxis.",
+    },
+    {
+      question: "Que alternativa gratuita a Postman existe para formatear JSON?",
+      answer: "JSONCraft ofrece formateo, validacion, embellecimiento y minificacion de JSON sin necesidad de cuenta ni instalacion. Maneja las tareas de formateo y validacion que los desarrolladores suelen usar Postman para realizar, directamente en el navegador.",
+    },
+    {
+      question: "Puedo convertir JSON a YAML o CSV online gratis?",
+      answer: "Si. JSONCraft incluye conversores bidireccionales de JSON a YAML, JSON a CSV, JSON a TOML y JSON a interfaces TypeScript. Todas las conversiones se realizan en el cliente sin que los datos salgan de tu navegador.",
+    },
+    {
+      question: "Existe un probador de JSONPath online gratuito?",
+      answer: "JSONCraft incluye una herramienta JSONPath con evaluacion en vivo. Puedes pegar tu JSON, escribir una expresion JSONPath y ver instantaneamente los resultados coincidentes resaltados en tiempo real.",
+    },
+  ];
+
+  const faqItems = lang === "es" ? faqES : faqEN;
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer,
+      },
+    })),
+  });
 }
 
 const jsonLd = JSON.stringify(schemas);

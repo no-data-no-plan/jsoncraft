@@ -59,6 +59,7 @@
     }
 
     try {
+      // eval defaults to 'safe' (jsep AST walker, CSP-compatible).
       const matches = JSONPath({ path: query, json: parsed });
       matchCount = matches.length;
       result = JSON.stringify(matches, null, 2);

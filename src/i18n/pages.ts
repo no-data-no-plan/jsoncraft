@@ -14,7 +14,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   formatter: {
     en: {
       title: "JSON Formatter & Validator Online Free",
-      description: "Format, validate, beautify and minify JSON online for free. Real-time validation, multiple indent styles, drag-and-drop. 100% private.",
+      description: "JSONCraft is a free suite of 22 developer tools — JSON formatter, validator, diff viewer, and converters for YAML, CSV, TOML, and TypeScript — that run entirely in your browser with no data upload.",
       seoHeading: "Format, Validate & Beautify JSON Instantly",
       seoText: "Paste or upload your JSON to instantly format it with proper indentation, validate its syntax, or minify it for production. JSONCraft detects errors in real time and shows the exact line and column. Supports 2-space, 4-space, and tab indentation.",
       seoBlockHeading: "About this tool",
@@ -29,7 +29,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Formateador y Validador JSON Online Gratis",
-      description: "Formatea, valida, embellece y minifica JSON online gratis. Validaci\u00f3n en tiempo real, m\u00faltiples estilos de sangr\u00eda, arrastrar y soltar. 100% privado.",
+      description: "JSONCraft es un conjunto gratuito de 22 herramientas para desarrolladores — formateador JSON, validador, visor de diferencias y conversores para YAML, CSV, TOML y TypeScript — que se ejecutan completamente en tu navegador sin subir datos.",
       seoHeading: "Formatea, Valida y Embellece JSON al Instante",
       seoText: "Pega o sube tu JSON para formatearlo instant\u00e1neamente con la sangr\u00eda correcta, validar su sintaxis o minificarlo para producci\u00f3n. JSONCraft detecta errores en tiempo real y muestra la l\u00ednea y columna exactas. Soporta sangr\u00eda de 2 espacios, 4 espacios y tabulaciones.",
       seoBlockHeading: "Sobre esta herramienta",
