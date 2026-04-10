@@ -14,7 +14,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   formatter: {
     en: {
       title: "JSON Formatter & Validator Online Free",
-      description: "JSONCraft is a free suite of 22 developer tools — JSON formatter, validator, diff viewer, and converters for YAML, CSV, TOML, and TypeScript — that run entirely in your browser with no data upload.",
+      description: "JSONCraft is a free suite of 22 browser-based developer tools — JSON formatter, validator, diff, YAML/CSV/TOML converters. 100% client-side, no signup.",
       seoHeading: "Format, Validate & Beautify JSON Instantly",
       seoText: "Paste or upload your JSON to instantly format it with proper indentation, validate its syntax, or minify it for production. JSONCraft detects errors in real time and shows the exact line and column. Supports 2-space, 4-space, and tab indentation.",
       seoBlockHeading: "About this tool",
@@ -29,7 +29,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Formateador y Validador JSON Online Gratis",
-      description: "JSONCraft es un conjunto gratuito de 22 herramientas para desarrolladores — formateador JSON, validador, visor de diferencias y conversores para YAML, CSV, TOML y TypeScript — que se ejecutan completamente en tu navegador sin subir datos.",
+      description: "JSONCraft es un conjunto gratuito de 22 herramientas para desarrolladores — formateador, validador, diff, conversores YAML/CSV/TOML. 100% en navegador.",
       seoHeading: "Formatea, Valida y Embellece JSON al Instante",
       seoText: "Pega o sube tu JSON para formatearlo instant\u00e1neamente con la sangr\u00eda correcta, validar su sintaxis o minificarlo para producci\u00f3n. JSONCraft detecta errores en tiempo real y muestra la l\u00ednea y columna exactas. Soporta sangr\u00eda de 2 espacios, 4 espacios y tabulaciones.",
       seoBlockHeading: "Sobre esta herramienta",
@@ -46,7 +46,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   diff: {
     en: {
       title: "JSON Diff \u2014 Compare JSON Online Side by Side",
-      description: "Compare two JSON documents online for free. See additions, deletions, and changes highlighted side by side. Semantic comparison \u2014 key order doesn't matter. No upload needed.",
+      description: "Compare two JSON documents online for free. See additions, deletions, and changes side by side. Real-time diffing, 100% in your browser.",
       seoHeading: "Compare JSON Documents Side by Side",
       seoText: "Paste two JSON documents to instantly see what changed. JSONCraft compares semantically, so different key ordering won't produce false differences. Additions are highlighted in green, deletions in red, with a summary of total changes.",
       seoBlockHeading: "About JSON Diff",
@@ -78,7 +78,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   viewer: {
     en: {
       title: "JSON Tree Viewer Online \u2014 Interactive JSON Explorer",
-      description: "Explore JSON as an interactive collapsible tree online. Navigate complex nested structures, see data types at a glance, and copy JSONPath expressions. Free, fast, private.",
+      description: "Explore JSON as an interactive collapsible tree. Navigate complex nested structures, expand and collapse nodes instantly. Free, browser-based.",
       seoHeading: "Explore JSON as an Interactive Tree",
       seoText: "Visualize any JSON structure as a collapsible tree. Navigate deeply nested data, see types and array lengths at a glance, and click any node to copy its JSONPath expression. Handles large JSON files efficiently.",
       seoBlockHeading: "About JSON Tree Viewer",
@@ -93,7 +93,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Visor de \u00c1rbol JSON Online \u2014 Explorador JSON Interactivo",
-      description: "Explora JSON como un \u00e1rbol interactivo colapsable online. Navega estructuras anidadas complejas, ve tipos de datos de un vistazo y copia expresiones JSONPath. Gratis, r\u00e1pido, privado.",
+      description: "Explora JSON como árbol interactivo colapsable. Navega estructuras anidadas complejas, expande y colapsa nodos al instante. Gratis, en navegador.",
       seoHeading: "Explora JSON como un \u00c1rbol Interactivo",
       seoText: "Visualiza cualquier estructura JSON como un \u00e1rbol colapsable. Navega datos profundamente anidados, ve tipos y longitudes de arrays de un vistazo, y haz clic en cualquier nodo para copiar su expresi\u00f3n JSONPath. Maneja archivos JSON grandes de forma eficiente.",
       seoBlockHeading: "Sobre el Visor de \u00c1rbol JSON",
@@ -142,7 +142,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   jsonpath: {
     en: {
       title: "JSONPath Tester Online \u2014 Query & Filter JSON Data",
-      description: "Test JSONPath expressions online with instant results. Evaluate queries against your JSON data, see match counts, and learn JSONPath syntax with built-in examples. Free JSONPath playground.",
+      description: "Test JSONPath expressions online with instant results. Evaluate queries, see match counts, and learn JSONPath with built-in examples. Free playground.",
       seoHeading: "Test JSONPath Expressions Interactively",
       seoText: "Evaluate JSONPath queries against your JSON data in real time. See matching results instantly with a count of matches. Includes built-in examples for filters, wildcards, recursive descent, and more to help you learn the syntax.",
       seoBlockHeading: "About JSONPath Tester",
@@ -157,7 +157,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Tester JSONPath Online \u2014 Consultar y Filtrar Datos JSON",
-      description: "Prueba expresiones JSONPath online con resultados instant\u00e1neos. Eval\u00faa consultas contra tus datos JSON, ve el conteo de coincidencias y aprende la sintaxis JSONPath con ejemplos integrados.",
+      description: "Prueba expresiones JSONPath online con resultados instantáneos. Evalúa consultas, ve el conteo de coincidencias y aprende la sintaxis. Playground gratis.",
       seoHeading: "Prueba Expresiones JSONPath de Forma Interactiva",
       seoText: "Eval\u00faa consultas JSONPath contra tus datos JSON en tiempo real. Ve los resultados de coincidencias instant\u00e1neamente con un conteo. Incluye ejemplos integrados para filtros, comodines, descenso recursivo y m\u00e1s para ayudarte a aprender la sintaxis.",
       seoBlockHeading: "Sobre el Tester JSONPath",
@@ -174,7 +174,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   "yaml-to-json": {
     en: {
       title: "YAML to JSON Converter Online Free",
-      description: "Convert YAML to JSON online for free. Instant, accurate conversion with full YAML support including multi-document files, anchors, and nested structures. No data sent to servers.",
+      description: "Convert YAML to JSON online for free. Instant conversion with full YAML support — multi-document, anchors, nested structures. No data uploaded.",
       seoHeading: "Convert YAML to JSON Instantly",
       seoText: "Paste or upload your YAML configuration files to convert them to JSON format. Supports multi-document YAML, complex nested structures, and automatically detects if you paste the wrong format.",
       seoBlockHeading: "About YAML to JSON conversion",
@@ -203,7 +203,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Conversor JSON a YAML Online Gratis",
-      description: "Convierte JSON a YAML online gratis. Obt\u00e9n YAML limpio y legible con sangr\u00eda correcta. Perfecto para crear archivos de configuraci\u00f3n desde datos JSON. 100% del lado del cliente.",
+      description: "Convierte JSON a YAML online gratis. YAML limpio y legible con sangría correcta. Perfecto para crear archivos de configuración desde JSON.",
       seoHeading: "Convierte JSON a YAML Limpio",
       seoText: "Transforma tus datos JSON en YAML legible con sangr\u00eda limpia de 2 espacios. Ideal para crear archivos de configuraci\u00f3n desde respuestas de API JSON o convertir entre formatos de datos.",
       seoBlockHeading: "Sobre la conversi\u00f3n JSON a YAML",
@@ -214,7 +214,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   "json-to-csv": {
     en: {
       title: "JSON to CSV Converter Online \u2014 Export to Spreadsheet",
-      description: "Convert JSON arrays to CSV format online for free. Export JSON data to spreadsheet-friendly CSV. Handles nested objects with dot notation flattening. No upload to servers.",
+      description: "Convert JSON arrays to CSV online for free. Export JSON data to spreadsheet-friendly CSV with auto-flattening of nested fields. 100% client-side.",
       seoHeading: "Export JSON Data to CSV",
       seoText: "Convert JSON arrays to CSV for use in Excel, Google Sheets, and other data tools. Nested objects are flattened with dot notation (e.g. address.city) and API wrappers are auto-extracted.",
       seoBlockHeading: "About JSON to CSV conversion",
@@ -223,7 +223,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Conversor JSON a CSV Online \u2014 Exportar a Hoja de C\u00e1lculo",
-      description: "Convierte arrays JSON a formato CSV online gratis. Exporta datos JSON a CSV compatible con hojas de c\u00e1lculo. Maneja objetos anidados con aplanamiento por notaci\u00f3n de punto.",
+      description: "Convierte arrays JSON a CSV online gratis. Exporta datos JSON a CSV compatible con hojas de cálculo con aplanamiento automático. 100% en navegador.",
       seoHeading: "Exporta Datos JSON a CSV",
       seoText: "Convierte arrays JSON a CSV para usar en Excel, Google Sheets y otras herramientas de datos. Los objetos anidados se aplanan con notaci\u00f3n de punto (ej. address.city) y los wrappers de API se extraen autom\u00e1ticamente.",
       seoBlockHeading: "Sobre la conversi\u00f3n JSON a CSV",
@@ -243,7 +243,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Conversor CSV a JSON Online Gratis",
-      description: "Convierte datos CSV a JSON online gratis. Detecci\u00f3n autom\u00e1tica de cabeceras, inferencia de delimitadores y conversi\u00f3n de tipos. Transforma datos de hojas de c\u00e1lculo a JSON estructurado.",
+      description: "Convierte datos CSV a JSON online gratis. Detección automática de cabeceras, inferencia de tipos y previsualización instantánea. Sin subidas.",
       seoHeading: "Convierte Datos CSV de Hojas de C\u00e1lculo a JSON",
       seoText: "Transforma datos CSV y de hojas de c\u00e1lculo en JSON estructurado. Detecta autom\u00e1ticamente delimitadores, infiere tipos de datos (n\u00fameros, booleanos) y maneja casos especiales como JSON embebido en celdas.",
       seoBlockHeading: "Sobre la conversi\u00f3n CSV a JSON",
@@ -263,7 +263,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Conversor JSON a TOML Online Gratis",
-      description: "Convierte JSON a formato de configuraci\u00f3n TOML online gratis. Salida TOML limpia con secciones correctas y valores tipados. Maneja valores nulos y arrays mixtos autom\u00e1ticamente.",
+      description: "Convierte JSON a formato TOML online gratis. Salida TOML limpia con secciones, arrays y tablas anidadas. Ideal para archivos de configuración.",
       seoHeading: "Convierte JSON a Configuraci\u00f3n TOML",
       seoText: "Transforma datos JSON en formato de configuraci\u00f3n TOML. Los objetos anidados se convierten en secciones TOML, los valores tipados se preservan y las limitaciones espec\u00edficas de TOML como valores nulos y arrays mixtos se manejan autom\u00e1ticamente.",
       seoBlockHeading: "Sobre la conversi\u00f3n JSON a TOML",
@@ -274,7 +274,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   "toml-to-json": {
     en: {
       title: "TOML to JSON Converter Online Free",
-      description: "Convert TOML configuration files to JSON online for free. Full TOML v1.0 support with tables, arrays of tables, and all typed values. Instant conversion, no data sent to servers.",
+      description: "Convert TOML configuration files to JSON online. Full TOML v1.0 support with tables, arrays, and datetimes. Browser-based, no upload needed.",
       seoHeading: "Convert TOML Configuration to JSON",
       seoText: "Parse TOML configuration files and convert them to JSON. Supports all TOML v1.0 features including tables, arrays of tables, inline tables, and typed values like dates and integers.",
       seoBlockHeading: "About TOML to JSON conversion",
@@ -283,7 +283,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Conversor TOML a JSON Online Gratis",
-      description: "Convierte archivos de configuraci\u00f3n TOML a JSON online gratis. Soporte completo de TOML v1.0 con tablas, arrays de tablas y todos los valores tipados. Conversi\u00f3n instant\u00e1nea.",
+      description: "Convierte archivos TOML a JSON online gratis. Soporte completo de TOML v1.0 con tablas, arrays y datetimes. Sin subidas, en tu navegador.",
       seoHeading: "Convierte Configuraci\u00f3n TOML a JSON",
       seoText: "Analiza archivos de configuraci\u00f3n TOML y conv\u00edertelos a JSON. Soporta todas las caracter\u00edsticas de TOML v1.0 incluyendo tablas, arrays de tablas, tablas en l\u00ednea y valores tipados como fechas y enteros.",
       seoBlockHeading: "Sobre la conversi\u00f3n TOML a JSON",
@@ -308,7 +308,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Tester de Regex Online Gratis",
-      description: "Prueba expresiones regulares con coincidencias en tiempo real, grupos de captura y resultados resaltados. Playground de regex gratuito \u2014 se ejecuta completamente en tu navegador.",
+      description: "Prueba expresiones regulares con coincidencias en tiempo real, grupos de captura y resultados resaltados. Flags i/g/m/s/u/y. Playground gratis.",
       seoHeading: "Prueba Expresiones Regulares al Instante",
       seoText: "Introduce un patr\u00f3n regex y una cadena de prueba para ver las coincidencias resaltadas en tiempo real. Soporta todos los flags de regex de JavaScript (global, insensible a may\u00fasculas, multil\u00ednea, dotAll, unicode). Ve grupos de captura y posiciones de coincidencia.",
       seoBlockHeading: "Sobre esta herramienta",
@@ -397,7 +397,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
       ],
     },
     es: {
-      title: "Generador de Hash Online Gratis \u2014 MD5, SHA-1, SHA-256, SHA-512",
+      title: "Generador de Hash Online — MD5, SHA-1, SHA-256, SHA-512",
       description: "Genera hashes MD5, SHA-1, SHA-256, SHA-384 y SHA-512 desde cualquier texto. Generador de hash online gratuito usando Web Crypto API \u2014 se ejecuta en tu navegador.",
       seoHeading: "Genera Hashes Criptogr\u00e1ficos al Instante",
       seoText: "Pega cualquier texto para generar sus valores hash MD5, SHA-1, SHA-256, SHA-384 y SHA-512 simult\u00e1neamente. Usa la Web Crypto API nativa del navegador para hashes SHA. Tus datos nunca salen de tu navegador.",
@@ -488,7 +488,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Constructor de Expresiones Cron Online Gratis",
-      description: "Construye y prueba expresiones cron con un editor visual. Ve las pr\u00f3ximas 5 ejecuciones programadas, usa presets r\u00e1pidos o escribe expresiones manualmente. Generador cron gratuito.",
+      description: "Construye y prueba expresiones cron con un editor visual. Ve las próximas 5 ejecuciones programadas con descripciones en lenguaje natural.",
       seoHeading: "Construye Expresiones Cron Visualmente",
       seoText: "Crea programaciones cron con un constructor visual o escribe expresiones directamente. Ve las pr\u00f3ximas 5 ejecuciones programadas en tiempo real. Presets r\u00e1pidos para programaciones comunes como cada 5 minutos, diario, semanal y mensual.",
       seoBlockHeading: "Sobre esta herramienta",
@@ -615,7 +615,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Validador YAML Online Gratis",
-      description: "Valida la sintaxis YAML online con mensajes de error detallados y n\u00fameros de l\u00ednea. Ve la salida JSON parseada. Soporta YAML multi-documento. Gratuito, privado, en el navegador.",
+      description: "Valida la sintaxis YAML online con mensajes de error detallados y números de línea. Ve exactamente dónde está el problema. 100% en navegador.",
       seoHeading: "Valida la Sintaxis YAML al Instante",
       seoText: "Pega YAML para validar su sintaxis instant\u00e1neamente. Ve posiciones exactas de errores con n\u00fameros de l\u00ednea y columna. Visualiza el resultado parseado como JSON. Soporta archivos YAML multi-documento separados por delimitadores ---.",
       seoBlockHeading: "Sobre la validaci\u00f3n de YAML",

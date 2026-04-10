@@ -29,6 +29,24 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: item.answer },
   })),
 };
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "JSONCraft vs JSONLint: Validators and Formatters Compared",
+  description: "JSONCraft and JSONLint for JSON validation — error reporting, privacy model, additional tools, and user experience compared.",
+  image: "https://jsoncraft.dev/og-image.png",
+  author: { "@type": "Organization", name: "JSONCraft", url: "https://jsoncraft.dev" },
+  publisher: {
+    "@type": "Organization",
+    name: "JSONCraft",
+    logo: { "@type": "ImageObject", url: "https://jsoncraft.dev/og-image.png" },
+  },
+  datePublished: "2026-04-09",
+  dateModified: "2026-04-10",
+  mainEntityOfPage: "https://jsoncraft.dev/vs-jsonlint/",
+  inLanguage: "en",
+});
 ---
 
 <Layout
@@ -37,6 +55,7 @@ const faqSchema = {
   activeToolId="compare"
   lang="en"
 >
+  <script type="application/ld+json" set:html={articleJsonLd} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <div class="flex-1 overflow-auto px-6 py-8">
     <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">

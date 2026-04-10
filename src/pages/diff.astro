@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import JsonDiff from "../components/JsonDiff.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import CompareLinks from "../components/CompareLinks.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("diff", "en")!;
@@ -12,4 +13,5 @@ const seo = getPageSeo("diff", "en")!;
   <JsonDiff client:load />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "viewer", "jsonpath"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
+  <CompareLinks lang="en" competitors={["jsonlint", "json-editor-online", "codebeautify"]} />
 </Layout>

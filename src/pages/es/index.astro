@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import JsonFormatter from "../../components/JsonFormatter.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
+import CompareLinks from "../../components/CompareLinks.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("formatter", "es")!;
@@ -27,4 +28,5 @@ const seo = getPageSeo("formatter", "es")!;
     features={seo.seoFeatures}
     lang="es"
   />
+  <CompareLinks lang="es" competitors={["codebeautify", "devtoys", "json-crack", "json-editor-online", "jsonlint"]} />
 </Layout>

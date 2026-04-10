@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import JsonSchemaValidator from "../components/JsonSchemaValidator.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import CompareLinks from "../components/CompareLinks.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("json-schema-validator", "en")!;
@@ -12,4 +13,5 @@ const seo = getPageSeo("json-schema-validator", "en")!;
   <JsonSchemaValidator client:load />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "viewer", "yaml-validator"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
+  <CompareLinks lang="en" competitors={["jsonlint", "codebeautify"]} />
 </Layout>

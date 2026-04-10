@@ -7,6 +7,7 @@ import { tools } from "../lib/tools";
 import type { Lang } from "../i18n/index";
 import { getAlternatePath } from "../i18n/index";
 import { t } from "../i18n/common";
+import { getHowTo } from "../i18n/howto";
 
 interface Props {
   title: string;
@@ -22,31 +23,84 @@ const canonicalUrl = `https://jsoncraft.dev${pathWithTrailing}`;
 const alternatePath = getAlternatePath(Astro.url.pathname);
 const alternateUrl = `https://jsoncraft.dev${alternatePath.endsWith('/') ? alternatePath : alternatePath + '/'}`;
 const activeTool = tools.find((t) => t.id === activeToolId);
-const pageKeywords = activeTool?.keywords.join(", ") || "";
 
 const isHome = activeToolId === "formatter" && (Astro.url.pathname === "/" || Astro.url.pathname === "/es" || Astro.url.pathname === "/es/");
 
-const schemas: object[] = [
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": title,
-    "url": canonicalUrl,
-    "description": description,
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "isPartOf": { "@type": "WebApplication", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
-  },
-  {
+// Page-type detection for schema-appropriate markup:
+// - /privacy-policy/ → WebPage (NOT SoftwareApplication, activeToolId="" is passed)
+// - /vs-*/ comparison pages → WebPage (each page adds Article schema inline)
+// - All other tool pages → SoftwareApplication
+const normalizedPath = Astro.url.pathname.replace(/^\/es\//, '/').replace(/\/$/, '');
+const isLegalPage = normalizedPath === "/privacy-policy";
+const isComparePage = normalizedPath.startsWith("/vs-");
+
+// OpenGraph type: website for home/legal, article for tool and compare pages
+const ogType = (isHome || isLegalPage) ? "website" : "article";
+const ogLocale = lang === "es" ? "es_ES" : "en_US";
+const ogLocaleAlternate = lang === "es" ? "en_US" : "es_ES";
+
+type SchemaObject = Record<string, unknown>;
+
+const primarySchema: SchemaObject = (isLegalPage || isComparePage)
+  ? {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": title,
+      "url": canonicalUrl,
+      "description": description,
+      "inLanguage": lang,
+      "isPartOf": { "@type": "WebSite", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": title,
+      "url": canonicalUrl,
+      "description": description,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "isPartOf": { "@type": "WebApplication", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+    };
+
+const schemas: SchemaObject[] = [primarySchema];
+
+// BreadcrumbList: only emit for non-home pages (home with 1 item is invalid
+// for rich results; Google requires ≥2 items in BreadcrumbList). position 1
+// URL uses explicit trailing slash to match canonical.
+if (!isHome) {
+  schemas.push({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "JSONCraft", "item": `https://jsoncraft.dev${lang === "es" ? "/es" : ""}` },
-      ...(!isHome ? [{ "@type": "ListItem", "position": 2, "name": title, "item": canonicalUrl }] : []),
+      { "@type": "ListItem", "position": 1, "name": "JSONCraft", "item": `https://jsoncraft.dev${lang === "es" ? "/es/" : "/"}` },
+      { "@type": "ListItem", "position": 2, "name": title, "item": canonicalUrl },
     ],
-  },
-];
+  });
+}
+
+// HowTo schema for tool pages — eligible for Google HowTo rich results.
+// Skip for legal pages, compare pages, and home (home has FAQPage instead).
+// HowTo steps are defined per tool in src/i18n/howto.ts.
+if (!isLegalPage && !isComparePage && !isHome) {
+  const howto = getHowTo(activeToolId, lang);
+  if (howto) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": howto.name,
+      "description": description,
+      "inLanguage": lang,
+      "tool": [{ "@type": "HowToTool", "name": `JSONCraft ${title.split(' — ')[0].split(' | ')[0]}` }],
+      "step": howto.steps.map((s, i) => ({
+        "@type": "HowToStep",
+        "position": i + 1,
+        "name": s.name,
+        "text": s.text,
+      })),
+    });
+  }
+}
 
 if (isHome) {
   schemas.push({
@@ -56,6 +110,18 @@ if (isHome) {
     "url": "https://jsoncraft.dev",
     "description": "Free online JSON, YAML, CSV, TOML tools. Format, diff, convert, validate — no signup, runs in your browser.",
     "inLanguage": ["en", "es"],
+  });
+
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "JSONCraft",
+    "url": "https://jsoncraft.dev",
+    "logo": "https://jsoncraft.dev/og-image.png",
+    "description": "Free, privacy-first suite of 22 developer tools for JSON, YAML, CSV, TOML, XML, and more. Format, diff, convert, validate — 100% client-side in your browser.",
+    "sameAs": [
+      "https://buymeacoffee.com/allopen",
+    ],
   });
 
   const faqEN = [
@@ -128,22 +194,31 @@ const jsonLd = JSON.stringify(schemas);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    {pageKeywords && <meta name="keywords" content={pageKeywords} />}
     <meta name="theme-color" content="#0f172a" />
     <meta name="google-adsense-account" content="ca-pub-8761907366448308" />
+
+    <!-- Preconnect to AdSense origins to shave ~50-100ms off the first ad request -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <link rel="dns-prefetch" href="https://adservice.google.com" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={lang === "en" ? canonicalUrl : alternateUrl} />
     <link rel="alternate" hreflang="es" href={lang === "es" ? canonicalUrl : alternateUrl} />
     <link rel="alternate" hreflang="x-default" href={lang === "en" ? canonicalUrl : alternateUrl} />
+
+    <!-- Preload critical font (Inter latin) to improve LCP -->
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/fonts/fonts.css" />
     <title>{fullTitle}</title>
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlternate} />
     <meta property="og:site_name" content="JSONCraft" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content="https://jsoncraft.dev/og-image.png" />

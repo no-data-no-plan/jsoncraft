@@ -29,6 +29,24 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: item.answer },
   })),
 };
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "JSONCraft vs JSON Editor Online: Editores Comparados",
+  description: "Comparación detallada de JSONCraft y JSON Editor Online — funciones, privacidad, diseño de interfaz y herramientas disponibles.",
+  image: "https://jsoncraft.dev/og-image.png",
+  author: { "@type": "Organization", name: "JSONCraft", url: "https://jsoncraft.dev" },
+  publisher: {
+    "@type": "Organization",
+    name: "JSONCraft",
+    logo: { "@type": "ImageObject", url: "https://jsoncraft.dev/og-image.png" },
+  },
+  datePublished: "2026-04-09",
+  dateModified: "2026-04-10",
+  mainEntityOfPage: "https://jsoncraft.dev/es/vs-json-editor-online/",
+  inLanguage: "es",
+});
 ---
 
 <Layout
@@ -37,6 +55,7 @@ const faqSchema = {
   activeToolId="compare"
   lang="es"
 >
+  <script type="application/ld+json" set:html={articleJsonLd} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <div class="flex-1 overflow-auto px-6 py-8">
     <div class="max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-primary);">

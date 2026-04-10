@@ -7,6 +7,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/" />
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -16,6 +17,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/diff/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/diff/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/diff/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -25,6 +27,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/viewer/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/viewer/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/viewer/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -34,6 +37,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/graph/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/graph/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/graph/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -43,6 +47,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/jsonpath/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/jsonpath/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/jsonpath/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -52,6 +57,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-to-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-to-json/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -61,6 +67,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-yaml/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-yaml/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-yaml/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -70,6 +77,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-csv/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-csv/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-csv/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -79,6 +87,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/csv-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/csv-to-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/csv-to-json/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -88,6 +97,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-toml/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-toml/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-toml/" />
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -97,6 +107,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/toml-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/toml-to-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/toml-to-json/" />
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -106,6 +117,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/regex/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/regex/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/regex/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -115,6 +127,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/base64/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/base64/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/base64/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -124,6 +137,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/url-encode/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/url-encode/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/url-encode/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -133,6 +147,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/hash/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/hash/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/hash/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -142,6 +157,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/uuid/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/uuid/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/uuid/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -151,6 +167,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/timestamp/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/timestamp/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/timestamp/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -160,6 +177,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/cron/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/cron/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/cron/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -169,6 +187,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-typescript/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-typescript/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-typescript/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -178,6 +197,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/xml-formatter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/xml-formatter/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/xml-formatter/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -187,6 +207,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-html-table/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-html-table/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-html-table/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -196,6 +217,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-validator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-validator/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-validator/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -205,6 +227,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-schema-validator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-schema-validator/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-schema-validator/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -214,6 +237,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/" />
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -223,6 +247,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/diff/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/diff/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/diff/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -232,6 +257,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/viewer/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/viewer/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/viewer/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -241,6 +267,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/graph/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/graph/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/graph/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -250,6 +277,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/jsonpath/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/jsonpath/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/jsonpath/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -259,6 +287,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-to-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-to-json/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -268,6 +297,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-yaml/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-yaml/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-yaml/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -277,6 +307,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-csv/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-csv/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-csv/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -286,6 +317,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/csv-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/csv-to-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/csv-to-json/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -295,6 +327,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-toml/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-toml/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-toml/" />
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -304,6 +337,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/toml-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/toml-to-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/toml-to-json/" />
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -313,6 +347,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/regex/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/regex/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/regex/" />
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -322,6 +357,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/base64/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/base64/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/base64/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -331,6 +367,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/url-encode/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/url-encode/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/url-encode/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -340,6 +377,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/hash/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/hash/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/hash/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -349,6 +387,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/uuid/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/uuid/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/uuid/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -358,6 +397,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/timestamp/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/timestamp/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/timestamp/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -367,6 +407,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/cron/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/cron/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/cron/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -376,6 +417,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-typescript/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-typescript/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-typescript/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -385,6 +427,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/xml-formatter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/xml-formatter/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/xml-formatter/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -394,6 +437,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-to-html-table/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-to-html-table/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-to-html-table/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -403,6 +447,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/yaml-validator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/yaml-validator/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/yaml-validator/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -412,6 +457,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/json-schema-validator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/json-schema-validator/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/json-schema-validator/" />
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -422,6 +468,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-codebeautify/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-codebeautify/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-codebeautify/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -431,6 +478,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-editor-online/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-editor-online/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-editor-online/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -440,6 +488,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-jsonlint/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-jsonlint/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-jsonlint/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -449,6 +498,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-devtoys/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-devtoys/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-devtoys/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -458,6 +508,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-crack/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-crack/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-crack/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -467,6 +518,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-codebeautify/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-codebeautify/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-codebeautify/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -476,6 +528,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-editor-online/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-editor-online/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-editor-online/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -485,6 +538,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-jsonlint/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-jsonlint/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-jsonlint/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -494,6 +548,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-devtoys/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-devtoys/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-devtoys/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
@@ -503,6 +558,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/vs-json-crack/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/vs-json-crack/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/vs-json-crack/" />
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2026-04-10</lastmod>
   </url>
