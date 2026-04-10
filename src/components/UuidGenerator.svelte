@@ -65,7 +65,7 @@
   </div>
 
   <div class="flex-1 overflow-auto p-3">
-    <div class="space-y-1">
+    <div class="space-y-1" aria-live="polite">
       {#each uuids as uuid}
         <div class="flex items-center gap-2 group">
           <code class="flex-1 p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-sm text-[var(--color-text-primary)] select-all">

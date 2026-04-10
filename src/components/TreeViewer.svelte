@@ -141,8 +141,8 @@
     <div
       class="flex items-center gap-1 py-0.5 px-1 rounded hover:bg-[var(--color-bg-tertiary)] group cursor-default"
       tabindex={isExpandable ? 0 : -1}
-      on:click={() => isExpandable && togglePath(path)}
-      on:keydown={(e) => { if (isExpandable && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); togglePath(path); } }}
+      onclick={() => isExpandable && togglePath(path)}
+      onkeydown={(e) => { if (isExpandable && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); togglePath(path); } }}
     >
       {#if isExpandable}
         <span class="w-4 text-center text-xs text-[var(--color-text-muted)] select-none transition-transform"
@@ -175,7 +175,7 @@
 
       <button
         class="ml-auto opacity-0 group-hover:opacity-100 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)]"
-        on:click|stopPropagation={() => copyPath(path)}
+        onclick={(e) => { e.stopPropagation(); copyPath(path); }}
         title={tt("viewer", lang, "copyPath")}
       >
         {tt("viewer", lang, "copyPath")}
@@ -193,7 +193,7 @@
           <div style="padding-left: {(depth + 1) * 16}px">
             <button
               class="text-xs text-[var(--color-accent)] hover:underline py-1"
-              on:click|stopPropagation={() => showMore(path)}
+              onclick={() => showMore(path)}
             >
               {tt("viewer", lang, "showMore")} ({items.length - limit} {tt("viewer", lang, "remaining")})
             </button>
@@ -208,7 +208,7 @@
           <div style="padding-left: {(depth + 1) * 16}px">
             <button
               class="text-xs text-[var(--color-accent)] hover:underline py-1"
-              on:click|stopPropagation={() => showMore(path)}
+              onclick={() => showMore(path)}
             >
               {tt("viewer", lang, "showMore")} ({entries.length - limit} {tt("viewer", lang, "remaining")})
             </button>
@@ -225,28 +225,30 @@
     class="flex items-center gap-2 px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
   >
     <button
-      on:click={expandAll}
+      onclick={expandAll}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
       {tt("viewer", lang, "expandAll")}
     </button>
     <button
-      on:click={collapseAll}
+      onclick={collapseAll}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {tt("viewer", lang, "collapseAll")}
     </button>
     <button
-      on:click={loadSample}
+      onclick={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "sample")}
     </button>
+    <span aria-live="polite">
     {#if processing}
       <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "parsing")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
+    </span>
   </div>
 
   <!-- Content -->
@@ -285,7 +287,7 @@
                 {#if parsed.length > rootLimit}
                   <button
                     class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
-                    on:click={() => showMore("$")}
+                    onclick={() => showMore("$")}
                   >
                     {tt("viewer", lang, "showMore")} ({parsed.length - rootLimit} {tt("viewer", lang, "remaining")})
                   </button>
@@ -303,7 +305,7 @@
                 {#if rootEntries.length > rootLimit}
                   <button
                     class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
-                    on:click={() => showMore("$")}
+                    onclick={() => showMore("$")}
                   >
                     {tt("viewer", lang, "showMore")} ({rootEntries.length - rootLimit} {tt("viewer", lang, "remaining")})
                   </button>

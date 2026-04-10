@@ -157,37 +157,37 @@
   }
 </script>
 
-<div class="flex flex-col h-full" on:drop={handleDrop} on:dragover={handleDragOver} role="application">
+<div class="flex flex-col h-full" ondrop={handleDrop} ondragover={handleDragOver}>
   <!-- Toolbar -->
   <div
     class="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
   >
     <button
-      on:click={format}
+      onclick={format}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
       {t(lang, "format")}
     </button>
     <button
-      on:click={minify}
+      onclick={minify}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "minify")}
     </button>
     <button
-      on:click={handleUpload}
+      onclick={handleUpload}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "upload")}
     </button>
     <button
-      on:click={clear}
+      onclick={clear}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "clear")}
     </button>
     <button
-      on:click={handleSample}
+      onclick={handleSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "sample")}
@@ -198,7 +198,7 @@
       <select
         id="indent-select"
         bind:value={indent}
-        on:change={() => handleInput(input)}
+        onchange={() => handleInput(input)}
         class="bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] text-xs rounded px-2 py-1 border border-[var(--color-border)]"
       >
         <option value={2}>{tt("formatter", lang, "spaces2")}</option>
@@ -208,11 +208,12 @@
     </div>
 
     <!-- Status indicator -->
+    <span aria-live="polite">
     {#if processing}
       <span class="text-xs text-[var(--color-accent)] animate-pulse">{t(lang, "processing")}</span>
     {:else if status === "valid"}
       <span class="flex items-center gap-1 text-xs text-[var(--color-success)]">
-        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path
             fill-rule="evenodd"
             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -223,7 +224,7 @@
       </span>
     {:else if status === "error"}
       <span class="flex items-center gap-1 text-xs text-[var(--color-error)]" title={errorMsg}>
-        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path
             fill-rule="evenodd"
             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -233,6 +234,7 @@
         {errorMsg}
       </span>
     {/if}
+    </span>
   </div>
 
   <!-- Editor panels -->
@@ -242,7 +244,7 @@
       <div class="flex items-center justify-between mb-1 px-1">
         <span class="text-xs text-[var(--color-text-muted)]">{t(lang, "input")}</span>
         <button
-          on:click={() => copyText(input)}
+          onclick={() => copyText(input)}
           class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
           title={tt("formatter", lang, "copyInput")}
         >
@@ -268,14 +270,14 @@
         <span class="text-xs text-[var(--color-text-muted)]">{t(lang, "output")}</span>
         <div class="flex items-center gap-2">
           <button
-            on:click={() => copyText(output)}
+            onclick={() => copyText(output)}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
             title={tt("formatter", lang, "copyOutput")}
           >
             {t(lang, "copy")}
           </button>
           <button
-            on:click={() => output && downloadFile(output, "formatted.json")}
+            onclick={() => output && downloadFile(output, "formatted.json")}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
             title={tt("formatter", lang, "downloadOutput")}
           >

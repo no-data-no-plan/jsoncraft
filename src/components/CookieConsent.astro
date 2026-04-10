@@ -23,7 +23,7 @@ const text = lang === "es"
     };
 ---
 
-<div id="cookie-banner" class="hidden fixed bottom-0 left-0 right-0 z-[9999] p-3 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)] shadow-lg" role="dialog" aria-label="Cookie consent">
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[9999] p-3 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)] shadow-lg" style="display: none;" role="dialog" aria-label="Cookie consent">
   <div class="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-3 text-xs text-[var(--color-text-secondary)]">
     <p class="flex-1">
       {text.message}
@@ -47,20 +47,20 @@ const text = lang === "es"
   var banner = document.getElementById("cookie-banner");
 
   if (consent === null) {
-    if (banner) banner.classList.remove("hidden");
+    if (banner) banner.style.display = "block";
   } else if (consent === "accepted") {
     loadAdsense();
   }
 
   document.getElementById("cookie-accept")?.addEventListener("click", function() {
     localStorage.setItem("cookie-consent", "accepted");
-    if (banner) banner.classList.add("hidden");
+    if (banner) banner.style.display = "none";
     loadAdsense();
   });
 
   document.getElementById("cookie-reject")?.addEventListener("click", function() {
     localStorage.setItem("cookie-consent", "rejected");
-    if (banner) banner.classList.add("hidden");
+    if (banner) banner.style.display = "none";
   });
 
   function loadAdsense() {

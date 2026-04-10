@@ -114,34 +114,36 @@
     class="flex items-center gap-2 px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
   >
     <button
-      on:click={compare}
+      onclick={compare}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
       {t(lang, "compare")}
     </button>
     <button
-      on:click={swap}
+      onclick={swap}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "swap")}
     </button>
     <button
-      on:click={clear}
+      onclick={clear}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "clear")}
     </button>
     <button
-      on:click={loadSample}
+      onclick={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "sample")}
     </button>
+    <span aria-live="polite">
     {#if processing}
       <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "comparing")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
+    </span>
   </div>
 
   <!-- Panels -->
@@ -170,6 +172,7 @@
   {#if diffResult.length > 0}
     <div
       class="border-t border-[var(--color-border)] max-h-80 overflow-auto bg-[var(--color-bg-secondary)]"
+      aria-live="polite"
     >
       <div class="text-xs text-[var(--color-text-muted)] px-4 py-1 border-b border-[var(--color-border)] flex items-center justify-between">
         {#if hasDifferences}

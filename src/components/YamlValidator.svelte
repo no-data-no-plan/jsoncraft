@@ -89,11 +89,13 @@ logging:
     <button onclick={upload} class="px-2 py-1 text-xs rounded bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "upload")}</button>
     <button onclick={copySample} class="px-2 py-1 text-xs rounded bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "sample")}</button>
     <button onclick={() => { input = ""; status = "idle"; errorMsg = ""; parsedPreview = ""; docCount = 0; }} class="px-2 py-1 text-xs rounded bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "clear")}</button>
+    <span aria-live="polite">
     {#if status === "valid"}
       <span class="ml-2 text-xs text-green-400">{tt("yamlValidator", lang, "validYaml")} ({docCount} {docCount === 1 ? tt("yamlValidator", lang, "document") : tt("yamlValidator", lang, "documents")})</span>
     {:else if status === "error"}
       <span class="ml-2 text-xs text-red-400">{tt("yamlValidator", lang, "invalidYaml")}</span>
     {/if}
+    </span>
     <div class="ml-auto flex items-center gap-2">
       {#if parsedPreview}
         <button onclick={copyParsed} class="px-2 py-1 text-xs rounded bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "copy")} JSON</button>
@@ -102,7 +104,7 @@ logging:
   </div>
 
   {#if errorMsg}
-    <div class="px-3 py-1.5 text-xs text-red-400 bg-red-500/10 border-b border-[var(--color-border)]">{errorMsg}</div>
+    <div class="px-3 py-1.5 text-xs text-red-400 bg-red-500/10 border-b border-[var(--color-border)]" aria-live="polite">{errorMsg}</div>
   {/if}
 
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">

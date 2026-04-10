@@ -124,6 +124,7 @@
       bind:value={pattern}
       oninput={() => debouncedTest()}
       placeholder={tt("regex", lang, "enterPattern")}
+      aria-label={tt("regex", lang, "enterPattern")}
       class="flex-1 min-w-[200px] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] px-2 py-1 rounded text-sm font-mono"
     />
     <span class="text-sm text-[var(--color-text-muted)] font-mono">/</span>
@@ -137,13 +138,13 @@
         >{f}</button>
       {/each}
     </div>
-    <span class="text-xs text-[var(--color-text-muted)] ml-auto">
+    <span class="text-xs text-[var(--color-text-muted)] ml-auto" aria-live="polite">
       {matches.length} {matches.length !== 1 ? tt("regex", lang, "matches") : tt("regex", lang, "matchSingular")}
     </span>
   </div>
 
   {#if error}
-    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]">
+    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]" aria-live="polite">
       {error}
     </div>
   {/if}

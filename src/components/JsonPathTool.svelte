@@ -123,28 +123,30 @@
         id="jsonpath-input"
         type="text"
         bind:value={query}
-        on:input={debouncedEvaluate}
+        oninput={debouncedEvaluate}
         class="flex-1 min-w-0 px-3 py-1.5 rounded text-sm font-mono bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] border border-[var(--color-border)] focus:border-[var(--color-accent)] focus:outline-none"
         placeholder="$.path.to.value"
       />
     </div>
     <button
-      on:click={evaluate}
+      onclick={evaluate}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
       {t(lang, "evaluate")}
     </button>
     <button
-      on:click={loadSample}
+      onclick={loadSample}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "sample")}
     </button>
+    <span aria-live="polite">
     {#if processing}
       <span class="text-xs text-[var(--color-accent)] animate-pulse">{t(lang, "evaluating")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)]">{error}</span>
     {/if}
+    </span>
   </div>
 
   <!-- Examples -->
@@ -154,7 +156,7 @@
     <span class="text-xs text-[var(--color-text-muted)]">{tt("jsonpath", lang, "examples")}</span>
     {#each examples as ex}
       <button
-        on:click={() => setQuery(ex.path)}
+        onclick={() => setQuery(ex.path)}
         class="px-2 py-0.5 rounded text-xs font-mono bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] hover:text-[var(--color-text-primary)] transition-colors"
       >
         {ex.label}

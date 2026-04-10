@@ -231,9 +231,11 @@
       </select>
     {/if}
 
+    <span aria-live="polite">
     {#if computing}
       <span class="text-xs text-[var(--color-accent)] ml-auto">{tt("hash", lang, "hashing")}</span>
     {/if}
+    </span>
   </div>
 
   {#if mode === "hmac"}
@@ -250,7 +252,7 @@
   {/if}
 
   {#if errorMsg}
-    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]">{errorMsg}</div>
+    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]" aria-live="polite">{errorMsg}</div>
   {/if}
 
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
@@ -279,7 +281,7 @@
     <div class="w-px bg-[var(--color-border)] hidden lg:block"></div>
     <div class="flex-1 flex flex-col min-h-0 overflow-auto">
       <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">{tt("hash", lang, "hashes")}</div>
-      <div class="p-3 space-y-3">
+      <div class="p-3 space-y-3" aria-live="polite">
         {#each hashes as h}
           <div class="space-y-1">
             <div class="flex items-center justify-between">

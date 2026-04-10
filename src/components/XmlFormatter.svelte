@@ -171,7 +171,7 @@
   </div>
 
   {#if error}
-    <div class="px-3 py-1.5 text-xs text-red-400 bg-red-500/10 border-b border-[var(--color-border)]">{error}</div>
+    <div class="px-3 py-1.5 text-xs text-red-400 bg-red-500/10 border-b border-[var(--color-border)]" aria-live="polite">{error}</div>
   {/if}
 
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">

@@ -506,7 +506,7 @@
       {tt("graph", lang, "fitView")}
     </button>
 
-    <div class="ml-auto flex items-center gap-3 text-xs text-[var(--color-text-muted)]">
+    <div class="ml-auto flex items-center gap-3 text-xs text-[var(--color-text-muted)]" aria-live="polite">
       {#if processing}
         <span class="text-[var(--color-accent)] animate-pulse">{t(lang, "parsing")}</span>
       {:else if error}
@@ -632,6 +632,10 @@
                   <g
                     transform="translate({node.width / 2}, {node.height})"
                     onclick={(e) => { e.stopPropagation(); toggleCollapse(node.id); }}
+                    onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggleCollapse(node.id); } }}
+                    role="button"
+                    tabindex="0"
+                    aria-label={node.collapsed ? (lang === 'es' ? 'Expandir nodo' : 'Expand node') : (lang === 'es' ? 'Contraer nodo' : 'Collapse node')}
                     style="cursor: pointer;"
                   >
                     <circle

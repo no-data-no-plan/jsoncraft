@@ -95,7 +95,7 @@
   </div>
 
   {#if error}
-    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]">{error}</div>
+    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]" aria-live="polite">{error}</div>
   {/if}
 
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">

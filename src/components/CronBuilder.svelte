@@ -191,17 +191,18 @@
       type="text"
       bind:value={expression}
       oninput={updateFromExpression}
+      aria-label={lang === "es" ? "Expresion cron" : "Cron expression"}
       class="flex-1 bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-accent)] px-3 py-2 rounded font-mono text-lg text-center tracking-wider"
     />
     <button onclick={copy} class="px-3 py-2 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "copy")}</button>
   </div>
 
   {#if error}
-    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]">{error}</div>
+    <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]" aria-live="polite">{error}</div>
   {/if}
 
   {#if validationError}
-    <div class="px-3 py-2 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)] font-mono">{validationError}</div>
+    <div class="px-3 py-2 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)] font-mono" aria-live="polite">{validationError}</div>
   {/if}
 
   <div class="p-3 text-sm text-[var(--color-text-secondary)] text-center border-b border-[var(--color-border)]">
