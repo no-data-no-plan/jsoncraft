@@ -1,0 +1,47 @@
+# JSONCraft
+
+> Free, privacy-first suite of 23 developer tools for JSON, YAML, CSV, TOML, XML, and common dev utilities. Format, diff, convert, validate, and transform data — every tool runs 100% in the browser with no data uploaded to any server. Built on Astro + Svelte 5 runes + CodeMirror 6.
+
+## JSON tools
+
+- [JSON Formatter](https://jsoncraft.dev/): Format, validate, beautify or minify JSON with line/column error reporting
+- [JSON Diff](https://jsoncraft.dev/diff/): Side-by-side comparison with additions, deletions, and changes highlighted in real time
+- [JSON Tree Viewer](https://jsoncraft.dev/viewer/): Interactive tree view of nested objects with search and branch copy
+- [JSON Graph Visualizer](https://jsoncraft.dev/graph/): Node-based visual graph of JSON structure with zoom and pan
+- [JSONPath Tester](https://jsoncraft.dev/jsonpath/): Query JSON with JSONPath expressions and see matched nodes highlighted
+- [JSON Schema Validator](https://jsoncraft.dev/json-schema-validator/): Validate JSON against a schema with detailed error paths
+
+## Converters
+
+- [JSON to YAML](https://jsoncraft.dev/json-to-yaml/), [JSON to CSV](https://jsoncraft.dev/json-to-csv/), [JSON to TOML](https://jsoncraft.dev/json-to-toml/), [JSON to HTML Table](https://jsoncraft.dev/json-to-html-table/), [JSON to TypeScript](https://jsoncraft.dev/json-to-typescript/)
+- [CSV to JSON](https://jsoncraft.dev/csv-to-json/), [TOML to JSON](https://jsoncraft.dev/toml-to-json/), [YAML to JSON](https://jsoncraft.dev/yaml-to-json/), [XML to JSON](https://jsoncraft.dev/xml-to-json/)
+
+## Developer utilities
+
+- [Base64 Encode/Decode](https://jsoncraft.dev/base64/)
+- [Regex Tester](https://jsoncraft.dev/regex/)
+- [Hash Generator](https://jsoncraft.dev/hash/) (MD5, SHA-1, SHA-256, SHA-512)
+- [UUID Generator](https://jsoncraft.dev/uuid/)
+- [Cron Expression Parser](https://jsoncraft.dev/cron/)
+- [Unix Timestamp Converter](https://jsoncraft.dev/timestamp/)
+
+## Comparison pages
+
+- [vs JSONLint](https://jsoncraft.dev/vs-jsonlint/)
+- [vs CodeBeautify](https://jsoncraft.dev/vs-codebeautify/)
+- [vs JSON Editor Online](https://jsoncraft.dev/vs-json-editor-online/)
+- [vs JSON Crack](https://jsoncraft.dev/vs-json-crack/)
+- [vs DevToys](https://jsoncraft.dev/vs-devtoys/)
+
+## Policies
+
+- [Privacy Policy](https://jsoncraft.dev/privacy-policy/)
+
+## Languages
+
+- English: https://jsoncraft.dev/
+- Spanish: https://jsoncraft.dev/es/
+
+## About
+
+Every JSONCraft tool is stateless and client-side. Pasted JSON, CSV, YAML, and other data never leaves the browser — no network requests, no logging, no account required. AI training bots (GPTBot, ClaudeBot, CCBot, Google-Extended) are blocked in robots.txt; citation bots (ChatGPT-User, PerplexityBot) are allowed.
