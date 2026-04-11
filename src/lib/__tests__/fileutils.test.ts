@@ -1,5 +1,5 @@
 /**
- * Tests for fileutils.ts — shared utilities across all 22 tools.
+ * Tests for fileutils.ts — shared utilities across all 23 tools.
  * stripBom, isLargeInput, friendlyError, debounce.
  */
 import { describe, it, expect } from 'vitest';

@@ -29,7 +29,7 @@ const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
     },
     es: {
       title: "Formateador y Validador JSON Online Gratis",
-      description: "JSONCraft es un conjunto gratuito de 22 herramientas para desarrolladores — formateador, validador, diff, conversores YAML/CSV/TOML. 100% en navegador.",
+      description: "JSONCraft es un conjunto gratuito de 23 herramientas para desarrolladores — formateador, validador, diff, conversores YAML/CSV/TOML. 100% en navegador.",
       seoHeading: "Formatea, Valida y Embellece JSON al Instante",
       seoText: "Pega o sube tu JSON para formatearlo instant\u00e1neamente con la sangr\u00eda correcta, validar su sintaxis o minificarlo para producci\u00f3n. JSONCraft detecta errores en tiempo real y muestra la l\u00ednea y columna exactas. Soporta sangr\u00eda de 2 espacios, 4 espacios y tabulaciones.",
       seoBlockHeading: "Sobre esta herramienta",
