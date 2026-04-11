@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
 import CrossLinks from "../components/CrossLinks.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import LangToggle from "../components/LangToggle.astro";
 import { tools } from "../lib/tools";
 import type { Lang } from "../i18n/index";
 import { getAlternatePath } from "../i18n/index";
@@ -265,13 +266,11 @@ const jsonLd = JSON.stringify(schemas);
           <span class="hidden sm:inline text-xs text-[var(--color-text-muted)]" style="min-width: 195px;">
             {t(lang, "headerBadge")}
           </span>
-          <a
-            href={alternatePath}
-            class="px-2 py-1 rounded text-xs font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
-            title={t(lang, "langToggleTitle")}
-          >
-            {t(lang, "langToggleLabel")}
-          </a>
+          <LangToggle
+            lang={lang}
+            enPath={lang === "en" ? Astro.url.pathname : alternatePath}
+            esPath={lang === "es" ? Astro.url.pathname : alternatePath}
+          />
           <button
             id="theme-toggle"
             class="p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
