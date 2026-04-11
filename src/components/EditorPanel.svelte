@@ -45,6 +45,7 @@
       {lang}
       {placeholder}
       {readonly}
+      {label}
       {onchange}
     />
   </div>

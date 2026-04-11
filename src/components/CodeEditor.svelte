@@ -8,13 +8,17 @@
   import { lintGutter } from "@codemirror/lint";
   import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 
-  let { value = "", lang = "json", placeholder = "", readonly = false, onchange = undefined }: {
+  let { value = "", lang = "json", placeholder = "", readonly = false, label = "", onchange = undefined }: {
     value?: string;
     lang?: "json" | "yaml" | "text";
     placeholder?: string;
     readonly?: boolean;
+    label?: string;
     onchange?: (value: string) => void;
   } = $props();
+
+  // Fallback chain for aria-label: explicit label > placeholder > generic
+  const effectiveLabel = label || placeholder || "Code editor";
 
   let container = $state<HTMLDivElement>(null!);
   let view: EditorView; // imperative, not reactive
@@ -33,6 +37,7 @@
       getLangExtension(),
       lintGutter(),
       EditorView.lineWrapping,
+      EditorView.contentAttributes.of({ "aria-label": effectiveLabel }),
       EditorView.updateListener.of((update) => {
         if (update.docChanged && onchange) {
           onchange(update.state.doc.toString());
@@ -82,6 +87,12 @@
       }),
       parent: container,
     });
+
+    // Make the scrollable region keyboard-reachable (WCAG 2.1.1 scrollable-region-focusable).
+    // CodeMirror defaults cm-scroller to tabindex=-1; cm-content remains the primary focus
+    // target for editing, but tabindex=0 on the scroller lets keyboard users tab into the
+    // scrollable area and use arrow keys to scroll long documents.
+    view.scrollDOM.setAttribute("tabindex", "0");
 
     const handleThemeChange = () => {
       const content = view.state.doc.toString();
