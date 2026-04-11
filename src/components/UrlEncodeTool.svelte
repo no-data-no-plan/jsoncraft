@@ -70,17 +70,17 @@
     <button
       onclick={() => { encodeMode = "component"; process(); }}
       title={tt("urlEncode", lang, "modeHint")}
-      class="px-3 py-1 rounded text-xs {encodeMode === 'component' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
+      class="px-3 py-1 rounded text-xs {encodeMode === 'component' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent-fg)]' : 'text-[var(--color-text-muted)]'}"
     >{tt("urlEncode", lang, "component")}</button>
     <button
       onclick={() => { encodeMode = "uri"; process(); }}
       title={tt("urlEncode", lang, "modeHint")}
-      class="px-3 py-1 rounded text-xs {encodeMode === 'uri' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
+      class="px-3 py-1 rounded text-xs {encodeMode === 'uri' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent-fg)]' : 'text-[var(--color-text-muted)]'}"
     >{tt("urlEncode", lang, "fullUri")}</button>
     <button
       onclick={() => { encodeMode = "form"; process(); }}
       title={tt("urlEncode", lang, "modeHint")}
-      class="px-3 py-1 rounded text-xs {encodeMode === 'form' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'}"
+      class="px-3 py-1 rounded text-xs {encodeMode === 'form' ? 'bg-[var(--color-accent)]/20 text-[var(--color-accent-fg)]' : 'text-[var(--color-text-muted)]'}"
     >{tt("urlEncode", lang, "form")}</button>
     <span
       class="text-xs text-[var(--color-text-muted)] cursor-help hidden md:inline"

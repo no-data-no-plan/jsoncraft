@@ -210,7 +210,7 @@
     <!-- Status indicator -->
     <span aria-live="polite">
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] animate-pulse">{t(lang, "processing")}</span>
+      <span class="text-xs text-[var(--color-accent-fg)] animate-pulse">{t(lang, "processing")}</span>
     {:else if status === "valid"}
       <span class="flex items-center gap-1 text-xs text-[var(--color-success)]">
         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">

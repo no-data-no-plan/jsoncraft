@@ -154,7 +154,7 @@
         <span class="w-4"></span>
       {/if}
 
-      <span class="text-[var(--color-accent)] text-sm">"{key}"</span>
+      <span class="text-[var(--color-accent-fg)] text-sm">"{key}"</span>
       <span class="text-[var(--color-text-muted)] text-sm">:</span>
 
       {#if type === "string"}
@@ -192,7 +192,7 @@
         {#if items.length > limit}
           <div style="padding-left: {(depth + 1) * 16}px">
             <button
-              class="text-xs text-[var(--color-accent)] hover:underline py-1"
+              class="text-xs text-[var(--color-accent-fg)] hover:underline py-1"
               onclick={() => showMore(path)}
             >
               {tt("viewer", lang, "showMore")} ({items.length - limit} {tt("viewer", lang, "remaining")})
@@ -207,7 +207,7 @@
         {#if entries.length > limit}
           <div style="padding-left: {(depth + 1) * 16}px">
             <button
-              class="text-xs text-[var(--color-accent)] hover:underline py-1"
+              class="text-xs text-[var(--color-accent-fg)] hover:underline py-1"
               onclick={() => showMore(path)}
             >
               {tt("viewer", lang, "showMore")} ({entries.length - limit} {tt("viewer", lang, "remaining")})
@@ -244,7 +244,7 @@
     </button>
     <span aria-live="polite">
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "parsing")}</span>
+      <span class="text-xs text-[var(--color-accent-fg)] ml-auto animate-pulse">{t(lang, "parsing")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}
@@ -286,7 +286,7 @@
                 {/each}
                 {#if parsed.length > rootLimit}
                   <button
-                    class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
+                    class="text-xs text-[var(--color-accent-fg)] hover:underline py-1 ml-4"
                     onclick={() => showMore("$")}
                   >
                     {tt("viewer", lang, "showMore")} ({parsed.length - rootLimit} {tt("viewer", lang, "remaining")})
@@ -304,7 +304,7 @@
                 {/each}
                 {#if rootEntries.length > rootLimit}
                   <button
-                    class="text-xs text-[var(--color-accent)] hover:underline py-1 ml-4"
+                    class="text-xs text-[var(--color-accent-fg)] hover:underline py-1 ml-4"
                     onclick={() => showMore("$")}
                   >
                     {tt("viewer", lang, "showMore")} ({rootEntries.length - rootLimit} {tt("viewer", lang, "remaining")})

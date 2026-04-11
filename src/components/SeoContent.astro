@@ -27,7 +27,7 @@ const relatedTools = relatedToolIds
       {relatedTools.map((tool) => (
         <a
           href={localePath(tool.path, lang)}
-          class="text-xs text-[var(--color-accent)] hover:underline"
+          class="text-xs text-[var(--color-accent-fg)] hover:underline"
         >
           {getToolName(tool.id, lang)}
         </a>

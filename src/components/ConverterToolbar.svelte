@@ -45,7 +45,7 @@
   </button>
   <span aria-live="polite">
   {#if processing}
-    <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "processingLarge")}</span>
+    <span class="text-xs text-[var(--color-accent-fg)] ml-auto animate-pulse">{t(lang, "processingLarge")}</span>
   {:else if wrongFormatHint}
     <span class="text-xs text-[var(--color-warning)] ml-auto">
       {wrongFormatHint.message}

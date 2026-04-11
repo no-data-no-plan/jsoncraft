@@ -142,7 +142,7 @@
     </button>
     <span aria-live="polite">
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] animate-pulse">{t(lang, "evaluating")}</span>
+      <span class="text-xs text-[var(--color-accent-fg)] animate-pulse">{t(lang, "evaluating")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)]">{error}</span>
     {/if}

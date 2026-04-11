@@ -41,7 +41,7 @@ const groups = [
 >
   <!-- Logo -->
   <a href={localePath("/", lang)} class="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border)]">
-    <span class="text-xl font-bold text-[var(--color-accent)]">{ }</span>
+    <span class="text-xl font-bold text-[var(--color-accent-fg)]">{ }</span>
     <span class="text-lg font-bold text-[var(--color-text-primary)]">JSONCraft</span>
   </a>
 
@@ -64,7 +64,7 @@ const groups = [
                 class:list={[
                   "flex items-center gap-2 px-4 py-1.5 mx-2 rounded text-sm transition-colors",
                   isActive
-                    ? "bg-[var(--color-accent)]/15 text-[var(--color-accent)] font-medium"
+                    ? "bg-[var(--color-accent)]/15 text-[var(--color-accent-fg)] font-medium"
                     : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)]",
                 ]}
               >

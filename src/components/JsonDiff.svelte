@@ -139,7 +139,7 @@
     </button>
     <span aria-live="polite">
     {#if processing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto animate-pulse">{t(lang, "comparing")}</span>
+      <span class="text-xs text-[var(--color-accent-fg)] ml-auto animate-pulse">{t(lang, "comparing")}</span>
     {:else if error}
       <span class="text-xs text-[var(--color-error)] ml-auto">{error}</span>
     {/if}

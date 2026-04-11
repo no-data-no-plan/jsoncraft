@@ -192,7 +192,7 @@
       bind:value={expression}
       oninput={updateFromExpression}
       aria-label={lang === "es" ? "Expresion cron" : "Cron expression"}
-      class="flex-1 bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-accent)] px-3 py-2 rounded font-mono text-lg text-center tracking-wider"
+      class="flex-1 bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-accent-fg)] px-3 py-2 rounded font-mono text-lg text-center tracking-wider"
     />
     <button onclick={copy} class="px-3 py-2 rounded text-sm bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "copy")}</button>
   </div>
@@ -220,7 +220,7 @@
             <button
               onclick={() => applyPreset(preset.value)}
               class="px-2 py-1.5 rounded text-xs text-left {expression === preset.value
-                ? 'bg-[var(--color-accent)]/15 text-[var(--color-accent)]'
+                ? 'bg-[var(--color-accent)]/15 text-[var(--color-accent-fg)]'
                 : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]'}"
             >
               <div class="font-medium">{tt("cron", lang, preset.labelKey)}</div>

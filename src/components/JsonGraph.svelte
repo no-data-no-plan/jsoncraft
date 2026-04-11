@@ -508,7 +508,7 @@
 
     <div class="ml-auto flex items-center gap-3 text-xs text-[var(--color-text-muted)]" aria-live="polite">
       {#if processing}
-        <span class="text-[var(--color-accent)] animate-pulse">{t(lang, "parsing")}</span>
+        <span class="text-[var(--color-accent-fg)] animate-pulse">{t(lang, "parsing")}</span>
       {:else if error}
         <span class="text-[var(--color-error)]">{error}</span>
       {:else if rootNode}

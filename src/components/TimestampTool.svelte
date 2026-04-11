@@ -82,7 +82,7 @@
   <!-- Live clock -->
   <div class="flex items-center justify-center gap-3 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
     <span class="text-sm text-[var(--color-text-muted)]">{tt("timestamp", lang, "currentUnix")}</span>
-    <button onclick={() => copy(liveTimestamp.toString())} class="font-mono text-lg text-[var(--color-accent)] hover:underline cursor-pointer">
+    <button onclick={() => copy(liveTimestamp.toString())} class="font-mono text-lg text-[var(--color-accent-fg)] hover:underline cursor-pointer">
       {liveTimestamp}
     </button>
   </div>
@@ -129,7 +129,7 @@
               <div class="flex-1 p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-sm text-[var(--color-text-primary)] select-all break-all">
                 {row.value}
               </div>
-              <button onclick={() => copy(row.value)} class="text-xs text-[var(--color-accent)] hover:underline shrink-0 pt-1">{t(lang, "copy")}</button>
+              <button onclick={() => copy(row.value)} class="text-xs text-[var(--color-accent-fg)] hover:underline shrink-0 pt-1">{t(lang, "copy")}</button>
             </div>
           {/each}
         </div>
@@ -151,17 +151,17 @@
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-xs text-[var(--color-text-muted)] w-16">{tt("timestamp", lang, "seconds")}</span>
-            <div class="flex-1 p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-sm text-[var(--color-accent)] select-all">
+            <div class="flex-1 p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-sm text-[var(--color-accent-fg)] select-all">
               {fromDate}
             </div>
-            <button onclick={() => copy(fromDate!.toString())} class="text-xs text-[var(--color-accent)] hover:underline">{t(lang, "copy")}</button>
+            <button onclick={() => copy(fromDate!.toString())} class="text-xs text-[var(--color-accent-fg)] hover:underline">{t(lang, "copy")}</button>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-xs text-[var(--color-text-muted)] w-16">{tt("timestamp", lang, "millis")}</span>
             <div class="flex-1 p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-sm text-[var(--color-text-primary)] select-all">
               {fromDate * 1000}
             </div>
-            <button onclick={() => copy((fromDate! * 1000).toString())} class="text-xs text-[var(--color-accent)] hover:underline">{t(lang, "copy")}</button>
+            <button onclick={() => copy((fromDate! * 1000).toString())} class="text-xs text-[var(--color-accent-fg)] hover:underline">{t(lang, "copy")}</button>
           </div>
         </div>
       {/if}

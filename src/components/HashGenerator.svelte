@@ -233,7 +233,7 @@
 
     <span aria-live="polite">
     {#if computing}
-      <span class="text-xs text-[var(--color-accent)] ml-auto">{tt("hash", lang, "hashing")}</span>
+      <span class="text-xs text-[var(--color-accent-fg)] ml-auto">{tt("hash", lang, "hashing")}</span>
     {/if}
     </span>
   </div>
@@ -286,7 +286,7 @@
           <div class="space-y-1">
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold text-[var(--color-text-secondary)]">{h.algo}</span>
-              <button onclick={() => copy(h.value)} class="text-xs text-[var(--color-accent)] hover:underline">{t(lang, "copy")}</button>
+              <button onclick={() => copy(h.value)} class="text-xs text-[var(--color-accent-fg)] hover:underline">{t(lang, "copy")}</button>
             </div>
             <div class="p-2 rounded bg-[var(--color-bg-tertiary)] font-mono text-xs text-[var(--color-text-primary)] break-all select-all">
               {h.value}

@@ -185,7 +185,7 @@
               <div class="p-2 rounded bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-sm">
                 <div class="flex items-center gap-2">
                   <span class="text-[var(--color-text-muted)] text-xs">#{i + 1}</span>
-                  <span class="font-mono text-[var(--color-accent)]">"{m.full}"</span>
+                  <span class="font-mono text-[var(--color-accent-fg)]">"{m.full}"</span>
                   <span class="text-xs text-[var(--color-text-muted)]">{tt("regex", lang, "atIndex")} {m.index}</span>
                 </div>
                 {#if m.groups.length > 0}

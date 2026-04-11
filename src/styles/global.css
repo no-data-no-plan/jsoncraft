@@ -6,9 +6,16 @@
   --color-bg-tertiary: #334155;
   --color-border: #475569;
   --color-text-primary: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-  --color-accent: #38bdf8;
+  /* secondary + muted unified to #b6c0cf for WCAG 4.5:1 on all 3
+     dark backgrounds. Old muted #64748b failed 3.75/3.07/2.18. */
+  --color-text-secondary: #b6c0cf;
+  --color-text-muted: #b6c0cf;
+  /* Accent split: #38bdf8 is great as text on dark (8.33/6.83/4.83)
+     but white-on-accent is 2.14 (button text fails). Split:
+     - --color-accent (#0369a1): white text 5.93 for buttons
+     - --color-accent-fg (#38bdf8): text on dark bg, passes 4.83 min */
+  --color-accent: #0369a1;
+  --color-accent-fg: #38bdf8;
   --color-accent-hover: #7dd3fc;
   --color-success: #4ade80;
   --color-error: #f87171;
@@ -33,15 +40,24 @@ html.light {
   --color-border: #cbd5e1;
   --color-text-primary: #0f172a;
   --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
-  --color-accent: #0284c7;
-  --color-accent-hover: #0369a1;
+  /* muted #94a3b8 fails 2.56 on white; #64748b passes 4.76. */
+  --color-text-muted: #64748b;
+  /* accent: #0284c7 white-on = 4.10, fails. #0369a1 passes 5.93. */
+  --color-accent: #0369a1;
+  --color-accent-fg: #0369a1;
+  --color-accent-hover: #075985;
   --color-success: #16a34a;
   --color-error: #dc2626;
   --color-warning: #d97706;
 }
 
 /* CodeMirror overrides */
+/* Placeholder text — CodeMirror default is too dim, fails WCAG 4.5:1.
+   Bump to match our --color-text-muted for contrast compliance. */
+.cm-placeholder {
+  color: var(--color-text-muted) !important;
+}
+
 .cm-editor {
   height: 100%;
   font-size: 14px;
