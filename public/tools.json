@@ -1,0 +1,596 @@
+{
+  "$schema": "https://schema.org/SoftwareApplication",
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "JSONCraft — Tools Index",
+  "description": "Free, privacy-first suite of developer tools for JSON, YAML, CSV, TOML, XML, and common dev utilities. Format, diff, convert, validate, and transform data — every tool runs 100% in the browser.",
+  "url": "https://jsoncraft.dev/tools.json",
+  "publisher": {
+    "@type": "Organization",
+    "name": "JSONCraft",
+    "url": "https://jsoncraft.dev"
+  },
+  "inLanguage": [
+    "en",
+    "es"
+  ],
+  "dateModified": "2026-04-13",
+  "numberOfItems": 23,
+  "itemListElement": [
+    {
+      "@type": "SoftwareApplication",
+      "position": 1,
+      "name": "JSON Formatter",
+      "url": "https://jsoncraft.dev/formatter/",
+      "alternateUrl": "https://jsoncraft.dev/es/formatter/",
+      "description": "Validate, format, beautify and minify JSON instantly",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json formatter",
+        "json validator",
+        "json beautifier",
+        "json prettify",
+        "json minify",
+        "json lint"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 2,
+      "name": "JSON Diff",
+      "url": "https://jsoncraft.dev/diff/",
+      "alternateUrl": "https://jsoncraft.dev/es/diff/",
+      "description": "Compare two JSON documents side by side and spot differences",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json diff",
+        "json compare",
+        "json difference",
+        "compare json online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 3,
+      "name": "JSON Tree Viewer",
+      "url": "https://jsoncraft.dev/viewer/",
+      "alternateUrl": "https://jsoncraft.dev/es/viewer/",
+      "description": "Explore JSON as an interactive collapsible tree",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json viewer",
+        "json tree",
+        "json explorer",
+        "json visualizer"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 4,
+      "name": "JSON Graph Visualizer",
+      "url": "https://jsoncraft.dev/graph/",
+      "alternateUrl": "https://jsoncraft.dev/es/graph/",
+      "description": "Visualize JSON data as an interactive graph diagram with nodes and connections",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json graph",
+        "json visualizer",
+        "json diagram",
+        "json graph viewer",
+        "json node graph",
+        "json crack alternative"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 5,
+      "name": "JSONPath Tester",
+      "url": "https://jsoncraft.dev/jsonpath/",
+      "alternateUrl": "https://jsoncraft.dev/es/jsonpath/",
+      "description": "Test and evaluate JSONPath expressions interactively",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "jsonpath tester",
+        "jsonpath query",
+        "jsonpath evaluator",
+        "jsonpath playground"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 6,
+      "name": "YAML to JSON",
+      "url": "https://jsoncraft.dev/yaml-to-json/",
+      "alternateUrl": "https://jsoncraft.dev/es/yaml-to-json/",
+      "description": "Convert YAML configuration files to JSON format instantly",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "yaml to json",
+        "yaml converter",
+        "yaml to json online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 7,
+      "name": "JSON to YAML",
+      "url": "https://jsoncraft.dev/json-to-yaml/",
+      "alternateUrl": "https://jsoncraft.dev/es/json-to-yaml/",
+      "description": "Convert JSON data to clean, readable YAML format",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json to yaml",
+        "json converter",
+        "json to yaml online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 8,
+      "name": "JSON to CSV",
+      "url": "https://jsoncraft.dev/json-to-csv/",
+      "alternateUrl": "https://jsoncraft.dev/es/json-to-csv/",
+      "description": "Convert JSON arrays to spreadsheet-friendly CSV format",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json to csv",
+        "json converter",
+        "json to csv online",
+        "json to spreadsheet"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 9,
+      "name": "CSV to JSON",
+      "url": "https://jsoncraft.dev/csv-to-json/",
+      "alternateUrl": "https://jsoncraft.dev/es/csv-to-json/",
+      "description": "Convert CSV spreadsheet data to structured JSON format",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "csv to json",
+        "csv converter",
+        "csv to json online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 10,
+      "name": "JSON to TOML",
+      "url": "https://jsoncraft.dev/json-to-toml/",
+      "alternateUrl": "https://jsoncraft.dev/es/json-to-toml/",
+      "description": "Convert JSON data to TOML configuration format",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json to toml",
+        "json converter",
+        "toml config generator"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 11,
+      "name": "TOML to JSON",
+      "url": "https://jsoncraft.dev/toml-to-json/",
+      "alternateUrl": "https://jsoncraft.dev/es/toml-to-json/",
+      "description": "Convert TOML configuration files to JSON format",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "toml to json",
+        "toml converter",
+        "toml parser online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 12,
+      "name": "Regex Tester",
+      "url": "https://jsoncraft.dev/regex/",
+      "alternateUrl": "https://jsoncraft.dev/es/regex/",
+      "description": "Test regular expressions with real-time matching and capture groups",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "regex tester",
+        "regex online",
+        "regular expression tester",
+        "regex playground"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 13,
+      "name": "Base64 Encode/Decode",
+      "url": "https://jsoncraft.dev/base64/",
+      "alternateUrl": "https://jsoncraft.dev/es/base64/",
+      "description": "Encode text to Base64 or decode Base64 strings instantly",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "base64 encoder",
+        "base64 decoder",
+        "base64 encode online",
+        "base64 converter"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 14,
+      "name": "URL Encoder/Decoder",
+      "url": "https://jsoncraft.dev/url-encode/",
+      "alternateUrl": "https://jsoncraft.dev/es/url-encode/",
+      "description": "Encode or decode URLs and query strings for safe transmission",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "url encoder",
+        "url decoder",
+        "url encode online",
+        "percent encoding"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 15,
+      "name": "Hash Generator",
+      "url": "https://jsoncraft.dev/hash/",
+      "alternateUrl": "https://jsoncraft.dev/es/hash/",
+      "description": "Generate MD5, SHA-1, SHA-256 and SHA-512 hashes from any text",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "hash generator",
+        "sha256 generator",
+        "md5 hash online",
+        "sha1 hash"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 16,
+      "name": "UUID Generator",
+      "url": "https://jsoncraft.dev/uuid/",
+      "alternateUrl": "https://jsoncraft.dev/es/uuid/",
+      "description": "Generate random UUIDs (v4) instantly with bulk generation support",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "uuid generator",
+        "uuid v4",
+        "guid generator",
+        "random uuid online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 17,
+      "name": "Timestamp Converter",
+      "url": "https://jsoncraft.dev/timestamp/",
+      "alternateUrl": "https://jsoncraft.dev/es/timestamp/",
+      "description": "Convert Unix timestamps to dates and dates to timestamps",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "unix timestamp converter",
+        "epoch converter",
+        "timestamp to date",
+        "unix time"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 18,
+      "name": "Cron Expression Builder",
+      "url": "https://jsoncraft.dev/cron/",
+      "alternateUrl": "https://jsoncraft.dev/es/cron/",
+      "description": "Build and test cron expressions with a visual editor and next-run preview",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "cron expression builder",
+        "cron generator",
+        "crontab guru",
+        "cron schedule"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 19,
+      "name": "JSON to TypeScript",
+      "url": "https://jsoncraft.dev/json-to-typescript/",
+      "alternateUrl": "https://jsoncraft.dev/es/json-to-typescript/",
+      "description": "Generate TypeScript interfaces and types from JSON data instantly",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json to typescript",
+        "json to ts",
+        "typescript interface generator",
+        "json to types"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 20,
+      "name": "XML Formatter",
+      "url": "https://jsoncraft.dev/xml-formatter/",
+      "alternateUrl": "https://jsoncraft.dev/es/xml-formatter/",
+      "description": "Format, prettify and minify XML documents with proper indentation",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "xml formatter",
+        "xml prettifier",
+        "xml beautifier",
+        "xml minifier",
+        "format xml online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 21,
+      "name": "JSON to HTML Table",
+      "url": "https://jsoncraft.dev/json-to-html-table/",
+      "alternateUrl": "https://jsoncraft.dev/es/json-to-html-table/",
+      "description": "Convert JSON arrays to clean HTML tables with preview and download",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json to html table",
+        "json to table",
+        "json table converter",
+        "json to html online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 22,
+      "name": "YAML Validator",
+      "url": "https://jsoncraft.dev/yaml-validator/",
+      "alternateUrl": "https://jsoncraft.dev/es/yaml-validator/",
+      "description": "Validate YAML syntax with detailed error messages and line numbers",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "yaml validator",
+        "yaml lint",
+        "yaml checker",
+        "validate yaml online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "position": 23,
+      "name": "JSON Schema Validator",
+      "url": "https://jsoncraft.dev/json-schema-validator/",
+      "alternateUrl": "https://jsoncraft.dev/es/json-schema-validator/",
+      "description": "Validate JSON data against a JSON Schema with detailed error reports",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web browser",
+      "keywords": [
+        "json schema validator",
+        "json schema",
+        "validate json schema",
+        "json schema tester"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://jsoncraft.dev/"
+      }
+    }
+  ]
+}
