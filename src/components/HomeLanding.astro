@@ -1,0 +1,290 @@
+---
+// Landing page content for `/`. Mounted inside Layout.astro which
+// provides the sidebar shell, header, ads, footer and CrossLinks, so
+// this component only owns the hero + grid + bottom CTA that replace
+// the formatter tool at the root URL. See CompoundVision / OpenImages
+// / PingThat / OpenPDF for the shared "minimal hero → categorised
+// grid → bottom CTA" pattern.
+
+import { tools } from "../lib/tools";
+import { getToolName, getToolCardDescription } from "../i18n/tools";
+import { getHomeI18n } from "../i18n/pages";
+import { localePath } from "../i18n/index";
+import type { Lang } from "../i18n/index";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+const i18n = getHomeI18n(lang);
+
+// Group ids follow src/components/Sidebar.astro exactly so the landing
+// mirrors the sidebar order a returning visitor already expects.
+const coreIds = ["formatter", "diff", "viewer", "graph", "jsonpath"];
+const converterIds = [
+  "yaml-to-json",
+  "json-to-yaml",
+  "json-to-csv",
+  "csv-to-json",
+  "json-to-toml",
+  "toml-to-json",
+  "json-to-typescript",
+  "json-to-html-table",
+  "xml-formatter",
+];
+const devToolIds = [
+  "regex",
+  "base64",
+  "url-encode",
+  "hash",
+  "uuid",
+  "timestamp",
+  "cron",
+  "yaml-validator",
+  "json-schema-validator",
+];
+
+const byId = new Map(tools.map((t) => [t.id, t]));
+
+const groups = [
+  { label: i18n.groupCoreLabel, ids: coreIds },
+  { label: i18n.groupConvertersLabel, ids: converterIds },
+  { label: i18n.groupDevToolsLabel, ids: devToolIds },
+].map((g) => ({
+  label: g.label,
+  cards: g.ids
+    .map((id) => byId.get(id))
+    .filter((t): t is NonNullable<typeof t> => Boolean(t))
+    .map((t) => ({
+      id: t.id,
+      path: t.path,
+      icon: t.icon,
+      name: getToolName(t.id, lang),
+      desc: getToolCardDescription(t.id, lang),
+    })),
+}));
+
+const formatterHref = localePath("/formatter/", lang);
+---
+
+<div class="home-landing">
+  <!-- Hero: eyebrow + h1 with em accent + subtext + thin CTA button.
+       Layout already provides the header row above this, so we don't
+       duplicate the h1 there; the header's page-title reads from the
+       Layout `title` prop (home.title from i18n/pages.ts). -->
+  <header class="hero">
+    <p class="hero-eyebrow">{i18n.heroEyebrow}</p>
+    <h1 class="hero-heading">
+      {i18n.heroHeadingPrefix}<em>{i18n.heroHeadingEm}</em>
+    </h1>
+    <p class="hero-subtext">{i18n.heroSubtext}</p>
+    <a class="hero-cta" href={formatterHref}>
+      <span aria-hidden="true" class="hero-cta-icon">{"{ }"}</span>
+      <span>{i18n.ctaOpenFormatter}</span>
+      <span aria-hidden="true" class="hero-cta-arrow">→</span>
+    </a>
+  </header>
+
+  <!-- 3 categorised tool groups. Layout injects the ad banner after
+       the <slot />, so we don't add one inline here — keeps the
+       category flow clean without interruption. -->
+  <section class="tool-groups" aria-label="JSONCraft tools">
+    {groups.map((group) => (
+      <section class="tool-group">
+        <h2 class="group-label">{group.label}</h2>
+        <div class="tool-grid">
+          {group.cards.map((card) => (
+            <a class="tool-card" href={localePath(card.path + "/", lang)}>
+              <span class="tool-card-icon" aria-hidden="true">{card.icon}</span>
+              <span class="tool-card-name">{card.name}</span>
+              <span class="tool-card-desc">{card.desc}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+
+  <!-- Bottom CTA: mono eyebrow + short summary. Matches the CV/OI/PT
+       closing block that sits right before CrossLinks (which Layout
+       injects below the slot). -->
+  <section class="bottom-cta">
+    <p class="bottom-cta-eyebrow">{i18n.bottomCtaEyebrow}</p>
+    <p class="bottom-cta-text">{i18n.bottomCtaText}</p>
+  </section>
+</div>
+
+<style>
+  .home-landing {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 1.5rem 3rem;
+    background: var(--color-bg);
+  }
+
+  /* Hero ---------------------------------------------------------- */
+  .hero {
+    max-width: 640px;
+    margin: 1.5rem auto 2.5rem;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
+  }
+  .hero-heading {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-heading em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+  .hero-subtext {
+    max-width: 540px;
+    margin: 0 auto 1.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.625rem 1.125rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.15s;
+  }
+  .hero-cta:hover,
+  .hero-cta:focus-visible {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    outline: none;
+    transform: translateY(-1px);
+  }
+  .hero-cta-icon {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    color: var(--color-accent);
+  }
+  .hero-cta-arrow {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    transition: color 0.15s;
+  }
+  .hero-cta:hover .hero-cta-arrow,
+  .hero-cta:focus-visible .hero-cta-arrow {
+    color: var(--color-accent);
+  }
+
+  /* Tool groups --------------------------------------------------- */
+  .tool-groups {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .tool-group {
+    margin-bottom: 2rem;
+  }
+  .group-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
+  }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 640px) {
+    .tool-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .tool-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.125rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-bg-secondary);
+    text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s, background 0.15s;
+  }
+  .tool-card:hover,
+  .tool-card:focus-visible {
+    border-color: var(--color-accent);
+    outline: none;
+    transform: translateY(-1px);
+  }
+  .tool-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 0.125rem;
+  }
+  .tool-card-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  .tool-card-desc {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+  }
+
+  /* Bottom CTA ---------------------------------------------------- */
+  .bottom-cta {
+    max-width: 560px;
+    margin: 3rem auto 1rem;
+    text-align: center;
+  }
+  .bottom-cta-eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.5rem;
+  }
+  .bottom-cta-text {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+</style>

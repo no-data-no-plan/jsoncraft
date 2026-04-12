@@ -10,6 +10,61 @@ interface PageSeo {
   seoFeatures: string[];
 }
 
+/**
+ * Rich i18n dictionary for the `/` landing page. Separate from the
+ * tool-page PageSeo shape because the landing needs hero copy, group
+ * labels, and a bottom CTA block that tool pages don't use.
+ */
+export interface HomeI18n {
+  title: string;
+  description: string;
+  heroEyebrow: string;
+  heroHeadingPrefix: string;
+  heroHeadingEm: string;
+  heroSubtext: string;
+  ctaOpenFormatter: string;
+  groupCoreLabel: string;
+  groupConvertersLabel: string;
+  groupDevToolsLabel: string;
+  bottomCtaEyebrow: string;
+  bottomCtaText: string;
+}
+
+const homeI18n: Record<Lang, HomeI18n> = {
+  en: {
+    title: "JSONCraft — Free JSON, YAML, CSV & TOML Tools in Your Browser",
+    description: "23 free developer tools for JSON, YAML, CSV, TOML and XML. Format, validate, diff, convert and visualize — 100% in your browser. No signup, no upload.",
+    heroEyebrow: "Free JSON & Data Tools",
+    heroHeadingPrefix: "Every JSON task, ",
+    heroHeadingEm: "instantly",
+    heroSubtext: "Format, validate, convert, diff, visualize — 23 browser tools for JSON, YAML, CSV, TOML and XML. No signup, no upload, nothing leaves your tab.",
+    ctaOpenFormatter: "Open JSON Formatter",
+    groupCoreLabel: "Core",
+    groupConvertersLabel: "Converters",
+    groupDevToolsLabel: "Dev Tools",
+    bottomCtaEyebrow: "23 free developer tools",
+    bottomCtaText: "No signup, no tracking, no limits. Everything runs locally in your browser.",
+  },
+  es: {
+    title: "JSONCraft — Herramientas JSON, YAML, CSV y TOML gratis en tu navegador",
+    description: "23 herramientas gratis para desarrolladores: JSON, YAML, CSV, TOML y XML. Formatea, valida, compara, convierte y visualiza — 100% en tu navegador, sin registro ni subidas.",
+    heroEyebrow: "Herramientas JSON gratis",
+    heroHeadingPrefix: "Toda tarea JSON, ",
+    heroHeadingEm: "al instante",
+    heroSubtext: "Formatea, valida, convierte, compara, visualiza \u2014 23 herramientas de navegador para JSON, YAML, CSV, TOML y XML. Sin registro, sin subidas, nada sale de tu pesta\u00f1a.",
+    ctaOpenFormatter: "Abrir formateador JSON",
+    groupCoreLabel: "Esenciales",
+    groupConvertersLabel: "Conversores",
+    groupDevToolsLabel: "Utilidades Dev",
+    bottomCtaEyebrow: "23 herramientas gratis para dev",
+    bottomCtaText: "Sin registro, sin tracking, sin l\u00edmites. Todo se ejecuta localmente en tu navegador.",
+  },
+};
+
+export function getHomeI18n(lang: Lang): HomeI18n {
+  return homeI18n[lang];
+}
+
 const pages: Record<string, { en: PageSeo; es: PageSeo }> = {
   formatter: {
     en: {

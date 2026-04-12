@@ -25,7 +25,11 @@ const alternatePath = getAlternatePath(Astro.url.pathname);
 const alternateUrl = `https://jsoncraft.dev${alternatePath.endsWith('/') ? alternatePath : alternatePath + '/'}`;
 const activeTool = tools.find((t) => t.id === activeToolId);
 
-const isHome = activeToolId === "formatter" && (Astro.url.pathname === "/" || Astro.url.pathname === "/es" || Astro.url.pathname === "/es/");
+// The landing page at `/` passes activeToolId="home". Tool pages pass
+// their tool id (e.g. "formatter", "diff"). isHome controls schema
+// selection (WebSite + Organization + FAQPage instead of
+// SoftwareApplication) and skips breadcrumb + HowTo emission.
+const isHome = activeToolId === "home";
 
 // Page-type detection for schema-appropriate markup:
 // - /privacy-policy/ → WebPage (NOT SoftwareApplication, activeToolId="" is passed)

@@ -11,7 +11,7 @@ export const tools: Tool[] = [
   {
     id: "formatter",
     name: "JSON Formatter",
-    path: "/",
+    path: "/formatter",
     description: "Validate, format, beautify and minify JSON instantly",
     icon: "{ }",
     keywords: ["json formatter", "json validator", "json beautifier", "json prettify", "json minify", "json lint"],

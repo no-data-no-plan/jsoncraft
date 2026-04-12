@@ -1,29 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import JsonFormatter from "../components/JsonFormatter.svelte";
-import SeoContent from "../components/SeoContent.astro";
-import SeoBlock from "../components/SeoBlock.astro";
+import HomeLanding from "../components/HomeLanding.astro";
 import CompareLinks from "../components/CompareLinks.astro";
-import { getPageSeo } from "../i18n/pages";
+import { getHomeI18n } from "../i18n/pages";
 
-const seo = getPageSeo("formatter", "en")!;
+const i18n = getHomeI18n("en");
 ---
 
 <Layout
-  title={seo.title}
-  description={seo.description}
-  activeToolId="formatter"
+  title={i18n.title}
+  description={i18n.description}
+  activeToolId="home"
 >
-  <JsonFormatter client:load />
-  <SeoContent
-    heading={seo.seoHeading}
-    text={seo.seoText}
-    relatedToolIds={["viewer", "diff", "json-to-yaml"]}
-  />
-  <SeoBlock
-    heading={seo.seoBlockHeading}
-    text={seo.seoBlockText}
-    features={seo.seoFeatures}
-  />
+  <HomeLanding lang="en" />
   <CompareLinks lang="en" competitors={["codebeautify", "devtoys", "json-crack", "json-editor-online", "jsonlint"]} />
 </Layout>

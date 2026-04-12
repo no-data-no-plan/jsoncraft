@@ -30,6 +30,40 @@ export function getToolName(id: string, lang: Lang): string {
   return toolNames[id]?.[lang] ?? toolNames[id]?.en ?? id;
 }
 
+// Short card descriptions for the landing grid. Kept under ~60 chars
+// so the 3-col desktop layout doesn't wrap awkwardly. The longer SEO
+// descriptions live in src/lib/tools.ts (for tool-page meta) and in
+// src/i18n/pages.ts (for tool-page SEO blocks).
+const toolCardDescriptions: Record<string, { en: string; es: string }> = {
+  formatter: { en: "Validate, beautify or minify JSON in real time", es: "Valida, embellece o minifica JSON en tiempo real" },
+  diff: { en: "Compare two JSON documents side by side", es: "Compara dos documentos JSON lado a lado" },
+  viewer: { en: "Explore JSON as a collapsible tree", es: "Explora JSON como \u00e1rbol colapsable" },
+  graph: { en: "Visualize JSON as an interactive graph", es: "Visualiza JSON como grafo interactivo" },
+  jsonpath: { en: "Test JSONPath expressions with live evaluation", es: "Prueba expresiones JSONPath con evaluaci\u00f3n en vivo" },
+  "yaml-to-json": { en: "Convert YAML files to JSON instantly", es: "Convierte YAML a JSON al instante" },
+  "json-to-yaml": { en: "Convert JSON to clean readable YAML", es: "Convierte JSON a YAML limpio y legible" },
+  "json-to-csv": { en: "Convert JSON arrays to spreadsheet CSV", es: "Convierte arrays JSON a CSV de hoja de c\u00e1lculo" },
+  "csv-to-json": { en: "Convert CSV data to structured JSON", es: "Convierte datos CSV a JSON estructurado" },
+  "json-to-toml": { en: "Convert JSON to TOML configuration", es: "Convierte JSON a configuraci\u00f3n TOML" },
+  "toml-to-json": { en: "Convert TOML config files to JSON", es: "Convierte ficheros TOML a JSON" },
+  regex: { en: "Test regex with live matches and groups", es: "Prueba regex con matches y grupos en vivo" },
+  base64: { en: "Encode text to Base64 or decode back", es: "Codifica texto a Base64 o decod\u00edficalo" },
+  "url-encode": { en: "Percent-encode or decode URLs safely", es: "Codifica o decodifica URLs con porcentaje" },
+  hash: { en: "Generate MD5, SHA-1, SHA-256, SHA-512", es: "Genera MD5, SHA-1, SHA-256 y SHA-512" },
+  uuid: { en: "Generate random UUID v4 strings in bulk", es: "Genera UUID v4 aleatorios en bloque" },
+  timestamp: { en: "Convert Unix timestamps to dates and back", es: "Convierte timestamps Unix a fechas y viceversa" },
+  cron: { en: "Build cron expressions with next-run preview", es: "Construye expresiones cron con vista previa" },
+  "json-to-typescript": { en: "Generate TypeScript interfaces from JSON", es: "Genera interfaces TypeScript desde JSON" },
+  "xml-formatter": { en: "Format, prettify or minify XML documents", es: "Formatea, embellece o minifica XML" },
+  "json-to-html-table": { en: "Convert JSON arrays to HTML tables", es: "Convierte arrays JSON a tablas HTML" },
+  "yaml-validator": { en: "Validate YAML with line-precise errors", es: "Valida YAML con errores por l\u00ednea" },
+  "json-schema-validator": { en: "Validate JSON against a JSON Schema", es: "Valida JSON contra un JSON Schema" },
+};
+
+export function getToolCardDescription(id: string, lang: Lang): string {
+  return toolCardDescriptions[id]?.[lang] ?? toolCardDescriptions[id]?.en ?? "";
+}
+
 // Component-specific translations
 
 const formatter = {

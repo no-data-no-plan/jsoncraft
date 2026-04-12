@@ -4,7 +4,7 @@
 
 ## JSON tools
 
-- [JSON Formatter](https://jsoncraft.dev/): Format, validate, beautify or minify JSON with line/column error reporting
+- [JSON Formatter](https://jsoncraft.dev/formatter/): Format, validate, beautify or minify JSON with line/column error reporting
 - [JSON Diff](https://jsoncraft.dev/diff/): Side-by-side comparison with additions, deletions, and changes highlighted in real time
 - [JSON Tree Viewer](https://jsoncraft.dev/viewer/): Interactive tree view of nested objects with search and branch copy
 - [JSON Graph Visualizer](https://jsoncraft.dev/graph/): Node-based visual graph of JSON structure with zoom and pan
