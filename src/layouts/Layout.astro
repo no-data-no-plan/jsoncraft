@@ -9,6 +9,7 @@ import type { Lang } from "../i18n/index";
 import { getAlternatePath } from "../i18n/index";
 import { t } from "../i18n/common";
 import { getHowTo } from "../i18n/howto";
+import { faqs } from "../i18n/faq";
 
 interface Props {
   title: string;
@@ -102,6 +103,23 @@ if (!isLegalPage && !isComparePage && !isHome) {
         "position": i + 1,
         "name": s.name,
         "text": s.text,
+      })),
+    });
+  }
+}
+
+// FAQPage schema for top tool pages (top 5 tools defined in i18n/faq.ts).
+if (!isLegalPage && !isComparePage && !isHome && faqs[activeToolId]) {
+  const faqContent = faqs[activeToolId][lang];
+  if (faqContent) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "inLanguage": lang,
+      "mainEntity": faqContent.faqs.map(f => ({
+        "@type": "Question",
+        "name": f.question,
+        "acceptedAnswer": { "@type": "Answer", "text": f.answer },
       })),
     });
   }
