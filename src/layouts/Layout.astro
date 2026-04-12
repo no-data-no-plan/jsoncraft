@@ -202,8 +202,25 @@ const jsonLd = JSON.stringify(schemas);
     <meta name="theme-color" content="#0f172a" />
     <meta name="google-adsense-account" content="ca-pub-8761907366448308" />
 
+    <!-- Google Analytics 4 — Consent Mode v2. Default deny all; CMP updates signals. -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-PV8S3GBCDY', { anonymize_ip: true });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PV8S3GBCDY"></script>
+
     <!-- Preconnect to AdSense origins to shave ~50-100ms off the first ad request -->
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://adservice.google.com" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
