@@ -299,7 +299,7 @@ const jsonLd = JSON.stringify(schemas);
             </svg>
           </button>
           {(isLegalPage || isHome || isComparePage) ? (
-            <span class="text-lg font-semibold text-[var(--color-text-primary)]">{title}</span>
+            <span class="text-lg font-semibold text-[var(--color-text-primary)]">{isHome ? "JSONCraft" : title}</span>
           ) : (
             <h1 class="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
           )}
