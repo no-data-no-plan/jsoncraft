@@ -129,6 +129,33 @@ const articleJsonLd = JSON.stringify({
         </ul>
       </section>
 
+      <!-- Matices tecnicos -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Matices tecnicos</h3>
+        <p>
+          JSON Editor Online, creado y mantenido por Jos de Jong, es genuinamente el mejor editor JSON puro de la web. Su funcion estrella es una vista de arbol que se comporta como una hoja de calculo: puedes hacer clic en un valor, escribir uno nuevo, tabular al siguiente campo, arrastrar un elemento del array hacia arriba o abajo y duplicar subarboles sin tocar nunca texto plano. El modo tabla es especialmente bueno para arrays homogeneos (el tipo de payload que sale de una consulta a base de datos o un export de Excel) porque transpone el array a filas y columnas de la forma en la que un humano querria leerlo. El visor de arbol de JSONCraft es deliberadamente de solo lectura y esta centrado en exploracion y copia de rutas, que es otro trabajo.
+        </p>
+        <p>
+          En el motor las dos herramientas divergen. JSON Editor Online usa un parser incremental propio mas scroll virtual, asi que puede abrir documentos muy por encima del limite comodo del <code>JSON.parse</code> del navegador; la cifra de 512 MB es real y excepcional para una herramienta web. JSONCraft se apoya en el <code>JSON.parse</code> estandar dentro de un Web Worker, lo cual es rapido para payloads normales pero rechazara documentos que superen el limite de string de V8 (unos 500 MB en la mayoria de navegadores). Si abres volcados de logs de cientos de MB en una pestana con frecuencia, JSON Editor Online es la opcion correcta y la diferencia no es sutil.
+        </p>
+      </section>
+
+      <!-- Precios y modelo -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Precios, anuncios y tracking</h3>
+        <p>
+          JSON Editor Online sigue un modelo freemium. El plan gratuito incluye anuncios y limita el tamano de archivo, restringe el historial y deshabilita el almacenamiento en la nube; el plan de pago (alrededor de $7 al mes) quita los anuncios, sube el limite a 512 MB y habilita sync entre dispositivos contra sus servidores. Para un particular con datos no sensibles es una oferta razonable; para ingenieros bajo NDA o que trabajan con PII la sincronizacion en la nube es un no rotundo porque el documento sale del navegador. JSONCraft se queda 100% en el cliente, carga un unico banner AdSense mas una unidad en el pie, usa Consent Mode v2 (la analitica solo se carga tras aceptar) y nunca introduce plan de pago ni sistema de cuentas, asi que no hay nada que sincronizar, nada que filtrar y nada que desbloquear.
+        </p>
+      </section>
+
+      <!-- Migracion -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Cambiar de flujo</h3>
+        <p>
+          Las dos herramientas se complementan bien. Manten JSON Editor Online marcado para sesiones de edicion pesadas: un export de Firestore de 200 MB, una coleccion de Postman que necesitas refactorizar a mano o cualquier dataset con muchos arrays donde la vista tabla ahorra tiempo real. Usa JSONCraft para todo lo que rodea la edicion: comparar dos snapshots del mismo payload, generar una interfaz TypeScript desde una respuesta de ejemplo, validar contra una definicion de <code>jsonschema.net</code>, convertir el resultado limpio a YAML para un manifiesto Kubernetes o a CSV para una hoja de calculo. No hay paso de importacion: ambas aceptan pegar y arrastrar, asi que el traspaso es literalmente copiar en una pestana y pegar en la otra.
+        </p>
+      </section>
+
       <!-- Veredicto -->
       <section class="space-y-3" style="color: var(--color-text-secondary);">
         <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>

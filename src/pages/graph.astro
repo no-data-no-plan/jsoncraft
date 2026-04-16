@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import JsonGraph from "../components/JsonGraph.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import FaqSection from "../components/FaqSection.astro";
 import CompareLinks from "../components/CompareLinks.astro";
 import { getPageSeo } from "../i18n/pages";
 
@@ -14,4 +15,5 @@ const seo = getPageSeo("graph", "en")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["viewer", "formatter", "jsonpath"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
   <CompareLinks lang="en" competitors={["json-crack", "json-editor-online"]} />
+  <FaqSection toolId="graph" lang="en" />
 </Layout>

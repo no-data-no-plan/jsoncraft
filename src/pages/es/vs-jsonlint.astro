@@ -128,6 +128,33 @@ const articleJsonLd = JSON.stringify({
         </ul>
       </section>
 
+      <!-- Matices tecnicos -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Matices tecnicos</h3>
+        <p>
+          JSONLint ha permanecido practicamente sin cambios desde principios de los 2010, lo cual es a la vez su fuerza y su techo. La pagina es un unico documento HTML con un textarea y un boton "Validate JSON"; al enviar, un parser JavaScript reporta el primer error de sintaxis con su linea y columna. Eso basta para cazar comas finales, claves sin comillas y llaves mal cerradas en JSON escrito a mano, y el bucle de feedback tan corto explica por que el sitio ha sobrevivido mas de una decada. Lo que no puede hacer es decirte si tu JSON coincide con la forma que espera tu backend. No hay validador de JSON Schema, ni evaluador de JSONPath para extraer una clave, ni modo diff para comparar dos payloads, ni vista de arbol para explorar una respuesta grande. El textarea tampoco tiene resaltado de sintaxis, emparejamiento de llaves ni plegado de codigo: en cuanto el documento pasa de una o dos pantallas, editar se vuelve notablemente tedioso.
+        </p>
+        <p>
+          JSONCraft ataca el mismo problema del primer minuto pero con un editor CodeMirror 6 que reporta errores en linea mientras escribes, con un marcador rojo en la canaleta y un tooltip describiendo el fallo. El parseo ocurre en un Web Worker para que la UI siga respondiendo en documentos grandes, y el mismo editor se reutiliza en el formatter, diff, visor de arbol, probador JSONPath y validador de schema, asi que la memoria muscular se arrastra. Para validacion mas alla de "esto es JSON sintacticamente", la herramienta de schema de JSONCraft acepta un documento JSON Schema y devuelve cada violacion con un puntero al nodo ofensor: una capacidad que JSONLint nunca ha anadido.
+        </p>
+      </section>
+
+      <!-- Precios y modelo -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Precios, anuncios y tracking</h3>
+        <p>
+          Ambas son gratuitas y no requieren cuenta. JSONLint se monetiza con anuncios display y carga en el arranque los habituales scripts de red publicitaria y analitica; no hay plan de pago. JSONCraft tambien muestra un unico banner AdSense mas una unidad en el pie, pero envuelve la analitica en Consent Mode v2 para que no se establezcan cookies de tracking hasta que aceptes, y cada funcion (validacion de schema, diff, conversiones, JSONPath) esta disponible sin registro ni upgrade premium. Si te preocupa mantener payloads pegados fuera de servidores de terceros, recuerda que el servidor de JSONLint tampoco ve tus datos (la validacion corre en el navegador), asi que en el eje de privacidad las dos herramientas son practicamente equivalentes; la diferencia esta en cuantos scripts de terceros carga cada pagina y con que agresividad trackean.
+        </p>
+      </section>
+
+      <!-- Migracion -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Cambiar de flujo</h3>
+        <p>
+          Si JSONLint vive en tu barra de marcadores como la pagina de referencia para "es valido este JSON", el reemplazo directo es el <code>/json-formatter/</code> de JSONCraft, que valida mientras escribes y formatea en el mismo paso. Cambia el marcador y sigue trabajando: no hay curva de aprendizaje porque el flujo principal (pegar, mirar el error, corregir) es identico. El valor que anade JSONCraft aparece despues de la validacion: si tu JSON es valido pero incorrecto, puedes abrir el Validador de JSON Schema para comprobarlo contra un contrato, el Diff JSON para comparar dos versiones o el conversor JSON a TypeScript para generar una interfaz. Nada de eso requiere salir del sitio ni aprender un editor nuevo. JSONLint sigue siendo perfectamente valido para el caso de un unico disparo; JSONCraft merece la pena la primera vez que quieras hacer cualquier cosa mas alla de esa pregunta.
+        </p>
+      </section>
+
       <!-- Veredicto -->
       <section class="space-y-3" style="color: var(--color-text-secondary);">
         <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>

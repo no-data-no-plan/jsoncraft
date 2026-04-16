@@ -129,6 +129,33 @@ const articleJsonLd = JSON.stringify({
         </ul>
       </section>
 
+      <!-- Technical nuances -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Technical nuances</h3>
+        <p>
+          JSON Editor Online, built and maintained by Jos de Jong, is genuinely the best-in-class pure JSON editor on the web. Its signature feature is a tree view that behaves like a spreadsheet: you can click a value, type a new one, tab to the next field, drag an array element up or down, and duplicate subtrees without ever touching raw text. The table mode is especially good for homogeneous arrays — the kind of payload you get out of a database query or an Excel export — because it transposes the array into rows and columns the way a human would want to read them. JSONCraft's tree viewer is deliberately read-only and focused on exploration and path copying, which is a different job.
+        </p>
+        <p>
+          On the engine side the two tools diverge. JSON Editor Online uses a custom incremental parser plus virtual scrolling so it can open documents far larger than the browser's default <code>JSON.parse</code> comfort zone — the 512 MB figure is real and exceptional for a web tool. JSONCraft leans on standard <code>JSON.parse</code> inside a Web Worker, which is fast for normal payloads but will refuse documents that exceed the V8 string limit (roughly 500 MB on most browsers). If you routinely crack open hundred-megabyte log dumps in a browser tab, JSON Editor Online is the right choice and it is not close.
+        </p>
+      </section>
+
+      <!-- Pricing and model -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Pricing, ads, and tracking</h3>
+        <p>
+          JSON Editor Online follows a freemium model. The free tier is ad-supported and caps file size, limits history, and disables cloud storage, while the paid plan (around $7 per month) removes ads, raises the size cap to 512 MB, and enables cross-device sync backed by their servers. For an individual working with non-sensitive data this is a fair deal; for engineers who have signed an NDA or who work with PII the cloud-sync feature is a hard no because the document leaves the browser. JSONCraft stays fully client-side, carries a single AdSense banner plus a footer unit, uses Consent Mode v2 so analytics only loads after you opt in, and never introduces a paid tier or an account system — so there is nothing to sync, nothing to leak, and nothing to unlock.
+        </p>
+      </section>
+
+      <!-- Migration -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Switching workflows</h3>
+        <p>
+          The two tools compose well. Keep JSON Editor Online bookmarked for heavy-duty editing sessions: a 200 MB Firestore export, a Postman collection you need to refactor by hand, or any array-heavy dataset where the table view saves real time. Use JSONCraft for everything around the edit — diffing two snapshots of the same payload, generating a TypeScript interface from a sample response, validating against a <code>jsonschema.net</code> definition, converting the cleaned-up result to YAML for a Kubernetes manifest or to CSV for a spreadsheet. There is no import step: both tools accept paste and drag-and-drop, so the hand-off is literally copy from one tab, paste into the other.
+        </p>
+      </section>
+
       <!-- Verdict -->
       <section class="space-y-3" style="color: var(--color-text-secondary);">
         <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Verdict</h3>

@@ -127,6 +127,33 @@ const articleJsonLd = JSON.stringify({
         </ul>
       </section>
 
+      <!-- Matices tecnicos -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Matices tecnicos</h3>
+        <p>
+          La mayor diferencia tecnica es donde se parsean tus datos. JSONCraft compila cada herramienta como asset estatico y las ejecuta dentro del sandbox JavaScript del navegador: el contenido que pegas en el editor nunca cruza la red. CodeBeautify opera mas como una app web clasica: varias herramientas envian el input por POST a un endpoint backend que devuelve el resultado formateado. Para snippets rapidos de JSON esto no importa; para respuestas de API, tokens de acceso, registros de usuarios o cualquier cosa bajo NDA se convierte en un problema real porque los datos ya han salido de la maquina cuando ves el resultado.
+        </p>
+        <p>
+          Los archivos grandes tambien se comportan distinto. JSONCraft delega el parseo JSON, el diff y las conversiones de formato a un Web Worker, asi que el hilo principal sigue respondiendo mientras se procesa un documento de 30 MB y el editor nunca se congela. CodeBeautify suele ejecutarse en el hilo principal, lo que puede colgar la pestana con entradas grandes, y los endpoints en servidor anaden latencia de ida y vuelta que se nota en cuanto iteras. Ninguna de las dos es un parser streaming, asi que documentos realmente enormes (cientos de MB) agotaran la memoria del navegador en ambas; para esos casos una CLI nativa como <code>jq</code> sigue siendo la respuesta correcta.
+        </p>
+      </section>
+
+      <!-- Precios y modelo -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Precios, anuncios y tracking</h3>
+        <p>
+          Ambos sitios son gratuitos y se financian con anuncios, pero la experiencia es muy distinta. CodeBeautify ejecuta varios bloques display por pagina junto con unidades intersticiales y fijas, y el DOM carga varios scripts de analitica y publicidad de terceros. Asi se financia la plataforma con sus mas de 100 herramientas, y es un trade-off legitimo, pero significa que tus pegados comparten pagina con trackers. JSONCraft usa un unico banner AdSense dentro del contenido mas una unidad en el pie, Google Analytics con Consent Mode v2 (no carga nada hasta que aceptas) y no usa pixeles de retargeting. No hay plan premium al que hacer upsell (cada herramienta es gratis siempre) porque la hoja de ruta se financia con el portafolio mas amplio de JSONCraft.dev, no con upsells dentro de la app.
+        </p>
+      </section>
+
+      <!-- Migracion -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Cambiar de flujo</h3>
+        <p>
+          Si tienes CodeBeautify marcado para trabajos con JSON, YAML, CSV, XML o TOML, la migracion es un cambio directo: sustituye el marcador por la herramienta equivalente de JSONCraft (por ejemplo, <code>/json-formatter/</code>, <code>/yaml-to-json/</code>, <code>/csv-to-json/</code>, <code>/xml-formatter/</code>, <code>/json-to-toml/</code>). La estructura de URLs es estable y cada pagina funciona offline tras cargarla una vez gracias al service worker PWA. Manten CodeBeautify marcado para formateo de SQL, embellecimiento HTML/CSS/JS, conversor imagen a base64 y los generadores de nicho que JSONCraft deliberadamente no cubre. Usar ambas es una estrategia razonable: JSONCraft para datos que no pegarias en un servidor cualquiera, CodeBeautify para la larga cola de formateadores especificos de lenguaje.
+        </p>
+      </section>
+
       <!-- Veredicto -->
       <section class="space-y-3" style="color: var(--color-text-secondary);">
         <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Veredicto</h3>

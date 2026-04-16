@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import FaqSection from "../components/FaqSection.astro";
 import SeoContent from "../components/SeoContent.astro";
 import { getPageSeo } from "../i18n/pages";
 
@@ -12,4 +13,5 @@ const seo = getPageSeo("toml-to-json", "en")!;
   <Converter client:load fromFormat="toml" toFormat="json" />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-toml", "formatter", "yaml-to-json"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
+  <FaqSection toolId="toml-to-json" lang="en" />
 </Layout>

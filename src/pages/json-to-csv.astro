@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Converter from "../components/Converter.svelte";
 import SeoBlock from "../components/SeoBlock.astro";
+import FaqSection from "../components/FaqSection.astro";
 import SeoContent from "../components/SeoContent.astro";
 import { getPageSeo } from "../i18n/pages";
 
@@ -12,4 +13,5 @@ const seo = getPageSeo("json-to-csv", "en")!;
   <Converter client:load fromFormat="json" toFormat="csv" />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["csv-to-json", "formatter", "json-to-yaml"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
+  <FaqSection toolId="json-to-csv" lang="en" />
 </Layout>

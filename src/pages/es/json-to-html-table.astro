@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import JsonToHtmlTable from "../../components/JsonToHtmlTable.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
+import FaqSection from "../../components/FaqSection.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("json-to-html-table", "es")!;
@@ -12,4 +13,5 @@ const seo = getPageSeo("json-to-html-table", "es")!;
   <JsonToHtmlTable client:load lang="es" />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-csv", "formatter", "viewer"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
+  <FaqSection toolId="json-to-html-table" lang="es" />
 </Layout>

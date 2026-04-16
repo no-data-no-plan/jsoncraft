@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import CronBuilder from "../components/CronBuilder.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
+import FaqSection from "../components/FaqSection.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("cron", "en")!;
@@ -12,4 +13,5 @@ const seo = getPageSeo("cron", "en")!;
   <CronBuilder client:load />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["timestamp", "formatter", "regex"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
+  <FaqSection toolId="cron" lang="en" />
 </Layout>

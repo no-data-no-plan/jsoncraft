@@ -128,6 +128,33 @@ const articleJsonLd = JSON.stringify({
         </ul>
       </section>
 
+      <!-- Technical nuances -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Technical nuances</h3>
+        <p>
+          JSONLint has been essentially unchanged since the early 2010s — which is both its strength and its ceiling. The page is a single HTML document with a textarea and a "Validate JSON" button; submitting calls a JavaScript parser that reports the first syntax error with a line and column. That is enough to catch trailing commas, unquoted keys, and mismatched braces in hand-written JSON, and the tight feedback loop is why the site has survived for more than a decade. What it cannot do is tell you whether your JSON matches the shape your backend expects. There is no JSON Schema validator, no JSONPath evaluator to drill into a key, no diff mode to compare two payloads, and no tree view to explore a large response. The textarea also has no syntax highlighting, bracket matching, or code folding — once your document grows past a screen or two, the editing experience becomes noticeably tedious.
+        </p>
+        <p>
+          JSONCraft aims at the same first-minute problem but uses a CodeMirror 6 editor that reports errors inline as you type, with a red gutter marker and a tooltip describing the mismatch. The parse happens in a Web Worker so the UI stays responsive on bigger documents, and the same editor is reused across the formatter, diff, tree viewer, JSONPath tester, and schema validator so the muscle memory carries over. For validation that goes beyond "is this syntactically JSON", JSONCraft's schema tool accepts a JSON Schema document and returns every violation with a pointer to the offending node — a capability JSONLint has never added.
+        </p>
+      </section>
+
+      <!-- Pricing and model -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Pricing, ads, and tracking</h3>
+        <p>
+          Both tools are free and do not require an account. JSONLint monetizes with display ads and loads the usual ad-network and analytics scripts on page load; there is no paid tier. JSONCraft also runs a single AdSense banner and a footer unit, but wraps analytics in Consent Mode v2 so no tracking cookies are set until you accept, and every feature — schema validation, diff, conversions, JSONPath — is available without a sign-up or a premium upgrade. If you care about keeping pasted payloads off third-party servers, remember that JSONLint's server also never sees your data (the validation runs in-browser), so on the privacy axis the two tools are effectively equivalent; the difference is in how many third-party scripts each page loads and how aggressively they track behaviour.
+        </p>
+      </section>
+
+      <!-- Migration -->
+      <section class="space-y-3" style="color: var(--color-text-secondary);">
+        <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Switching workflows</h3>
+        <p>
+          If JSONLint lives in your bookmarks bar as the go-to "is this valid JSON" page, the direct replacement is JSONCraft's <code>/json-formatter/</code>, which validates as you type and formats in the same step. Swap the bookmark and keep going — there is no learning curve because the core flow (paste, look at error, fix) is identical. Where JSONCraft adds value is the moment after validation: if your JSON is valid but wrong, you can open the JSON Schema Validator to check it against a contract, the JSON Diff to compare two versions, or the JSON to TypeScript converter to generate an interface. None of that requires leaving the site or learning a new editor. JSONLint remains perfectly fine for the single-shot use case; JSONCraft is worth adopting the first time you want to do anything beyond that one question.
+        </p>
+      </section>
+
       <!-- Verdict -->
       <section class="space-y-3" style="color: var(--color-text-secondary);">
         <h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">Verdict</h3>

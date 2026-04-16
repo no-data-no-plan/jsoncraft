@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import TreeViewer from "../../components/TreeViewer.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
+import FaqSection from "../../components/FaqSection.astro";
 import CompareLinks from "../../components/CompareLinks.astro";
 import { getPageSeo } from "../../i18n/pages";
 
@@ -14,4 +15,5 @@ const seo = getPageSeo("viewer", "es")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "jsonpath", "diff"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
   <CompareLinks lang="es" competitors={["json-crack", "json-editor-online"]} />
+  <FaqSection toolId="viewer" lang="es" />
 </Layout>

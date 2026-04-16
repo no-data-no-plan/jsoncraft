@@ -1,0 +1,31 @@
+---
+import type { Lang } from "../i18n/index";
+import { faqs } from "../i18n/faq";
+import { t } from "../i18n/common";
+
+interface Props {
+  toolId: string;
+  lang?: Lang;
+}
+
+const { toolId, lang = "en" } = Astro.props;
+const entry = faqs[toolId]?.[lang];
+const heading = lang === "es" ? "Preguntas frecuentes" : "Frequently asked questions";
+---
+
+{entry && entry.faqs.length > 0 && (
+  <section class="px-4 py-3 border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
+    <h2 class="text-sm font-semibold text-[var(--color-text-primary)] mb-2">{heading}</h2>
+    <div class="space-y-1">
+      {entry.faqs.map((faq, i) => (
+        <details class="border-b border-[var(--color-border)] last:border-b-0 pb-1">
+          <summary class="cursor-pointer py-1 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] select-none list-none flex items-center gap-2">
+            <span aria-hidden="true" class="text-[var(--color-text-muted)] text-xs">▸</span>
+            <span>{faq.question}</span>
+          </summary>
+          <p class="ml-4 mt-1 mb-2 text-sm text-[var(--color-text-muted)] leading-relaxed">{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+)}
