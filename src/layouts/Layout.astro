@@ -349,7 +349,7 @@ const jsonLd = JSON.stringify(schemas);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          {(isLegalPage || isHome || isComparePage) ? (
+          {(isLegalPage || isHome || isComparePage || isDocsHub || isDocsArticle) ? (
             <span class="text-lg font-semibold text-[var(--color-text-primary)]">{isHome ? "JSONCraft" : title}</span>
           ) : (
             <h1 class="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
