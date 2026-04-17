@@ -7,6 +7,17 @@ publishedAt: 2026-04-17
 lang: en
 tags: ["json-schema", "validation", "draft-07"]
 excerpt: "JSON Schema stops bad payloads at the edge of your service. Here are the keywords and patterns backend engineers actually use."
+faq:
+  - q: "Which JSON Schema draft should I use in 2026?"
+    a: "Target Draft 7 unless you have a specific reason not to. It is the floor that every mainstream validator supports — Ajv, python-jsonschema, go-jsonschema, and everit-org/json-schema on the JVM all ship it by default. Reach for 2019-09 only if you need `unevaluatedProperties` or `dependentRequired`, and 2020-12 only if you are on OpenAPI 3.1 or need `prefixItems` tuple semantics. Newer drafts add power but cut you off from half the ecosystem, and most production bugs are caught fine by Draft 7 keywords."
+  - q: "Why is additionalProperties false so important?"
+    a: "Without `additionalProperties: false`, your schema is advisory rather than enforcing. An attacker can smuggle extra fields through the validator into whatever downstream code inspects the raw JSON — anything from prototype-pollution keys like `__proto__` to privilege-escalation fields your app reads opportunistically. Schemas that omit it are suggesting, not validating. Set it on every object that touches external input. The only time to relax it is for open-ended maps, where `patternProperties` plus `additionalProperties: false` is still the right shape."
+  - q: "How do I reference other schemas with $ref?"
+    a: "Local refs use JSON Pointer into `#/$defs` (2019-09+) or `#/definitions` (Draft 7): `{ \"$ref\": \"#/definitions/address\" }`. Remote refs like `\"$ref\": \"https://example.com/schemas/address.json\"` work too, but never let your validator fetch at request time — the latency is unbounded. Pre-load every referenced schema at boot with `ajv.addSchema()` or the equivalent so resolution is purely in-memory. This is also how you get reliable validation in offline or sandboxed environments."
+  - q: "When should I use if/then/else versus oneOf?"
+    a: "Use `if`/`then`/`else` for two-branch conditional validation driven by a discriminator — for example, required fields that differ when `kind` is `card` versus `bank`. It reads cleaner than two full subschemas under `oneOf` for the same purpose. Reach for `oneOf` when you have three or more branches, or when the branches do not share a common discriminator field. `allOf` is for composition (mixing in a `Timestamped` base), and `anyOf` is for 'match at least one' — which is rarely what you actually want in validation."
+  - q: "Is format alone enough to validate emails or URLs?"
+    a: "No. `format` is advisory in JSON Schema — some validators enforce it (Ajv with `ajv-formats`), others ignore it entirely. Regex-based formats like `email` do not fully conform to RFC 5322, because no regex can. They catch obvious typos but are not security boundaries. When a format is security-critical — validating a URL before a server-side fetch, for example — parse the value with the language's URL parser and check scheme and host against an explicit allowlist. Treat `format` as a hint, not a defense."
 ---
 
 JSON Schema is the contract between your API and everything that calls it. It is the single artifact that can validate input, drive code generation, feed OpenAPI, and document the shape of your data all at once. But most teams use maybe 15% of it, stop at `type` and `required`, and then wonder why their validators miss real bugs.

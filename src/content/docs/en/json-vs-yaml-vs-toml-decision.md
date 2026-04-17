@@ -7,6 +7,17 @@ publishedAt: 2026-04-17
 lang: en
 tags: ["yaml", "toml", "formats", "config"]
 excerpt: "JSON, YAML, and TOML all represent the same tree of data. Which one you should use is decided by who edits the file, not by syntactic taste."
+faq:
+  - q: "Why does JSON have no comments?"
+    a: "JSON was designed as a machine-to-machine data interchange format, not as a human-edited config format. Douglas Crockford, who specified JSON, deliberately removed comments because parsers were implementing non-portable directives in them, breaking interoperability between tools. The omission is a feature for wire traffic and a hostile property for configuration. If you find yourself wanting comments in a `.json` config file, that is the signal to convert it to YAML or TOML — both natively support `#` comments and both have mature tooling."
+  - q: "When is YAML actually dangerous?"
+    a: "YAML has two real security footguns. Tag-based deserialization lets a malicious document instantiate arbitrary classes during parsing via tags like `!!python/object:...`, `!!java...`, or `!!ruby/object:...` — always use `yaml.safe_load()` in Python, `SafeConstructor` in snakeyaml, or `YAML(typ='safe')` in ruamel on untrusted input. The other gotcha is the Norway problem: unquoted `NO` was parsed as boolean `false` in YAML 1.1 and many parsers still follow those semantics. Quote country codes and similar string-ish tokens defensively."
+  - q: "Why does TOML work for Cargo but not deep config trees?"
+    a: "TOML was designed for flat-to-moderately-nested configuration. Its table and dotted-key syntax is clean for shallow structures — `Cargo.toml` and `pyproject.toml` are mostly lists of packages, feature flags, and build options. Representing a 5-level-deep nested object in TOML is possible but reads badly, and TOML has no native reference or inheritance mechanism, so you end up repeating yourself. If your config is deep, cross-referenced, or multi-environment, YAML handles it more naturally thanks to anchors and aliases."
+  - q: "Is YAML a superset of JSON?"
+    a: "Since YAML 1.2, technically yes — every valid JSON document parses as YAML. That was an explicit goal, so you can paste a JSON blob into a YAML file and the parser accepts it. In practice, 'superset' hides that YAML adds significant whitespace, multi-document files, anchors, multiple scalar styles, and implicit typing on top. So while JSON-in-YAML works, YAML's extra features mean a round trip through JSON loses comments and anchors. Convert one way (YAML → JSON) freely, but treat the reverse as lossy."
+  - q: "Can I safely convert between JSON, YAML, and TOML?"
+    a: "Structural data round-trips cleanly; metadata does not. YAML → JSON loses comments and expands anchors inline, which inflates the file. JSON → YAML is lossless in structure but your emitter may default to block or flow style — check the output. TOML ↔ JSON is the cleanest round trip because TOML has explicit types that map 1:1 to JSON primitives, with one catch: TOML's native date types become plain strings in JSON. Use JSONCraft's in-browser converters (JSON → YAML, YAML → JSON, JSON → TOML, TOML → JSON) — no data leaves the page."
 ---
 
 JSON, YAML, and TOML can all represent the same tree of data. A Kubernetes manifest in YAML, a `package.json` in JSON, and a `pyproject.toml` in TOML are encoding the same structural ideas: nested maps, lists, scalars. Which one you should use is decided less by syntactic taste and more by **who edits the file, who reads it, and what tooling you have on the far side**.

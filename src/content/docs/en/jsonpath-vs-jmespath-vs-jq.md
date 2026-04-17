@@ -7,6 +7,17 @@ publishedAt: 2026-04-17
 lang: en
 tags: ["jsonpath", "jmespath", "jq", "query"]
 excerpt: "JSONPath for selection. JMESPath for AWS. jq for transformation. Same family of problems, three different answers."
+faq:
+  - q: "Is JSONPath finally standardized?"
+    a: "Yes, RFC 9535 was published in 2024 and standardized JSONPath after 17 years of dialect fragmentation. Before the RFC, expressions like `$..book[0]` and filter expressions behaved differently across implementations. The RFC settles most of those disagreements and defines conformance testing. In practice, expect a transition period — libraries are still migrating toward full RFC 9535 compliance, and older JSONPath engines in production code may still use Goessner-dialect semantics. Check your library's docs to see which spec it targets before porting queries across stacks."
+  - q: "When is jq overkill compared to JSONPath or JMESPath?"
+    a: "jq is a full functional programming language with variables, functions, recursion, and modules. If your query only selects values by path — for example, inside a Kubernetes manifest tool that expects JSONPath, or a library's error-path field — a jq dependency adds build weight and a learning curve you do not need. JMESPath is the sweet spot when you need selection plus light reshaping in a portable query string. Reach for jq when you need real transformation, conditionals, joins, groupings, or streaming over large inputs."
+  - q: "Which query language should I use inside the AWS CLI?"
+    a: "JMESPath. It was designed at AWS specifically to query API responses, and every `--query` flag on the AWS CLI and every `query` parameter in the AWS SDK paginators accepts JMESPath. Its formal ABNF grammar and extensive test suite mean every compliant implementation behaves identically, which matters when you are writing queries that move between bash scripts, CloudFormation, and Lambda code. JSONPath and jq both work outside AWS tooling but offer no advantage inside it."
+  - q: "Can I transform output structure with JSONPath?"
+    a: "No. JSONPath is purely a selector — it returns a set of nodes from the input, and it cannot rename fields, construct new objects, or compute values. If you need to reshape output — turning `{InstanceId: 'i-abc', State: {Name: 'running'}}` into `{Id: 'i-abc', State: 'running'}` — use JMESPath, which has multi-select hashes for exactly that purpose, or jq, whose object construction `{Id: .InstanceId, State: .State.Name}` is one of its core patterns. Use JSONPath when the answer already exists inside the input."
+  - q: "Does jq work in the browser?"
+    a: "Yes, via `jq-wasm` or `jq-web`, which compile the canonical C implementation to WebAssembly. Both run entirely client-side and handle the same query language as the `jq` binary. The tradeoff is bundle size — the wasm build adds hundreds of KB to your page, so it is rarely worth shipping to users when a smaller JSONPath or JMESPath library would do. Reach for jq-wasm when you are building a developer tool where full jq power matters more than bytes, such as an interactive query playground."
 ---
 
 You have a big blob of JSON and you want one piece of it — or a transformed version of many pieces of it. There are three widely-deployed query languages for JSON in 2026: **JSONPath**, **JMESPath**, and **jq**. They look similar at a glance and solve overlapping problems, but their sweet spots are genuinely different.

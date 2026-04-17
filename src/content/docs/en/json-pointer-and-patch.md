@@ -7,6 +7,17 @@ publishedAt: 2026-04-17
 lang: en
 tags: ["json-pointer", "json-patch", "rfc-6901", "rfc-6902"]
 excerpt: "Two small RFCs most teams reinvent without knowing they exist. JSON Pointer addresses a single node. JSON Patch describes an atomic series of changes. Use them."
+faq:
+  - q: "What is the difference between JSON Pointer and JSONPath?"
+    a: "JSON Pointer (RFC 6901) addresses exactly one node in a document using slash-separated tokens — `/users/0/name` resolves to a single value. It has no wildcards, no filters, and one canonical spec that every implementation agrees on. JSONPath addresses a set of zero or more nodes and supports wildcards (`*`, `..`), filters (`?(@.price<10)`), and slices. Use Pointer when you need 'the node' — schema `$ref`, patch operations, validator error paths. Use JSONPath when you need 'every node that matches' a pattern across the document."
+  - q: "How do I escape slashes in a JSON Pointer?"
+    a: "Two characters need escaping inside pointer tokens: `/` becomes `~1` and `~` becomes `~0`. The order matters — escape `~` first, then `/` — but virtually every library handles this for you. So a key literally named `a/b~c` is referenced as `/a~1b~0c`. No other escaping rules apply: spaces, unicode, and special characters all pass through verbatim. This two-rule escape scheme is deliberately minimal so the pointer syntax stays unambiguous across every language's implementation of RFC 6901."
+  - q: "Is JSON Patch atomic?"
+    a: "Yes. A JSON Patch is all-or-nothing by specification: if any operation in the array fails — a `test` mismatch, an `add` to a missing parent path, a `remove` on a path that does not exist — the whole patch is aborted and the document is left unchanged. This atomicity is what makes JSON Patch suitable for HTTP `PATCH`: the client either sees the full change or nothing, with no partial-write cleanup. Combined with a `test` operation checking a version field plus an `If-Match` ETag header, you get optimistic concurrency control for free."
+  - q: "When should I use JSON Merge Patch instead of JSON Patch?"
+    a: "Use JSON Merge Patch (RFC 7396) for the common 'update these fields' case — it is dramatically simpler to write. A merge patch is itself a JSON object: applying `{\"name\": \"Updated\", \"tags\": null}` sets `name` and deletes `tags`. The limitations: you cannot distinguish 'delete this field' from 'set it to null' because null always means delete, and you cannot express array operations like 'append one item'. If you need either, use JSON Patch (RFC 6902). The content types differ — `application/merge-patch+json` vs `application/json-patch+json` — and tell the server which format to expect."
+  - q: "How do I generate a JSON Patch from two documents?"
+    a: "Do not write patches by hand. The standard pattern is: fetch current state, edit a local copy, diff old vs new to produce a minimal patch, send the patch. Libraries for step 3: `fast-json-patch` in JavaScript (`jsonpatch.compare(a, b)`), `jsonpatch` in Python, `evanphx/json-patch` in Go. Prepend a `test` operation on a version field and append a `replace` that increments it, and you have a safe compare-and-swap patch. Use JSONCraft's JSON Diff tool to visualize the change before sending — it helps catch accidental deletes."
 ---
 
 JSON Pointer (RFC 6901) and JSON Patch (RFC 6902) are two of the smallest, most universally implemented, and most frequently reinvented specifications in the JSON ecosystem. Both are under five pages. Both solve problems most teams solve badly with ad-hoc code.
