@@ -392,8 +392,10 @@ const jsonLd = JSON.stringify(schemas);
       </header>
 
       <!-- Main content -->
-      <main id="main-content" class="flex-1 flex flex-col overflow-hidden">
-        <slot />
+      <main id="main-content" class="flex-1 flex flex-col">
+        <div class="tool-content-wrapper flex flex-col">
+          <slot />
+        </div>
         {activeToolId && activeToolId !== "home" && activeToolId !== "compare" && activeToolId !== "docs" && !isLegalPage && (
           <RelatedDocs toolId={activeToolId} lang={lang} />
         )}
@@ -547,5 +549,27 @@ const jsonLd = JSON.stringify(schemas);
         });
       })();
     </script>
+  <style is:global>
+    /* Reserve space for tool Svelte islands (client:load) so the
+       CodeMirror editors inside get a defined height. Without this,
+       main's flex-col distributes space to content below the tool and
+       CodeMirror collapses to a single line. `astro-island` has
+       `display: contents` by default which prevents flex-basis from
+       working — override with `display: block` within the wrapper. */
+    .tool-content-wrapper {
+      flex: 1 1 auto;
+      min-height: 640px;
+    }
+    .tool-content-wrapper > astro-island {
+      display: block;
+      min-height: 640px;
+    }
+    @media (max-width: 640px) {
+      .tool-content-wrapper,
+      .tool-content-wrapper > astro-island {
+        min-height: 480px;
+      }
+    }
+  </style>
   </body>
 </html>
