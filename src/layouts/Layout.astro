@@ -19,7 +19,7 @@ interface Props {
 }
 
 const { title, description, activeToolId, lang = "en" } = Astro.props;
-const fullTitle = `${title} | JSONCraft`;
+const fullTitle = title.startsWith("JSONCraft") ? title : `${title} | JSONCraft`;
 const pathWithTrailing = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
 const canonicalUrl = `https://jsoncraft.dev${pathWithTrailing}`;
 const alternatePath = getAlternatePath(Astro.url.pathname);
