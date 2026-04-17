@@ -41,7 +41,7 @@ $.store.book[0,2]          # specific indices
 $.store.book[:3]           # slice
 ```
 
-You can try these live in the [JSONPath Tester](/jsonpath) against any payload.
+You can try these live in the [JSONPath Tester](/jsonpath/) against any payload.
 
 **Use JSONPath when:**
 
@@ -142,7 +142,7 @@ For pure selection, all three work. The differences matter when the query grows.
 - At a **shell prompt or in a CI script** you want jq.
 - Inside **application code**, pick the one with the best library for your language. In JS/TS, `jsonpath-plus` for JSONPath, `jmespath.js` for JMESPath, `jq-wasm` for jq — each has tradeoffs on bundle size and features.
 
-Use the [JSONPath Tester](/jsonpath) and the [JSON Viewer](/viewer) to prototype your selectors before wiring them into code. Getting the expression right interactively is five minutes; debugging a wrong selector in production is an afternoon.
+Use the [JSONPath Tester](/jsonpath/) and the [JSON Viewer](/viewer/) to prototype your selectors before wiring them into code. Getting the expression right interactively is five minutes; debugging a wrong selector in production is an afternoon.
 
 ## Related reading
 

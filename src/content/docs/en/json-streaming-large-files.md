@@ -155,11 +155,11 @@ If you control the producer, consider emitting **NDJSON** (newline-delimited JSO
 {"id": 3, "name": "Cyr"}
 ```
 
-This is the format BigQuery, Kafka Connect sinks, and most log aggregators emit. It is also trivial to process with [JSON to CSV](/json-to-csv) on a per-line basis. The price is that it is not "valid JSON" — no enclosing array — but it was never meant to be.
+This is the format BigQuery, Kafka Connect sinks, and most log aggregators emit. It is also trivial to process with [JSON to CSV](/json-to-csv/) on a per-line basis. The price is that it is not "valid JSON" — no enclosing array — but it was never meant to be.
 
 ## Interactive inspection
 
-When you have a sample file in the 1-50 MB range, the [JSON Viewer](/viewer) will load it in-browser and let you navigate the tree lazily. Above that size, use a streaming parser to extract a sample and inspect the sample. Opening a 2 GB JSON in any GUI tool is asking for tears.
+When you have a sample file in the 1-50 MB range, the [JSON Viewer](/viewer/) will load it in-browser and let you navigate the tree lazily. Above that size, use a streaming parser to extract a sample and inspect the sample. Opening a 2 GB JSON in any GUI tool is asking for tears.
 
 ## Related reading
 

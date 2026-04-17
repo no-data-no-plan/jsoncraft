@@ -155,11 +155,11 @@ Si controlas el productor, considera emitir **NDJSON** (newline-delimited JSON) 
 {"id": 3, "name": "Cyr"}
 ```
 
-Este es el formato que emiten BigQuery, los sinks de Kafka Connect y la mayoría de agregadores de logs. También es trivial procesarlo con [JSON a CSV](/es/json-to-csv) línea a línea. El precio es que no es "JSON válido" — sin array envolvente — pero nunca se pretendió que lo fuera.
+Este es el formato que emiten BigQuery, los sinks de Kafka Connect y la mayoría de agregadores de logs. También es trivial procesarlo con [JSON a CSV](/es/json-to-csv/) línea a línea. El precio es que no es "JSON válido" — sin array envolvente — pero nunca se pretendió que lo fuera.
 
 ## Inspección interactiva
 
-Cuando tienes un archivo de muestra en el rango 1-50 MB, el [Visor JSON](/es/viewer) lo carga en navegador y te deja navegar el árbol de forma lazy. Por encima, usa un parser streaming para extraer una muestra e inspeccionar la muestra. Abrir un JSON de 2 GB en cualquier GUI es pedir lágrimas.
+Cuando tienes un archivo de muestra en el rango 1-50 MB, el [Visor JSON](/es/viewer/) lo carga en navegador y te deja navegar el árbol de forma lazy. Por encima, usa un parser streaming para extraer una muestra e inspeccionar la muestra. Abrir un JSON de 2 GB en cualquier GUI es pedir lágrimas.
 
 ## Lectura relacionada
 

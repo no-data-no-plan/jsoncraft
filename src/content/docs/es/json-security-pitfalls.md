@@ -48,7 +48,7 @@ Librerías que han shippado CVEs aquí: `lodash.merge`, `minimist`, `object-path
 
 1. **Rechaza claves peligrosas.** Al recorrer input no confiable, niega las claves `__proto__`, `constructor` y `prototype` explícitamente. Es el fix más simple y lo que hace lodash moderno.
 2. **Usa `Object.create(null)` o `Map`.** Los objetos construidos con prototype `null` no tienen `Object.prototype` que contaminar.
-3. **Usa un schema.** Un validador JSON Schema con `additionalProperties: false` rechaza claves desconocidas antes de que lleguen al paso de merge. El [Validador JSON Schema](/es/json-schema-validator) es donde lo pruebas interactivamente.
+3. **Usa un schema.** Un validador JSON Schema con `additionalProperties: false` rechaza claves desconocidas antes de que lleguen al paso de merge. El [Validador JSON Schema](/es/json-schema-validator/) es donde lo pruebas interactivamente.
 4. **Congela `Object.prototype` en producción.** `Object.freeze(Object.prototype)` como defensa en profundidad — algunos frameworks lo hacen al arrancar.
 
 ## Parser DoS: inputs grandes y anidamiento profundo
@@ -135,7 +135,7 @@ Pega esto en cualquier endpoint HTTP que acepte JSON detrás de un validador que
 }
 ```
 
-Luego, en un request separado, comprueba si `{}.polluted` es true. Si lo es, tienes una vulnerabilidad de pollution. El [Formateador JSON](/es/formatter) es una forma segura de inspeccionar los bytes exactos antes de enviarlos.
+Luego, en un request separado, comprueba si `{}.polluted` es true. Si lo es, tienes una vulnerabilidad de pollution. El [Formateador JSON](/es/formatter/) es una forma segura de inspeccionar los bytes exactos antes de enviarlos.
 
 ## Lectura relacionada
 

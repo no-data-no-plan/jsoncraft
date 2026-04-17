@@ -80,7 +80,7 @@ La feature más infrautilizada de Draft 7 son los subschemas condicionales. Perm
 }
 ```
 
-Pega esto en el [Validador de JSON Schema](/es/json-schema-validator) y prueba ambas formas. Antes de `if`/`then`/`else`, tenías que tirar de `oneOf` con dos subschemas completos; después, un único schema expresa la intención con claridad.
+Pega esto en el [Validador de JSON Schema](/es/json-schema-validator/) y prueba ambas formas. Antes de `if`/`then`/`else`, tenías que tirar de `oneOf` con dos subschemas completos; después, un único schema expresa la intención con claridad.
 
 Para más de dos ramas, `oneOf` sigue siendo la herramienta correcta. `allOf` es para composición (mezclar un `Timestamped` base), y `anyOf` es para "coincide con al menos uno" — que rara vez es lo que quieres en un contexto de validación.
 
@@ -168,6 +168,6 @@ Esto valida un map de códigos de país ISO a números y rechaza cualquier clave
 
 ## Hacia dónde seguir
 
-Una vez tengas un schema en el que confíes, pásalo a [Ajv](https://ajv.js.org/) con `strict: true` y `allErrors: false` en hot paths de producción — `allErrors: true` está bien para herramientas de desarrollo pero es más lento. Combínalo con el [Formateador JSON](/es/formatter) para inspección rápida de payloads, y con [JSON Pointer y JSON Patch](/es/docs/json-pointer-and-patch/) para entender cómo se resuelven los paths `$ref` por dentro.
+Una vez tengas un schema en el que confíes, pásalo a [Ajv](https://ajv.js.org/) con `strict: true` y `allErrors: false` en hot paths de producción — `allErrors: true` está bien para herramientas de desarrollo pero es más lento. Combínalo con el [Formateador JSON](/es/formatter/) para inspección rápida de payloads, y con [JSON Pointer y JSON Patch](/es/docs/json-pointer-and-patch/) para entender cómo se resuelven los paths `$ref` por dentro.
 
 Si validas input no confiable, lee también [Pitfalls de seguridad en JSON](/es/docs/json-security-pitfalls/) — el schema por sí solo no detiene prototype pollution ni DoS a nivel de parser.

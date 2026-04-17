@@ -39,7 +39,7 @@ Reach for JSON when:
 - You are generating the file from code, not editing it by hand.
 - You need JSON Schema validation with a mature tooling stack.
 
-Avoid JSON when humans will be editing the file frequently. Tools like [JSON to YAML](/json-to-yaml) exist because `.json` config files in real projects get rewritten as YAML within a year anyway.
+Avoid JSON when humans will be editing the file frequently. Tools like [JSON to YAML](/json-to-yaml/) exist because `.json` config files in real projects get rewritten as YAML within a year anyway.
 
 ```json
 {
@@ -94,7 +94,7 @@ YAML has real security footguns:
 - **The Norway problem.** Unquoted `NO` was historically parsed as boolean `false` in YAML 1.1. YAML 1.2 narrowed this but many parsers still follow 1.1 semantics. If you are writing country codes unquoted, you have a bug waiting.
 - **Significant whitespace.** Tabs and spaces are not interchangeable. One stray tab and your config silently reshapes.
 
-Use YAML when the file is primarily human-edited, references are useful (multi-environment config), and you have a schema validator on the receiving end. Feed it through [YAML to JSON](/yaml-to-json) to sanity-check what your parser actually sees.
+Use YAML when the file is primarily human-edited, references are useful (multi-environment config), and you have a schema validator on the receiving end. Feed it through [YAML to JSON](/yaml-to-json/) to sanity-check what your parser actually sees.
 
 ## TOML: config for humans, without the rope
 
@@ -140,7 +140,7 @@ Ask three questions in order:
 
 Config tends to drift between formats over a project's life. A Node service starts with `package.json`, grows CI in `.github/workflows/*.yml`, and picks up a tool that wants `pyproject.toml`. Keeping them consistent is easier than picking one and forcing it everywhere.
 
-JSONCraft ships four one-step conversions: [JSON → YAML](/json-to-yaml), [YAML → JSON](/yaml-to-json), [JSON → TOML](/json-to-toml), and [TOML → JSON](/toml-to-json). They run entirely in your browser — no data leaves the page, which matters if the file has secrets.
+JSONCraft ships four one-step conversions: [JSON → YAML](/json-to-yaml/), [YAML → JSON](/yaml-to-json/), [JSON → TOML](/json-to-toml/), and [TOML → JSON](/toml-to-json/). They run entirely in your browser — no data leaves the page, which matters if the file has secrets.
 
 A few caveats on conversion:
 

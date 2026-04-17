@@ -48,7 +48,7 @@ Libraries that have shipped CVEs here: `lodash.merge`, `minimist`, `object-path`
 
 1. **Reject dangerous keys.** When walking untrusted input, refuse `__proto__`, `constructor`, and `prototype` keys explicitly. This is the simplest fix and what modern lodash does.
 2. **Use `Object.create(null)` or `Map`.** Objects built with a `null` prototype have no `Object.prototype` to pollute.
-3. **Use a schema.** A JSON Schema validator with `additionalProperties: false` rejects unknown keys before they reach the merge step. The [JSON Schema Validator](/json-schema-validator) is where you test this interactively.
+3. **Use a schema.** A JSON Schema validator with `additionalProperties: false` rejects unknown keys before they reach the merge step. The [JSON Schema Validator](/json-schema-validator/) is where you test this interactively.
 4. **Freeze `Object.prototype` in production.** `Object.freeze(Object.prototype)` as a defense-in-depth measure — some frameworks do this at boot.
 
 ## Parser DoS: big inputs and deep nesting
@@ -135,7 +135,7 @@ Paste this into any HTTP endpoint that accepts JSON behind a validator you wrote
 }
 ```
 
-Then, in a separate request, check whether `{}.polluted` is true. If it is, you have a pollution vulnerability. The [JSON Formatter](/formatter) is a safe way to inspect the exact bytes before sending them.
+Then, in a separate request, check whether `{}.polluted` is true. If it is, you have a pollution vulnerability. The [JSON Formatter](/formatter/) is a safe way to inspect the exact bytes before sending them.
 
 ## Related reading
 

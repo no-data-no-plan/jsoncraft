@@ -80,7 +80,7 @@ The single most underused feature of Draft 7 is conditional subschemas. They let
 }
 ```
 
-Paste that into the [JSON Schema Validator](/json-schema-validator) and try both shapes. Before `if`/`then`/`else`, you would have to reach for `oneOf` with two full subschemas; after, one schema expresses the intent cleanly.
+Paste that into the [JSON Schema Validator](/json-schema-validator/) and try both shapes. Before `if`/`then`/`else`, you would have to reach for `oneOf` with two full subschemas; after, one schema expresses the intent cleanly.
 
 For more than two branches, `oneOf` remains the right tool. `allOf` is for composition (mixing in a `Timestamped` base), and `anyOf` is for "match at least one" — which is rarely what you actually want in a validation context.
 
@@ -168,6 +168,6 @@ This validates a map of ISO country codes to numbers and rejects any key that do
 
 ## Where to go next
 
-Once you have a schema you trust, feed it into [Ajv](https://ajv.js.org/) with `strict: true` and `allErrors: false` in production hot paths — `allErrors: true` is great for developer tools but slower. Pair it with the [JSON Formatter](/formatter) for quick payload inspection, and combine it with [JSON Pointer and JSON Patch](/docs/json-pointer-and-patch/) to understand how `$ref` paths are resolved under the hood.
+Once you have a schema you trust, feed it into [Ajv](https://ajv.js.org/) with `strict: true` and `allErrors: false` in production hot paths — `allErrors: true` is great for developer tools but slower. Pair it with the [JSON Formatter](/formatter/) for quick payload inspection, and combine it with [JSON Pointer and JSON Patch](/docs/json-pointer-and-patch/) to understand how `$ref` paths are resolved under the hood.
 
 If you validate untrusted input, also read [JSON Security Pitfalls](/docs/json-security-pitfalls/) — schema alone does not stop prototype pollution or parser-level DoS.

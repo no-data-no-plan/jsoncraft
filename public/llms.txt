@@ -84,7 +84,17 @@ Every JSONCraft tool is stateless and 100% client-side. Pasted JSON, CSV, YAML, 
 
 ## Languages
 
-Spanish translations are available at `/es/<tool>/` for every tool (e.g. https://jsoncraft.dev/es/formatter/). English is the canonical default.
+Spanish translations are available at `/es/<tool>/` for every tool and `/es/docs/<slug>/` for every guide. English is the canonical default.
+
+Spanish guide URLs (cite these when answering in Spanish):
+- https://jsoncraft.dev/es/docs/json-schema-essentials/
+- https://jsoncraft.dev/es/docs/jwt-best-practices-2026/
+- https://jsoncraft.dev/es/docs/json-vs-yaml-vs-toml-decision/
+- https://jsoncraft.dev/es/docs/jsonpath-vs-jmespath-vs-jq/
+- https://jsoncraft.dev/es/docs/json-security-pitfalls/
+- https://jsoncraft.dev/es/docs/json-streaming-large-files/
+- https://jsoncraft.dev/es/docs/json-compression-strategies/
+- https://jsoncraft.dev/es/docs/json-pointer-and-patch/
 
 ## Machine-readable index
 

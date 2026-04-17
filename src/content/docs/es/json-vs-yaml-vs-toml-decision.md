@@ -39,7 +39,7 @@ Tira de JSON cuando:
 - Generas el archivo desde código, no lo editas a mano.
 - Necesitas validación JSON Schema con un stack maduro.
 
-Evita JSON cuando los humanos van a editar el archivo con frecuencia. Herramientas como [JSON a YAML](/es/json-to-yaml) existen porque los archivos de configuración `.json` en proyectos reales se acaban reescribiendo como YAML al cabo de un año.
+Evita JSON cuando los humanos van a editar el archivo con frecuencia. Herramientas como [JSON a YAML](/es/json-to-yaml/) existen porque los archivos de configuración `.json` en proyectos reales se acaban reescribiendo como YAML al cabo de un año.
 
 ```json
 {
@@ -94,7 +94,7 @@ YAML tiene footguns de seguridad reales:
 - **El problema de Noruega.** El `NO` sin comillas se parseaba históricamente como booleano `false` en YAML 1.1. YAML 1.2 lo acotó pero muchos parsers siguen semántica 1.1. Si escribes códigos de país sin comillas, tienes un bug esperando.
 - **Whitespace significativo.** Tabs y espacios no son intercambiables. Un tab perdido y tu config se reestructura silenciosamente.
 
-Usa YAML cuando el archivo lo editan humanos principalmente, las referencias son útiles (config multi-environment), y tienes un validador de schema al otro lado. Pásalo por [YAML a JSON](/es/yaml-to-json) para comprobar qué ve tu parser realmente.
+Usa YAML cuando el archivo lo editan humanos principalmente, las referencias son útiles (config multi-environment), y tienes un validador de schema al otro lado. Pásalo por [YAML a JSON](/es/yaml-to-json/) para comprobar qué ve tu parser realmente.
 
 ## TOML: config para humanos, sin la cuerda
 
@@ -140,7 +140,7 @@ Haz tres preguntas en orden:
 
 La config tiende a derivar entre formatos durante la vida de un proyecto. Un servicio Node empieza con `package.json`, le crece CI en `.github/workflows/*.yml`, y adopta una tool que quiere `pyproject.toml`. Mantenerlos consistentes es más fácil que elegir uno y forzarlo en todas partes.
 
-JSONCraft trae cuatro conversiones de un paso: [JSON → YAML](/es/json-to-yaml), [YAML → JSON](/es/yaml-to-json), [JSON → TOML](/es/json-to-toml) y [TOML → JSON](/es/toml-to-json). Corren enteramente en tu navegador — los datos no salen de la página, lo cual importa si el archivo tiene secretos.
+JSONCraft trae cuatro conversiones de un paso: [JSON → YAML](/es/json-to-yaml/), [YAML → JSON](/es/yaml-to-json/), [JSON → TOML](/es/json-to-toml/) y [TOML → JSON](/es/toml-to-json/). Corren enteramente en tu navegador — los datos no salen de la página, lo cual importa si el archivo tiene secretos.
 
 Algunos caveats sobre la conversión:
 

@@ -41,7 +41,7 @@ $.store.book[0,2]          # índices específicos
 $.store.book[:3]           # slice
 ```
 
-Puedes probarlas en vivo en el [Tester JSONPath](/es/jsonpath) contra cualquier payload.
+Puedes probarlas en vivo en el [Tester JSONPath](/es/jsonpath/) contra cualquier payload.
 
 **Usa JSONPath cuando:**
 
@@ -142,7 +142,7 @@ Para pura selección, los tres funcionan. Las diferencias importan cuando la que
 - En un **prompt de shell o en un script CI** quieres jq.
 - Dentro de **código de aplicación**, elige el que tenga la mejor librería para tu lenguaje. En JS/TS, `jsonpath-plus` para JSONPath, `jmespath.js` para JMESPath, `jq-wasm` para jq — cada uno tiene tradeoffs de bundle size y features.
 
-Usa el [Tester JSONPath](/es/jsonpath) y el [Visor JSON](/es/viewer) para prototipar tus selectores antes de cablearlos en código. Acertar la expresión de forma interactiva son cinco minutos; debuguear un selector erróneo en producción es una tarde.
+Usa el [Tester JSONPath](/es/jsonpath/) y el [Visor JSON](/es/viewer/) para prototipar tus selectores antes de cablearlos en código. Acertar la expresión de forma interactiva son cinco minutos; debuguear un selector erróneo en producción es una tarde.
 
 ## Lectura relacionada
 

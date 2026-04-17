@@ -21,7 +21,7 @@ A JWT is three base64url-encoded parts separated by dots: `header.payload.signat
 eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyXzEyMyIsImV4cCI6MTc2MzAwMDAwMH0.signature_bytes_base64url
 ```
 
-Decode the first two segments with the [Base64 tool](/base64) (remember to switch to url-safe variant) and you get plain JSON:
+Decode the first two segments with the [Base64 tool](/base64/) (remember to switch to url-safe variant) and you get plain JSON:
 
 ```json
 // header
@@ -100,9 +100,9 @@ There are three practical answers:
 
 When debugging a JWT in production, the workflow is:
 
-1. Paste the token into the [Base64 decoder](/base64) (url-safe mode) to inspect header and payload.
+1. Paste the token into the [Base64 decoder](/base64/) (url-safe mode) to inspect header and payload.
 2. Check `alg`, `exp`, `iss`, `aud` against what your verifier expects.
-3. Compute the expected signature with the [Hash tool](/hash) if HS256 — `HMAC-SHA256(header + "." + payload, secret)`, base64url-encoded.
+3. Compute the expected signature with the [Hash tool](/hash/) if HS256 — `HMAC-SHA256(header + "." + payload, secret)`, base64url-encoded.
 4. If asymmetric, use the issuer's JWKS endpoint to fetch the public key matching `kid`.
 
 ## Related reading

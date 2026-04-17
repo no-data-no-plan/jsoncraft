@@ -134,7 +134,7 @@ You rarely write a patch by hand. The common pattern is:
 
 Libraries that do step 3: `fast-json-patch` in JS, `jsonpatch` in Python, `evanphx/json-patch` in Go. They produce a minimal patch that describes the difference.
 
-When debugging, the [JSON Diff tool](/diff) visualizes exactly what changed between two documents — useful for checking that the patch you are about to send matches what you intend. Paste the before and after, read the diff, then let your library generate the JSON Patch.
+When debugging, the [JSON Diff tool](/diff/) visualizes exactly what changed between two documents — useful for checking that the patch you are about to send matches what you intend. Paste the before and after, read the diff, then let your library generate the JSON Patch.
 
 ## A practical example: collaborative editing
 
