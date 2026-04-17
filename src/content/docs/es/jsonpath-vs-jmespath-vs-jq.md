@@ -42,7 +42,7 @@ JSONPath es el "XPath para JSON" que Stefan Goessner esbozó en un post de blog 
 
 Una expresión JSONPath selecciona un conjunto de nodos de un documento JSON. Es solo lectura y puramente selector — no hay paso de mapping ni transformación.
 
-```
+```txt
 $                          # raíz
 $.store.book[0]            # primer libro
 $.store.book[*].title      # todo título de libro
@@ -68,7 +68,7 @@ JMESPath se diseñó en AWS para consultar respuestas de la API de AWS. Si algun
 
 La feature destacada respecto a JSONPath es el **reshaping de salida**: JMESPath puede construir objetos y arrays con estructura nueva a partir de los nodos matcheados.
 
-```
+```json
 # input
 {
   "Reservations": [
@@ -129,7 +129,7 @@ Lo que jq puede hacer y los otros no:
 
 ## Lado a lado: "títulos de libros por debajo de $10"
 
-```
+```json
 # input
 { "store": { "book": [
   { "title": "A", "price": 8.0 },

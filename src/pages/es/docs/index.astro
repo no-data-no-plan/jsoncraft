@@ -8,23 +8,23 @@ const groupedCategories = CATEGORY_ORDER
   .map((cat) => ({ cat, docs: docs.filter((d) => d.data.category === cat) }))
   .filter((g) => g.docs.length > 0);
 
-const description = "Gu\u00edas pr\u00e1cticas sobre JSON, JSON Schema, JWT, JSONPath y conversi\u00f3n entre formatos. Cada gu\u00eda enlaza con la herramienta de JSONCraft que la aplica en el navegador.";
+const description = "Guías prácticas sobre JSON, JSON Schema, JWT, JSONPath y conversión entre formatos. Cada guía enlaza con la herramienta de JSONCraft que la aplica en el navegador.";
 ---
 
-<Layout title="Gu\u00edas" description={description} activeToolId="docs" lang={lang} schemaType="CollectionPage">
+<Layout title="Guías" description={description} activeToolId="docs" lang={lang} schemaType="CollectionPage">
   <section class="px-4 sm:px-8 py-8 max-w-[56rem] mx-auto">
     <header class="mb-8">
-      <p class="text-xs uppercase tracking-wider text-[var(--color-accent-fg)] mb-2">Gu\u00edas</p>
-      <h1 class="text-3xl font-bold text-[var(--color-text-primary)] leading-tight mb-3">Gu\u00edas del ecosistema JSON</h1>
+      <p class="text-xs uppercase tracking-wider text-[var(--color-accent-fg)] mb-2">Guías</p>
+      <h1 class="text-3xl font-bold text-[var(--color-text-primary)] leading-tight mb-3">Guías del ecosistema JSON</h1>
       <p class="text-base text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
-        Gu\u00edas pr\u00e1cticas y t\u00e9cnicas sobre JSON Schema, JWT, JSONPath vs JMESPath, JSON vs YAML vs TOML, parsers streaming, pitfalls de seguridad y compresi\u00f3n.
-        Cada gu\u00eda va con la herramienta de JSONCraft que la aplica en el navegador.
+        Guías prácticas y técnicas sobre JSON Schema, JWT, JSONPath vs JMESPath, JSON vs YAML vs TOML, parsers streaming, pitfalls de seguridad y compresión.
+        Cada guía va con la herramienta de JSONCraft que la aplica en el navegador.
       </p>
     </header>
 
     {docs.length === 0 && (
       <div class="p-4 rounded border border-[var(--color-border)] text-sm text-[var(--color-text-muted)] bg-[var(--color-bg-secondary)]">
-        Sin gu\u00edas publicadas todav\u00eda. Vuelve pronto.
+        Sin guías publicadas todavía. Vuelve pronto.
       </div>
     )}
 

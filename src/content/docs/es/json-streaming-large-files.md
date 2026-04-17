@@ -160,7 +160,7 @@ Reglas prácticas, independientemente del lenguaje:
 
 Si controlas el productor, considera emitir **NDJSON** (newline-delimited JSON) en vez de un array gigante. Cada línea es un valor JSON independiente. Toda tool capaz de streaming — jq, stream-json, ijson, incluso `awk`/`head`/`tail` — lo maneja nativamente.
 
-```
+```json
 {"id": 1, "name": "Ana"}
 {"id": 2, "name": "Ben"}
 {"id": 3, "name": "Cyr"}

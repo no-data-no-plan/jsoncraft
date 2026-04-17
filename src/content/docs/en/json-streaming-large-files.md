@@ -160,7 +160,7 @@ Rules of thumb, regardless of language:
 
 If you control the producer, consider emitting **NDJSON** (newline-delimited JSON) instead of a giant array. Each line is an independent JSON value. Every streaming-capable tool — jq, stream-json, ijson, even `awk`/`head`/`tail` — handles it naturally.
 
-```
+```json
 {"id": 1, "name": "Ana"}
 {"id": 2, "name": "Ben"}
 {"id": 3, "name": "Cyr"}

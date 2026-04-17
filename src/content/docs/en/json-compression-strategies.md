@@ -41,7 +41,7 @@ Two things leap out. **On the wire, JSON + gzip is the smallest non-schema optio
 
 A typical JSON payload has enormous redundancy: repeated keys on every object, long camelCase identifiers, ASCII digits for numbers. gzip (DEFLATE) eats this for breakfast. Expect 70-80% size reduction on any JSON document larger than about 1 KB, and 80-90% on API responses with repeated objects.
 
-```
+```bash
 $ wc -c api_response.json
 1948221 api_response.json           # 1.95 MB
 
@@ -89,7 +89,7 @@ If your constraint is "we need a binary object representation and an RFC to cite
 
 Protocol Buffers and Avro are in a different category. They require a schema on both ends, and they use that schema to encode only the *data*, not the field names or structure. A Protobuf message for `{id: 1, name: "Ana"}` with `id` as field 1 and `name` as field 2 is roughly:
 
-```
+```txt
 08 01 12 03 41 6e 61
 ```
 

@@ -24,8 +24,8 @@ export const CATEGORY_LABELS: Record<DocLang, Record<Category, string>> = {
   },
   es: {
     fundamentals: "Fundamentos",
-    schema: "Schema y validaci\u00f3n",
-    formats: "Formatos y conversi\u00f3n",
+    schema: "Schema y validación",
+    formats: "Formatos y conversión",
     security: "Seguridad",
     performance: "Rendimiento",
     ecosystem: "Ecosistema",

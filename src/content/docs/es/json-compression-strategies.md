@@ -41,7 +41,7 @@ Dos cosas saltan a la vista. **En el cable, JSON + gzip es la opción más peque
 
 Un payload JSON típico tiene redundancia enorme: claves repetidas en cada objeto, identificadores camelCase largos, dígitos ASCII para números. gzip (DEFLATE) se lo come de desayuno. Espera 70-80% de reducción de tamaño en cualquier documento JSON mayor de ~1 KB, y 80-90% en respuestas de API con objetos repetidos.
 
-```
+```bash
 $ wc -c api_response.json
 1948221 api_response.json           # 1,95 MB
 
@@ -89,7 +89,7 @@ Si tu restricción es "necesitamos representación binaria de objeto y un RFC qu
 
 Protocol Buffers y Avro están en categoría distinta. Exigen un schema en ambos extremos, y lo usan para codificar solo los *datos*, no los nombres de campo ni la estructura. Un mensaje Protobuf para `{id: 1, name: "Ana"}` con `id` como field 1 y `name` como field 2 es aproximadamente:
 
-```
+```txt
 08 01 12 03 41 6e 61
 ```
 

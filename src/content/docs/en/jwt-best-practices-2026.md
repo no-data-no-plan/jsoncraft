@@ -28,7 +28,7 @@ This guide covers what you should use in 2026, what you should avoid, and how to
 
 A JWT is three base64url-encoded parts separated by dots: `header.payload.signature`. Note **base64url**, not base64 — `-` and `_` replace `+` and `/`, and trailing `=` padding is stripped. A JWT with a normal base64 signature will fail verification in every correct library.
 
-```
+```txt
 eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyXzEyMyIsImV4cCI6MTc2MzAwMDAwMH0.signature_bytes_base64url
 ```
 

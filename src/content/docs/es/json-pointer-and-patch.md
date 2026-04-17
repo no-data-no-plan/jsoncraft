@@ -28,7 +28,7 @@ JSON Pointer (RFC 6901) y JSON Patch (RFC 6902) son dos de las especificaciones 
 
 Un JSON Pointer es un string con tokens separados por barras, cada uno de los cuales es una clave de objeto o un índice de array. La raíz del documento es el string vacío. Los tokens se combinan con barras delante.
 
-```
+```json
 // documento
 {
   "users": [
@@ -108,7 +108,7 @@ Un JSON Patch es **todo-o-nada**. Si cualquier operación del array falla (un `t
 
 El método `PATCH` de IETF es deliberadamente agnóstico de formato, pero RFC 5789 menciona explícitamente JSON Patch como el enfoque canónico JSON-sobre-HTTP. Un intercambio típico:
 
-```
+```http
 PATCH /api/documents/42 HTTP/1.1
 Content-Type: application/json-patch+json
 If-Match: "etag-abc-123"

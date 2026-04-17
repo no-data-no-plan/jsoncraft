@@ -28,7 +28,7 @@ JSON Pointer (RFC 6901) and JSON Patch (RFC 6902) are two of the smallest, most 
 
 A JSON Pointer is a string with slash-separated tokens, each of which is an object key or an array index. The root of the document is the empty string. Tokens are combined with leading slashes.
 
-```
+```json
 // document
 {
   "users": [
@@ -108,7 +108,7 @@ A JSON Patch is **all-or-nothing**. If any operation in the array fails (a `test
 
 The IETF `PATCH` method is deliberately format-agnostic, but RFC 5789 explicitly calls out JSON Patch as the canonical JSON-over-HTTP approach. A typical exchange:
 
-```
+```http
 PATCH /api/documents/42 HTTP/1.1
 Content-Type: application/json-patch+json
 If-Match: "etag-abc-123"
