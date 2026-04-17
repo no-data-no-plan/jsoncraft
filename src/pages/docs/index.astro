@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getAllDocs, docPath, formatDate, CATEGORY_ORDER, CATEGORY_LABELS } from "../../lib/docs";
+
+const lang = "en" as const;
+const docs = await getAllDocs(lang);
+const groupedCategories = CATEGORY_ORDER
+  .map((cat) => ({ cat, docs: docs.filter((d) => d.data.category === cat) }))
+  .filter((g) => g.docs.length > 0);
+
+const description = "Practical guides on JSON, JSON Schema, JWT, JSONPath, and format conversion. Every guide links to the JSONCraft tool that applies it in-browser.";
+---
+
+<Layout title="Guides" description={description} activeToolId="docs" lang={lang} schemaType="CollectionPage">
+  <section class="px-4 sm:px-8 py-8 max-w-[56rem] mx-auto">
+    <header class="mb-8">
+      <p class="text-xs uppercase tracking-wider text-[var(--color-accent-fg)] mb-2">Guides</p>
+      <h1 class="text-3xl font-bold text-[var(--color-text-primary)] leading-tight mb-3">JSON ecosystem guides</h1>
+      <p class="text-base text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
+        Practical, technical guides on JSON Schema, JWT, JSONPath vs JMESPath, JSON vs YAML vs TOML, streaming parsers, security pitfalls, and compression.
+        Each guide pairs with the JSONCraft tool that applies it in-browser.
+      </p>
+    </header>
+
+    {docs.length === 0 && (
+      <div class="p-4 rounded border border-[var(--color-border)] text-sm text-[var(--color-text-muted)] bg-[var(--color-bg-secondary)]">
+        No guides published yet. Check back soon.
+      </div>
+    )}
+
+    {groupedCategories.map(({ cat, docs: catDocs }) => (
+      <div class="mb-8">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-primary)] mb-3 pb-1 border-b border-[var(--color-border)]">
+          {CATEGORY_LABELS[lang][cat]}
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {catDocs.map((doc) => (
+            <a
+              href={docPath(doc)}
+              class="block p-4 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors bg-[var(--color-bg-secondary)]"
+            >
+              <div class="text-sm font-semibold text-[var(--color-text-primary)] mb-1 leading-snug">{doc.data.title}</div>
+              <div class="text-xs text-[var(--color-text-muted)] line-clamp-3 mb-2">{doc.data.description}</div>
+              <div class="text-[10px] text-[var(--color-text-muted)] opacity-70">{formatDate(doc.data.publishedAt, lang)}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+</Layout>

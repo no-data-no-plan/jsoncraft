@@ -582,4 +582,133 @@
     <priority>0.6</priority>
     <lastmod>2026-04-17</lastmod>
   </url>
+
+  <!-- Docs hub -->
+  <url>
+    <loc>https://jsoncraft.dev/docs/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/" />
+    <priority>0.8</priority><changefreq>weekly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/" />
+    <priority>0.8</priority><changefreq>weekly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <!-- Docs articles (8 × EN + ES) -->
+  <url>
+    <loc>https://jsoncraft.dev/docs/json-schema-essentials/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-schema-essentials/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-schema-essentials/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-schema-essentials/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/json-schema-essentials/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-schema-essentials/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-schema-essentials/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-schema-essentials/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/jwt-best-practices-2026/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/jwt-best-practices-2026/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/jwt-best-practices-2026/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/jwt-best-practices-2026/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/jwt-best-practices-2026/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/jwt-best-practices-2026/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/jwt-best-practices-2026/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/jwt-best-practices-2026/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-vs-yaml-vs-toml-decision/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/json-vs-yaml-vs-toml-decision/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-vs-yaml-vs-toml-decision/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/jsonpath-vs-jmespath-vs-jq/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/jsonpath-vs-jmespath-vs-jq/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/jsonpath-vs-jmespath-vs-jq/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/json-security-pitfalls/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-security-pitfalls/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-security-pitfalls/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-security-pitfalls/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/json-security-pitfalls/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-security-pitfalls/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-security-pitfalls/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-security-pitfalls/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/json-streaming-large-files/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-streaming-large-files/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-streaming-large-files/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-streaming-large-files/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/json-streaming-large-files/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-streaming-large-files/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-streaming-large-files/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-streaming-large-files/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/json-compression-strategies/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-compression-strategies/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-compression-strategies/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-compression-strategies/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/json-compression-strategies/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-compression-strategies/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-compression-strategies/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-compression-strategies/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/docs/json-pointer-and-patch/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-pointer-and-patch/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-pointer-and-patch/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-pointer-and-patch/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/docs/json-pointer-and-patch/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/docs/json-pointer-and-patch/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/docs/json-pointer-and-patch/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-pointer-and-patch/" />
+    <priority>0.7</priority><changefreq>monthly</changefreq><lastmod>2026-04-17</lastmod>
+  </url>
 </urlset>
