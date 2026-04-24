@@ -290,8 +290,21 @@ const jsonLd = JSON.stringify(schemas);
 
     <!-- Preconnect to AdSense origins to shave ~50-100ms off the first ad request -->
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <link rel="preconnect" href="https://fundingchoicesmessages.google.com" crossorigin />
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://adservice.google.com" />
+
+    <!-- Google Funding Choices (Privacy & messaging CMP) — certified for AdSense
+         GDPR/CCPA. MUST load BEFORE AdSense. Handles IAB TCF v2.2 signaling
+         for EEA/UK/CH users and CCPA signals for California users. No UI shown
+         outside regulated regions. -->
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8761907366448308?ers=1"></script>
+    <script is:inline>
+      (function() { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();
+    </script>
+
+    <!-- Google AdSense — CMP (above) controls consent signal per region -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8761907366448308" crossorigin="anonymous"></script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
