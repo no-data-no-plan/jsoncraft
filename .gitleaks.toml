@@ -1,0 +1,17 @@
+# Inherit gitleaks default ruleset
+[extend]
+useDefault = true
+
+# Educational JWT examples in published docs are not secrets — the
+# "signature" is the literal string "signature_bytes_base64url" so the
+# token is unverifiable by design. Allowlist those files (path + regex
+# fallback in case path normalization differs across scan modes).
+[allowlist]
+description = "JWT example tokens in best-practices docs"
+paths = [
+  '''src/content/docs/en/jwt-best-practices-.*\.md''',
+  '''src/content/docs/es/jwt-best-practices-.*\.md''',
+]
+regexes = [
+  '''signature_bytes_base64url''',
+]
