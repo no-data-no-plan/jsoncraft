@@ -28,6 +28,11 @@ export interface HomeI18n {
   groupDevToolsLabel: string;
   bottomCtaEyebrow: string;
   bottomCtaText: string;
+  // Editorial intro paragraphs rendered between hero and tool grid.
+  // Tuple is (paragraph 1, paragraph 2) — keeps the rendering logic
+  // simple while letting translators handle each as a self-contained
+  // unit. Aim for 60-90 words per paragraph.
+  introParagraphs: [string, string];
 }
 
 const homeI18n: Record<Lang, HomeI18n> = {
@@ -44,6 +49,10 @@ const homeI18n: Record<Lang, HomeI18n> = {
     groupDevToolsLabel: "Dev Tools",
     bottomCtaEyebrow: "23 free developer tools",
     bottomCtaText: "No signup, no tracking, no limits. Everything runs locally in your browser.",
+    introParagraphs: [
+      "JSONCraft started as a single JSON formatter and grew into a focused suite covering the recurring tasks that show up alongside JSON in real codebases — schema validation, structural diffing, YAML and TOML and CSV conversion, JSONPath queries, and the small developer utilities (regex tester, base64 encoder, UUID generator, cron parser, timestamp converter, hash calculator) that you would otherwise hop between five different tabs to use. Every tool is keyboard-driven, deep-linkable, and shares a consistent input/output panel so the muscle memory transfers.",
+      "Privacy is the design constraint, not a marketing tag. The entire suite is static HTML and TypeScript shipped from Cloudflare's edge — there is no backend, no upload step, no signup wall, no telemetry on the data you paste in. Whatever you put into a JSONCraft tool stays in your browser tab; closing the tab discards it. That makes JSONCraft a viable choice for handling production payloads, customer data fixtures, signed JWT debug dumps, internal config files, and anything else you would not paste into a third-party site whose data-handling story you cannot audit.",
+    ],
   },
   es: {
     title: "JSONCraft — Herramientas JSON, YAML, CSV y TOML gratis en tu navegador",
@@ -58,6 +67,10 @@ const homeI18n: Record<Lang, HomeI18n> = {
     groupDevToolsLabel: "Utilidades Dev",
     bottomCtaEyebrow: "23 herramientas gratis para dev",
     bottomCtaText: "Sin registro, sin tracking, sin l\u00edmites. Todo se ejecuta localmente en tu navegador.",
+    introParagraphs: [
+      "JSONCraft empez\u00f3 como un \u00fanico formateador de JSON y creci\u00f3 hasta convertirse en una suite enfocada que cubre las tareas recurrentes que aparecen junto a JSON en proyectos reales: validaci\u00f3n de esquemas, diff estructural, conversi\u00f3n entre YAML, TOML y CSV, consultas JSONPath y las peque\u00f1as utilidades de desarrollo (probador de regex, codificador base64, generador de UUID, parser de cron, conversor de timestamps, calculadora de hash) por las que de otra forma saltar\u00edas entre cinco pesta\u00f1as. Todas las herramientas se manejan por teclado, son enlazables directamente y comparten el mismo panel de entrada/salida, as\u00ed que la memoria muscular se transfiere de una a otra.",
+      "La privacidad es la restricci\u00f3n de dise\u00f1o, no un eslogan de marketing. Toda la suite es HTML est\u00e1tico y TypeScript servido desde el edge de Cloudflare \u2014 no hay backend, no hay paso de subida, no hay muro de registro y no hay telemetr\u00eda sobre los datos que pegas. Lo que pongas en una herramienta de JSONCraft se queda en tu pesta\u00f1a; al cerrarla, se descarta. Eso convierte a JSONCraft en una opci\u00f3n viable para manejar payloads de producci\u00f3n, fixtures con datos de clientes, dumps de JWT firmados, archivos de configuraci\u00f3n internos y cualquier cosa que no pegar\u00edas en un sitio de terceros cuya pol\u00edtica de datos no puedes auditar.",
+    ],
   },
 };
 

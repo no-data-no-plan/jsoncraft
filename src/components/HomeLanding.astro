@@ -86,6 +86,16 @@ const formatterHref = localePath("/formatter/", lang);
     </a>
   </header>
 
+  <!-- Editorial intro: two paragraphs of crawlable copy positioning
+       JSONCraft and stating the privacy model. Lifts the home above
+       the AdSense thin-content threshold (was 294w) and gives Google
+       enough text to understand what the page is about beyond the
+       hero one-liner. -->
+  <section class="intro" aria-label={i18n.heroEyebrow}>
+    <p>{i18n.introParagraphs[0]}</p>
+    <p>{i18n.introParagraphs[1]}</p>
+  </section>
+
   <!-- 3 categorised tool groups. Layout injects the ad banner after
        the <slot />, so we don't add one inline here — keeps the
        category flow clean without interruption. -->
@@ -191,6 +201,22 @@ const formatterHref = localePath("/formatter/", lang);
   .hero-cta:hover .hero-cta-arrow,
   .hero-cta:focus-visible .hero-cta-arrow {
     color: var(--color-accent);
+  }
+
+  /* Intro --------------------------------------------------------- */
+  .intro {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    padding: 0 0.5rem;
+  }
+  .intro p {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+  .intro p:last-child {
+    margin-bottom: 0;
   }
 
   /* Tool groups --------------------------------------------------- */
