@@ -137,28 +137,8 @@ if (!isHome) {
   });
 }
 
-// HowTo schema for tool pages — eligible for Google HowTo rich results.
-// Skip for legal pages, compare pages, and home (home has FAQPage instead).
-// HowTo steps are defined per tool in src/i18n/howto.ts.
-if (!isLegalPage && !isComparePage && !isHome && !isDocsArticle && !isDocsHub) {
-  const howto = getHowTo(activeToolId, lang);
-  if (howto) {
-    schemas.push({
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": howto.name,
-      "description": description,
-      "inLanguage": lang,
-      "tool": [{ "@type": "HowToTool", "name": `JSONCraft ${title.split(' — ')[0].split(' | ')[0]}` }],
-      "step": howto.steps.map((s, i) => ({
-        "@type": "HowToStep",
-        "position": i + 1,
-        "name": s.name,
-        "text": s.text,
-      })),
-    });
-  }
-}
+// HowTo schema removed 2026-04-27 — Google deprecated non-recipe HowTo
+// rich-results in Aug 2023. i18n/howto.ts data kept for in-page rendering.
 
 // FAQPage schema for top tool pages (top 5 tools defined in i18n/faq.ts).
 if (!isLegalPage && !isComparePage && !isHome && !isDocsArticle && !isDocsHub && faqs[activeToolId]) {
