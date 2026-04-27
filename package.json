@@ -14,7 +14,8 @@
     "test:watch": "vitest",
     "e2e": "npm run build && playwright test",
     "e2e:ui": "playwright test --ui",
-    "e2e:headed": "playwright test --headed"
+    "e2e:headed": "playwright test --headed",
+    "prebuild": "bash scripts/update-sitemap-lastmod.sh"
   },
   "dependencies": {
     "@astrojs/svelte": "^8.0.3",

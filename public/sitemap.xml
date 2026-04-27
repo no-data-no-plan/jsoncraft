@@ -595,4 +595,46 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/docs/json-pointer-and-patch/" />
     <lastmod>2026-04-27</lastmod>
   </url>
+  <url>
+    <loc>https://jsoncraft.dev/about/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/about/" />
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/about/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/about/" />
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/contact/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/contact/" />
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/contact/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/contact/" />
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/terms/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/terms/" />
+  </url>
+  <url>
+    <loc>https://jsoncraft.dev/es/terms/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/terms/" />
+  </url>
 </urlset>
