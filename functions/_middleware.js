@@ -21,6 +21,8 @@ function buildCSP(nonce) {
     "base-uri 'self'",
     "form-action 'self' https://formspree.io",
     "frame-ancestors 'none'",
+    "report-to csp",
+    "report-uri https://csp.pingthat.dev/r",
     "upgrade-insecure-requests",
   ].join('; ');
 }
@@ -40,6 +42,8 @@ const CSP_STATIC = [
   "base-uri 'self'",
   "form-action 'self' https://formspree.io",
   "frame-ancestors 'none'",
+  "report-to csp",
+  "report-uri https://csp.pingthat.dev/r",
   "upgrade-insecure-requests",
 ].join('; ');
 
@@ -107,6 +111,7 @@ export async function onRequest(context) {
   newHeaders.set('X-Content-Type-Options', 'nosniff');
   newHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   newHeaders.set('Permissions-Policy', PERMISSIONS_POLICY);
+  newHeaders.set('Reporting-Endpoints', 'csp="https://csp.pingthat.dev/r"');
   newHeaders.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   // HTML responses get the strict nonce-based CSP matching what HTMLRewriter stamped.
   // Non-HTML (JS/CSS/images/etc.) get the static policy without nonce.
