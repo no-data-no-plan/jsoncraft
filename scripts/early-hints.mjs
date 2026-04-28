@@ -18,8 +18,15 @@ const cssFiles = readdirSync(astroDir).filter(f => f.endsWith('.css'));
 
 // JSONCraft: every page imports tools.HASH.css; home pages also import
 // HomeLanding.HASH.css. Preload both on home, only tools elsewhere.
-const toolsCss = cssFiles.find(f => /^tools\..*\.css$/.test(f));
-const homeLandingCss = cssFiles.find(f => /^HomeLanding\..*\.css$/.test(f));
+function pickUnique(re, label) {
+  const matches = cssFiles.filter(f => re.test(f));
+  if (matches.length > 1) {
+    throw new Error(`[early-hints] Multiple ${label} matches in dist/_astro/: ${matches.join(', ')}. Clean dist/ and rebuild.`);
+  }
+  return matches[0] ?? null;
+}
+const toolsCss = pickUnique(/^tools\..*\.css$/, 'tools.*.css');
+const homeLandingCss = pickUnique(/^HomeLanding\..*\.css$/, 'HomeLanding.*.css');
 
 if (!toolsCss) {
   console.log('[early-hints] no tools.*.css found in _astro/, skipping');
