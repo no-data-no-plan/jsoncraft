@@ -119,10 +119,10 @@ const formatterHref = localePath("/formatter/", lang);
   <!-- Bottom CTA: mono eyebrow + short summary. Matches the CV/OI/PT
        closing block that sits right before CrossLinks (which Layout
        injects below the slot). -->
-  <section class="bottom-cta">
+  <div class="bottom-cta">
     <p class="bottom-cta-eyebrow">{i18n.bottomCtaEyebrow}</p>
     <p class="bottom-cta-text">{i18n.bottomCtaText}</p>
-  </section>
+  </div>
 </div>
 
 <style>
@@ -191,7 +191,7 @@ const formatterHref = localePath("/formatter/", lang);
   .hero-cta-icon {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 12px;
-    color: var(--color-accent);
+    color: var(--color-accent-fg);
   }
   .hero-cta-arrow {
     font-size: 14px;
@@ -276,7 +276,7 @@ const formatterHref = localePath("/formatter/", lang);
     height: 34px;
     border-radius: 6px;
     background: color-mix(in srgb, var(--color-accent) 10%, transparent);
-    color: var(--color-accent);
+    color: var(--color-accent-fg);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 12px;
     font-weight: 600;
