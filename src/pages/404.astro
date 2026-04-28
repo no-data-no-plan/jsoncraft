@@ -14,6 +14,9 @@ const popularIds = [
   "base64",
 ];
 const popular = popularIds.map(id => tools.find(t => t.id === id)).filter(Boolean);
+import fs from "node:fs";
+import path from "node:path";
+const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8");
 ---
 <!doctype html>
 <html lang="en">
@@ -23,7 +26,7 @@ const popular = popularIds.map(id => tools.find(t => t.id === id)).filter(Boolea
   <meta name="robots" content="noindex" />
   <title>Page Not Found — JSONCraft</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <style is:inline set:html={FONTS_CSS}></style>
 
   <!-- Google Analytics 4 — Consent Mode v2. AdSense intentionally excluded: Google
        program policies prohibit serving ads on 404 pages. -->
