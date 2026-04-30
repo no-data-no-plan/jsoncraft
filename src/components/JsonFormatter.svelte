@@ -190,20 +190,31 @@
   // Global Ctrl/Cmd+Enter accelerator (Nielsen audit Phase 6, JC F4):
   // expose the muscle-memory shortcut from JSONLint / JSON-Crack so power
   // users can format without reaching for the button. Mounted via $effect
-  // with proper cleanup.
+  // with proper cleanup. Skips when the user is typing into a native
+  // textarea or other form fields outside this tool — Round-2 review fix
+  // 2026-04-30 prevented unconditional preventDefault from hijacking
+  // Ctrl+Enter for any other form on the page.
   $effect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-        e.preventDefault();
-        format();
-      }
+      if (!((e.ctrlKey || e.metaKey) && e.key === "Enter")) return;
+      const t = e.target;
+      if (t instanceof HTMLTextAreaElement || t instanceof HTMLInputElement) return;
+      e.preventDefault();
+      format();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   });
 
   // Detect platform to render the right modifier glyph in <kbd> hints.
-  const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+  // Prefer userAgentData (Chromium 90+); fall back to deprecated platform
+  // for Safari/Firefox. Round-2 review fix 2026-04-30.
+  const isMac = (() => {
+    if (typeof navigator === "undefined") return false;
+    const uad = (navigator as any).userAgentData;
+    if (uad?.platform) return uad.platform === "macOS";
+    return /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+  })();
   const modKey = isMac ? "⌘" : "Ctrl";
 </script>
 
