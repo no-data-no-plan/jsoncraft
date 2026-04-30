@@ -470,6 +470,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
             <a href={lang === "es" ? "/es/contact/" : "/contact/"} class="hover:text-[var(--color-accent)] transition-colors">{lang === "es" ? "Contacto" : "Contact"}</a>
             <a href={lang === "es" ? "/es/privacy-policy/" : "/privacy-policy/"} class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerPrivacy")}</a>
             <a href={lang === "es" ? "/es/terms/" : "/terms/"} class="hover:text-[var(--color-accent)] transition-colors">{lang === "es" ? "Términos" : "Terms"}</a>
+            <CookieConsent lang={lang} />
             <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerCoffee")}</a>
           </span>
         </div>
@@ -483,8 +484,6 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
         </form>
       </footer>
     </div>
-
-    <CookieConsent lang={lang} />
 
     <script is:inline>
       document.getElementById("theme-toggle")?.addEventListener("click", () => {
