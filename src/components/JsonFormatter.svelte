@@ -186,6 +186,25 @@
   function handleDragOver(e: DragEvent) {
     e.preventDefault();
   }
+
+  // Global Ctrl/Cmd+Enter accelerator (Nielsen audit Phase 6, JC F4):
+  // expose the muscle-memory shortcut from JSONLint / JSON-Crack so power
+  // users can format without reaching for the button. Mounted via $effect
+  // with proper cleanup.
+  $effect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        e.preventDefault();
+        format();
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  });
+
+  // Detect platform to render the right modifier glyph in <kbd> hints.
+  const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+  const modKey = isMac ? "⌘" : "Ctrl";
 </script>
 
 <div class="flex flex-col h-full" ondrop={handleDrop} ondragover={handleDragOver}>
@@ -195,9 +214,11 @@
   >
     <button
       onclick={format}
-      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+      title={`${t(lang, "format")} (${modKey}+Enter)`}
+      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors inline-flex items-center gap-1.5"
     >
-      {t(lang, "format")}
+      <span>{t(lang, "format")}</span>
+      <kbd class="hidden sm:inline px-1 py-0.5 rounded text-[10px] font-mono bg-white/20" aria-hidden="true">{modKey}+Enter</kbd>
     </button>
     <button
       onclick={minify}
