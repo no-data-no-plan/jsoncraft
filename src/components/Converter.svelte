@@ -10,6 +10,7 @@
   import { ConversionEngine } from "../lib/conversion-engine";
   import ConverterToolbar from "./ConverterToolbar.svelte";
   import EditorPanel from "./EditorPanel.svelte";
+  import UndoToast from "./UndoToast.svelte";
 
   let { lang = "en", fromFormat = "json", toFormat = "yaml" }: {
     lang?: Lang;
@@ -74,12 +75,40 @@
     if (text) navigator.clipboard.writeText(text);
   }
 
+  // Undo-toast state for destructive Clear (Nielsen audit 2026-04-30, F2).
+  let undoSnapshot = $state<{ input: string; output: string } | null>(null);
+  let toastVisible = $state(false);
+
   function clear() {
+    if (!input && !output) {
+      input = "";
+      output = "";
+      error = "";
+      warning = "";
+      wrongFormatHint = null;
+      return;
+    }
+    undoSnapshot = { input, output };
     input = "";
     output = "";
     error = "";
     warning = "";
     wrongFormatHint = null;
+    toastVisible = true;
+  }
+
+  function undoClear() {
+    if (!undoSnapshot) return;
+    input = undoSnapshot.input;
+    // output regenerates from input on next convert; just trigger it
+    undoSnapshot = null;
+    toastVisible = false;
+    convert();
+  }
+
+  function dismissUndo() {
+    undoSnapshot = null;
+    toastVisible = false;
   }
 
   async function handleUpload() {
@@ -147,3 +176,12 @@
     />
   </div>
 </div>
+
+<UndoToast
+  visible={toastVisible}
+  message={t(lang, "cleared")}
+  key={undoSnapshot}
+  onUndo={undoClear}
+  onDismiss={dismissUndo}
+  {lang}
+/>

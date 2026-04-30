@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { EditorView, keymap, placeholder as cmPlaceholder, lineNumbers } from "@codemirror/view";
-  import { EditorState } from "@codemirror/state";
+  import { EditorState, Transaction } from "@codemirror/state";
   import { json } from "@codemirror/lang-json";
   import { yaml } from "@codemirror/lang-yaml";
   import { oneDark } from "@codemirror/theme-one-dark";
@@ -111,7 +111,15 @@
     };
   });
 
-  // Update editor when value changes externally
+  // Update editor when value changes externally.
+  //
+  // `addToHistory.of(false)` excludes this transaction from CodeMirror's undo
+  // stack (Nielsen audit code-review 2026-04-30). Without it, the UndoToast
+  // restore would push BOTH the Clear (insert "") and the Undo (insert
+  // original) into the editor's history. Then Ctrl+Z inside the editor —
+  // meant to undo the user's last typed character — would re-clear the
+  // editor instead. `addToHistory` is the canonical CodeMirror flag for
+  // suppressing history recording on programmatic changes.
   $effect(() => {
     if (view && value !== view.state.doc.toString()) {
       view.dispatch({
@@ -120,6 +128,7 @@
           to: view.state.doc.length,
           insert: value,
         },
+        annotations: Transaction.addToHistory.of(false),
       });
     }
   });

@@ -1,10 +1,18 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import UndoToast from "./UndoToast.svelte";
   import { stripBom } from "../lib/fileutils";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
-  import Ajv from "ajv";
+  // Switched from `ajv` to `@cfworker/json-schema` (Nielsen audit 2026-04-30,
+  // F1): Ajv's default `code:true` mode runtime-compiles validators via the
+  // Function constructor, which the site's CSP forbids ('unsafe-eval' is not
+  // an allowed source). The page surfaced ~400 chars of raw CSP error text to
+  // users instead of validation results, making the tool functionally dead.
+  // @cfworker/json-schema is a no-eval, draft-2020-12 capable validator —
+  // safe under our CSP and ~15KB gzipped vs ajv's ~30KB.
+  import { Validator } from "@cfworker/json-schema";
 
   let { lang = "en" as Lang } = $props();
 
@@ -12,6 +20,22 @@
   let schemaInput = $state("");
   let results = $state<{ valid: boolean; errors: string[] } | null>(null);
   let parseError = $state("");
+
+  // Memoize the Validator by raw schema string (Round-2 review fix
+  // 2026-04-30): without this, a new Validator was constructed on every
+  // keystroke in either editor, re-parsing + re-dereferencing the schema
+  // 3+ times per second. Negligible for tiny schemas, perceptible lag for
+  // 500-field schemas with $ref.
+  let lastSchemaStr = "";
+  let cachedValidator: Validator | null = null;
+
+  function getValidator(schemaStr: string, parsedSchema: unknown): Validator {
+    if (schemaStr !== lastSchemaStr) {
+      lastSchemaStr = schemaStr;
+      cachedValidator = new Validator(parsedSchema as any, "2020-12");
+    }
+    return cachedValidator!;
+  }
 
   function validate() {
     if (!jsonInput.trim() || !schemaInput.trim()) {
@@ -42,21 +66,46 @@
     parseError = "";
 
     try {
-      const ajv = new Ajv({ allErrors: true, verbose: true });
-      const validateFn = ajv.compile(schema as object);
-      const valid = validateFn(data);
+      // Default to draft 2020-12; @cfworker/json-schema also accepts 4/7/2019-09.
+      // Validator is memoized by raw schema string above to avoid re-parse
+      // and $ref-deref on every keystroke.
+      const validator = getValidator(stripBom(schemaInput), schema);
+      const result = validator.validate(data);
 
-      if (valid) {
+      if (result.valid) {
         results = { valid: true, errors: [] };
       } else {
-        const errors = (validateFn.errors || []).map((err) => {
-          const path = err.instancePath || "/";
-          return `${path}: ${err.message}${err.params ? ` (${JSON.stringify(err.params)})` : ""}`;
+        const errors = result.errors.map((err) => {
+          const path = err.instanceLocation || "/";
+          // err.error is the human-readable message; keywordLocation gives
+          // the schema path (e.g. "#/properties/age/minimum") which helps
+          // power users debug a complex schema.
+          const keywordSuffix = err.keywordLocation && err.keywordLocation !== "#"
+            ? ` [${err.keywordLocation}]`
+            : "";
+          return `${path}: ${err.error}${keywordSuffix}`;
         });
         results = { valid: false, errors };
       }
     } catch (e: any) {
-      parseError = `Schema error: ${e.message}`;
+      // Schema-shape errors (e.g. invalid $ref) bubble up here. Plain language
+      // instead of raw stack — the previous Ajv path leaked CSP errors.
+      //
+      // `Unresolved $ref` errors from @cfworker/json-schema include a 200+
+      // char "Known schemas: [...]" dump of internal identifiers. Replace
+      // with a focused, actionable message instead of leaking library
+      // internals (Nielsen audit code-review 2026-04-30).
+      const msg: string = e?.message ?? "";
+      const isRefError = msg.includes("Unresolved $ref");
+      const friendly = isRefError
+        ? (lang === "es"
+            ? "Los esquemas con referencias `$ref` externas no se admiten en el navegador. Inserta cada esquema referenciado en línea antes de validar."
+            : "Schemas with external `$ref` URIs are not supported in the browser. Inline all referenced schemas before validating.")
+        : (lang === "es"
+            ? "No se pudo procesar el esquema. Verifica que sea un JSON Schema válido."
+            : "Could not process the schema. Check that it's a valid JSON Schema.");
+      const detail = (!isRefError && msg) ? ` (${msg})` : "";
+      parseError = `${friendly}${detail}`;
       results = null;
     }
   }
@@ -98,11 +147,38 @@
     validate();
   }
 
+  // Undo-toast state for destructive Clear (Nielsen audit 2026-04-30, F2).
+  let undoSnapshot = $state<{ jsonInput: string; schemaInput: string } | null>(null);
+  let toastVisible = $state(false);
+
   function clear() {
+    if (!jsonInput && !schemaInput) {
+      jsonInput = "";
+      schemaInput = "";
+      results = null;
+      parseError = "";
+      return;
+    }
+    undoSnapshot = { jsonInput, schemaInput };
     jsonInput = "";
     schemaInput = "";
     results = null;
     parseError = "";
+    toastVisible = true;
+  }
+
+  function undoClear() {
+    if (!undoSnapshot) return;
+    jsonInput = undoSnapshot.jsonInput;
+    schemaInput = undoSnapshot.schemaInput;
+    undoSnapshot = null;
+    toastVisible = false;
+    validate();
+  }
+
+  function dismissUndo() {
+    undoSnapshot = null;
+    toastVisible = false;
   }
 </script>
 
@@ -152,3 +228,12 @@
     </div>
   {/if}
 </div>
+
+<UndoToast
+  visible={toastVisible}
+  message={t(lang, "clearedAll")}
+  key={undoSnapshot}
+  onUndo={undoClear}
+  onDismiss={dismissUndo}
+  {lang}
+/>

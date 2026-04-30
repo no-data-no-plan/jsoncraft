@@ -1,5 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import UndoToast from "./UndoToast.svelte";
   import { diffJson } from "diff";
   import { friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, diffInWorker } from "../lib/worker-api";
@@ -92,12 +93,44 @@
     compare();
   }
 
+  // Undo-toast state for destructive Clear (Nielsen audit 2026-04-30, F2).
+  let undoSnapshot = $state<{ left: string; right: string } | null>(null);
+  let toastVisible = $state(false);
+
   function clear() {
+    if (!left && !right) {
+      left = "";
+      right = "";
+      diffResult = [];
+      error = "";
+      hasDifferences = false;
+      return;
+    }
+    undoSnapshot = { left, right };
     left = "";
     right = "";
     diffResult = [];
     error = "";
     hasDifferences = false;
+    toastVisible = true;
+  }
+
+  function undoClear() {
+    if (!undoSnapshot) return;
+    left = undoSnapshot.left;
+    right = undoSnapshot.right;
+    undoSnapshot = null;
+    toastVisible = false;
+    // Use the debounced variant (Nielsen audit code-review 2026-04-30): if
+    // the user starts typing within 300ms of clicking Undo, the in-flight
+    // worker compare() from this restore would race and overwrite their
+    // new input with stale snapshot-based diff data.
+    debouncedCompare();
+  }
+
+  function dismissUndo() {
+    undoSnapshot = null;
+    toastVisible = false;
   }
 
   function swap() {
@@ -196,3 +229,12 @@
     </div>
   {/if}
 </div>
+
+<UndoToast
+  visible={toastVisible}
+  message={t(lang, "clearedAll")}
+  key={undoSnapshot}
+  onUndo={undoClear}
+  onDismiss={dismissUndo}
+  {lang}
+/>

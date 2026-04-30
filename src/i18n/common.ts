@@ -56,6 +56,11 @@ const common = {
     groupCore: "Core",
     groupConverters: "Converters",
     groupDevTools: "Dev Tools",
+    // Undo toast (UndoToast.svelte)
+    undo: "Undo",
+    cleared: "Editor cleared",
+    clearedAll: "Editors cleared",
+    dismiss: "Dismiss",
   },
   es: {
     headerBadge: "Tus datos nunca salen de tu navegador",
@@ -101,6 +106,10 @@ const common = {
     groupCore: "Principal",
     groupConverters: "Conversores",
     groupDevTools: "Herramientas Dev",
+    undo: "Deshacer",
+    cleared: "Editor vaciado",
+    clearedAll: "Editores vaciados",
+    dismiss: "Cerrar",
   },
 } as const;
 

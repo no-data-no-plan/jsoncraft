@@ -1,5 +1,6 @@
 <script lang="ts">
   import CodeEditor from "./CodeEditor.svelte";
+  import UndoToast from "./UndoToast.svelte";
   import { uploadFile, downloadFile, friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
   import { t } from "../i18n/common";
@@ -90,11 +91,41 @@
     if (text) navigator.clipboard.writeText(text);
   }
 
+  // Undo-toast state for destructive Clear (Nielsen audit 2026-04-30, F2).
+  // Snapshot of the editor state so undo can fully restore.
+  let undoSnapshot = $state<{ input: string; output: string; status: typeof status; errorMsg: string } | null>(null);
+  let toastVisible = $state(false);
+
   function clear() {
+    // Skip the snapshot dance if there's nothing to lose.
+    if (!input && !output) {
+      input = "";
+      output = "";
+      status = "idle";
+      errorMsg = "";
+      return;
+    }
+    undoSnapshot = { input, output, status, errorMsg };
     input = "";
     output = "";
     status = "idle";
     errorMsg = "";
+    toastVisible = true;
+  }
+
+  function undoClear() {
+    if (!undoSnapshot) return;
+    input = undoSnapshot.input;
+    output = undoSnapshot.output;
+    status = undoSnapshot.status;
+    errorMsg = undoSnapshot.errorMsg;
+    undoSnapshot = null;
+    toastVisible = false;
+  }
+
+  function dismissUndo() {
+    undoSnapshot = null;
+    toastVisible = false;
   }
 
   function handleSample() {
@@ -291,3 +322,12 @@
     </div>
   </div>
 </div>
+
+<UndoToast
+  visible={toastVisible}
+  message={t(lang, "cleared")}
+  key={undoSnapshot}
+  onUndo={undoClear}
+  onDismiss={dismissUndo}
+  {lang}
+/>
