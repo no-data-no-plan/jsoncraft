@@ -6,7 +6,7 @@
   import { yaml } from "@codemirror/lang-yaml";
   import { oneDark } from "@codemirror/theme-one-dark";
   import { lintGutter } from "@codemirror/lint";
-  import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
+  import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 
   let { value = "", lang = "json", placeholder = "", readonly = false, label = "", onchange = undefined }: {
     value?: string;
@@ -33,7 +33,11 @@
     const exts = [
       lineNumbers(),
       history(),
-      keymap.of([...defaultKeymap, ...historyKeymap]),
+      // indentWithTab last so Tab indents inside the editor (Nielsen audit
+      // 2026-04-30, JC F3). Esc-then-Tab still escapes to the next focusable
+      // element via defaultKeymap's keymap precedence — that's the standard
+      // a11y escape hatch CodeMirror documents.
+      keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab]),
       getLangExtension(),
       lintGutter(),
       EditorView.lineWrapping,
