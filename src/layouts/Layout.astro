@@ -383,6 +383,8 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
             id="menu-toggle"
             class="lg:hidden p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
             aria-label={t(lang, "toggleMenu")}
+            aria-expanded="false"
+            aria-controls="sidebar"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -490,9 +492,15 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
       document.getElementById("icon-dark")?.classList.toggle("hidden", isLight);
       document.getElementById("icon-light")?.classList.toggle("hidden", !isLight);
 
-      // Mobile menu toggle
+      // Mobile menu toggle. Keep aria-expanded in sync with the visible state
+      // so screen readers announce the open/closed state correctly.
       document.getElementById("menu-toggle")?.addEventListener("click", () => {
-        document.getElementById("sidebar")?.classList.toggle("-translate-x-full");
+        const sidebar = document.getElementById("sidebar");
+        const toggle = document.getElementById("menu-toggle");
+        if (!sidebar || !toggle) return;
+        const wasHidden = sidebar.classList.contains("-translate-x-full");
+        sidebar.classList.toggle("-translate-x-full");
+        toggle.setAttribute("aria-expanded", String(wasHidden));
       });
     </script>
 
