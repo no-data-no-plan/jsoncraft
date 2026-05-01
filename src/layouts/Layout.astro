@@ -6,6 +6,7 @@ import CrossLinks from "../components/CrossLinks.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import LangToggle from "../components/LangToggle.astro";
 import Shortcuts from "../components/Shortcuts.svelte";
+import NotifyToast from "../components/NotifyToast.svelte";
 import { tools } from "../lib/tools";
 import type { Lang } from "../i18n/index";
 import { getAlternatePath } from "../i18n/index";
@@ -369,7 +370,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
     </script>
   </head>
   <body class="flex min-h-screen">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded focus:text-sm focus:font-medium" style="background: var(--color-accent); color: #fff;">Skip to content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded focus:text-sm focus:font-medium" style="background: var(--color-accent); color: #fff;">{lang === "es" ? "Saltar al contenido" : "Skip to content"}</a>
     <Sidebar activeToolId={activeToolId} lang={lang} />
 
     <div class="flex flex-1 flex-col min-w-0">
@@ -603,5 +604,11 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
        (Nielsen audit Phase 6+, JC F4). client:idle so the listener
        attaches without blocking initial paint. -->
   <Shortcuts client:idle lang={lang} />
+
+  <!-- Global toast region (Nielsen re-audit 2026-05-01: H1 visibility).
+       Tools call `notify()` from src/lib/notify.ts after copy/download
+       to surface a brief aria-live confirmation. client:only because the
+       component attaches a window-level event listener at mount. -->
+  <NotifyToast client:only="svelte" />
   </body>
 </html>

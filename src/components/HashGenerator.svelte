@@ -4,6 +4,7 @@
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
   import Md5Worker from "../workers/md5-worker.ts?worker";
+  import { copyAndNotify } from "../lib/notify";
 
   let { lang = "en" as Lang } = $props();
 
@@ -192,7 +193,7 @@
   }
 
   function copy(val: string) {
-    navigator.clipboard.writeText(val);
+    copyAndNotify(val, lang === "es" ? "Copiado" : "Copied");
   }
 
   function formatSize(bytes: number): string {

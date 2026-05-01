@@ -3,6 +3,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { copyAndNotify } from "../lib/notify";
 
   let { lang = "en" as Lang } = $props();
 
@@ -64,7 +65,7 @@
   }
 
   function copy() {
-    if (output) navigator.clipboard.writeText(output);
+    if (output) copyAndNotify(output, lang === "es" ? "Copiado" : "Copied");
   }
 </script>
 
