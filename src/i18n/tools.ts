@@ -102,6 +102,14 @@ const diff = {
     noDifferences: "No differences \u2014 JSONs are identical",
     enterLeft: "Enter JSON in the left panel",
     enterRight: "Enter JSON in the right panel",
+    sideBySide: "Side-by-side",
+    unified: "Unified",
+    summaryAdded: "added",
+    summaryRemoved: "removed",
+    summaryChanged: "changed",
+    aria_diffOutput: "Diff output",
+    aria_leftEditor: "Left JSON editor",
+    aria_rightEditor: "Right JSON editor",
   },
   es: {
     leftOriginal: "Izquierda (Original)",
@@ -113,6 +121,14 @@ const diff = {
     noDifferences: "Sin diferencias \u2014 los JSON son id\u00e9nticos",
     enterLeft: "Introduce JSON en el panel izquierdo",
     enterRight: "Introduce JSON en el panel derecho",
+    sideBySide: "Lado a lado",
+    unified: "Unificado",
+    summaryAdded: "a\u00f1adidas",
+    summaryRemoved: "eliminadas",
+    summaryChanged: "modificadas",
+    aria_diffOutput: "Salida del diff",
+    aria_leftEditor: "Editor JSON izquierdo",
+    aria_rightEditor: "Editor JSON derecho",
   },
 };
 
@@ -215,6 +231,9 @@ const regex = {
     atIndex: "at index",
     matches: "matches",
     matchSingular: "match",
+    visualize: "Visualize",
+    visualization: "Visualization",
+    visualizeHint: "See how each part of the pattern is parsed.",
   },
   es: {
     enterPattern: "Introduce un patr\u00f3n regex...",
@@ -225,6 +244,9 @@ const regex = {
     atIndex: "en \u00edndice",
     matches: "coincidencias",
     matchSingular: "coincidencia",
+    visualize: "Visualizar",
+    visualization: "Visualizaci\u00f3n",
+    visualizeHint: "Mira c\u00f3mo se descompone cada parte del patr\u00f3n.",
   },
 };
 

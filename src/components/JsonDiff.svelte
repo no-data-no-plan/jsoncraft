@@ -4,6 +4,7 @@
   import { diffJson } from "diff";
   import { friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, diffInWorker } from "../lib/worker-api";
+  import { alignDiff, type AlignSummary } from "../lib/diff-align";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -15,6 +16,14 @@
   let diffResult = $state<Array<{ added?: boolean; removed?: boolean; value: string }>>([]);
   let error = $state("");
   let hasDifferences = $state(false);
+  // Side-by-side is the new default — line numbers + paired changes are
+  // far easier to read for JSON. Users who liked the inline-coloured
+  // unified output can flip the toolbar toggle.
+  let viewMode = $state<"side" | "unified">("side");
+
+  // Alignment runs cheap and synchronously, so derive it from the existing
+  // diff parts rather than re-running the worker.
+  const aligned = $derived<AlignSummary>(alignDiff(diffResult));
 
   let processing = $state(false);
 
@@ -170,6 +179,20 @@
     >
       {t(lang, "sample")}
     </button>
+    <div class="ml-auto inline-flex rounded overflow-hidden border border-[var(--color-border)]" role="group" aria-label="View mode">
+      <button
+        type="button"
+        onclick={() => (viewMode = "side")}
+        aria-pressed={viewMode === "side"}
+        class="px-2.5 py-1 text-xs {viewMode === 'side' ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)]'}"
+      >{tt("diff", lang, "sideBySide")}</button>
+      <button
+        type="button"
+        onclick={() => (viewMode = "unified")}
+        aria-pressed={viewMode === "unified"}
+        class="px-2.5 py-1 text-xs {viewMode === 'unified' ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)]'}"
+      >{tt("diff", lang, "unified")}</button>
+    </div>
     <span aria-live="polite">
     {#if processing}
       <span class="text-xs text-[var(--color-accent-fg)] ml-auto animate-pulse">{t(lang, "comparing")}</span>
@@ -206,25 +229,55 @@
     <div
       class="border-t border-[var(--color-border)] max-h-80 overflow-auto bg-[var(--color-bg-secondary)]"
       aria-live="polite"
+      aria-label={tt("diff", lang, "aria_diffOutput")}
     >
-      <div class="text-xs text-[var(--color-text-muted)] px-4 py-1 border-b border-[var(--color-border)] flex items-center justify-between">
+      <div class="text-xs text-[var(--color-text-muted)] px-4 py-1 border-b border-[var(--color-border)] flex items-center gap-3 flex-wrap">
         {#if hasDifferences}
-          <span>
-            {tt("diff", lang, "differences")}
-            +{diffResult.filter(p => p.added).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} {tt("diff", lang, "lines")},
-            -{diffResult.filter(p => p.removed).reduce((n, p) => n + p.value.split('\n').length - 1, 0)} {tt("diff", lang, "lines")}
-          </span>
+          <span>{tt("diff", lang, "differences")}</span>
+          {#if aligned.added > 0}
+            <span class="text-[var(--color-success)]">+{aligned.added} {tt("diff", lang, "summaryAdded")}</span>
+          {/if}
+          {#if aligned.removed > 0}
+            <span class="text-[var(--color-error)]">−{aligned.removed} {tt("diff", lang, "summaryRemoved")}</span>
+          {/if}
+          {#if aligned.changed > 0}
+            <span class="text-[var(--color-warning)]">±{aligned.changed} {tt("diff", lang, "summaryChanged")}</span>
+          {/if}
         {:else}
           <span class="text-[var(--color-success)]">{tt("diff", lang, "noDifferences")}</span>
         {/if}
       </div>
+
       {#if hasDifferences}
-        <pre class="px-4 py-2 text-sm font-mono">{#each diffResult as part}<span
-              class={part.added
-                ? "bg-green-900/40 text-[var(--color-success)]"
-                : part.removed
-                  ? "bg-red-900/40 text-[var(--color-error)]"
-                  : "text-[var(--color-text-secondary)]"}>{part.value}</span>{/each}</pre>
+        {#if viewMode === "side"}
+          <!-- Side-by-side: paired left/right rows with per-side line numbers.
+               Background tints: removed = red, added = green, changed = both
+               with their respective tint, placeholder = muted strip so the
+               eye can still locate the row in the column. -->
+          <div class="text-sm font-mono">
+            {#each aligned.rows as row}
+              <div class="grid grid-cols-2 border-b border-[var(--color-border)]/40">
+                <div class="flex border-r border-[var(--color-border)]/40 {row.left.kind === 'removed' ? 'bg-red-900/30' : row.left.kind === 'placeholder' ? 'bg-[var(--color-bg-tertiary)]/40' : ''}">
+                  <span class="w-10 px-2 text-right text-xs text-[var(--color-text-muted)] select-none flex-shrink-0">{row.left.lineNumber ?? ''}</span>
+                  <span class="px-2 whitespace-pre overflow-x-auto flex-1 {row.left.kind === 'removed' ? 'text-[var(--color-error)]' : row.left.kind === 'placeholder' ? 'text-[var(--color-text-muted)]' : 'text-[var(--color-text-secondary)]'}">{row.left.text}</span>
+                </div>
+                <div class="flex {row.right.kind === 'added' ? 'bg-green-900/30' : row.right.kind === 'placeholder' ? 'bg-[var(--color-bg-tertiary)]/40' : ''}">
+                  <span class="w-10 px-2 text-right text-xs text-[var(--color-text-muted)] select-none flex-shrink-0">{row.right.lineNumber ?? ''}</span>
+                  <span class="px-2 whitespace-pre overflow-x-auto flex-1 {row.right.kind === 'added' ? 'text-[var(--color-success)]' : row.right.kind === 'placeholder' ? 'text-[var(--color-text-muted)]' : 'text-[var(--color-text-secondary)]'}">{row.right.text}</span>
+                </div>
+              </div>
+            {/each}
+          </div>
+        {:else}
+          <!-- Unified: the original inline output, kept for users who prefer
+               compact view-source-style coloured spans. -->
+          <pre class="px-4 py-2 text-sm font-mono">{#each diffResult as part}<span
+                class={part.added
+                  ? "bg-green-900/40 text-[var(--color-success)]"
+                  : part.removed
+                    ? "bg-red-900/40 text-[var(--color-error)]"
+                    : "text-[var(--color-text-secondary)]"}>{part.value}</span>{/each}</pre>
+        {/if}
       {/if}
     </div>
   {/if}

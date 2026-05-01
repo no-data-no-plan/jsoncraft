@@ -5,6 +5,8 @@
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
   import RegexWorker from "../workers/regex-worker.ts?worker";
+  import RegexVisualizer from "./RegexVisualizer.svelte";
+  import { parseRegex, type ParseOutcome } from "../lib/regex-parse";
 
   let { lang = "en" as Lang } = $props();
 
@@ -14,6 +16,11 @@
   let matches = $state<{ full: string; index: number; groups: string[] }[]>([]);
   let error = $state("");
   let highlighted = $state("");
+  let showVisualizer = $state(false);
+
+  // Re-parse the pattern whenever it (or the flags) change. Cheap because
+  // the parser is single-pass over the pattern; no debounce needed.
+  const visualizerOutcome = $derived<ParseOutcome>(parseRegex(pattern, flags));
 
   let worker: Worker | null = null;
   let workerTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -138,7 +145,15 @@
         >{f}</button>
       {/each}
     </div>
-    <span class="text-xs text-[var(--color-text-muted)] ml-auto" aria-live="polite">
+    <button
+      type="button"
+      onclick={() => (showVisualizer = !showVisualizer)}
+      aria-pressed={showVisualizer}
+      class="ml-auto px-2 h-7 rounded text-xs {showVisualizer
+        ? 'bg-[var(--color-accent)] text-white'
+        : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)]'}"
+    >{tt("regex", lang, "visualize")}</button>
+    <span class="text-xs text-[var(--color-text-muted)]" aria-live="polite">
       {matches.length} {matches.length !== 1 ? tt("regex", lang, "matches") : tt("regex", lang, "matchSingular")}
     </span>
   </div>
@@ -146,6 +161,17 @@
   {#if error}
     <div class="px-3 py-1 text-xs text-[var(--color-error)] bg-[var(--color-error)]/10 border-b border-[var(--color-border)]" aria-live="polite">
       {error}
+    </div>
+  {/if}
+
+  {#if showVisualizer}
+    <div class="border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] max-h-[40vh] overflow-auto">
+      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] flex items-center gap-2">
+        <span>{tt("regex", lang, "visualization")}</span>
+        <span class="text-[var(--color-text-muted)]">·</span>
+        <span>{tt("regex", lang, "visualizeHint")}</span>
+      </div>
+      <RegexVisualizer outcome={visualizerOutcome} {lang} />
     </div>
   {/if}
 
