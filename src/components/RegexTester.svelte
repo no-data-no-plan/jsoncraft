@@ -125,20 +125,40 @@
 <div class="flex flex-col h-full">
   <!-- Toolbar -->
   <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex-wrap">
-    <span class="text-sm text-[var(--color-text-muted)] font-mono">/</span>
+    <label for="regex-pattern" class="text-sm text-[var(--color-text-muted)] font-mono">/</label>
     <input
+      id="regex-pattern"
       type="text"
       bind:value={pattern}
       oninput={() => debouncedTest()}
       placeholder={tt("regex", lang, "enterPattern")}
-      aria-label={tt("regex", lang, "enterPattern")}
+      aria-label={lang === "es" ? "Patrón de regex" : "Regex pattern"}
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
       class="flex-1 min-w-[200px] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] px-2 py-1 rounded text-sm font-mono"
     />
-    <span class="text-sm text-[var(--color-text-muted)] font-mono">/</span>
-    <div class="flex gap-1">
-      {#each ["g", "i", "m", "s", "u"] as f}
+    <span class="text-sm text-[var(--color-text-muted)] font-mono" aria-hidden="true">/</span>
+    <!--
+      Flag buttons need aria-pressed (toggle state) + an accessible name
+      that goes beyond the visible single character. WCAG 4.1.2 + 1.3.1
+      (manual audit 2026-05-01, JC F4) — without this, SR users hear
+      "g, button" without knowing what "g" means or whether it's enabled.
+    -->
+    <div class="flex gap-1" role="group" aria-label={lang === "es" ? "Flags de la regex" : "Regex flags"}>
+      {#each [
+        { f: "g", label: lang === "es" ? "Global (todas las coincidencias)" : "Global (all matches)" },
+        { f: "i", label: lang === "es" ? "Insensible a mayúsculas" : "Case insensitive" },
+        { f: "m", label: lang === "es" ? "Multilínea" : "Multiline" },
+        { f: "s", label: lang === "es" ? 'Punto coincide con saltos de línea' : "Dot matches newlines" },
+        { f: "u", label: lang === "es" ? "Modo Unicode" : "Unicode mode" },
+      ] as { f, label }}
         <button
+          type="button"
           onclick={() => toggleFlag(f)}
+          aria-pressed={flags.includes(f)}
+          aria-label={label}
+          title={label}
           class="w-7 h-7 rounded text-xs font-mono {flags.includes(f)
             ? 'bg-[var(--color-accent)] text-white'
             : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)]'}"
@@ -179,11 +199,12 @@
   <div class="flex-1 flex flex-col lg:flex-row min-h-0">
     <!-- Test string -->
     <div class="flex-1 flex flex-col min-h-0">
-      <div class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
+      <label for="regex-test-string" class="px-3 py-1 text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] block">
         {tt("regex", lang, "testString")}
-      </div>
+      </label>
       <div class="flex-1 p-3 overflow-auto">
         <textarea
+          id="regex-test-string"
           bind:value={testString}
           oninput={() => debouncedTest()}
           rows="10"
