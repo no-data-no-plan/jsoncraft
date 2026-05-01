@@ -33,8 +33,18 @@
     class="rounded border bg-[var(--color-bg-tertiary)] text-sm"
     style="border-color: {accent}66;"
   >
+    <!--
+      The kind label and branch index used to take their text colour from
+      `accent`, but several accent tokens (capture-group #0369a1 on slate-700
+      dark; alternation #d97706 on slate-200 light) failed WCAG 1.4.3 AA on
+      the bg-tertiary background — measured 1.75:1 and 2.58:1 in the
+      2026-05-01 manual audit. The colour signal stays on the decorative
+      border + accent-coloured background pip; text uses the theme-aware
+      secondary token which clears AA in both modes.
+    -->
     <div class="flex items-center gap-2 px-2 py-1 border-b" style="border-color: {accent}33;">
-      <span class="text-[10px] uppercase tracking-wider font-mono" style="color: {accent};">{node.kind}</span>
+      <span aria-hidden="true" class="inline-block w-1.5 h-1.5 rounded-full" style="background-color: {accent};"></span>
+      <span class="text-[10px] uppercase tracking-wider font-mono text-[var(--color-text-secondary)]">{node.kind}</span>
       <span class="text-xs text-[var(--color-text-secondary)]">{explainNode(node, lang)}</span>
     </div>
 
@@ -48,7 +58,7 @@
       <div class="p-2 flex flex-col gap-2">
         {#each node.branches as branch, i}
           <div class="flex items-start gap-2">
-            <span class="text-[10px] font-mono pt-1" style="color: {accent};">{i + 1}</span>
+            <span class="text-[10px] font-mono pt-1 text-[var(--color-text-secondary)]">{i + 1}</span>
             <div class="flex-1">{@render nodeView(branch)}</div>
           </div>
         {/each}
