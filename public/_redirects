@@ -1,0 +1,11 @@
+# Cloudflare Pages native redirects.
+# Format: <source> <destination> <code>
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Stanford audit 2026-05-01 (sev-3): the footer + sister apps + external
+# blogs link to /privacy/ and /cookies/, but the canonical route is
+# /privacy-policy/. 301 the legacy paths so we don't 404 referrers.
+/privacy /privacy-policy/ 301
+/cookies /privacy-policy/ 301
+/es/privacy /es/privacy-policy/ 301
+/es/cookies /es/privacy-policy/ 301
