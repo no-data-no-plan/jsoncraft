@@ -555,6 +555,10 @@ export const faqs: Record<string, FAQByLang> = {
     en: {
       faqs: [
         {
+          question: "How do I test a regex online?",
+          answer: "Open the JSONCraft regex tester, paste your pattern (without slashes or delimiters) into the pattern field, paste a sample string into the test input, and the tool highlights every match in real time. Toggle flags (g, i, m, s, u, y) with one click and read capture groups in the table below. Nothing is uploaded — the entire match runs in your browser using JavaScript's native RegExp engine, so you can paste production log lines or sensitive samples safely.",
+        },
+        {
           question: "How do I test a regex pattern?",
           answer: "Paste your pattern (without delimiters) and a test string; the tester compiles the regex with JavaScript's RegExp engine and highlights every match in the string, listing capture groups and named groups below. Flags g, i, m, s, u and y are toggleable. A replace field lets you preview substitution output live with $1, $<name> backreferences. Syntax errors are reported inline with the offending character position.",
         },
@@ -578,6 +582,10 @@ export const faqs: Record<string, FAQByLang> = {
     },
     es: {
       faqs: [
+        {
+          question: "\u00bfC\u00f3mo probar regex online?",
+          answer: "Abre el tester de regex de JSONCraft, pega tu patr\u00f3n (sin barras ni delimitadores) en el campo de patr\u00f3n, pega una cadena de muestra en el input de prueba y la herramienta resalta cada coincidencia en tiempo real. Conmuta flags (g, i, m, s, u, y) con un clic y lee los grupos de captura en la tabla. Nada se sube \u2014 todo el matching corre en tu navegador con el motor RegExp nativo de JavaScript, as\u00ed que puedes pegar l\u00edneas de log de producci\u00f3n o muestras sensibles sin riesgo.",
+        },
         {
           question: "\u00bfC\u00f3mo pruebo un patr\u00f3n regex?",
           answer: "Pega tu patr\u00f3n (sin delimitadores) y una cadena de prueba; el tester compila el regex con el motor RegExp de JavaScript y resalta cada coincidencia en la cadena, listando grupos de captura y grupos nombrados debajo. Los flags g, i, m, s, u e y son conmutables. Un campo de reemplazo permite previsualizar la sustituci\u00f3n en vivo con retrorreferencias $1, $<name>. Los errores de sintaxis se reportan con la posici\u00f3n del car\u00e1cter.",

@@ -27,16 +27,19 @@
 
   let processing = $state(false);
 
-  async function compare() {
+  async function compare(opts: { manual?: boolean } = {}) {
     error = "";
     hasDifferences = false;
     if (!left.trim() && !right.trim()) {
       diffResult = [];
+      if (opts.manual) error = tt("diff", lang, "enterBoth");
       return;
     }
     if (!left.trim() || !right.trim()) {
       diffResult = [];
-      error = !left.trim() ? tt("diff", lang, "enterLeft") : tt("diff", lang, "enterRight");
+      if (opts.manual) {
+        error = !left.trim() ? tt("diff", lang, "enterLeft") : tt("diff", lang, "enterRight");
+      }
       return;
     }
 
@@ -156,7 +159,7 @@
     class="flex items-center gap-2 px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
   >
     <button
-      onclick={compare}
+      onclick={() => compare({ manual: true })}
       class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
     >
       {t(lang, "compare")}

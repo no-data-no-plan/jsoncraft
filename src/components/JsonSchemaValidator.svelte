@@ -184,6 +184,7 @@
 
 <div class="flex flex-col h-full">
   <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex-wrap">
+    <button onclick={validate} class="px-3 py-1 text-xs rounded font-semibold bg-[var(--color-accent)] text-white hover:opacity-90">{tt("jsonSchemaValidator", lang, "validate")}</button>
     <button onclick={copySample} class="px-2 py-1 text-xs rounded bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "sample")}</button>
     <button onclick={clear} class="px-2 py-1 text-xs rounded bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">{t(lang, "clear")}</button>
     <span aria-live="polite">
@@ -193,6 +194,12 @@
       {:else}
         <span class="ml-2 text-xs text-red-400">{tt("jsonSchemaValidator", lang, "invalid")} ({results.errors.length} {results.errors.length === 1 ? tt("jsonSchemaValidator", lang, "error") : tt("jsonSchemaValidator", lang, "errors")})</span>
       {/if}
+    {:else if !jsonInput.trim() && !schemaInput.trim()}
+      <span class="ml-2 text-xs text-[var(--color-text-muted)]">{tt("jsonSchemaValidator", lang, "awaitingBoth")}</span>
+    {:else if !jsonInput.trim()}
+      <span class="ml-2 text-xs text-[var(--color-text-muted)]">{tt("jsonSchemaValidator", lang, "awaitingJson")}</span>
+    {:else if !schemaInput.trim()}
+      <span class="ml-2 text-xs text-[var(--color-text-muted)]">{tt("jsonSchemaValidator", lang, "awaitingSchema")}</span>
     {/if}
     </span>
   </div>

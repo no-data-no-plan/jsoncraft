@@ -11,7 +11,7 @@ const seo = getPageSeo("yaml-to-json", "en")!;
 
 <Layout title={seo.title} description={seo.description} activeToolId="yaml-to-json">
   <Converter client:load fromFormat="yaml" toFormat="json" />
-  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["json-to-yaml", "formatter", "viewer"]} />
+  <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["yaml-validator", "json-to-yaml", "formatter"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
   <FaqSection toolId="yaml-to-json" lang="en" />
 </Layout>

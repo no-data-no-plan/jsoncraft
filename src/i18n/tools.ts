@@ -102,6 +102,7 @@ const diff = {
     noDifferences: "No differences \u2014 JSONs are identical",
     enterLeft: "Enter JSON in the left panel",
     enterRight: "Enter JSON in the right panel",
+    enterBoth: "Paste JSON in both panels to compare",
     sideBySide: "Side-by-side",
     unified: "Unified",
     summaryAdded: "added",
@@ -121,6 +122,7 @@ const diff = {
     noDifferences: "Sin diferencias \u2014 los JSON son id\u00e9nticos",
     enterLeft: "Introduce JSON en el panel izquierdo",
     enterRight: "Introduce JSON en el panel derecho",
+    enterBoth: "Pega JSON en ambos paneles para comparar",
     sideBySide: "Lado a lado",
     unified: "Unificado",
     summaryAdded: "a\u00f1adidas",
@@ -515,6 +517,10 @@ const jsonSchemaValidator = {
     error: "error",
     errors: "errors",
     validationErrors: "Validation Errors",
+    validate: "Validate",
+    awaitingBoth: "Paste JSON and schema to validate",
+    awaitingJson: "Awaiting JSON\u2026",
+    awaitingSchema: "Awaiting schema\u2026",
   },
   es: {
     jsonPlaceholder: "Pega los datos JSON a validar...",
@@ -524,6 +530,10 @@ const jsonSchemaValidator = {
     error: "error",
     errors: "errores",
     validationErrors: "Errores de Validaci\u00f3n",
+    validate: "Validar",
+    awaitingBoth: "Pega JSON y schema para validar",
+    awaitingJson: "Esperando JSON\u2026",
+    awaitingSchema: "Esperando schema\u2026",
   },
 };
 
