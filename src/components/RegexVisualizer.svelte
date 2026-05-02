@@ -33,10 +33,23 @@
 
 {#snippet nodeView(node: AstNode)}
   {@const accent = nodeAccent(node.kind)}
+  <!--
+    role="group" + tabindex="0" makes each AST node a keyboard-reachable
+    region so focus-driven hover-highlight works for keyboard users (CW-JC-10).
+    Without tabindex the focusin/focusout handlers below would never fire on
+    a div. We accept Svelte's noninteractive-tabindex warning here on purpose:
+    the node has no native interactive role (it's not a button, link, or
+    form control — activating it does nothing; only focus/hover reveals the
+    pattern slice highlight), but it MUST be focusable for keyboard parity
+    with the mouse hover affordance (WCAG 2.1.1).
+  -->
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
   <div
-    class="rounded border bg-[var(--color-bg-tertiary)] text-sm cursor-help"
+    class="rounded border bg-[var(--color-bg-tertiary)] text-sm cursor-help focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--color-bg-secondary)]"
     style="border-color: {accent}66;"
-    role="presentation"
+    role="group"
+    aria-label={node.kind}
+    tabindex="0"
     onmouseenter={() => onHover?.({ pos: node.pos, end: node.end })}
     onmouseleave={() => onHover?.(null)}
     onfocusin={() => onHover?.({ pos: node.pos, end: node.end })}
