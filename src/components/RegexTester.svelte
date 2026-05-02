@@ -17,6 +17,11 @@
   let error = $state("");
   let highlighted = $state("");
   let showVisualizer = $state(false);
+  // CW-JC-10 (2026-05-02): Hover/focus on a visualizer node reports its
+  // pos/end so the pattern preview can highlight the matching slice — turns
+  // the AST tree into an interactive teaching surface.
+  let hoveredRange = $state<{ pos: number; end: number } | null>(null);
+  function setHovered(r: { pos: number; end: number } | null) { hoveredRange = r; }
 
   // Re-parse the pattern whenever it (or the flags) change. Cheap because
   // the parser is single-pass over the pattern; no debounce needed.
@@ -191,7 +196,22 @@
         <span class="text-[var(--color-text-muted)]">·</span>
         <span>{tt("regex", lang, "visualizeHint")}</span>
       </div>
-      <RegexVisualizer outcome={visualizerOutcome} {lang} />
+      {#if pattern}
+        <!-- Pattern preview with hover-highlight (CW-JC-10). When the user
+             hovers an AST node the matching slice is wrapped in <mark>
+             so the connection between tree node and source pattern is
+             obvious. Falls back to the plain pattern when nothing hovered. -->
+        <div class="px-3 pt-1 pb-2 text-sm font-mono whitespace-pre-wrap break-all" aria-live="polite">
+          <span class="text-[var(--color-text-muted)] text-xs mr-1" aria-hidden="true">/</span>
+          {#if hoveredRange && hoveredRange.pos < hoveredRange.end && hoveredRange.end <= pattern.length}
+            <span class="text-[var(--color-text-secondary)]">{pattern.slice(0, hoveredRange.pos)}</span><mark style="background: var(--color-accent); color: white; padding: 0 2px; border-radius: 2px;">{pattern.slice(hoveredRange.pos, hoveredRange.end)}</mark><span class="text-[var(--color-text-secondary)]">{pattern.slice(hoveredRange.end)}</span>
+          {:else}
+            <span class="text-[var(--color-text-secondary)]">{pattern}</span>
+          {/if}
+          <span class="text-[var(--color-text-muted)] text-xs ml-1" aria-hidden="true">/{flags}</span>
+        </div>
+      {/if}
+      <RegexVisualizer outcome={visualizerOutcome} {lang} onHover={setHovered} />
     </div>
   {/if}
 

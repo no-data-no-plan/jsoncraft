@@ -6,8 +6,12 @@
     /** The parser outcome — the visualizer renders an inline error if not ok. */
     outcome: ParseOutcome;
     lang?: ExplainLang;
+    /** Reports which slice of the pattern the user is hovering over. The
+     *  parent renders the highlight in the pattern preview (CW-JC-10
+     *  hover→highlight, 2026-05-02). */
+    onHover?: (range: { pos: number; end: number } | null) => void;
   }
-  let { outcome, lang = "en" }: Props = $props();
+  let { outcome, lang = "en", onHover }: Props = $props();
 
   // Each AST node category gets a distinct accent so the user can scan the
   // whole pattern at a glance. The accents reuse JC's design tokens so the
@@ -30,8 +34,13 @@
 {#snippet nodeView(node: AstNode)}
   {@const accent = nodeAccent(node.kind)}
   <div
-    class="rounded border bg-[var(--color-bg-tertiary)] text-sm"
+    class="rounded border bg-[var(--color-bg-tertiary)] text-sm cursor-help"
     style="border-color: {accent}66;"
+    role="presentation"
+    onmouseenter={() => onHover?.({ pos: node.pos, end: node.end })}
+    onmouseleave={() => onHover?.(null)}
+    onfocusin={() => onHover?.({ pos: node.pos, end: node.end })}
+    onfocusout={() => onHover?.(null)}
   >
     <!--
       The kind label and branch index used to take their text colour from
