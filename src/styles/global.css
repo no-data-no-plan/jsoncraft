@@ -22,6 +22,16 @@
   --color-warning: #fbbf24;
 }
 
+/* Astro island layout default — mirrors Astro's runtime ISLAND_STYLES.
+   Hosted in <head> here (instead of Astro's <body>-injected <style>) so the
+   served HTML validates as W3C HTML5 (style tag is not allowed inside body).
+   The body-injected duplicate is stripped by scripts/strip-astro-island-style.mjs. */
+astro-island,
+astro-slot,
+astro-static-slot {
+  display: contents;
+}
+
 html {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   scrollbar-gutter: stable;

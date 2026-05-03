@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "bash scripts/check-svelte-state.sh && astro build && node scripts/early-hints.mjs",
+    "build": "bash scripts/check-svelte-state.sh && astro build && node scripts/early-hints.mjs && node scripts/strip-astro-island-style.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
