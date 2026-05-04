@@ -15,6 +15,7 @@ const common = {
     footerSupportEmail: "support@jsoncraft.dev",
     footerSupportEmailSub: "typically replies within 24h",
     footerLastVerified: "Last verified May 2026 \u2014 all 23 tools passing",
+    toolLastVerified: "Last verified May 2026 \u2014 runs in your browser",
     feedbackPlaceholder: "Bug, idea, or feedback...",
     feedbackSend: "Send",
     // Sidebar
@@ -93,6 +94,7 @@ const common = {
     footerSupportEmail: "support@jsoncraft.dev",
     footerSupportEmailSub: "respuesta en menos de 24h",
     footerLastVerified: "\u00daltima verificaci\u00f3n mayo 2026 \u2014 las 23 herramientas pasando",
+    toolLastVerified: "\u00daltima verificaci\u00f3n mayo 2026 \u2014 corre en tu navegador",
     feedbackPlaceholder: "Error, idea o sugerencia...",
     feedbackSend: "Enviar",
     sidebarPrivacy: "100% en tu navegador. No se env\u00edan datos a ning\u00fan servidor.",

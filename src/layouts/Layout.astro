@@ -431,6 +431,19 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
         </div>
       </header>
 
+      <!--
+        Tool-page maintenance stamp — Stanford T-06 (mirror of PT). Only on
+        actual tool pages (not home/compare/docs/legal).
+      -->
+      {!isHome && !isComparePage && !isDocsHub && !isDocsArticle && !isLegalPage && (
+        <div class="px-4 sm:px-6 py-1.5 border-b border-[var(--color-border)]" style="background: var(--color-bg-secondary); font-size: 11px; color: var(--color-text-muted);">
+          <div class="flex items-center gap-2">
+            <span aria-hidden="true" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent);"></span>
+            <span>{t(lang, "toolLastVerified")}</span>
+          </div>
+        </div>
+      )}
+
       <!-- Main content -->
       <main id="main-content" class="flex-1 flex flex-col">
         <div class="tool-content-wrapper flex flex-col">
