@@ -466,6 +466,19 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
             <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerCoffee")}</a>
           </span>
         </div>
+        <!--
+          Identity strip — Stanford Web Credibility signals (T-02, T-04, T-06).
+          Mirror of PT pattern shipped 2026-05-03.
+        -->
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2 text-[var(--color-text-muted)]" style="font-size: 11px;">
+          <span>{t(lang, "footerMaintainedBy")} · <span style="color: var(--color-text-dim);">{t(lang, "footerSince")}</span></span>
+          <span style="color: var(--color-border);">&middot;</span>
+          <a href={`mailto:${t(lang, "footerSupportEmail")}?subject=${encodeURIComponent('JSONCraft — ' + (lang === 'es' ? 'consulta' : 'support'))}`}
+             class="hover:text-[var(--color-accent)] transition-colors inline-block py-1"
+             title={t(lang, "footerSupportEmailSub")}>{t(lang, "footerSupportEmail")}</a>
+          <span style="color: var(--color-border);">&middot;</span>
+          <span title={t(lang, "footerSupportEmailSub")} style="color: var(--color-text-dim);">{t(lang, "footerLastVerified")}</span>
+        </div>
         <form id="feedback-form" action="https://formspree.io/f/mpqoddwl" method="POST" class="flex gap-2">
           <input type="hidden" name="app" value="JSONCraft" />
           <input type="hidden" name="page" value="" />
