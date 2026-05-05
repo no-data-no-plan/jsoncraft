@@ -3,7 +3,7 @@ import type { Lang } from "./index";
 const common = {
   en: {
     // Header
-    headerBadge: "Your data never leaves your browser",
+    headerBadge: "Your inputs stay in your browser",
     // Footer
     footerTagline: "JSONCraft \u2014 Free, fast, private JSON tools",
     footerCoffee: "Buy me a coffee",
@@ -19,7 +19,7 @@ const common = {
     feedbackPlaceholder: "Bug, idea, or feedback...",
     feedbackSend: "Send",
     // Sidebar
-    sidebarPrivacy: "100% client-side. No data sent to any server.",
+    sidebarPrivacy: "100% client-side. No JSON sent to any server.",
     // Buttons (shared)
     copy: "Copy",
     copied: "Copied!",
@@ -53,7 +53,7 @@ const common = {
     related: "Related:",
     // SeoBlock
     aboutThisTool: "About this tool",
-    seoBlockPrivacy: "100% client-side. Your data never leaves your browser. No tracking, no cookies.",
+    seoBlockPrivacy: "100% client-side. Your inputs never leave your browser. Ads via AdSense (consent required).",
     // Theme / Menu
     toggleTheme: "Toggle theme",
     toggleMenu: "Toggle menu",
@@ -85,7 +85,7 @@ const common = {
     shortcutOpenShortcuts: "Open this dialog",
   },
   es: {
-    headerBadge: "Tus datos nunca salen de tu navegador",
+    headerBadge: "Tus inputs permanecen en tu navegador",
     footerTagline: "JSONCraft \u2014 Herramientas JSON gratuitas, r\u00e1pidas y privadas",
     footerCoffee: "Buy me a coffee",
     footerPrivacy: "Privacidad",
@@ -126,7 +126,7 @@ const common = {
     processingLarge: "Procesando archivo grande...",
     related: "Relacionados:",
     aboutThisTool: "Sobre esta herramienta",
-    seoBlockPrivacy: "100% en tu navegador. Tus datos nunca salen de tu navegador. Sin rastreo, sin cookies.",
+    seoBlockPrivacy: "100% en tu navegador. Tus inputs nunca salen de tu navegador. Anuncios mediante AdSense (con consentimiento).",
     toggleTheme: "Cambiar tema",
     toggleMenu: "Alternar men\u00fa",
     langToggleLabel: "EN",

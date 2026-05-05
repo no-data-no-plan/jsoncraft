@@ -14,3 +14,27 @@
 /es/privacy/       /es/privacy-policy/   301
 /es/cookies        /es/privacy-policy/   301
 /es/cookies/       /es/privacy-policy/   301
+
+# vs-* comparison pages removed 2026-05-05 (Path A — see /methodology/).
+# Pages didn't meet the factual bar required for competitor reviews,
+# so they were deleted rather than maintained at half-quality.
+/vs-codebeautify                              /                                 301
+/vs-codebeautify/                             /                                 301
+/es/vs-codebeautify                           /es/                              301
+/es/vs-codebeautify/                          /es/                              301
+/vs-devtoys                              /                                 301
+/vs-devtoys/                             /                                 301
+/es/vs-devtoys                           /es/                              301
+/es/vs-devtoys/                          /es/                              301
+/vs-json-crack                              /                                 301
+/vs-json-crack/                             /                                 301
+/es/vs-json-crack                           /es/                              301
+/es/vs-json-crack/                          /es/                              301
+/vs-json-editor-online                              /                                 301
+/vs-json-editor-online/                             /                                 301
+/es/vs-json-editor-online                           /es/                              301
+/es/vs-json-editor-online/                          /es/                              301
+/vs-jsonlint                              /                                 301
+/vs-jsonlint/                             /                                 301
+/es/vs-jsonlint                           /es/                              301
+/es/vs-jsonlint/                          /es/                              301

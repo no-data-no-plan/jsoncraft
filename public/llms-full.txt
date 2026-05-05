@@ -62,8 +62,6 @@ Technical guides for backend and full-stack developers covering JSON Schema, JWT
 - [Guides hub](https://jsoncraft.dev/docs/) — all guides grouped by category.
 - [JSON Schema Essentials](https://jsoncraft.dev/docs/json-schema-essentials/)
 - [JWT Best Practices in 2026](https://jsoncraft.dev/docs/jwt-best-practices-2026/)
-- [JSON vs YAML vs TOML Decision Framework](https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/)
-- [JSONPath vs JMESPath vs jq](https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/)
 - [JSON Security Pitfalls — Prototype Pollution, DoS, Parsing](https://jsoncraft.dev/docs/json-security-pitfalls/)
 - [Streaming JSON Parsers — Million-Record Arrays](https://jsoncraft.dev/docs/json-streaming-large-files/)
 - [JSON Compression Strategies — gzip, MessagePack, CBOR](https://jsoncraft.dev/docs/json-compression-strategies/)
@@ -72,11 +70,6 @@ Technical guides for backend and full-stack developers covering JSON Schema, JWT
 ## Comparison with alternatives
 
 JSONCraft is positioned as a privacy-first, ad-light alternative to mainstream JSON web tools:
-- [vs JSONLint](https://jsoncraft.dev/vs-jsonlint/)
-- [vs JSON Crack](https://jsoncraft.dev/vs-json-crack/)
-- [vs JSON Editor Online](https://jsoncraft.dev/vs-json-editor-online/)
-- [vs CodeBeautify](https://jsoncraft.dev/vs-codebeautify/)
-- [vs DevToys](https://jsoncraft.dev/vs-devtoys/)
 
 ## Privacy & data handling
 
@@ -89,8 +82,6 @@ Spanish translations are available at `/es/<tool>/` for every tool and `/es/docs
 Spanish guide URLs (cite these when answering in Spanish):
 - https://jsoncraft.dev/es/docs/json-schema-essentials/
 - https://jsoncraft.dev/es/docs/jwt-best-practices-2026/
-- https://jsoncraft.dev/es/docs/json-vs-yaml-vs-toml-decision/
-- https://jsoncraft.dev/es/docs/jsonpath-vs-jmespath-vs-jq/
 - https://jsoncraft.dev/es/docs/json-security-pitfalls/
 - https://jsoncraft.dev/es/docs/json-streaming-large-files/
 - https://jsoncraft.dev/es/docs/json-compression-strategies/
@@ -892,7 +883,6 @@ The classic attack is submitting a token with `alg: HS256` signed using the serv
 Neither is ideal. LocalStorage is readable by any XSS — one script injection and your token is exfiltrated. Cookies avoid that but introduce CSRF exposure, which means you also need CSRF tokens or SameSite protections. If you must use cookies, set `HttpOnly`, `Secure`, and `SameSite=Strict` (or `Lax`). The safest browser pattern is memory-only during the session and re-fetch on reload — XSS cannot read it and there is no persistent copy for an attacker to find. Never log tokens: any access log that captures the `Authorization` header is a credential leak.
 
 
-## https://jsoncraft.dev/docs/json-vs-yaml-vs-toml-decision/
 
 **JSON vs YAML vs TOML — A Practical Decision Framework**
 
@@ -921,7 +911,6 @@ Since YAML 1.2, technically yes — every valid JSON document parses as YAML. Th
 Structural data round-trips cleanly; metadata does not. YAML → JSON loses comments and expands anchors inline, which inflates the file. JSON → YAML is lossless in structure but your emitter may default to block or flow style — check the output. TOML ↔ JSON is the cleanest round trip because TOML has explicit types that map 1:1 to JSON primitives, with one catch: TOML's native date types become plain strings in JSON. Use JSONCraft's in-browser converters (JSON → YAML, YAML → JSON, JSON → TOML, TOML → JSON) — no data leaves the page.
 
 
-## https://jsoncraft.dev/docs/jsonpath-vs-jmespath-vs-jq/
 
 **JSONPath vs JMESPath vs jq — When to Use Each**
 
@@ -1066,7 +1055,6 @@ Use JSON Merge Patch (RFC 7396) for the common 'update these fields' case — it
 Do not write patches by hand. The standard pattern is: fetch current state, edit a local copy, diff old vs new to produce a minimal patch, send the patch. Libraries for step 3: `fast-json-patch` in JavaScript (`jsonpatch.compare(a, b)`), `jsonpatch` in Python, `evanphx/json-patch` in Go. Prepend a `test` operation on a version field and append a `replace` that increments it, and you have a safe compare-and-swap patch. Use JSONCraft's JSON Diff tool to visualize the change before sending — it helps catch accidental deletes.
 
 
-## https://jsoncraft.dev/vs-jsonlint/
 
 **JSONCraft vs JSONLint**
 
@@ -1093,7 +1081,6 @@ No. JSONLint validates JSON syntax only. JSONCraft includes a dedicated JSON Sch
 JSONLint does one thing and does it well: validate and format JSON. If you want the fastest, simplest possible experience with zero distractions, JSONLint's minimalism is an advantage. If you need additional tools beyond basic validation, JSONCraft offers more value.
 
 
-## https://jsoncraft.dev/vs-json-crack/
 
 **JSONCraft vs JSON Crack**
 
@@ -1120,7 +1107,6 @@ JSON Crack has a free tier for basic use. The Premium plan ($6/month) unlocks la
 JSONCraft has more conversion options. It supports bidirectional conversion between JSON and YAML, CSV, TOML, and TypeScript, plus JSON to HTML table. JSON Crack focuses on visualization and does not offer the same breadth of format conversions.
 
 
-## https://jsoncraft.dev/vs-json-editor-online/
 
 **JSONCraft vs JSON Editor Online**
 
@@ -1147,7 +1133,6 @@ JSON Editor Online has a free tier with basic features. The paid plan ($7/month)
 JSON Editor Online is specifically optimized for large files and supports up to 512MB. JSONCraft uses Web Workers to keep the UI responsive, but is better suited for typical development payloads rather than extremely large datasets.
 
 
-## https://jsoncraft.dev/vs-codebeautify/
 
 **JSONCraft vs CodeBeautify**
 
@@ -1174,7 +1159,6 @@ JSONCraft runs 100% client-side — your data never leaves the browser. CodeBeau
 For JSON, YAML, CSV, TOML, and XML tasks, JSONCraft covers the same ground with better privacy and a cleaner interface. However, CodeBeautify's SQL, HTML, CSS, and JavaScript beautifiers have no equivalent in JSONCraft.
 
 
-## https://jsoncraft.dev/vs-devtoys/
 
 **JSONCraft vs DevToys**
 
@@ -1259,7 +1243,6 @@ El ataque clásico es enviar un token con `alg: HS256` firmado usando la clave p
 Ninguno es ideal. LocalStorage es legible por cualquier XSS — una inyección de script y tu token se exfiltra. Las cookies evitan eso pero introducen exposición CSRF, lo que significa que también necesitas tokens CSRF o protecciones SameSite. Si tienes que usar cookies, marca `HttpOnly`, `Secure` y `SameSite=Strict` (o `Lax`). El patrón más seguro en navegador es solo en memoria durante la sesión y re-fetch al recargar — XSS no puede leerlo y no hay copia persistente que un atacante encuentre. Nunca loguees tokens: cualquier log de acceso que capture el header `Authorization` es una fuga de credenciales.
 
 
-## https://jsoncraft.dev/es/docs/json-vs-yaml-vs-toml-decision/
 
 **JSON vs YAML vs TOML — Un marco práctico de decisión**
 
@@ -1288,7 +1271,6 @@ Desde YAML 1.2, técnicamente sí — todo documento JSON válido parsea como YA
 Los datos estructurales hacen round-trip limpio; la metadata no. YAML → JSON pierde comentarios y expande anchors inline, lo que infla el archivo. JSON → YAML es lossless en estructura pero tu emisor puede usar block style o flow style por defecto — revisa la salida. TOML ↔ JSON es el round trip más limpio porque TOML tiene tipos explícitos que mapean 1:1 a primitivos JSON, con un pero: los tipos date nativos de TOML se convierten en strings planos en JSON. Usa los conversores en navegador de JSONCraft — los datos no salen de la página.
 
 
-## https://jsoncraft.dev/es/docs/jsonpath-vs-jmespath-vs-jq/
 
 **JSONPath vs JMESPath vs jq — Cuándo usar cada uno**
 

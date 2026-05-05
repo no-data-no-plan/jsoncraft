@@ -4,7 +4,6 @@ import JsonPathTool from "../../components/JsonPathTool.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
 import FaqSection from "../../components/FaqSection.astro";
-import CompareLinks from "../../components/CompareLinks.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("jsonpath", "es")!;
@@ -14,6 +13,5 @@ const seo = getPageSeo("jsonpath", "es")!;
   <JsonPathTool client:load lang="es" />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["viewer", "formatter", "diff"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
-  <CompareLinks lang="es" competitors={["json-editor-online", "codebeautify"]} />
   <FaqSection toolId="jsonpath" lang="es" />
 </Layout>

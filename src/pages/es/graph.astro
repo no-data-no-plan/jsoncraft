@@ -4,7 +4,6 @@ import JsonGraph from "../../components/JsonGraph.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
 import FaqSection from "../../components/FaqSection.astro";
-import CompareLinks from "../../components/CompareLinks.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("graph", "es")!;
@@ -14,6 +13,5 @@ const seo = getPageSeo("graph", "es")!;
   <JsonGraph client:load lang="es" />
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["viewer", "formatter", "jsonpath"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
-  <CompareLinks lang="es" competitors={["json-crack", "json-editor-online"]} />
   <FaqSection toolId="graph" lang="es" />
 </Layout>

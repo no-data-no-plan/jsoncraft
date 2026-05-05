@@ -4,7 +4,6 @@ import JsonFormatter from "../components/JsonFormatter.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 import FaqSection from "../components/FaqSection.astro";
-import CompareLinks from "../components/CompareLinks.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("formatter", "en")!;
@@ -26,6 +25,5 @@ const seo = getPageSeo("formatter", "en")!;
     text={seo.seoBlockText}
     features={seo.seoFeatures}
   />
-  <CompareLinks lang="en" competitors={["codebeautify", "devtoys", "json-crack", "json-editor-online", "jsonlint"]} />
   <FaqSection toolId="formatter" lang="en" />
 </Layout>

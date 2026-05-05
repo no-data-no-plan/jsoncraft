@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import HomeLanding from "../../components/HomeLanding.astro";
-import CompareLinks from "../../components/CompareLinks.astro";
 import { getHomeI18n } from "../../i18n/pages";
 
 const i18n = getHomeI18n("es");
@@ -14,5 +13,4 @@ const i18n = getHomeI18n("es");
   lang="es"
 >
   <HomeLanding lang="es" />
-  <CompareLinks lang="es" competitors={["codebeautify", "devtoys", "json-crack", "json-editor-online", "jsonlint"]} />
 </Layout>
