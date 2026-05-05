@@ -27,6 +27,18 @@ interface Props {
 }
 
 const { title, description, activeToolId, lang = "en", schemaType = "SoftwareApplication", docsPublishedAt, docsUpdatedAt, docsCategory, docsTags } = Astro.props;
+
+// Build-time month for "Last verified" footer + per-tool stamp (Bloque 1b —
+// previously hardcoded to "May 2026", now reflects the actual deploy month).
+const MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MONTHS_ES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+const buildDate = new Date();
+const monthYear = lang === "es"
+  ? `${MONTHS_ES[buildDate.getMonth()]} ${buildDate.getFullYear()}`
+  : `${MONTHS_EN[buildDate.getMonth()]} ${buildDate.getFullYear()}`;
+const lastVerifiedFooter = t(lang, "footerLastVerified").replace("{{month}}", monthYear);
+const lastVerifiedTool = t(lang, "toolLastVerified").replace("{{month}}", monthYear);
+
 const fullTitle = title.startsWith("JSONCraft") ? title : `${title} | JSONCraft`;
 const pathWithTrailing = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
 const canonicalUrl = `https://jsoncraft.dev${pathWithTrailing}`;
@@ -439,7 +451,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
         <div class="px-4 sm:px-6 py-1.5 border-b border-[var(--color-border)]" style="background: var(--color-bg-secondary); font-size: 11px; color: var(--color-text-muted);">
           <div class="flex items-center gap-2">
             <span aria-hidden="true" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent);"></span>
-            <span>{t(lang, "toolLastVerified")}</span>
+            <span>{lastVerifiedTool}</span>
           </div>
         </div>
       )}
@@ -474,6 +486,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
             <a href={lang === "es" ? "/es/about/" : "/about/"} class="hover:text-[var(--color-accent)] transition-colors">{lang === "es" ? "Acerca de" : "About"}</a>
             <a href={lang === "es" ? "/es/contact/" : "/contact/"} class="hover:text-[var(--color-accent)] transition-colors">{lang === "es" ? "Contacto" : "Contact"}</a>
             <a href={lang === "es" ? "/es/privacy-policy/" : "/privacy-policy/"} class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerPrivacy")}</a>
+            <a href={lang === "es" ? "/es/methodology/" : "/methodology/"} class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerMethodology")}</a>
             <a href={lang === "es" ? "/es/terms/" : "/terms/"} class="hover:text-[var(--color-accent)] transition-colors">{lang === "es" ? "Términos" : "Terms"}</a>
             <CookieConsent lang={lang} />
             <a href="https://buymeacoffee.com/allopen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)] transition-colors">{t(lang, "footerCoffee")}</a>
@@ -490,7 +503,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
              class="hover:text-[var(--color-accent)] transition-colors inline-block py-1"
              title={t(lang, "footerSupportEmailSub")}>{t(lang, "footerSupportEmail")}</a>
           <span style="color: var(--color-border);">&middot;</span>
-          <span title={t(lang, "footerSupportEmailSub")} style="color: var(--color-text-dim);">{t(lang, "footerLastVerified")}</span>
+          <span title={t(lang, "footerSupportEmailSub")} style="color: var(--color-text-dim);">{lastVerifiedFooter}</span>
         </div>
         <form id="feedback-form" action="https://formspree.io/f/mpqoddwl" method="POST" class="flex gap-2">
           <input type="hidden" name="app" value="JSONCraft" />
