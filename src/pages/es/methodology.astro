@@ -1,0 +1,63 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const LAST_UPDATED = "2026-05-06";
+---
+
+<Layout
+  title="Cómo se construye y verifica JSONCraft"
+  description="Cómo se escriben las herramientas, cómo se comprueba la fiabilidad y qué hace y qué no hace el sitio."
+  activeToolId=""
+>
+  <article class="p-6 sm:p-8 max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-muted);">
+    <header class="space-y-1">
+      <h1 class="text-2xl font-bold" style="color: var(--color-text);">Cómo se construye y verifica JSONCraft</h1>
+      <p class="text-xs" style="color: var(--color-text-dim);">Última actualización: {LAST_UPDATED}</p>
+    </header>
+
+    <section class="space-y-2">
+      <p>JSONCraft es un proyecto independiente llevado por un solo desarrollador. Esta página describe cómo se construyen las herramientas y el contenido — qué se ejecuta en tu navegador, cómo se verifica cada herramienta y qué hace y qué no hace el sitio.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Qué se ejecuta en tu navegador</h2>
+      <p>Cada herramienta del sitio se ejecuta íntegramente en el cliente. JSON, YAML, CSV, TOML y XML que pegas — y los archivos que cargas — se parsean, formatean, validan, comparan, convierten y visualizan en tu navegador. No hay paso de subida, ni cuenta, ni cómputo en servidor en la ruta de la herramienta.</p>
+      <p>Los anuncios vienen de Google AdSense (publisher ID <code>ca-pub-8761907366448308</code>). AdSense usa cookies y comparte datos limitados con la red publicitaria de Google cuando aceptas. El banner de cookies es un consent gate real: los scripts de AdSense no se cargan hasta que aceptas. Si rechazas, no se establecen cookies publicitarias. Los espacios publicitarios están claramente marcados como <code>Sponsored</code>.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Cómo se verifica la fiabilidad de las herramientas</h2>
+      <p>Cada herramienta está cubierta por una prueba end-to-end automatizada que se ejecuta en cada deploy. La línea "Last verified — N tools passing" del footer la pone CI: refleja la fecha del último build verde y el número de herramientas que pasaron. Si una prueba se rompe, el footer lo refleja en el siguiente build, y la herramienta rota se arregla antes de que la línea vuelva a todo-passing.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Cómo se escribe el contenido</h2>
+      <p>El comportamiento de las herramientas se implementa y verifica a mano contra las especificaciones de origen: RFC 8259 para JSON, la spec YAML 1.2.2, RFC 4180 para CSV, la spec TOML 1.0 y las recomendaciones W3C XML 1.0 / 1.1. Los casos límite (manejo de BOM, claves duplicadas, round-trip sin pérdida) están cubiertos por pruebas que fijan el comportamiento mandado por la spec.</p>
+      <p>Las guías largas bajo <a href="/es/docs/" class="underline" style="color: var(--color-accent);">/docs/</a> se redactan con asistencia de IA y reciben revisión ligera antes de publicarse. Los hechos técnicos en esas guías — qué dice una spec, cómo trata un parser un caso corner — son verificables independientemente.</p>
+      <p>Antes se publicaban páginas de comparación ("X vs Y") con revisión ligera. Esas páginas se han retirado porque el proyecto no podía mantener el listón factual que requerían. Si una página de comparación te ha redirigido aquí, usa los productos reales para compararlos.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Lo que el sitio no hace</h2>
+      <ul class="list-disc list-outside ml-5 space-y-1">
+        <li>Colocaciones de pago, contenido editorial patrocinado ni guest posts. Los anuncios de AdSense están claramente marcados como <code>Sponsored</code> y separados del editorial.</li>
+        <li>Parafrasear posts de blogs de la competencia.</li>
+        <li>Enviar tus datos a ningún sitio. Las herramientas trabajan sobre lo que pegas o cargas localmente; nada sale de tu navegador.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Cómo se mantiene el contenido al día</h2>
+      <p>Cuando una spec se revisa de una forma que afecta al comportamiento del parser, la herramienta afectada se actualiza. La suite de pruebas CI captura regresiones de comportamiento en cada deploy, y los errores visibles se arreglan en el siguiente deploy.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Reportar errores</h2>
+      <p>Si detectas un error factual, una herramienta rota o contenido desactualizado, escribe a <a href="mailto:support@jsoncraft.dev" class="underline" style="color: var(--color-accent);">support@jsoncraft.dev</a>. El operador lee el correo entrante y responde en cuanto puede. Las correcciones sustanciales se publican con una nota <code>Corrected YYYY-MM-DD</code> junto al párrafo afectado.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Financiación y monetización</h2>
+      <p>JSONCraft no acepta pagos por listar herramientas, ni ingresos de afiliados, ni contenido editorial patrocinado. La monetización es vía anuncios display de Google AdSense (donde está aprobado) y propinas ocasionales en Buy Me a Coffee. Los espacios publicitarios están claramente marcados como <code>Sponsored</code> y separados del resto de la página.</p>
+    </section>
+  </article>
+</Layout>

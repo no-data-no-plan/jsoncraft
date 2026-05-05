@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+const LAST_UPDATED = "2026-05-06";
+---
+
+<Layout
+  title="How JSONCraft is built and verified"
+  description="How tools are written, how reliability is checked, and what the site does and doesn't do."
+  activeToolId=""
+>
+  <article class="p-6 sm:p-8 max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-muted);">
+    <header class="space-y-1">
+      <h1 class="text-2xl font-bold" style="color: var(--color-text);">How JSONCraft is built and verified</h1>
+      <p class="text-xs" style="color: var(--color-text-dim);">Last updated: {LAST_UPDATED}</p>
+    </header>
+
+    <section class="space-y-2">
+      <p>JSONCraft is an independent project run by one developer. This page describes how the tools and content actually get built — what runs in your browser, how each tool is verified, and what the site does and doesn't do.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">What runs in your browser</h2>
+      <p>Every tool on this site runs entirely client-side. JSON, YAML, CSV, TOML, and XML you paste — and any files you load — are parsed, formatted, validated, diffed, converted, and visualized in your browser. There is no upload step, no account, no server-side computation in the tool path.</p>
+      <p>Ads come from Google AdSense (publisher ID <code>ca-pub-8761907366448308</code>). AdSense uses cookies and shares limited data with Google's ad network when you consent. The cookie banner is a real consent gate: AdSense scripts do not load until you accept. If you decline, no ad cookies are set. Ad slots are clearly marked <code>Sponsored</code>.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">How tool reliability is verified</h2>
+      <p>Every tool is covered by an automated end-to-end test that runs on every deploy. The "Last verified — N tools passing" line in the footer is set by CI: it reflects the date of the last green run and the count of tools that passed. If a test breaks, the footer reflects that on the next build, and the broken tool is fixed before the line goes back to all-passing.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">How content is written</h2>
+      <p>Tool behavior is implemented and verified by hand against the source specifications: RFC 8259 for JSON, the YAML 1.2.2 spec, RFC 4180 for CSV, the TOML 1.0 spec, and the XML 1.0 / 1.1 W3C recommendations. Edge cases (BOM handling, duplicate keys, lossless round-trip) are covered by tests that pin the spec-mandated behavior.</p>
+      <p>Long-form guides under <a href="/docs/" class="underline" style="color: var(--color-accent);">/docs/</a> are drafted with AI assistance and lightly reviewed before publishing. The technical facts in those guides — what a spec says, how a parser handles a corner case — are independently verifiable.</p>
+      <p>Comparison pages ("X vs Y") were previously published with light review. Those pages have been removed because the project couldn't maintain the factual bar they required. If a comparison page redirected you here, please use the actual products to compare them.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">What the site doesn't do</h2>
+      <ul class="list-disc list-outside ml-5 space-y-1">
+        <li>Paid placements, sponsored editorial, or guest posts. AdSense ads are clearly marked <code>Sponsored</code> and separate from editorial.</li>
+        <li>Paraphrase competitor blog posts.</li>
+        <li>Send your data anywhere. The tools work on whatever you paste or load locally; nothing leaves your browser.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">How content stays current</h2>
+      <p>When a spec is revised in a way that affects parser behavior, the affected tool is updated. The CI test suite catches behavioral regressions on every deploy, and visible errors are fixed on the next deploy.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Reporting errors</h2>
+      <p>If you spot a factual error, a broken tool, or content that's outdated, email <a href="mailto:support@jsoncraft.dev" class="underline" style="color: var(--color-accent);">support@jsoncraft.dev</a>. The operator reads incoming email and replies as soon as possible. Substantive corrections are published with a <code>Corrected YYYY-MM-DD</code> note next to the affected paragraph.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Funding and monetization</h2>
+      <p>JSONCraft accepts no payment for tool listings, no affiliate revenue, and no sponsored editorial content. Monetization is via Google AdSense display ads (where approved) and occasional Buy Me a Coffee tips. Ad slots are clearly marked <code>Sponsored</code> and separate from the rest of the page.</p>
+    </section>
+  </article>
+</Layout>
