@@ -39,6 +39,10 @@ const monthYear = lang === "es"
 const lastVerifiedFooter = t(lang, "footerLastVerified").replace("{{month}}", monthYear);
 const lastVerifiedTool = t(lang, "toolLastVerified").replace("{{month}}", monthYear);
 
+// Methodology URL — bridge target for Organization.publishingPrinciples and
+// isPartOf on per-page schemas (Bloque 1c+1d).
+const methodologyUrl = lang === "es" ? "https://jsoncraft.dev/es/methodology/" : "https://jsoncraft.dev/methodology/";
+
 const fullTitle = title.startsWith("JSONCraft") ? title : `${title} | JSONCraft`;
 const pathWithTrailing = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
 const canonicalUrl = `https://jsoncraft.dev${pathWithTrailing}`;
@@ -122,11 +126,28 @@ if (isLegalPage || isComparePage) {
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Any",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "isPartOf": { "@type": "WebApplication", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+    "isPartOf": [
+      { "@type": "WebApplication", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+      { "@type": "WebPage", "@id": methodologyUrl, "url": methodologyUrl, "name": lang === "es" ? "Metodología" : "Methodology" },
+    ],
   };
 }
 
 const schemas: SchemaObject[] = [primarySchema];
+
+// Organization schema with publishingPrinciples → methodology (Bloque 1c).
+// Emitted on every page (not just home like before) so search engines see
+// the site-level E-E-A-T bridge regardless of which URL they crawl first.
+schemas.push({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "JSONCraft",
+  "url": "https://jsoncraft.dev/",
+  "logo": "https://jsoncraft.dev/og-image.png",
+  "email": "support@jsoncraft.dev",
+  "publishingPrinciples": methodologyUrl,
+  "actionableFeedbackPolicy": `${methodologyUrl}#reporting-errors`,
+});
 
 // BreadcrumbList: only emit for non-home pages (home with 1 item is invalid
 // for rich results; Google requires ≥2 items in BreadcrumbList). position 1
@@ -181,17 +202,8 @@ if (isHome) {
     "inLanguage": ["en", "es"],
   });
 
-  schemas.push({
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "JSONCraft",
-    "url": "https://jsoncraft.dev",
-    "logo": "https://jsoncraft.dev/og-image.png",
-    "description": "Free, privacy-first suite of 23 developer tools for JSON, YAML, CSV, TOML, XML, and more. Format, diff, convert, validate — 100% client-side in your browser.",
-    "sameAs": [
-      "https://buymeacoffee.com/allopen",
-    ],
-  });
+  // (Home-only Organization schema removed — Bloque 1c emits a single
+  // top-level Organization on every page above with publishingPrinciples.)
 
   const faqEN = [
     {
