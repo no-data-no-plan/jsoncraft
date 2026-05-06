@@ -115,7 +115,7 @@
         "@type": "SoftwareApplication",
         "name": "Conversor CSV a JSON Online Gratis",
         "url": "https://jsoncraft.dev/es/csv-to-json/",
-        "description": "Convierte datos CSV a JSON online gratis. Detección automática de cabeceras, inferencia de tipos y previsualización instantánea. Sin subidas.",
+        "description": "Convierte datos CSV a JSON online gratis. Detección automática de cabeceras, inferencia de tipos y previsualización instantánea.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -353,7 +353,7 @@
         "@type": "SoftwareApplication",
         "name": "Conversor TOML a JSON Online Gratis",
         "url": "https://jsoncraft.dev/es/toml-to-json/",
-        "description": "Convierte archivos TOML a JSON online gratis. Soporte completo de TOML v1.0 con tablas, arrays y datetimes. Sin subidas, en tu navegador.",
+        "description": "Convierte archivos TOML a JSON online gratis. Soporte completo de TOML v1.0 con tablas, arrays y datetimes.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -421,7 +421,7 @@
         "@type": "SoftwareApplication",
         "name": "Formateador XML Online Gratis",
         "url": "https://jsoncraft.dev/es/xml-formatter/",
-        "description": "Formatea, embellece y minifica XML online gratis. Sangría correcta, validación de sintaxis y minificación con un clic. 100% privado, en el navegador.",
+        "description": "Formatea, embellece y minifica XML online gratis. Sangría correcta, validación de sintaxis y minificación con un clic., en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -472,7 +472,7 @@
         "@type": "SoftwareApplication",
         "name": "JSON Formatter & Validator Online Free",
         "url": "https://jsoncraft.dev/formatter/",
-        "description": "JSONCraft is a free suite of 22 browser-based developer tools — JSON formatter, validator, diff, YAML/CSV/TOML converters. 100% client-side, no signup.",
+        "description": "JSONCraft is a free suite of 22 browser-based developer tools — JSON formatter, validator, diff, YAML/CSV/TOML converters. 100% client-side.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -744,7 +744,7 @@
         "@type": "SoftwareApplication",
         "name": "XML Formatter & Prettifier Online Free",
         "url": "https://jsoncraft.dev/xml-formatter/",
-        "description": "Format, prettify and minify XML online for free. Proper indentation, syntax validation, and one-click minification. 100% private, browser-based.",
+        "description": "Format, prettify and minify XML online for free. Proper indentation, syntax validation, and one-click minification.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {
