@@ -3,6 +3,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -11,6 +12,12 @@
   let mode = $state<"encode" | "decode">("encode");
   let encodeMode = $state<"component" | "uri" | "form">("component");
   let error = $state("");
+
+  const fireToolComplete = useToolComplete("url-encode");
+  $effect(() => {
+    output; error;
+    if (output && !error) fireToolComplete();
+  });
 
   function formEncode(s: string): string {
     return encodeURIComponent(s).replace(/%20/g, "+");

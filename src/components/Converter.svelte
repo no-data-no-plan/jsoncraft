@@ -11,6 +11,7 @@
   import ConverterToolbar from "./ConverterToolbar.svelte";
   import EditorPanel from "./EditorPanel.svelte";
   import UndoToast from "./UndoToast.svelte";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en", fromFormat = "json", toFormat = "yaml" }: {
     lang?: Lang;
@@ -24,6 +25,12 @@
   let warning = $state("");
   let wrongFormatHint: WrongFormatHint | null = $state(null);
   let processing = $state(false);
+
+  const fireToolComplete = useToolComplete(`${fromFormat}-to-${toFormat}`);
+  $effect(() => {
+    output; error;
+    if (output && !error) fireToolComplete();
+  });
 
   const engine = new ConversionEngine();
 

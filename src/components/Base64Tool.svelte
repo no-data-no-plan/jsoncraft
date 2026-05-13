@@ -4,6 +4,7 @@
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
   import { copyAndNotify } from "../lib/notify";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -12,6 +13,8 @@
   let mode: "encode" | "decode" = "encode";
   let urlSafe = $state(false);
   let error = "";
+
+  const fireToolComplete = useToolComplete("base64");
 
   function encodeText(text: string): string {
     const std = btoa(unescape(encodeURIComponent(text)));
@@ -41,6 +44,7 @@
     if (!input.trim()) { output = ""; return; }
     try {
       output = mode === "encode" ? encodeText(input) : decodeText(input);
+      if (output) fireToolComplete();
     } catch (e: any) {
       error = mode === "decode" ? tt("base64", lang, "invalidBase64") : e.message;
       output = "";

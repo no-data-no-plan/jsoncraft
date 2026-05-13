@@ -4,12 +4,19 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
   let input = $state("");
   let output = $state("");
   let error = $state("");
+
+  const fireToolComplete = useToolComplete("json-to-typescript");
+  $effect(() => {
+    output; error;
+    if (output && !error) fireToolComplete();
+  });
 
   function capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);

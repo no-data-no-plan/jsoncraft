@@ -5,6 +5,7 @@
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
   import { copyAndNotify } from "../lib/notify";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -12,6 +13,12 @@
   let htmlOutput = $state("");
   let error = $state("");
   let showPreview = $state(true);
+
+  const fireToolComplete = useToolComplete("json-to-html-table");
+  $effect(() => {
+    htmlOutput; error;
+    if (htmlOutput && !error) fireToolComplete();
+  });
 
   function escapeHtml(str: string): string {
     return String(str)

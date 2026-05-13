@@ -3,6 +3,7 @@
   import UndoToast from "./UndoToast.svelte";
   import { uploadFile, downloadFile, friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -14,6 +15,12 @@
   let status = $state<"idle" | "valid" | "error">("idle");
   let errorMsg = $state("");
   let indent = $state<number | string>(2);
+
+  const fireToolComplete = useToolComplete("formatter");
+  $effect(() => {
+    status; output;
+    if (status === "valid" && output) fireToolComplete();
+  });
 
   function validate(text: string): { valid: boolean; error?: string; parsed?: unknown } {
     if (!text.trim()) return { valid: true };

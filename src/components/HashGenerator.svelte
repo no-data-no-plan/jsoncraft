@@ -5,8 +5,11 @@
   import type { Lang } from "../i18n/index";
   import Md5Worker from "../workers/md5-worker.ts?worker";
   import { copyAndNotify } from "../lib/notify";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
+
+  const fireToolComplete = useToolComplete("hash");
 
   type Mode = "text" | "file" | "hmac";
   type HmacAlgo = "SHA-1" | "SHA-256" | "SHA-512";
@@ -115,6 +118,7 @@
         }
       }
       hashes = results;
+      fireToolComplete();
     } finally {
       computing = false;
     }
@@ -127,6 +131,7 @@
     try {
       const value = await hmac(hmacAlgo, secretKey, input);
       hashes = [{ algo: `HMAC-${hmacAlgo}`, value }];
+      fireToolComplete();
     } catch (e: any) {
       errorMsg = e.message;
       hashes = [];
@@ -151,6 +156,7 @@
         results.push({ algo: a.name, value: await digestHex(a.algo, buffer) });
       }
       hashes = results;
+      fireToolComplete();
     } catch (e: any) {
       errorMsg = e.message;
       hashes = [];

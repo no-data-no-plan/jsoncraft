@@ -6,6 +6,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -14,6 +15,12 @@
   let result = $state("");
   let error = $state("");
   let matchCount = $state(0);
+
+  const fireToolComplete = useToolComplete("jsonpath");
+  $effect(() => {
+    result; error;
+    if (result && !error) fireToolComplete();
+  });
 
   const examples = $derived([
     { label: tt("jsonpath", lang, "allAuthors"), path: "$.store.book[*].author" },

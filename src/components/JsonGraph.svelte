@@ -5,8 +5,11 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
+
+  const fireToolComplete = useToolComplete("graph");
 
   // ── Types ──
 
@@ -38,6 +41,11 @@
   let rootNode = $state<GraphNode | null>(null);
   let totalNodes = $state(0);
   let maxDepth = $state(0);
+
+  $effect(() => {
+    rootNode; error;
+    if (rootNode !== null && !error) fireToolComplete();
+  });
 
   // Pan & zoom
   let viewX = $state(0);

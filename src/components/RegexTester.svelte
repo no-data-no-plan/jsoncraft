@@ -7,6 +7,7 @@
   import RegexWorker from "../workers/regex-worker.ts?worker";
   import RegexVisualizer from "./RegexVisualizer.svelte";
   import { parseRegex, type ParseOutcome } from "../lib/regex-parse";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -15,6 +16,12 @@
   let testString = $state("");
   let matches = $state<{ full: string; index: number; groups: string[] }[]>([]);
   let error = $state("");
+
+  const fireToolComplete = useToolComplete("regex");
+  $effect(() => {
+    matches.length; error;
+    if (matches.length > 0 && !error) fireToolComplete();
+  });
   let highlighted = $state("");
   let showVisualizer = $state(false);
   // CW-JC-10 (2026-05-02): Hover/focus on a visualizer node reports its

@@ -5,12 +5,19 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
   let input = $state("");
   let parsed = $state<unknown>(null);
   let error = $state("");
+
+  const fireToolComplete = useToolComplete("viewer");
+  $effect(() => {
+    parsed; error;
+    if (parsed !== null && !error) fireToolComplete();
+  });
 
   function collectFirstLevelPaths(data: unknown): Set<string> {
     const paths = new Set<string>();

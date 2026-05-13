@@ -3,6 +3,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -13,6 +14,14 @@
   let fromDate = $state<number | null>(null);
   let error = $state("");
   let unit = $state<"auto" | "seconds" | "ms">("auto");
+
+  const fireToolComplete = useToolComplete("timestamp");
+  let firstEffectRun = true;
+  $effect(() => {
+    fromTs; fromDate;
+    if (firstEffectRun) { firstEffectRun = false; return; }
+    if (fromTs || fromDate !== null) fireToolComplete();
+  });
 
   function toMs(ts: number): number {
     if (unit === "ms") return ts;

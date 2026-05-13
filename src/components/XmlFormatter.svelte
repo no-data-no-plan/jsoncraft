@@ -4,6 +4,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -11,6 +12,12 @@
   let output = $state("");
   let error = $state("");
   let indent = $state(2);
+
+  const fireToolComplete = useToolComplete("xml-formatter");
+  $effect(() => {
+    output; error;
+    if (output && !error) fireToolComplete();
+  });
 
   function escXml(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 

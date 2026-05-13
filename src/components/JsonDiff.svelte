@@ -8,6 +8,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -16,6 +17,12 @@
   let diffResult = $state<Array<{ added?: boolean; removed?: boolean; value: string }>>([]);
   let error = $state("");
   let hasDifferences = $state(false);
+
+  const fireToolComplete = useToolComplete("diff");
+  $effect(() => {
+    diffResult.length; error;
+    if (diffResult.length > 0 && !error) fireToolComplete();
+  });
   // Side-by-side is the new default — line numbers + paired changes are
   // far easier to read for JSON. Users who liked the inline-coloured
   // unified output can flip the toolbar toggle.

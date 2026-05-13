@@ -2,6 +2,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -10,6 +11,14 @@
   let nextRuns = $state<string[]>([]);
   let error = $state("");
   let validationError = $state("");
+
+  const fireToolComplete = useToolComplete("cron");
+  let firstEffectRun = true;
+  $effect(() => {
+    expression; nextRuns.length;
+    if (firstEffectRun) { firstEffectRun = false; return; }
+    if (nextRuns.length > 0 && !error) fireToolComplete();
+  });
 
   const fieldSpecs = [
     { name: "minute", min: 0, max: 59 },

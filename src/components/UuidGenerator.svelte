@@ -2,6 +2,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -9,6 +10,8 @@
   let uppercase = $state(false);
   let noDashes = $state(false);
   let uuids = $state<string[]>([]);
+
+  const fireToolComplete = useToolComplete("uuid");
 
   generate();
 
@@ -22,6 +25,11 @@
       uuids.push(id);
     }
     uuids = uuids;
+  }
+
+  function userGenerate() {
+    generate();
+    fireToolComplete();
   }
 
   function copyAll() {
@@ -55,7 +63,7 @@
       {tt("uuid", lang, "noDashes")}
     </label>
     <button
-      onclick={generate}
+      onclick={userGenerate}
       class="px-3 py-1 rounded text-sm bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]"
     >{t(lang, "generate")}</button>
     <button

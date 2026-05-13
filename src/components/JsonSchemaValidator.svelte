@@ -13,6 +13,7 @@
   // @cfworker/json-schema is a no-eval, draft-2020-12 capable validator —
   // safe under our CSP and ~15KB gzipped vs ajv's ~30KB.
   import { Validator } from "@cfworker/json-schema";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -20,6 +21,12 @@
   let schemaInput = $state("");
   let results = $state<{ valid: boolean; errors: string[] } | null>(null);
   let parseError = $state("");
+
+  const fireToolComplete = useToolComplete("json-schema-validator");
+  $effect(() => {
+    results; parseError;
+    if (results !== null && !parseError) fireToolComplete();
+  });
 
   // Memoize the Validator by raw schema string (Round-2 review fix
   // 2026-04-30): without this, a new Validator was constructed on every

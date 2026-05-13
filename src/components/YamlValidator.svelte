@@ -5,6 +5,7 @@
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
   import * as yaml from "js-yaml";
+  import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
 
@@ -13,6 +14,12 @@
   let errorMsg = $state("");
   let docCount = $state(0);
   let parsedPreview = $state("");
+
+  const fireToolComplete = useToolComplete("yaml-validator");
+  $effect(() => {
+    status;
+    if (status === "valid") fireToolComplete();
+  });
 
   function validate(text: string) {
     if (!text.trim()) {
