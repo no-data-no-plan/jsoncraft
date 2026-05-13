@@ -99,6 +99,12 @@
     return Array.from(new Uint8Array(sig)).map((b) => b.toString(16).padStart(2, "0")).join("");
   }
 
+  function errorMessage(e: unknown): string {
+    if (e instanceof Error) return e.message;
+    if (typeof e === "string") return e;
+    return "Unknown error";
+  }
+
   async function computeAllTextHashes(val: string) {
     errorMsg = "";
     if (!val) { hashes = []; return; }
@@ -109,8 +115,8 @@
       try {
         const md5Hex = await md5Async(val);
         results.push({ algo: "MD5", value: md5Hex });
-      } catch (e: any) {
-        results.push({ algo: "MD5", value: "(" + e.message + ")" });
+      } catch (e: unknown) {
+        results.push({ algo: "MD5", value: "(" + errorMessage(e) + ")" });
       }
       for (const a of textAlgorithms) {
         if (a.algo) {
@@ -132,8 +138,8 @@
       const value = await hmac(hmacAlgo, secretKey, input);
       hashes = [{ algo: `HMAC-${hmacAlgo}`, value }];
       fireToolComplete();
-    } catch (e: any) {
-      errorMsg = e.message;
+    } catch (e: unknown) {
+      errorMsg = errorMessage(e);
       hashes = [];
       fireToolComplete('error');
     } finally {
@@ -158,8 +164,8 @@
       }
       hashes = results;
       fireToolComplete();
-    } catch (e: any) {
-      errorMsg = e.message;
+    } catch (e: unknown) {
+      errorMsg = errorMessage(e);
       hashes = [];
       fireToolComplete('error');
     } finally {
