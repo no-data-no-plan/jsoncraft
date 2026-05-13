@@ -311,6 +311,7 @@ const hash = {
     hmacAlgorithm: "Algorithm",
     enterKeyAndMessage: "Enter a secret key and a message to compute HMAC.",
     workerTimeout: "MD5 timed out",
+    unknownError: "Unknown error",
   },
   es: {
     pasteToHash: "Pega texto para generar hashes",
@@ -330,6 +331,7 @@ const hash = {
     hmacAlgorithm: "Algoritmo",
     enterKeyAndMessage: "Introduce una clave secreta y un mensaje para calcular HMAC.",
     workerTimeout: "MD5 tard\u00f3 demasiado",
+    unknownError: "Error desconocido",
   },
 };
 
