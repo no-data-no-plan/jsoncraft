@@ -11,7 +11,7 @@ const common = {
     // Identity strip \u2014 Stanford Web Credibility (T-02 maintenance,
     // T-04 visible email, T-06 last-verified). Mirrors PT pattern.
     footerSince: "since 2025",
-    footerMaintainedBy: "maintained by Marco \u2014 solo dev",
+    footerMaintainedBy: "maintained by Marco B. \u2014 solo dev",
     footerSupportEmail: "support@jsoncraft.dev",
     footerSupportEmailSub: "typically replies within 24h",
     // {{month}} replaced at build time in Layout.astro frontmatter (Bloque 1b).
@@ -92,7 +92,7 @@ const common = {
     footerCoffee: "Buy me a coffee",
     footerPrivacy: "Privacidad",
     footerSince: "desde 2025",
-    footerMaintainedBy: "mantenido por Marco \u2014 solo dev",
+    footerMaintainedBy: "mantenido por Marco B. \u2014 solo dev",
     footerSupportEmail: "support@jsoncraft.dev",
     footerSupportEmailSub: "respuesta en menos de 24h",
     footerLastVerified: "\u00daltima verificaci\u00f3n {{month}} \u2014 las 23 herramientas pasando",
