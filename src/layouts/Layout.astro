@@ -43,6 +43,9 @@ const lastVerifiedTool = t(lang, "toolLastVerified").replace("{{month}}", monthY
 // isPartOf on per-page schemas (Bloque 1c+1d).
 const methodologyUrl = lang === "es" ? "https://jsoncraft.dev/es/methodology/" : "https://jsoncraft.dev/methodology/";
 
+const authorUrl = lang === "es" ? "https://jsoncraft.dev/es/about/" : "https://jsoncraft.dev/about/";
+const authorPerson = { "@type": "Person", "name": "Marco B.", "url": authorUrl };
+
 const fullTitle = title.startsWith("JSONCraft") ? title : `${title} | JSONCraft`;
 const pathWithTrailing = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
 const canonicalUrl = `https://jsoncraft.dev${pathWithTrailing}`;
@@ -83,6 +86,7 @@ if (isLegalPage || isComparePage) {
     "description": description,
     "inLanguage": lang,
     "isPartOf": { "@type": "WebSite", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+    "author": authorPerson,
   };
 } else if (isDocsArticle) {
   primarySchema = {
@@ -94,7 +98,7 @@ if (isLegalPage || isComparePage) {
     "inLanguage": lang,
     "datePublished": docsPublishedAt!.toISOString(),
     "dateModified": (docsUpdatedAt ?? docsPublishedAt!).toISOString(),
-    "author": { "@type": "Organization", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+    "author": authorPerson,
     "publisher": {
       "@type": "Organization",
       "name": "JSONCraft",
@@ -115,6 +119,7 @@ if (isLegalPage || isComparePage) {
     "description": description,
     "inLanguage": lang,
     "isPartOf": { "@type": "WebSite", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
+    "author": authorPerson,
   };
 } else {
   primarySchema = {
@@ -130,6 +135,7 @@ if (isLegalPage || isComparePage) {
       { "@type": "WebApplication", "name": "JSONCraft", "url": "https://jsoncraft.dev" },
       { "@type": "WebPage", "@id": methodologyUrl, "url": methodologyUrl, "name": lang === "es" ? "Metodología" : "Methodology" },
     ],
+    "author": authorPerson,
   };
 }
 
@@ -279,6 +285,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0f172a" />
+    <meta name="author" content="Marco B." />
     <meta name="google-adsense-account" content="ca-pub-8761907366448308" />
 
     <!-- Google Analytics 4 — Consent Mode v2. Default deny all; CMP updates signals. -->
