@@ -135,6 +135,7 @@
     } catch (e: any) {
       errorMsg = e.message;
       hashes = [];
+      fireToolComplete('error');
     } finally {
       computing = false;
     }
@@ -160,6 +161,7 @@
     } catch (e: any) {
       errorMsg = e.message;
       hashes = [];
+      fireToolComplete('error');
     } finally {
       computing = false;
     }
