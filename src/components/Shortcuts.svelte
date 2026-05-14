@@ -222,8 +222,8 @@
     background: transparent;
     border: 1px solid var(--color-border, #2a2a2a);
     border-radius: 4px;
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     font-size: 16px;
     line-height: 1;
     color: var(--color-text-secondary, #888);
