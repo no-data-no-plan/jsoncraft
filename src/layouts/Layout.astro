@@ -412,7 +412,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
         <div class="flex items-center gap-3">
           <button
             id="menu-toggle"
-            class="lg:hidden p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
+            class="lg:hidden p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={t(lang, "toggleMenu")}
             aria-expanded="false"
             aria-controls="sidebar"
@@ -439,7 +439,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
           />
           <button
             id="theme-toggle"
-            class="p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]"
+            class="p-2 rounded hover:bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={t(lang, "toggleTheme")}
           >
             <svg id="icon-dark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
