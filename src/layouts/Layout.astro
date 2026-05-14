@@ -476,7 +476,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
       )}
 
       <!-- Main content -->
-      <main id="main-content" class="flex-1 flex flex-col">
+      <main id="main-content" tabindex="-1" class="flex-1 flex flex-col">
         <div class="tool-content-wrapper flex flex-col">
           <slot />
         </div>
