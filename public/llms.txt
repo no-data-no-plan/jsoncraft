@@ -97,7 +97,7 @@ https://jsoncraft.dev/sitemap.xml
 
 ## Policies
 
-- [Privacy Policy](https://jsoncraft.dev/privacy-policy/)
+- [Privacy Policy](https://jsoncraft.dev/privacy/)
 
 ## Related
 

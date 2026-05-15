@@ -2,18 +2,18 @@
 # Format: <source> <destination> <code>
 # https://developers.cloudflare.com/pages/configuration/redirects/
 
-# Stanford audit 2026-05-01 (sev-3): the footer + sister apps + external
-# blogs link to /privacy/ and /cookies/, but the canonical route is
-# /privacy-policy/. 301 the legacy paths so we don't 404 referrers.
+# Portfolio URL convention unified 2026-05-15: /privacy/ is canonical
+# across CV/AY/OI/JC/PT/OP (previously split 3-3). JC, PT, OP flipped
+# to /privacy/ on this date; redirects below catch the legacy paths.
 # Both with and without trailing slash — CF Pages does NOT auto-canonicalise.
-/privacy           /privacy-policy/      301
-/privacy/          /privacy-policy/      301
-/cookies           /privacy-policy/      301
-/cookies/          /privacy-policy/      301
-/es/privacy        /es/privacy-policy/   301
-/es/privacy/       /es/privacy-policy/   301
-/es/cookies        /es/privacy-policy/   301
-/es/cookies/       /es/privacy-policy/   301
+/privacy-policy    /privacy/      301
+/privacy-policy/   /privacy/      301
+/cookies           /privacy/      301
+/cookies/          /privacy/      301
+/es/privacy-policy /es/privacy/   301
+/es/privacy-policy/ /es/privacy/  301
+/es/cookies        /es/privacy/   301
+/es/cookies/       /es/privacy/   301
 
 # vs-* comparison pages removed 2026-05-05 (Path A — see /methodology/).
 # Pages didn't meet the factual bar required for competitor reviews,

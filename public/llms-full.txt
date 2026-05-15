@@ -97,7 +97,7 @@ https://jsoncraft.dev/sitemap.xml
 
 ## Policies
 
-- [Privacy Policy](https://jsoncraft.dev/privacy-policy/)
+- [Privacy Policy](https://jsoncraft.dev/privacy/)
 
 ## Related
 
@@ -1415,7 +1415,7 @@ Usa JSON Merge Patch (RFC 7396) para el caso común 'actualiza estos campos' —
 No escribas patches a mano. El patrón estándar es: fetch del estado actual, edita una copia local, diff antiguo vs nuevo para producir un patch mínimo, manda el patch. Librerías para el paso 3: `fast-json-patch` en JavaScript (`jsonpatch.compare(a, b)`), `jsonpatch` en Python, `evanphx/json-patch` en Go. Antepón una operación `test` sobre un campo de version y añade al final un `replace` que lo incremente, y tienes un patch compare-and-swap seguro. Usa la herramienta JSON Diff de JSONCraft para visualizar el cambio antes de enviar — ayuda a cazar borrados accidentales.
 
 
-## https://jsoncraft.dev/privacy-policy/
+## https://jsoncraft.dev/privacy/
 
 How JSONCraft handles your data. All processing is client-side; no data is uploaded, logged, or tracked.
 

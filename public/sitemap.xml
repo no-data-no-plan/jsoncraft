@@ -524,11 +524,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/terms/" />
   </url>
   <url>
-    <loc>https://jsoncraft.dev/privacy-policy/</loc>
+    <loc>https://jsoncraft.dev/privacy/</loc>
     <lastmod>2026-05-13</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/privacy-policy/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/privacy-policy/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jsoncraft.dev/privacy/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://jsoncraft.dev/es/privacy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jsoncraft.dev/privacy/" />
   </url>
   <url>
     <loc>https://jsoncraft.dev/es/terms/</loc>
