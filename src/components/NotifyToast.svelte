@@ -34,6 +34,7 @@
   const DEFAULT_ERROR_MS = 7000;
   const DEDUPE_WINDOW_MS = 750;
   const RESUME_DEBOUNCE_MS = 100;
+  const EVENT_NAME = "jc-toast";
 
   let toasts = $state<ActiveToast[]>([]);
   let paused = $state(false);
@@ -148,11 +149,11 @@
   }
 
   onMount(() => {
-    window.addEventListener("jc-toast", handle as EventListener);
+    window.addEventListener(EVENT_NAME, handle as EventListener);
     window.addEventListener("keydown", handleKeydown);
   });
   onDestroy(() => {
-    window.removeEventListener("jc-toast", handle as EventListener);
+    window.removeEventListener(EVENT_NAME, handle as EventListener);
     window.removeEventListener("keydown", handleKeydown);
     if (resumeHandle) clearTimeout(resumeHandle);
     for (const id of Array.from(timers.keys())) clearTimer(id);

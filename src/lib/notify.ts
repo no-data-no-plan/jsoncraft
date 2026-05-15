@@ -10,6 +10,8 @@
  */
 export type ToastKind = "success" | "info" | "error";
 
+const EVENT_NAME = "jc-toast";
+
 export interface ToastOptions {
   /** Stable identity. If a toast with this id is still visible, the call
    *  refreshes it (resets timer, updates text) instead of stacking. Use to
@@ -22,7 +24,7 @@ export interface ToastOptions {
 
 export function notify(message: string, kind: ToastKind = "success", opts: ToastOptions = {}) {
   if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent("jc-toast", { detail: { message, kind, ...opts } }));
+  window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: { message, kind, ...opts } }));
 }
 
 /** Convenience: copy + toast in one call. Returns true on success.
