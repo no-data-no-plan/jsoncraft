@@ -17,8 +17,8 @@ async function getSchemas(page: Page): Promise<Record<string, unknown[]>> {
 }
 
 test.describe("Schema + heading hygiene", () => {
-  test("/privacy-policy/ has WebPage schema + single h1", async ({ page }) => {
-    await page.goto("/privacy-policy/");
+  test("/privacy/ has WebPage schema + single h1", async ({ page }) => {
+    await page.goto("/privacy/");
 
     const schemas = await getSchemas(page);
     expect(schemas["WebPage"]?.length).toBeGreaterThanOrEqual(1);
