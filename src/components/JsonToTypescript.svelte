@@ -4,6 +4,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { copyAndNotify, downloadAndNotify } from "../lib/notify";
   import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
@@ -173,19 +174,14 @@
     convert();
   }
 
-  function download() {
+  async function download() {
     if (!output) return;
     const blob = new Blob([output], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "types.ts";
-    a.click();
-    URL.revokeObjectURL(url);
+    await downloadAndNotify(blob, "types.ts", t(lang, "downloaded"), t(lang, "downloadFailed"));
   }
 
   function copyOutput() {
-    if (output) navigator.clipboard.writeText(output);
+    if (output) copyAndNotify(output, t(lang, "copied"), t(lang, "copyFailed"));
   }
 </script>
 

@@ -3,6 +3,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { copyAndNotify } from "../lib/notify";
   import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
@@ -80,7 +81,7 @@
   }
 
   function copy(val: string) {
-    navigator.clipboard.writeText(val);
+    copyAndNotify(val, t(lang, "copied"), t(lang, "copyFailed"));
   }
 
   // Auto-convert on load

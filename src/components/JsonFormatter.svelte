@@ -4,6 +4,7 @@
   import { uploadFile, downloadFile, friendlyError, debounce, stripBom } from "../lib/fileutils";
   import { shouldUseWorker, parseInWorker } from "../lib/worker-api";
   import { useToolComplete } from "../lib/tool-complete.svelte";
+  import { copyAndNotify, notify } from "../lib/notify";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -95,7 +96,13 @@
   }
 
   function copyText(text: string) {
-    if (text) navigator.clipboard.writeText(text);
+    if (text) copyAndNotify(text, t(lang, "copied"), t(lang, "copyFailed"));
+  }
+
+  function handleDownload() {
+    if (!output) return;
+    downloadFile(output, "formatted.json");
+    notify(t(lang, "downloaded"));
   }
 
   // Undo-toast state for destructive Clear (Nielsen audit 2026-04-30, F2).
@@ -347,7 +354,7 @@
             {t(lang, "copy")}
           </button>
           <button
-            onclick={() => output && downloadFile(output, "formatted.json")}
+            onclick={handleDownload}
             class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
             title={tt("formatter", lang, "downloadOutput")}
           >

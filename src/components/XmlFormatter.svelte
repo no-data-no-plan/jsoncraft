@@ -4,6 +4,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { copyAndNotify, notify } from "../lib/notify";
   import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
@@ -143,6 +144,7 @@
   function download() {
     if (!output) return;
     downloadFile(output, "formatted.xml");
+    notify(t(lang, "downloaded"));
   }
 
   function copySample() {
@@ -151,7 +153,7 @@
   }
 
   function copyOutput() {
-    if (output) navigator.clipboard.writeText(output);
+    if (output) copyAndNotify(output, t(lang, "copied"), t(lang, "copyFailed"));
   }
 </script>
 

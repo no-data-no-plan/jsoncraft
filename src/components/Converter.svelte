@@ -1,6 +1,7 @@
 <script lang="ts">
   import { uploadFile, downloadFile, friendlyError, debounce } from "../lib/fileutils";
   import { shouldUseWorker, convertInWorker } from "../lib/worker-api";
+  import { copyAndNotify, notify } from "../lib/notify";
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
@@ -79,7 +80,7 @@
   }
 
   function copyText(text: string) {
-    if (text) navigator.clipboard.writeText(text);
+    if (text) copyAndNotify(text, t(lang, "copied"), t(lang, "copyFailed"));
   }
 
   // Undo-toast state for destructive Clear (Nielsen audit 2026-04-30, F2).
@@ -131,7 +132,9 @@
   }
 
   function handleDownload() {
-    if (output) downloadFile(output, downloadExtMap[toFormat]);
+    if (!output) return;
+    downloadFile(output, downloadExtMap[toFormat]);
+    notify(t(lang, "downloaded"));
   }
 
   function loadSample() {

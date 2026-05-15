@@ -562,7 +562,9 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
       });
     </script>
 
-    <!-- Feedback form: AJAX submit + toast (no page reload) -->
+    <!-- Feedback form: AJAX submit + dispatch toast event (no page reload).
+         Toast UI is rendered by <NotifyToast> island below; this script just
+         dispatches `jc-toast` events. -->
     <script>
       (function () {
         const form = document.getElementById('feedback-form');
@@ -574,45 +576,8 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
           error: isEs ? 'Error al enviar. Inténtalo más tarde.' : 'Error sending. Please try again later.',
         };
 
-        function showToast(text, isError) {
-          const toast = document.createElement('div');
-          toast.setAttribute('role', 'status');
-          toast.setAttribute('aria-live', 'polite');
-          toast.textContent = text;
-          Object.assign(toast.style, {
-            position: 'fixed',
-            bottom: '24px',
-            left: '50%',
-            transform: 'translate(-50%, 20px)',
-            padding: '12px 20px',
-            borderRadius: '8px',
-            background: isError ? '#dc2626' : '#059669',
-            color: '#fff',
-            fontSize: '13px',
-            fontWeight: '500',
-            zIndex: '9999',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
-            opacity: '0',
-            transition: 'opacity .25s ease, transform .25s ease',
-            cursor: 'pointer',
-            maxWidth: '90vw',
-          });
-          toast.title = isEs ? 'Clic para cerrar' : 'Click to dismiss';
-          document.body.appendChild(toast);
-          requestAnimationFrame(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translate(-50%, 0)';
-          });
-          let dismissed = false;
-          const dismiss = () => {
-            if (dismissed) return;
-            dismissed = true;
-            toast.style.opacity = '0';
-            toast.style.transform = 'translate(-50%, 20px)';
-            setTimeout(() => toast.remove(), 300);
-          };
-          toast.addEventListener('click', dismiss);
-          setTimeout(dismiss, 5000);
+        function toast(message, kind) {
+          window.dispatchEvent(new CustomEvent('jc-toast', { detail: { message, kind } }));
         }
 
         form.addEventListener('submit', async (e) => {
@@ -630,13 +595,13 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
               headers: { Accept: 'application/json' },
             });
             if (res.ok) {
-              showToast(MSG.success, false);
+              toast(MSG.success, 'success');
               form.reset();
             } else {
-              showToast(MSG.error, true);
+              toast(MSG.error, 'error');
             }
           } catch {
-            showToast(MSG.error, true);
+            toast(MSG.error, 'error');
           } finally {
             if (submitBtn instanceof HTMLButtonElement) submitBtn.disabled = false;
           }
@@ -675,6 +640,6 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
        Tools call `notify()` from src/lib/notify.ts after copy/download
        to surface a brief aria-live confirmation. client:only because the
        component attaches a window-level event listener at mount. -->
-  <NotifyToast client:only="svelte" />
+  <NotifyToast client:only="svelte" lang={lang} />
   </body>
 </html>

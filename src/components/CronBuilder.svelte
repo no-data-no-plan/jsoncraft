@@ -2,6 +2,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
+  import { copyAndNotify } from "../lib/notify";
   import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
@@ -155,7 +156,7 @@
   }
 
   function copy() {
-    navigator.clipboard.writeText(expression);
+    copyAndNotify(expression, t(lang, "copied"), t(lang, "copyFailed"));
   }
 
   function describe(): string {

@@ -207,7 +207,7 @@
   }
 
   function copy(val: string) {
-    copyAndNotify(val, lang === "es" ? "Copiado" : "Copied");
+    copyAndNotify(val, t(lang, "copied"), t(lang, "copyFailed"));
   }
 
   function formatSize(bytes: number): string {

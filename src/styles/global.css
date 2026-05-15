@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* ── Z-index scale ──
+   Centralised so stacking order is reasoned about in one place
+   instead of scattered `z-50` / `z-[100]` magic numbers. The scale
+   mirrors the user-facing layer order: row popovers (most ephemeral)
+   → fixed nav → modals → toast → help tooltip (must sit above
+   everything, including modal confirms).
+   Tailwind 4 accepts these as arbitrary values: `z-[var(--z-modal)]`. */
+:root {
+  --z-row-menu: 30;            /* per-row popovers inside tables */
+  --z-nav-dropdown: 40;        /* nav dropdowns */
+  --z-pane: 45;                /* side panes */
+  --z-pronav-sheet: 55;        /* mobile hamburger sheet backdrop */
+  --z-pronav-sheet-dialog: 60; /* mobile hamburger sheet dialog */
+  --z-modal-backdrop: 70;      /* full-screen dialog backdrops */
+  --z-modal: 75;               /* dialog content above its backdrop */
+  --z-toast: 90;               /* transient toasts / banners */
+  --z-help-tooltip: 100;       /* shortcuts hint, help tip — wins over modals */
+}
+
 /* ── Global `prefers-reduced-motion` contract ──
    User-agent-level opt-out: any element under a user with
    reduced-motion will get all CSS animations + transitions

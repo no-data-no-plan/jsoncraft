@@ -69,7 +69,7 @@
   }
 
   function copy() {
-    if (output) copyAndNotify(output, lang === "es" ? "Copiado" : "Copied");
+    if (output) copyAndNotify(output, t(lang, "copied"), t(lang, "copyFailed"));
   }
 </script>
 

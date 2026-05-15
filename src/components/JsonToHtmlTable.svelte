@@ -4,7 +4,7 @@
   import { t } from "../i18n/common";
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
-  import { copyAndNotify } from "../lib/notify";
+  import { copyAndNotify, downloadAndNotify } from "../lib/notify";
   import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
@@ -100,19 +100,14 @@
   }
 
   function copyOutput() {
-    if (htmlOutput) copyAndNotify(htmlOutput, lang === "es" ? "Copiado" : "Copied");
+    if (htmlOutput) copyAndNotify(htmlOutput, t(lang, "copied"), t(lang, "copyFailed"));
   }
 
-  function download() {
+  async function download() {
     if (!htmlOutput) return;
     const full = `<!DOCTYPE html>\n<html>\n<head>\n<style>\ntable { border-collapse: collapse; width: 100%; }\nth, td { border: 1px solid #ddd; padding: 8px; text-align: left; }\nth { background-color: #f2f2f2; font-weight: bold; }\ntr:nth-child(even) { background-color: #f9f9f9; }\n</style>\n</head>\n<body>\n${htmlOutput}\n</body>\n</html>`;
     const blob = new Blob([full], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "table.html";
-    a.click();
-    URL.revokeObjectURL(url);
+    await downloadAndNotify(blob, "table.html", t(lang, "downloaded"), t(lang, "downloadFailed"));
   }
 </script>
 

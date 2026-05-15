@@ -5,6 +5,7 @@
   import { tt } from "../i18n/tools";
   import type { Lang } from "../i18n/index";
   import * as yaml from "js-yaml";
+  import { copyAndNotify } from "../lib/notify";
   import { useToolComplete } from "../lib/tool-complete.svelte";
 
   let { lang = "en" as Lang } = $props();
@@ -87,7 +88,7 @@ logging:
   }
 
   function copyParsed() {
-    if (parsedPreview) navigator.clipboard.writeText(parsedPreview);
+    if (parsedPreview) copyAndNotify(parsedPreview, t(lang, "copied"), t(lang, "copyFailed"));
   }
 </script>
 

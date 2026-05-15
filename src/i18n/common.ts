@@ -71,6 +71,10 @@ const common = {
     cleared: "Editor cleared",
     clearedAll: "Editors cleared",
     dismiss: "Dismiss",
+    // NotifyToast (post-action feedback) — copy/download success + error
+    copyFailed: "Copy failed",
+    downloaded: "Downloaded",
+    downloadFailed: "Download failed",
     // Shortcuts modal (Shortcuts.svelte) — opened with ? key
     keyboardShortcuts: "Keyboard shortcuts",
     closeDialog: "Close",
@@ -141,6 +145,9 @@ const common = {
     cleared: "Editor vaciado",
     clearedAll: "Editores vaciados",
     dismiss: "Cerrar",
+    copyFailed: "Error al copiar",
+    downloaded: "Descargado",
+    downloadFailed: "Error al descargar",
     keyboardShortcuts: "Atajos de teclado",
     closeDialog: "Cerrar",
     shortcutsHint: "Pulsa ? para abrir este diálogo desde cualquier punto del sitio.",

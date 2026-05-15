@@ -10,9 +10,19 @@
  */
 export type ToastKind = "success" | "info" | "error";
 
-export function notify(message: string, kind: ToastKind = "success") {
+export interface ToastOptions {
+  /** Stable identity. If a toast with this id is still visible, the call
+   *  refreshes it (resets timer, updates text) instead of stacking. Use to
+   *  collapse rapid-fire identical events into a single visible toast. */
+  id?: string;
+  /** Override the default duration (ms). Defaults: success/info 5000,
+   *  error 7000. Pass 0 to make sticky (close-button only). */
+  durationMs?: number;
+}
+
+export function notify(message: string, kind: ToastKind = "success", opts: ToastOptions = {}) {
   if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent("jc-toast", { detail: { message, kind } }));
+  window.dispatchEvent(new CustomEvent("jc-toast", { detail: { message, kind, ...opts } }));
 }
 
 /** Convenience: copy + toast in one call. Returns true on success.
@@ -30,6 +40,33 @@ export async function copyAndNotify(text: string, label: string, errorLabel?: st
     return true;
   } catch {
     notify(errorLabel ?? "Copy failed", "error");
+    return false;
+  }
+}
+
+/** Convenience: trigger a Blob download + toast in one call. Returns true
+ *  on success. Constructs the anchor + click + revoke inside so callers
+ *  don't need to repeat the boilerplate. For text-based downloads that
+ *  already go through `fileutils.downloadFile()`, just append a `notify()`
+ *  after the existing call instead of switching to this helper. */
+export async function downloadAndNotify(blob: Blob, filename: string, label: string, errorLabel?: string): Promise<boolean> {
+  if (typeof document === "undefined" || typeof URL === "undefined") {
+    notify(errorLabel ?? "Download not available", "error");
+    return false;
+  }
+  try {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    notify(label);
+    return true;
+  } catch {
+    notify(errorLabel ?? "Download failed", "error");
     return false;
   }
 }
