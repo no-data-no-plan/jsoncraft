@@ -18,6 +18,13 @@
     message: string;
     kind: ToastKind;
     durationMs: number;
+    /** Immutable creation timestamp. Used by the dedupe window so that
+     *  rapid-fire identical events don't perpetually extend the same
+     *  toast — the window measures from first creation, not from last
+     *  timer reset. */
+    createdAt: number;
+    /** Mutable timer-start timestamp. Reset by scheduleDismiss every time
+     *  the toast's expiry is rescheduled (pause→resume, refresh-by-id). */
     startedAt: number;
     pausedRemaining: number | null;
   }
@@ -56,6 +63,7 @@
   function handle(e: Event) {
     const ev = e as ToastEvent;
     const { message, kind = "success", id, durationMs } = ev.detail;
+    if (!message) return;
     const defaultMs = kind === "error" ? DEFAULT_ERROR_MS : DEFAULT_SUCCESS_MS;
     const ms = durationMs ?? defaultMs;
 
@@ -73,7 +81,7 @@
 
     const now = performance.now();
     const dup = toasts.find(
-      (tt) => tt.message === message && tt.kind === kind && now - tt.startedAt < DEDUPE_WINDOW_MS,
+      (tt) => tt.message === message && tt.kind === kind && now - tt.createdAt < DEDUPE_WINDOW_MS,
     );
     if (dup) {
       if (!paused && ms > 0) scheduleDismiss(dup, ms);
@@ -85,6 +93,7 @@
       message,
       kind,
       durationMs: ms,
+      createdAt: now,
       startedAt: now,
       pausedRemaining: null,
     };
@@ -153,80 +162,86 @@
   const assertiveToasts = $derived(toasts.filter((tt) => tt.kind === "error"));
 </script>
 
-<!-- Dual live regions: polite for success/info (waits for current utterance),
-     assertive for errors (interrupts). Both mounted always so SR has a stable
-     announce target before content changes. WAI-ARIA APG Alert pattern. -->
-<div
-  class="toast-region toast-region-polite"
-  role="status"
-  aria-live="polite"
-  aria-atomic="false"
-  aria-relevant="additions"
->
-  {#each politeToasts as toast (toast.id)}
-    <div
-      class="toast toast-{toast.kind}"
-      data-notify-toast-root
-      onmouseenter={pauseAll}
-      onmouseleave={scheduleResume}
-      onfocusin={pauseAll}
-      onfocusout={scheduleResume}
-    >
-      <span class="toast-msg">{toast.message}</span>
-      <button
-        type="button"
-        class="toast-close"
-        onclick={() => dismiss(toast.id)}
-        aria-label={t(lang, "dismiss")}
-      >×</button>
-    </div>
-  {/each}
-</div>
+<!-- Single fixed wrapper holds both live regions stacked column-reverse so
+     assertive (errors) renders ABOVE polite (success/info) and the visual
+     gap matches the actual stack height — no magic offset needed.
+     Each inner region keeps its own role + aria-live so SRs treat them
+     correctly. WAI-ARIA APG Alert pattern. -->
+<div class="toast-stack">
+  <div
+    class="toast-region"
+    role="status"
+    aria-live="polite"
+    aria-atomic="false"
+    aria-relevant="additions"
+  >
+    {#each politeToasts as toast (toast.id)}
+      <div
+        class="toast toast-{toast.kind}"
+        data-notify-toast-root
+        onmouseenter={pauseAll}
+        onmouseleave={scheduleResume}
+        onfocusin={pauseAll}
+        onfocusout={scheduleResume}
+      >
+        <span class="toast-msg">{toast.message}</span>
+        <button
+          type="button"
+          class="toast-close"
+          onclick={() => dismiss(toast.id)}
+          aria-label={t(lang, "dismiss")}
+        >×</button>
+      </div>
+    {/each}
+  </div>
 
-<div
-  class="toast-region toast-region-assertive"
-  role="alert"
-  aria-live="assertive"
-  aria-atomic="false"
-  aria-relevant="additions"
->
-  {#each assertiveToasts as toast (toast.id)}
-    <div
-      class="toast toast-error"
-      data-notify-toast-root
-      onmouseenter={pauseAll}
-      onmouseleave={scheduleResume}
-      onfocusin={pauseAll}
-      onfocusout={scheduleResume}
-    >
-      <span class="toast-msg">{toast.message}</span>
-      <button
-        type="button"
-        class="toast-close"
-        onclick={() => dismiss(toast.id)}
-        aria-label={t(lang, "dismiss")}
-      >×</button>
-    </div>
-  {/each}
+  <div
+    class="toast-region"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="false"
+    aria-relevant="additions"
+  >
+    {#each assertiveToasts as toast (toast.id)}
+      <div
+        class="toast toast-error"
+        data-notify-toast-root
+        onmouseenter={pauseAll}
+        onmouseleave={scheduleResume}
+        onfocusin={pauseAll}
+        onfocusout={scheduleResume}
+      >
+        <span class="toast-msg">{toast.message}</span>
+        <button
+          type="button"
+          class="toast-close"
+          onclick={() => dismiss(toast.id)}
+          aria-label={t(lang, "dismiss")}
+        >×</button>
+      </div>
+    {/each}
+  </div>
 </div>
 
 <style>
-  .toast-region {
+  .toast-stack {
     position: fixed;
+    bottom: 1.25rem;
     right: 1.25rem;
     z-index: var(--z-toast, 90);
     pointer-events: none;
     display: flex;
-    flex-direction: column;
+    /* Assertive declared second in DOM → renders ABOVE polite in
+       column-reverse, matching "errors visually highest" intent. */
+    flex-direction: column-reverse;
     gap: 0.5rem;
     max-width: min(420px, calc(100vw - 2.5rem));
   }
-  .toast-region-polite {
-    bottom: 1.25rem;
-  }
-  /* Stack assertive above polite so errors are visually highest. */
-  .toast-region-assertive {
-    bottom: calc(1.25rem + 3 * (var(--toast-h, 3rem) + 0.5rem));
+  .toast-region {
+    display: flex;
+    /* Newest toast (last in array) renders at top of its region. */
+    flex-direction: column-reverse;
+    gap: 0.5rem;
   }
   .toast {
     pointer-events: auto;

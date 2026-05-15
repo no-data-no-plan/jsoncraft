@@ -133,7 +133,11 @@
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 60;
+    /* UndoToast is a toast primitive — use --z-toast (90). Previous
+       hardcoded 60 collided with --z-pronav-sheet-dialog: 60 after the
+       z-scale was centralised; UndoToast won by DOM order but the tie
+       was fragile. */
+    z-index: var(--z-toast, 90);
     min-width: min(360px, calc(100vw - 2rem));
     max-width: calc(100vw - 2rem);
     background: var(--color-bg-secondary, #1a1a1a);
