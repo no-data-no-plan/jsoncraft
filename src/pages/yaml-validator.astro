@@ -4,6 +4,7 @@ import YamlValidator from "../components/YamlValidator.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 import FaqSection from "../components/FaqSection.astro";
+import SourcesBlock from "../components/SourcesBlock.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("yaml-validator", "en")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("yaml-validator", "en")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["yaml-to-json", "formatter", "json-schema-validator"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
   <FaqSection toolId="yaml-validator" lang="en" />
+  <SourcesBlock slug="yaml-validator" lang="en" />
 </Layout>

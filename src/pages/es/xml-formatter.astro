@@ -4,6 +4,7 @@ import XmlFormatter from "../../components/XmlFormatter.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
 import FaqSection from "../../components/FaqSection.astro";
+import SourcesBlock from "../../components/SourcesBlock.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("xml-formatter", "es")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("xml-formatter", "es")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "yaml-to-json", "json-to-toml"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
   <FaqSection toolId="xml-formatter" lang="es" />
+  <SourcesBlock slug="xml-formatter" lang="es" />
 </Layout>

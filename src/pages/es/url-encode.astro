@@ -4,6 +4,7 @@ import UrlEncodeTool from "../../components/UrlEncodeTool.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
 import FaqSection from "../../components/FaqSection.astro";
+import SourcesBlock from "../../components/SourcesBlock.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("url-encode", "es")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("url-encode", "es")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["base64", "hash", "regex"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
   <FaqSection toolId="url-encode" lang="es" />
+  <SourcesBlock slug="url-encode" lang="es" />
 </Layout>

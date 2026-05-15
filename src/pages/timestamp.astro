@@ -4,6 +4,7 @@ import TimestampTool from "../components/TimestampTool.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 import FaqSection from "../components/FaqSection.astro";
+import SourcesBlock from "../components/SourcesBlock.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("timestamp", "en")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("timestamp", "en")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["uuid", "hash", "cron"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
   <FaqSection toolId="timestamp" lang="en" />
+  <SourcesBlock slug="timestamp" lang="en" />
 </Layout>

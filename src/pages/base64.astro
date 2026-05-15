@@ -4,6 +4,7 @@ import Base64Tool from "../components/Base64Tool.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 import FaqSection from "../components/FaqSection.astro";
+import SourcesBlock from "../components/SourcesBlock.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("base64", "en")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("base64", "en")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["url-encode", "hash", "formatter"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
   <FaqSection toolId="base64" lang="en" />
+  <SourcesBlock slug="base64" lang="en" />
 </Layout>

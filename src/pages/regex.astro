@@ -4,6 +4,7 @@ import RegexTester from "../components/RegexTester.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 import FaqSection from "../components/FaqSection.astro";
+import SourcesBlock from "../components/SourcesBlock.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("regex", "en")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("regex", "en")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["formatter", "diff", "url-encode"]} />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} />
   <FaqSection toolId="regex" lang="en" />
+  <SourcesBlock slug="regex" lang="en" />
 </Layout>

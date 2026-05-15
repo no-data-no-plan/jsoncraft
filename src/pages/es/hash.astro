@@ -4,6 +4,7 @@ import HashGenerator from "../../components/HashGenerator.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
 import FaqSection from "../../components/FaqSection.astro";
+import SourcesBlock from "../../components/SourcesBlock.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("hash", "es")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("hash", "es")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["base64", "uuid", "url-encode"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
   <FaqSection toolId="hash" lang="es" />
+  <SourcesBlock slug="hash" lang="es" />
 </Layout>

@@ -4,6 +4,7 @@ import UuidGenerator from "../../components/UuidGenerator.svelte";
 import SeoContent from "../../components/SeoContent.astro";
 import SeoBlock from "../../components/SeoBlock.astro";
 import FaqSection from "../../components/FaqSection.astro";
+import SourcesBlock from "../../components/SourcesBlock.astro";
 import { getPageSeo } from "../../i18n/pages";
 
 const seo = getPageSeo("uuid", "es")!;
@@ -14,4 +15,5 @@ const seo = getPageSeo("uuid", "es")!;
   <SeoContent heading={seo.seoHeading} text={seo.seoText} relatedToolIds={["hash", "base64", "timestamp"]} lang="es" />
   <SeoBlock heading={seo.seoBlockHeading} text={seo.seoBlockText} features={seo.seoFeatures} lang="es" />
   <FaqSection toolId="uuid" lang="es" />
+  <SourcesBlock slug="uuid" lang="es" />
 </Layout>
