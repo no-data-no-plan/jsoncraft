@@ -75,6 +75,9 @@ const common = {
     copyFailed: "Copy failed",
     downloaded: "Downloaded",
     downloadFailed: "Download failed",
+    // SourcesBlock — canonical specs + standards each tool implements
+    sourcesHeading: "Sources",
+    sourcesNote: "These are the specifications and standards this tool implements.",
     // Shortcuts modal (Shortcuts.svelte) — opened with ? key
     keyboardShortcuts: "Keyboard shortcuts",
     closeDialog: "Close",
@@ -148,6 +151,8 @@ const common = {
     copyFailed: "Error al copiar",
     downloaded: "Descargado",
     downloadFailed: "Error al descargar",
+    sourcesHeading: "Fuentes",
+    sourcesNote: "Estas son las especificaciones y estándares que esta herramienta implementa.",
     keyboardShortcuts: "Atajos de teclado",
     closeDialog: "Cerrar",
     shortcutsHint: "Pulsa ? para abrir este diálogo desde cualquier punto del sitio.",

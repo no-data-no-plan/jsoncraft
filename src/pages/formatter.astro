@@ -4,6 +4,7 @@ import JsonFormatter from "../components/JsonFormatter.svelte";
 import SeoContent from "../components/SeoContent.astro";
 import SeoBlock from "../components/SeoBlock.astro";
 import FaqSection from "../components/FaqSection.astro";
+import SourcesBlock from "../components/SourcesBlock.astro";
 import { getPageSeo } from "../i18n/pages";
 
 const seo = getPageSeo("formatter", "en")!;
@@ -26,4 +27,5 @@ const seo = getPageSeo("formatter", "en")!;
     features={seo.seoFeatures}
   />
   <FaqSection toolId="formatter" lang="en" />
+  <SourcesBlock slug="formatter" lang="en" />
 </Layout>
