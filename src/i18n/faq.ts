@@ -230,7 +230,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo consulto JSON con JSONPath?",
-          answer: "Pega tu JSON y escribe una expresi\u00f3n JSONPath como $.store.book[0].title o $..author. La herramienta eval\u00faa la consulta sobre el documento y devuelve los nodos coincidentes en tiempo real. Soporta los operadores habituales: hijo (.), descenso recursivo (..), comod\u00edn (*), slicing de arrays ([0:3]), filtros ([?(@.price < 10)]) y selecci\u00f3n m\u00faltiple ([title,author]). Los resultados se muestran como array JSON de coincidencias.",
+          answer: "Pega tu JSON y escribe una expresi\u00f3n JSONPath como $.store.book[0].title o $..author. La herramienta eval\u00faa la consulta sobre el documento y devuelve los nodos coincidentes en tiempo real. Admite los operadores habituales: hijo (.), descenso recursivo (..), comod\u00edn (*), slicing de arrays ([0:3]), filtros ([?(@.price < 10)]) y selecci\u00f3n m\u00faltiple ([title,author]). Los resultados se muestran como array JSON de coincidencias.",
         },
         {
           question: "\u00bfEl evaluador JSONPath es gratis?",
@@ -291,7 +291,7 @@ export const faqs: Record<string, FAQByLang> = {
           answer: "No. El parser YAML se ejecuta \u00edntegramente en tu navegador. Nada sale de tu dispositivo — importante para manifiestos de Kubernetes que puedan contener secretos, o workflows de CI que referencian hostnames internos. Puedes convertir configuraciones sensibles sin que ning\u00fan dato llegue a un servidor, y no hay historial, cuenta ni logs de ning\u00fan tipo.",
         },
         {
-          question: "\u00bfSoporta archivos YAML multi-documento?",
+          question: "\u00bfAdmite archivos YAML multi-documento?",
           answer: "YAML multi-documento (streams separados por ---) no se admite como salida combinada; JSON no tiene equivalente nativo para streams de documentos. Si tu archivo contiene varios documentos, dividelos por --- y convierte cada uno por separado. YAML de un \u00fanico documento con cualquier profundidad de mapeos y secuencias anidadas, anclas, alias y tipos escalares est\u00e1ndar funciona directamente.",
         },
         {
@@ -599,7 +599,7 @@ export const faqs: Record<string, FAQByLang> = {
           answer: "No. Todo corre en tu navegador usando el motor nativo RegExp. Nada se transmite — importante porque las cadenas de prueba suelen contener extractos de logs, direcciones de email u otros datos reales que intentas patr\u00f3n-matchear. Puedes pegar muestras de producci\u00f3n sin filtrarlas.",
         },
         {
-          question: "\u00bfSoporta grupos nombrados y lookbehind?",
+          question: "\u00bfAdmite grupos nombrados y lookbehind?",
           answer: "S\u00ed. Los grupos nombrados (?<nombre>...) est\u00e1n admitidos y se muestran por nombre en la tabla de coincidencias. El lookahead (?=...) y el lookahead negativo (?!...) siempre han funcionado; el lookbehind (?<=...) y el lookbehind negativo (?<!...) funcionan en todos los navegadores modernos. Los escapes Unicode como \\p{Emoji} funcionan con el flag u. El motor es el que provea tu JavaScript era ES2022.",
         },
         {
@@ -888,7 +888,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo leo una expresi\u00f3n cron?",
-          answer: "Pega una expresi\u00f3n cron de 5 campos (minuto, hora, d\u00eda del mes, mes, d\u00eda de la semana) y la herramienta emite una descripci\u00f3n legible y las pr\u00f3ximas 5 ejecuciones en tu zona horaria local. Soporta los operadores est\u00e1ndar — *, */n, a-b, a,b,c — y los alias comunes @hourly, @daily, @weekly, @monthly, @yearly. Los errores de sintaxis se marcan con el campo y la raz\u00f3n para que los corrijas al instante.",
+          answer: "Pega una expresi\u00f3n cron de 5 campos (minuto, hora, d\u00eda del mes, mes, d\u00eda de la semana) y la herramienta emite una descripci\u00f3n legible y las pr\u00f3ximas 5 ejecuciones en tu zona horaria local. Admite los operadores est\u00e1ndar — *, */n, a-b, a,b,c — y los alias comunes @hourly, @daily, @weekly, @monthly, @yearly. Los errores de sintaxis se marcan con el campo y la raz\u00f3n para que los corrijas al instante.",
         },
         {
           question: "\u00bfEl parser de cron es gratis?",
@@ -899,7 +899,7 @@ export const faqs: Record<string, FAQByLang> = {
           answer: "No. El parseo corre \u00edntegramente en tu navegador. Nada se transmite ni registra. Las expresiones cron rara vez contienen secretos, pero a menudo aparecen junto a nombres de job que revelan arquitectura interna; mantenerlas locales es siempre la opci\u00f3n m\u00e1s segura.",
         },
         {
-          question: "\u00bfSoporta alias y sintaxis extendida?",
+          question: "\u00bfAdmite alias y sintaxis extendida?",
           answer: "Los alias est\u00e1ndar (@hourly, @daily, @weekly, @monthly, @yearly, @annually, @reboot) se reconocen. El parser cubre cron Unix cl\u00e1sico de 5 campos; el de 6 campos (con segundos, usado por Quartz y algunas variantes de CronJob de Kubernetes) y el de 7 (con a\u00f1o) no son est\u00e1ndar y no se analizan. El d\u00eda de la semana usa 0-6 con 0 como domingo, como la mayor\u00eda de crontabs Unix.",
         },
         {
@@ -1149,7 +1149,7 @@ export const faqs: Record<string, FAQByLang> = {
           answer: "No. La validaci\u00f3n corre \u00edntegramente en tu navegador con una implementaci\u00f3n de JSON Schema cliente. Nada se env\u00eda a ning\u00fan sitio, importante porque los esquemas describen a menudo modelos de datos internos (registros de usuario, payloads de pago) y la muestra suele ser salida real de producci\u00f3n. Puedes validar con seguridad sin que se filtren datos ni estructura.",
         },
         {
-          question: "\u00bfSoporta $ref y esquemas remotos?",
+          question: "\u00bfAdmite $ref y esquemas remotos?",
           answer: "Las $ref locales a otras definiciones del mismo esquema funcionan directo — usa punteros estilo $ref: \"#/definitions/Foo\". Las $ref remotas a URLs externas no se descargan intencionalmente — requerir\u00eda llamada de red y la herramienta es estrictamente cliente. Si tu esquema usa $ref externa, inlinea esas definiciones en un \u00fanico esquema combinado antes de validar aqu\u00ed.",
         },
         {
