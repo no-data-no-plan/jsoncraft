@@ -38,7 +38,7 @@ export const howtoSteps: Record<string, HowToByLang> = {
       steps: [
         { name: "Pega tu JSON", text: "Pega tu JSON en el editor o suelta un archivo .json sobre la página." },
         { name: "Revisa errores", text: "JSONCraft resalta errores de sintaxis con la línea y columna exactas del problema." },
-        { name: "Elige sangría", text: "Selecciona 2 espacios, 4 espacios o tabs para el formato de salida." },
+        { name: "Elige sangría", text: "Selecciona 2 espacios, 4 espacios o tabulaciones para el formato de salida." },
         { name: "Embellece o minifica", text: "Haz clic en Embellecer para formato legible o Minificar para producción." },
         { name: "Copia o descarga", text: "Copia el resultado al portapapeles o descárgalo como .json." },
       ],
@@ -137,7 +137,7 @@ export const howtoSteps: Record<string, HowToByLang> = {
       name: "Cómo convertir YAML a JSON",
       steps: [
         { name: "Pega YAML", text: "Pega tu YAML o sube un archivo .yaml/.yml." },
-        { name: "Revisa la conversión", text: "JSONCraft convierte al instante a JSON preservando estructuras y tipos." },
+        { name: "Revisa la conversión", text: "JSONCraft convierte al instante a JSON conservando estructuras y tipos." },
         { name: "Copia el JSON", text: "Copia el resultado al portapapeles o descárgalo como .json." },
       ],
     },
@@ -287,7 +287,7 @@ export const howtoSteps: Record<string, HowToByLang> = {
       steps: [
         { name: "Pega tu JSON", text: "Pega el documento JSON que quieres validar." },
         { name: "Pega el schema", text: "Pega tu JSON Schema (Draft 7, 2019-09 o 2020-12)." },
-        { name: "Ejecuta validación", text: "JSONCraft reporta errores de validación con rutas detalladas." },
+        { name: "Ejecuta validación", text: "JSONCraft informa de errores de validación con rutas detalladas." },
         { name: "Corrige y re-valida", text: "Edita cualquier documento y re-ejecuta para comprobar cambios." },
       ],
     },

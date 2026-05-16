@@ -46,15 +46,15 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo formateo y valido JSON?",
-          answer: "Pega tu JSON en el editor y el formateador lo parsea, resalta errores de sintaxis con n\u00famero de l\u00ednea y lo embellece con indentaci\u00f3n configurable (2 o 4 espacios, o tabulaci\u00f3n). Tambi\u00e9n ofrece un modo minify que quita espacios para payloads compactos, y una opci\u00f3n de ordenar claves \u00fatil para diffs. Los errores se reportan con la posici\u00f3n exacta del car\u00e1cter para que detectes al instante una coma de m\u00e1s o una llave sin cerrar.",
+          answer: "Pega tu JSON en el editor y el formateador lo analiza, resalta errores de sintaxis con n\u00famero de l\u00ednea y lo embellece con indentaci\u00f3n configurable (2 o 4 espacios, o tabulaci\u00f3n). Tambi\u00e9n ofrece un modo minify que quita espacios para payloads compactos, y una opci\u00f3n de ordenar claves \u00fatil para diffs. Los errores se informan con la posici\u00f3n exacta del car\u00e1cter para que detectes al instante una coma de m\u00e1s o una llave sin cerrar.",
         },
         {
           question: "\u00bfEl formateador JSON es gratis?",
-          answer: "S\u00ed, completamente gratis. Sin registro, sin l\u00edmite de tama\u00f1o m\u00e1s all\u00e1 de lo que aguante tu navegador (decenas de MB van bien en un port\u00e1til moderno), sin marcas de agua. JSONCraft est\u00e1 totalmente abierto para todas las herramientas — formateador, diff, viewer, convertidores — sin plan premium. Es la v\u00eda m\u00e1s r\u00e1pida de JSON desordenado a JSON limpio.",
+          answer: "S\u00ed, completamente gratis. Sin registro, sin l\u00edmite de tama\u00f1o m\u00e1s all\u00e1 de lo que aguante tu navegador (decenas de MB van bien en un port\u00e1til moderno), sin marcas de agua. Todas las herramientas de JSONCraft son gratuitas — formateador, diff, viewer, convertidores — sin plan premium. Es la v\u00eda m\u00e1s r\u00e1pida de JSON desordenado a JSON limpio.",
         },
         {
           question: "\u00bfEl formateador sube mi JSON?",
-          answer: "No. Cada byte de tu JSON se parsea y formatea localmente en tu navegador con un parser JavaScript cliente. Nada se sube, nada se guarda, ni siquiera hay componente de servidor para el formateador. Esto importa porque los payloads JSON suelen contener claves API, tokens o PII, y ser\u00eda peligroso pegarlos en una herramienta que los enviara fuera.",
+          answer: "No. Cada byte de tu JSON se analiza y formatea localmente en tu navegador con un parser JavaScript local. Nada se sube, nada se guarda, ni siquiera hay componente de servidor para el formateador. Esto importa porque los payloads JSON suelen contener claves API, tokens o PII, y ser\u00eda peligroso pegarlos en una herramienta que los enviara fuera.",
         },
         {
           question: "\u00bfEmbellece JSON minificado de miles de l\u00edneas?",
@@ -134,7 +134,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo comparo dos documentos JSON?",
-          answer: "Pega el JSON A a la izquierda y el JSON B a la derecha. La herramienta parsea ambos, alinea claves coincidentes y resalta los cambios lado a lado: verde para a\u00f1adidos, rojo para eliminados, amarillo para cambios de valor. Gestiona objetos y arrays anidados de forma estructural — as\u00ed, a\u00f1adir un elemento en medio no marca todo lo siguiente como cambiado, a diferencia de los diffs de texto. Puedes plegar secciones iguales para centrarte solo en lo distinto.",
+          answer: "Pega el JSON A a la izquierda y el JSON B a la derecha. La herramienta analiza ambos, alinea claves coincidentes y resalta los cambios lado a lado: verde para a\u00f1adidos, rojo para eliminados, amarillo para cambios de valor. Gestiona objetos y arrays anidados de forma estructural — as\u00ed, a\u00f1adir un elemento en medio no marca todo lo siguiente como cambiado, a diferencia de los diffs de texto. Puedes plegar secciones iguales para centrarte solo en lo distinto.",
         },
         {
           question: "\u00bfLa herramienta diff JSON es gratis?",
@@ -142,7 +142,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfEl diff sube mis documentos JSON?",
-          answer: "No. Ambos documentos se parsean y comparan localmente en tu navegador. Nada se env\u00eda a un servidor ni se guarda. Esto importa especialmente al comparar respuestas API o ficheros de configuraci\u00f3n con credenciales; puedes comparar con seguridad dos versiones de secrets.json sin transmitirlas nunca.",
+          answer: "No. Ambos documentos se analizan y comparan localmente en tu navegador. Nada se env\u00eda a un servidor ni se guarda. Esto importa especialmente al comparar respuestas API o archivos de configuraci\u00f3n con credenciales; puedes comparar con seguridad dos versiones de secrets.json sin transmitirlas nunca.",
         },
         {
           question: "\u00bfHace diff estructural o solo textual?",
@@ -188,10 +188,10 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfLa herramienta de grafos sube mi JSON?",
-          answer: "No. El JSON se parsea y organiza \u00edntegramente en tu navegador — sin petici\u00f3n de red ni componente de servidor. Esto importa cuando el JSON representa infraestructura interna, registros de cliente o payloads de auth; puedes visualizar datos sensibles sin que salgan de tu m\u00e1quina. No hay historial, ni cuenta, ni logs.",
+          answer: "No. El JSON se analiza y organiza \u00edntegramente en tu navegador — sin petici\u00f3n de red ni componente de servidor. Esto importa cuando el JSON representa infraestructura interna, registros de cliente o payloads de auth; puedes visualizar datos sensibles sin que salgan de tu m\u00e1quina. No hay historial, ni cuenta, ni logs.",
         },
         {
-          question: "\u00bfManeja bien ficheros JSON grandes?",
+          question: "\u00bfManeja bien archivos JSON grandes?",
           answer: "Para documentos de hasta unos miles de nodos el renderer SVG sigue siendo interactivo. A partir de ah\u00ed los navegadores se ralentizan porque cada nodo es un elemento DOM. Para payloads muy grandes puedes plegar ramas o prefiltrar con JSONPath antes de pasar al grafo. El pan y zoom siguen respondiendo porque el SVG est\u00e1 acelerado por GPU aunque haya muchos elementos en pantalla.",
         },
         {
@@ -280,7 +280,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo convierto YAML a JSON?",
-          answer: "Pega un documento YAML — manifiesto de Kubernetes, workflow de GitHub Actions, docker-compose, cualquier configuraci\u00f3n — y el conversor lo parsea con un parser YAML 1.2 y produce el JSON equivalente. Los tipos se preservan: los n\u00fameros quedan como n\u00fameros, los booleanos como booleanos, los nulls como null, las cadenas como cadenas. Las anclas y alias se resuelven para que el JSON sea autocontenido, y los mapeos y secuencias anidados se traducen uno a uno.",
+          answer: "Pega un documento YAML — manifiesto de Kubernetes, workflow de GitHub Actions, docker-compose, cualquier configuraci\u00f3n — y el conversor lo analiza con un parser YAML 1.2 y produce el JSON equivalente. Los tipos se conservan: los n\u00fameros quedan como n\u00fameros, los booleanos como booleanos, los nulls como null, las cadenas como cadenas. Las anclas y alias se resuelven para que el JSON sea autocontenido, y los mapeos y secuencias anidados se traducen uno a uno.",
         },
         {
           question: "\u00bfEl conversor YAML a JSON es gratis?",
@@ -292,7 +292,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfSoporta archivos YAML multi-documento?",
-          answer: "YAML multi-documento (streams separados por ---) no se soporta como salida combinada; JSON no tiene equivalente nativo para streams de documentos. Si tu archivo contiene varios documentos, dividelos por --- y convierte cada uno por separado. YAML de un \u00fanico documento con cualquier profundidad de mapeos y secuencias anidadas, anclas, alias y tipos escalares est\u00e1ndar funciona directamente.",
+          answer: "YAML multi-documento (streams separados por ---) no se admite como salida combinada; JSON no tiene equivalente nativo para streams de documentos. Si tu archivo contiene varios documentos, dividelos por --- y convierte cada uno por separado. YAML de un \u00fanico documento con cualquier profundidad de mapeos y secuencias anidadas, anclas, alias y tipos escalares est\u00e1ndar funciona directamente.",
         },
         {
           question: "\u00bfQu\u00e9 pasa con el round-trip YAML a JSON a YAML?",
@@ -330,7 +330,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo convierto JSON a YAML?",
-          answer: "Pega JSON y el conversor emite YAML 1.2 con la indentaci\u00f3n correcta, mapeos y secuencias en estilo bloque por defecto. Los tipos se preservan: n\u00fameros, booleanos y nulls se escriben en sintaxis nativa YAML (true/false/null, sin comillas), las cadenas se entrecomillan solo cuando hace falta. Puedes ajustar el ancho de indentaci\u00f3n y elegir entre estilo bloque y flow para arrays compactos. La salida est\u00e1 lista para Kubernetes, Ansible o cualquier herramienta YAML.",
+          answer: "Pega JSON y el conversor emite YAML 1.2 con la indentaci\u00f3n correcta, mapeos y secuencias en estilo bloque por defecto. Los tipos se conservan: n\u00fameros, booleanos y nulls se escriben en sintaxis nativa YAML (true/false/null, sin comillas), las cadenas se entrecomillan solo cuando hace falta. Puedes ajustar el ancho de indentaci\u00f3n y elegir entre estilo bloque y flow para arrays compactos. La salida est\u00e1 lista para Kubernetes, Ansible o cualquier herramienta YAML.",
         },
         {
           question: "\u00bfEl conversor JSON a YAML es gratis?",
@@ -346,7 +346,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfCu\u00e1ndo conviene YAML sobre JSON para configuraci\u00f3n?",
-          answer: "YAML gana cuando mantienen el archivo humanos: permite comentarios, tiene menos puntuaci\u00f3n y se lee mejor en profundidad. JSON gana cuando lo intercambian m\u00e1quinas: es inequ\u00edvoco, universalmente soportado y sin coerci\u00f3n sorprendente (YAML parsea 'no' como false). Usa este conversor cuando tengas JSON generado por m\u00e1quina que un humano necesita editar, o al rev\u00e9s.",
+          answer: "YAML gana cuando mantienen el archivo humanos: permite comentarios, tiene menos puntuaci\u00f3n y se lee mejor en profundidad. JSON gana cuando lo intercambian m\u00e1quinas: es inequ\u00edvoco, universalmente compatible y sin coerci\u00f3n sorprendente (YAML analiza 'no' como false). Usa este conversor cuando tengas JSON generado por m\u00e1quina que un humano necesita editar, o al rev\u00e9s.",
         },
       ],
     },
@@ -430,7 +430,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo convierto CSV a JSON?",
-          answer: "Pega los datos CSV (o sube un archivo) y el conversor detecta el delimitador, parsea las cabeceras y devuelve un array JSON de objetos — un objeto por fila con los nombres de cabecera como claves. Gestiona campos entrecomillados, comillas escapadas, saltos de l\u00ednea dentro de celdas y delimitadores variables (coma, punto y coma, tabulaci\u00f3n). Tambi\u00e9n puedes elegir una forma de salida alternativa, como array de arrays si prefieres filas sin cabecera.",
+          answer: "Pega los datos CSV (o sube un archivo) y el conversor detecta el delimitador, analiza las cabeceras y devuelve un array JSON de objetos — un objeto por fila con los nombres de cabecera como claves. Gestiona campos entrecomillados, comillas escapadas, saltos de l\u00ednea dentro de celdas y delimitadores variables (coma, punto y coma, tabulaci\u00f3n). Tambi\u00e9n puedes elegir una forma de salida alternativa, como array de arrays si prefieres filas sin cabecera.",
         },
         {
           question: "\u00bfEl conversor CSV a JSON es gratis?",
@@ -442,7 +442,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfC\u00f3mo gestiona casos l\u00edmite como comas entrecomilladas o tipos mixtos?",
-          answer: "Los campos entrecomillados se parsean seg\u00fan RFC 4180, as\u00ed una coma dentro de 'Smith, John' no rompe la fila. Por defecto los campos se emiten como cadenas, con opci\u00f3n a detectar autom\u00e1ticamente n\u00fameros y booleanos (true/false, 1/0). Para CSVs reales de Excel y Google Sheets la detecci\u00f3n funciona bien, pero puedes desactivarla si tienes columnas tipo c\u00f3digo postal que deben quedar como cadena.",
+          answer: "Los campos entrecomillados se analizan seg\u00fan RFC 4180, as\u00ed una coma dentro de 'Smith, John' no rompe la fila. Por defecto los campos se emiten como cadenas, con opci\u00f3n a detectar autom\u00e1ticamente n\u00fameros y booleanos (true/false, 1/0). Para CSVs reales de Excel y Google Sheets la detecci\u00f3n funciona bien, pero puedes desactivarla si tienes columnas tipo c\u00f3digo postal que deben quedar como cadena.",
         },
         {
           question: "\u00bfCu\u00e1ndo convertir CSV a JSON en vez de importar directo?",
@@ -496,7 +496,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfPor qu\u00e9 elegir TOML sobre JSON o YAML?",
-          answer: "TOML apunta a configuraci\u00f3n editada por humanos: soporta comentarios, tiene sem\u00e1ntica m\u00e1s simple que YAML (sin espacios significativos, sin sorpresas de tipo) y una superficie m\u00e1s legible que JSON para archivos de varias secciones. Rust (Cargo), Python (pyproject) y Hugo lo han estandarizado. Usa este conversor cuando una herramienta que dependes de ella exija TOML pero tu origen emita JSON.",
+          answer: "TOML apunta a configuraci\u00f3n editada por humanos: admite comentarios, tiene sem\u00e1ntica m\u00e1s simple que YAML (sin espacios significativos, sin sorpresas de tipo) y una superficie m\u00e1s legible que JSON para archivos de varias secciones. Rust (Cargo), Python (pyproject) y Hugo lo han estandarizado. Usa este conversor cuando una herramienta que dependes de ella exija TOML pero tu origen emita JSON.",
         },
       ],
     },
@@ -530,7 +530,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo convierto TOML a JSON?",
-          answer: "Pega un documento TOML (Cargo.toml, pyproject.toml, config de Hugo) y el conversor lo parsea seg\u00fan la spec TOML 1.0 y emite el JSON equivalente. Las tablas se vuelven objetos anidados, los array-of-tables ([[section]]) se vuelven arrays JSON de objetos, y los tipos escalares (cadenas, n\u00fameros, booleanos, date-times) se convierten a sus hom\u00f3logos JSON. Las inline tables y arrays inline funcionan igual que sus equivalentes en bloque.",
+          answer: "Pega un documento TOML (Cargo.toml, pyproject.toml, config de Hugo) y el conversor lo analiza seg\u00fan la spec TOML 1.0 y emite el JSON equivalente. Las tablas se vuelven objetos anidados, los array-of-tables ([[section]]) se vuelven arrays JSON de objetos, y los tipos escalares (cadenas, n\u00fameros, booleanos, date-times) se convierten a sus hom\u00f3logos JSON. Las inline tables y arrays inline funcionan igual que sus equivalentes en bloque.",
         },
         {
           question: "\u00bfEl conversor TOML a JSON es gratis?",
@@ -542,11 +542,11 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfPreserva los literales date-time de TOML?",
-          answer: "TOML tiene tipos nativos date-time, local date, local time y local date-time — m\u00e1s ricos que JSON, que solo tiene cadenas. El conversor los emite como cadenas ISO 8601, la convenci\u00f3n de facto en JSON, y hacen round-trip limpio por el conversor JSON a TOML. Si tu downstream necesita un Date de JavaScript, tendr\u00e1s que parsear la cadena all\u00ed, pero no se pierde informaci\u00f3n.",
+          answer: "TOML tiene tipos nativos date-time, local date, local time y local date-time — m\u00e1s ricos que JSON, que solo tiene cadenas. El conversor los emite como cadenas ISO 8601, la convenci\u00f3n de facto en JSON, y hacen round-trip limpio por el conversor JSON a TOML. Si tu downstream necesita un Date de JavaScript, tendr\u00e1s que analizar la cadena all\u00ed, pero no se pierde informaci\u00f3n.",
         },
         {
           question: "\u00bfQu\u00e9 caracter\u00edsticas TOML pueden no hacer round-trip a JSON?",
-          answer: "Los comentarios y el formato original (orden de claves en inline tables, cadenas literales frente a b\u00e1sicas) no se preservan — JSON no tiene ninguno. La distinci\u00f3n array-of-tables frente a inline tables colapsa en JSON (ambos se vuelven arrays de objetos). La precisi\u00f3n num\u00e9rica se preserva para enteros hasta 2^53 (el rango seguro de JSON); los enteros TOML m\u00e1s grandes se vuelven cadenas para evitar truncamiento silencioso.",
+          answer: "Los comentarios y el formato original (orden de claves en inline tables, cadenas literales frente a b\u00e1sicas) no se conservan — JSON no tiene ninguno. La distinci\u00f3n array-of-tables frente a inline tables colapsa en JSON (ambos se vuelven arrays de objetos). La precisi\u00f3n num\u00e9rica se conserva para enteros hasta 2^53 (el rango seguro de JSON); los enteros TOML m\u00e1s grandes se vuelven cadenas para evitar truncamiento silencioso.",
         },
       ],
     },
@@ -588,7 +588,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfC\u00f3mo pruebo un patr\u00f3n regex?",
-          answer: "Pega tu patr\u00f3n (sin delimitadores) y una cadena de prueba; el tester compila el regex con el motor RegExp de JavaScript y resalta cada coincidencia en la cadena, listando grupos de captura y grupos nombrados debajo. Los flags g, i, m, s, u e y son conmutables. Un campo de reemplazo permite previsualizar la sustituci\u00f3n en vivo con retrorreferencias $1, $<name>. Los errores de sintaxis se reportan con la posici\u00f3n del car\u00e1cter.",
+          answer: "Pega tu patr\u00f3n (sin delimitadores) y una cadena de prueba; el tester compila el regex con el motor RegExp de JavaScript y resalta cada coincidencia en la cadena, listando grupos de captura y grupos nombrados debajo. Los flags g, i, m, s, u e y son conmutables. Un campo de reemplazo permite previsualizar la sustituci\u00f3n en vivo con retrorreferencias $1, $<name>. Los errores de sintaxis se informan con la posici\u00f3n del car\u00e1cter.",
         },
         {
           question: "\u00bfEl tester regex es gratis?",
@@ -600,11 +600,11 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfSoporta grupos nombrados y lookbehind?",
-          answer: "S\u00ed. Los grupos nombrados (?<nombre>...) est\u00e1n soportados y se muestran por nombre en la tabla de coincidencias. El lookahead (?=...) y el lookahead negativo (?!...) siempre han funcionado; el lookbehind (?<=...) y el lookbehind negativo (?<!...) funcionan en todos los navegadores modernos. Los escapes Unicode como \\p{Emoji} funcionan con el flag u. El motor es el que provea tu JavaScript era ES2022.",
+          answer: "S\u00ed. Los grupos nombrados (?<nombre>...) est\u00e1n admitidos y se muestran por nombre en la tabla de coincidencias. El lookahead (?=...) y el lookahead negativo (?!...) siempre han funcionado; el lookbehind (?<=...) y el lookbehind negativo (?<!...) funcionan en todos los navegadores modernos. Los escapes Unicode como \\p{Emoji} funcionan con el flag u. El motor es el que provea tu JavaScript era ES2022.",
         },
         {
           question: "\u00bfEn qu\u00e9 se diferencia regex JavaScript de PCRE o Python re?",
-          answer: "La mayor\u00eda de sintaxis es compartida, pero JavaScript carece de algunas caracter\u00edsticas de PCRE: sin cuantificadores posesivos, sin patrones recursivos, sin grupos at\u00f3micos, sin \\K. Los modificadores inline como (?i) no se soportan — los flags van en el literal regex. Los grupos nombrados usan (?<nombre>...) (como .NET), no (?P<nombre>...) como Python. Al portar un patr\u00f3n, ten cuidado con esto; la mayor\u00eda de patrones simples se transfieren limpiamente.",
+          answer: "La mayor\u00eda de sintaxis es compartida, pero JavaScript carece de algunas caracter\u00edsticas de PCRE: sin cuantificadores posesivos, sin patrones recursivos, sin grupos at\u00f3micos, sin \\K. Los modificadores inline como (?i) no se admiten — los flags van en el literal regex. Los grupos nombrados usan (?<nombre>...) (como .NET), no (?P<nombre>...) como Python. Al portar un patr\u00f3n, ten cuidado con esto; la mayor\u00eda de patrones simples se transfieren limpiamente.",
         },
       ],
     },
@@ -750,7 +750,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfQu\u00e9 algoritmo usar?",
-          answer: "SHA-256 es el valor por defecto seguro para trabajo nuevo — ampliamente soportado, r\u00e1pido y resistente a colisiones. SHA-384 y SHA-512 ofrecen m\u00e1s bits de salida cuando los necesites (ej. HMAC con claves largas). SHA-1 est\u00e1 deprecado para seguridad pero aparece en sistemas legacy (Git, TLS antiguo). MD5 est\u00e1 roto criptogr\u00e1ficamente pero sirve para checksums no-seguridad (claves de cach\u00e9 CDN, deduplicaci\u00f3n de archivos). La herramienta ofrece los cinco para que coincidas con lo que tu upstream espera.",
+          answer: "SHA-256 es el valor por defecto seguro para trabajo nuevo — con amplia compatibilidad, r\u00e1pido y resistente a colisiones. SHA-384 y SHA-512 ofrecen m\u00e1s bits de salida cuando los necesites (ej. HMAC con claves largas). SHA-1 est\u00e1 deprecado para seguridad pero aparece en sistemas legacy (Git, TLS antiguo). MD5 est\u00e1 roto criptogr\u00e1ficamente pero sirve para checksums no-seguridad (claves de cach\u00e9 CDN, deduplicaci\u00f3n de archivos). La herramienta ofrece los cinco para que coincidas con lo que tu upstream espera.",
         },
         {
           question: "\u00bfC\u00f3mo se compara hashear texto con hashear un archivo?",
@@ -838,7 +838,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo convierto entre Unix epoch e ISO 8601?",
-          answer: "Pega un timestamp Unix (segundos o milisegundos) y la herramienta lo convierte a ISO 8601 en UTC m\u00e1s tu zona horaria local. O pega una cadena ISO 8601 (2026-04-16T12:00:00Z) y la convierte de vuelta a epoch. La precisi\u00f3n en milisegundos se preserva en ambas direcciones. La herramienta autodetecta si tu entrada son segundos (10 d\u00edgitos) o milisegundos (13 d\u00edgitos) para que no tengas que elegir.",
+          answer: "Pega un timestamp Unix (segundos o milisegundos) y la herramienta lo convierte a ISO 8601 en UTC m\u00e1s tu zona horaria local. O pega una cadena ISO 8601 (2026-04-16T12:00:00Z) y la convierte de vuelta a epoch. La precisi\u00f3n en milisegundos se conserva en ambas direcciones. La herramienta autodetecta si tu entrada son segundos (10 d\u00edgitos) o milisegundos (13 d\u00edgitos) para que no tengas que elegir.",
         },
         {
           question: "\u00bfEl conversor de timestamp es gratis?",
@@ -900,7 +900,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfSoporta alias y sintaxis extendida?",
-          answer: "Los alias est\u00e1ndar (@hourly, @daily, @weekly, @monthly, @yearly, @annually, @reboot) se reconocen. El parser cubre cron Unix cl\u00e1sico de 5 campos; el de 6 campos (con segundos, usado por Quartz y algunas variantes de CronJob de Kubernetes) y el de 7 (con a\u00f1o) no son est\u00e1ndar y no se parsean. El d\u00eda de la semana usa 0-6 con 0 como domingo, como la mayor\u00eda de crontabs Unix.",
+          answer: "Los alias est\u00e1ndar (@hourly, @daily, @weekly, @monthly, @yearly, @annually, @reboot) se reconocen. El parser cubre cron Unix cl\u00e1sico de 5 campos; el de 6 campos (con segundos, usado por Quartz y algunas variantes de CronJob de Kubernetes) y el de 7 (con a\u00f1o) no son est\u00e1ndar y no se analizan. El d\u00eda de la semana usa 0-6 con 0 como domingo, como la mayor\u00eda de crontabs Unix.",
         },
         {
           question: "\u00bfQu\u00e9 pasa cuando d\u00eda del mes y d\u00eda de semana est\u00e1n ambos restringidos?",
@@ -988,7 +988,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo formateo o minifico XML?",
-          answer: "Pega XML y la herramienta lo parsea, valida que est\u00e9 bien formado y lo embellece con indentaci\u00f3n configurable. Los atributos quedan en su etiqueta de apertura, las etiquetas auto-cerradas se preservan y las secciones CDATA quedan intactas. Un modo minify quita todo el espacio entre etiquetas para transporte en red. Los errores de parseo se reportan con l\u00ednea y columna para que encuentres r\u00e1pido una etiqueta sin cerrar o un atributo mal.",
+          answer: "Pega XML y la herramienta lo analiza, valida que est\u00e9 bien formado y lo embellece con indentaci\u00f3n configurable. Los atributos quedan en su etiqueta de apertura, las etiquetas auto-cerradas se conservan y las secciones CDATA quedan intactas. Un modo minify quita todo el espacio entre etiquetas para transporte en red. Los errores de parseo se informan con l\u00ednea y columna para que encuentres r\u00e1pido una etiqueta sin cerrar o un atributo mal.",
         },
         {
           question: "\u00bfEl formateador XML es gratis?",
@@ -1000,7 +1000,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfC\u00f3mo se manejan CDATA y atributos?",
-          answer: "El contenido CDATA se preserva al pie de la letra — sin reformatear, sin cambios de escape — porque cambiarlo romper\u00eda a consumidores que lo tratan como datos opacos. Los atributos quedan en la etiqueta de apertura en su orden original por defecto, con opci\u00f3n de ordenar alfab\u00e9ticamente para salida diff-friendly. Las referencias a entidades (&amp;, &lt;, etc.) se mantienen, no se expanden. Las declaraciones como <?xml version=\"1.0\"?> y DOCTYPE se preservan en la primera l\u00ednea.",
+          answer: "El contenido CDATA se conserva al pie de la letra — sin reformatear, sin cambios de escape — porque cambiarlo romper\u00eda a consumidores que lo tratan como datos opacos. Los atributos quedan en la etiqueta de apertura en su orden original por defecto, con opci\u00f3n de ordenar alfab\u00e9ticamente para salida diff-friendly. Las referencias a entidades (&amp;, &lt;, etc.) se mantienen, no se expanden. Las declaraciones como <?xml version=\"1.0\"?> y DOCTYPE se conservan en la primera l\u00ednea.",
         },
         {
           question: "\u00bfValida contra un esquema (XSD/DTD)?",
@@ -1088,7 +1088,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo valido sintaxis YAML?",
-          answer: "Pega un documento YAML y el validador lo parsea con un parser compatible con YAML 1.2 y reporta errores de sintaxis con n\u00famero de l\u00ednea y columna. Problemas comunes como indentaci\u00f3n inconsistente, secuencias flow sin cerrar, tabulaciones donde deber\u00eda haber espacios y referencias de ancla mal se marcan con raz\u00f3n legible. Si el documento es v\u00e1lido, ves una marca verde y un conteo de claves y profundidad.",
+          answer: "Pega un documento YAML y el validador lo analiza con un parser compatible con YAML 1.2 y informa de errores de sintaxis con n\u00famero de l\u00ednea y columna. Problemas comunes como indentaci\u00f3n inconsistente, secuencias flow sin cerrar, tabulaciones donde deber\u00eda haber espacios y referencias de ancla mal se marcan con raz\u00f3n legible. Si el documento es v\u00e1lido, ves una marca verde y un conteo de claves y profundidad.",
         },
         {
           question: "\u00bfEl validador YAML es gratis?",
@@ -1100,7 +1100,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfContra qu\u00e9 versi\u00f3n de YAML valida?",
-          answer: "YAML 1.2, el est\u00e1ndar actual. Acepta las reglas m\u00e1s estrictas de 1.2 (ya no se parsea 'no' como false por defecto, nulls expl\u00edcitos, menos tipados impl\u00edcitos) y marca los h\u00e1bitos comunes de YAML 1.1 que 1.2 rechaza. Las tabulaciones en indentaci\u00f3n son error sea cual sea la versi\u00f3n (YAML proh\u00edbe tabs para indent). Las etiquetas personalizadas fuera del core schema se permiten sint\u00e1cticamente pero no se tipan.",
+          answer: "YAML 1.2, el est\u00e1ndar actual. Acepta las reglas m\u00e1s estrictas de 1.2 (ya no se analiza 'no' como false por defecto, nulls expl\u00edcitos, menos tipados impl\u00edcitos) y marca los h\u00e1bitos comunes de YAML 1.1 que 1.2 rechaza. Las tabulaciones en indentaci\u00f3n son error sea cual sea la versi\u00f3n (YAML proh\u00edbe tabs para indent). Las etiquetas personalizadas fuera del core schema se permiten sint\u00e1cticamente pero no se tipan.",
         },
         {
           question: "\u00bfValida esquema o solo sintaxis?",
@@ -1138,7 +1138,7 @@ export const faqs: Record<string, FAQByLang> = {
       faqs: [
         {
           question: "\u00bfC\u00f3mo valido JSON contra un JSON Schema?",
-          answer: "Pega el esquema a un lado y los datos al otro; el validador ejecuta los datos contra el esquema (draft-07 por defecto) y reporta cada violaci\u00f3n con una ruta JSON Pointer, la palabra clave que falla (type, required, minLength, pattern, etc.) y una raz\u00f3n legible. Si los datos son v\u00e1lidos, marca verde. Ambas entradas son en vivo — al editar cualquiera se re-ejecuta la validaci\u00f3n al instante.",
+          answer: "Pega el esquema a un lado y los datos al otro; el validador ejecuta los datos contra el esquema (draft-07 por defecto) e informa de cada violaci\u00f3n con una ruta JSON Pointer, la palabra clave que falla (type, required, minLength, pattern, etc.) y una raz\u00f3n legible. Si los datos son v\u00e1lidos, marca verde. Ambas entradas son en vivo — al editar cualquiera se re-ejecuta la validaci\u00f3n al instante.",
         },
         {
           question: "\u00bfEl validador de JSON Schema es gratis?",
@@ -1153,7 +1153,7 @@ export const faqs: Record<string, FAQByLang> = {
           answer: "Las $ref locales a otras definiciones del mismo esquema funcionan directo — usa punteros estilo $ref: \"#/definitions/Foo\". Las $ref remotas a URLs externas no se descargan intencionalmente — requerir\u00eda llamada de red y la herramienta es estrictamente cliente. Si tu esquema usa $ref externa, inlinea esas definiciones en un \u00fanico esquema combinado antes de validar aqu\u00ed.",
         },
         {
-          question: "\u00bfQu\u00e9 draft de JSON Schema soporta?",
+          question: "\u00bfQu\u00e9 draft de JSON Schema admite?",
           answer: "Draft-07 es el valor por defecto porque tiene el soporte de herramientas m\u00e1s amplio y es lo que usan la mayor\u00eda de specs OpenAPI 3.0. Drafts posteriores (2019-09, 2020-12) introdujeron cambios significativos como $defs reemplazando a definitions y unevaluatedProperties; si tu esquema usa esas palabras expl\u00edcitamente, apuntar a draft-07 ser\u00e1 m\u00e1s estricto sobre palabras clave desconocidas. Para pares datos/esquema puramente draft-07, el validador es 100% conforme a la spec.",
         },
       ],
