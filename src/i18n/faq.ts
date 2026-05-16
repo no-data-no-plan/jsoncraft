@@ -342,7 +342,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfC\u00f3mo se manejan las cadenas con caracteres especiales?",
-          answer: "Las cadenas con caracteres significativos en YAML (dos puntos, guiones, almohadillas al inicio, contenido multil\u00ednea) se entrecomillan o escapan en bloque autom\u00e1ticamente para que la salida siga siendo v\u00e1lida. Las claves con aspecto num\u00e9rico o booleano se entrecomillan para evitar retipado accidental al reparsear. Los caracteres de control y bytes no imprimibles se escapan. El resultado hace round-trip limpio con el conversor YAML a JSON.",
+          answer: "Las cadenas con caracteres significativos en YAML (dos puntos, guiones, almohadillas al inicio, contenido multil\u00ednea) se entrecomillan o escapan en bloque autom\u00e1ticamente para que la salida siga siendo v\u00e1lida. Las claves con aspecto num\u00e9rico o booleano se entrecomillan para evitar retipado accidental al volver a analizarlo. Los caracteres de control y bytes no imprimibles se escapan. El resultado hace round-trip limpio con el conversor YAML a JSON.",
         },
         {
           question: "\u00bfCu\u00e1ndo conviene YAML sobre JSON para configuraci\u00f3n?",

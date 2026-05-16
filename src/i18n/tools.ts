@@ -45,7 +45,7 @@ const toolCardDescriptions: Record<string, { en: string; es: string }> = {
   "json-to-csv": { en: "Convert JSON arrays to spreadsheet CSV", es: "Convierte arrays JSON a CSV de hoja de c\u00e1lculo" },
   "csv-to-json": { en: "Convert CSV data to structured JSON", es: "Convierte datos CSV a JSON estructurado" },
   "json-to-toml": { en: "Convert JSON to TOML configuration", es: "Convierte JSON a configuraci\u00f3n TOML" },
-  "toml-to-json": { en: "Convert TOML config files to JSON", es: "Convierte ficheros TOML a JSON" },
+  "toml-to-json": { en: "Convert TOML config files to JSON", es: "Convierte archivos TOML a JSON" },
   regex: { en: "Test regex with live matches and groups", es: "Prueba regex con matches y grupos en vivo" },
   base64: { en: "Encode text to Base64 or decode back", es: "Codifica texto a Base64 o decod\u00edficalo" },
   "url-encode": { en: "Percent-encode or decode URLs safely", es: "Codifica o decodifica URLs con porcentaje" },
