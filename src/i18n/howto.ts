@@ -60,7 +60,7 @@ export const howtoSteps: Record<string, HowToByLang> = {
         { name: "Pega el JSON original", text: "Pega tu primer documento JSON en el panel izquierdo." },
         { name: "Pega el JSON modificado", text: "Pega tu segundo documento JSON en el panel derecho." },
         { name: "Revisa el diff", text: "Adiciones, eliminaciones y cambios se resaltan lado a lado en tiempo real." },
-        { name: "Navega los cambios", text: "Haz clic en cualquier diff resaltado para saltar a esa ubicación." },
+        { name: "Recorre los cambios", text: "Haz clic en cualquier diff resaltado para saltar a esa ubicación." },
       ],
     },
   },

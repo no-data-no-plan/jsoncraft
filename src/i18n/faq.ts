@@ -96,7 +96,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfEl visor JSON es gratuito?",
-          answer: "S\u00ed, totalmente gratis y sin registro. Explora payloads JSON del tama\u00f1o que tu navegador pueda cargar — decenas de megabytes en una m\u00e1quina moderna. Todas las herramientas de JSONCraft son gratuitas, sin plan premium ni l\u00edmites artificiales; el visor sustituye el dolor de recorrer un blob minificado en DevTools.",
+          answer: "S\u00ed, totalmente gratis y sin registro. Explora payloads JSON del tama\u00f1o que tu navegador pueda cargar — decenas de megabytes en una m\u00e1quina moderna. Todas las herramientas de JSONCraft son gratuitas, sin plan premium ni l\u00edmites artificiales; el visor sustituye el dolor de recorrer un texto minificado en DevTools.",
         },
         {
           question: "\u00bfEl visor sube mi JSON a un servidor?",
@@ -295,8 +295,8 @@ export const faqs: Record<string, FAQByLang> = {
           answer: "YAML multi-documento (streams separados por ---) no se admite como salida combinada; JSON no tiene equivalente nativo para streams de documentos. Si tu archivo contiene varios documentos, dividelos por --- y convierte cada uno por separado. YAML de un \u00fanico documento con cualquier profundidad de mapeos y secuencias anidadas, anclas, alias y tipos escalares est\u00e1ndar funciona directamente.",
         },
         {
-          question: "\u00bfQu\u00e9 pasa con el round-trip YAML a JSON a YAML?",
-          answer: "La conversi\u00f3n pierde algo en una direcci\u00f3n: los comentarios YAML y ciertas decisiones de formato no existen en JSON, as\u00ed que se descartan. Para round-trip de configuraci\u00f3n, combina esta herramienta con el conversor JSON a YAML, pero ten en cuenta que los comentarios no sobreviven. Para datos puramente estructurales (sin comentarios ni etiquetas personalizadas) el round-trip es limpio y produce salida sem\u00e1nticamente id\u00e9ntica.",
+          question: "\u00bfLa conversi\u00f3n YAML \u2192 JSON \u2192 YAML mantiene todo?",
+          answer: "La conversi\u00f3n pierde algo en una direcci\u00f3n: los comentarios YAML y ciertas decisiones de formato no existen en JSON, as\u00ed que se descartan. Para conversiones de ida y vuelta de configuraci\u00f3n, combina esta herramienta con el conversor JSON a YAML, pero ten en cuenta que los comentarios no sobreviven. Para datos puramente estructurales (sin comentarios ni etiquetas personalizadas) la conversi\u00f3n de ida y vuelta es limpia y produce salida sem\u00e1nticamente id\u00e9ntica.",
         },
       ],
     },
@@ -342,7 +342,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfC\u00f3mo se manejan las cadenas con caracteres especiales?",
-          answer: "Las cadenas con caracteres significativos en YAML (dos puntos, guiones, almohadillas al inicio, contenido multil\u00ednea) se entrecomillan o escapan en bloque autom\u00e1ticamente para que la salida siga siendo v\u00e1lida. Las claves con aspecto num\u00e9rico o booleano se entrecomillan para evitar retipado accidental al volver a analizarlo. Los caracteres de control y bytes no imprimibles se escapan. El resultado hace round-trip limpio con el conversor YAML a JSON.",
+          answer: "Las cadenas con caracteres significativos en YAML (dos puntos, guiones, almohadillas al inicio, contenido multil\u00ednea) se entrecomillan o escapan en bloque autom\u00e1ticamente para que la salida siga siendo v\u00e1lida. Las claves con aspecto num\u00e9rico o booleano se entrecomillan para evitar retipado accidental al volver a analizarlo. Los caracteres de control y bytes no imprimibles se escapan. El resultado pasa por el conversor YAML a JSON sin p\u00e9rdida.",
         },
         {
           question: "\u00bfCu\u00e1ndo conviene YAML sobre JSON para configuraci\u00f3n?",
@@ -542,10 +542,10 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfPreserva los literales date-time de TOML?",
-          answer: "TOML tiene tipos nativos date-time, local date, local time y local date-time — m\u00e1s ricos que JSON, que solo tiene cadenas. El conversor los emite como cadenas ISO 8601, la convenci\u00f3n de facto en JSON, y hacen round-trip limpio por el conversor JSON a TOML. Si tu downstream necesita un Date de JavaScript, tendr\u00e1s que analizar la cadena all\u00ed, pero no se pierde informaci\u00f3n.",
+          answer: "TOML tiene tipos nativos date-time, local date, local time y local date-time — m\u00e1s ricos que JSON, que solo tiene cadenas. El conversor los emite como cadenas ISO 8601, la convenci\u00f3n de facto en JSON, y vuelven a JSON sin p\u00e9rdida por el conversor JSON a TOML. Si tu downstream necesita un Date de JavaScript, tendr\u00e1s que analizar la cadena all\u00ed, pero no se pierde informaci\u00f3n.",
         },
         {
-          question: "\u00bfQu\u00e9 caracter\u00edsticas TOML pueden no hacer round-trip a JSON?",
+          question: "\u00bfQu\u00e9 caracter\u00edsticas TOML pueden perderse al pasar por JSON?",
           answer: "Los comentarios y el formato original (orden de claves en inline tables, cadenas literales frente a b\u00e1sicas) no se conservan — JSON no tiene ninguno. La distinci\u00f3n array-of-tables frente a inline tables colapsa en JSON (ambos se vuelven arrays de objetos). La precisi\u00f3n num\u00e9rica se conserva para enteros hasta 2^53 (el rango seguro de JSON); los enteros TOML m\u00e1s grandes se vuelven cadenas para evitar truncamiento silencioso.",
         },
       ],
@@ -850,7 +850,7 @@ export const faqs: Record<string, FAQByLang> = {
         },
         {
           question: "\u00bfC\u00f3mo se manejan las zonas horarias?",
-          answer: "Unix epoch es agn\u00f3stico a zona horaria (siempre UTC). La salida ISO 8601 muestra tanto UTC (sufijo Z) como tu zona horaria local con el offset (-05:00, +01:00). Tambi\u00e9n puedes elegir una zona espec\u00edfica de un desplegable para convertir, \u00fatil al programar o depurar entre regiones. Los valores en milisegundos hacen round-trip exacto; la precisi\u00f3n sub-milisegundo se trunca (l\u00edmite de Date en JavaScript).",
+          answer: "Unix epoch es agn\u00f3stico a zona horaria (siempre UTC). La salida ISO 8601 muestra tanto UTC (sufijo Z) como tu zona horaria local con el offset (-05:00, +01:00). Tambi\u00e9n puedes elegir una zona espec\u00edfica de un desplegable para convertir, \u00fatil al programar o depurar entre regiones. Los valores en milisegundos vuelven exactos a su forma original; la precisi\u00f3n sub-milisegundo se trunca (l\u00edmite de Date en JavaScript).",
         },
         {
           question: "\u00bfCu\u00e1l es la diferencia entre segundos y milisegundos en epoch?",
