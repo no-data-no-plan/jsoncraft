@@ -16,6 +16,8 @@
         "description": "Encode text to Base64 or decode Base64 strings instantly. Free online Base64 converter — supports UTF-8, runs entirely in your browser.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -33,6 +35,8 @@
         "description": "Build and test cron expressions with a visual editor. See next 5 scheduled runs, use quick presets, or type expressions manually. Free cron generator.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -50,6 +54,8 @@
         "description": "Convert CSV data to JSON online for free. Automatic header detection, delimiter inference, and type conversion. Transform spreadsheet data into structured JSON instantly.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -67,6 +73,8 @@
         "description": "Compare two JSON documents online for free. See additions, deletions, and changes side by side. Real-time diffing, 100% in your browser.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -84,6 +92,8 @@
         "description": "Codifica texto a Base64 o decodifica cadenas Base64 instantáneamente. Conversor Base64 online gratuito — soporta UTF-8, se ejecuta completamente en tu navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -101,6 +111,8 @@
         "description": "Construye y prueba expresiones cron con un editor visual. Ve las próximas 5 ejecuciones programadas con descripciones en lenguaje natural.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -118,6 +130,8 @@
         "description": "Convierte datos CSV a JSON online gratis. Detección automática de cabeceras, inferencia de tipos y previsualización instantánea.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -135,6 +149,8 @@
         "description": "Compara dos documentos JSON online gratis. Ve adiciones, eliminaciones y cambios resaltados lado a lado. Comparación semántica — el orden de las claves no importa.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -152,6 +168,8 @@
         "description": "JSONCraft es un conjunto gratuito de 23 herramientas para desarrolladores — formateador, validador, diff, conversores YAML/CSV/TOML. 100% en navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -169,6 +187,8 @@
         "description": "Visualiza datos JSON como un diagrama de grafo interactivo. Explora nodos, colapsa ramas, desplázate y haz zoom. Gratis, privado, sin subida.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -186,6 +206,8 @@
         "description": "Genera hashes MD5, SHA-1, SHA-256, SHA-384 y SHA-512 desde cualquier texto. Generador de hash online gratuito usando Web Crypto API — se ejecuta en tu navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -203,6 +225,8 @@
         "description": "Valida datos JSON contra un JSON Schema con informes de error detallados. Soporta Draft-07. Todos los errores mostrados a la vez. Gratuito, privado, en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -220,6 +244,8 @@
         "description": "Convierte arrays JSON a CSV online gratis. Exporta datos JSON a CSV compatible con hojas de cálculo con aplanamiento automático. 100% en navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -237,6 +263,8 @@
         "description": "Convierte arrays JSON a tablas HTML limpias con vista previa en vivo. Descarga como archivo HTML o copia el código. Gratuito, privado, en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -254,6 +282,8 @@
         "description": "Convierte JSON a formato TOML online gratis. Salida TOML limpia con secciones, arrays y tablas anidadas. Ideal para archivos de configuración.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -271,6 +301,8 @@
         "description": "Convierte JSON a interfaces y tipos TypeScript instantáneamente. Genera interfaces limpias y tipadas desde cualquier estructura JSON. Gratuito, privado, en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -288,6 +320,8 @@
         "description": "Convierte JSON a YAML online gratis. YAML limpio y legible con sangría correcta. Perfecto para crear archivos de configuración desde JSON.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -305,6 +339,8 @@
         "description": "Prueba expresiones JSONPath online con resultados instantáneos. Evalúa consultas, ve el conteo de coincidencias y aprende la sintaxis. Playground gratis.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -322,6 +358,8 @@
         "description": "Prueba expresiones regulares con coincidencias en tiempo real, grupos de captura y resultados resaltados. Flags i/g/m/s/u/y. Playground gratis.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -339,6 +377,8 @@
         "description": "Convierte timestamps Unix a fechas legibles y fechas a timestamps. Reloj en vivo, visualización UTC/local/ISO. Gratuito, privado, en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -356,6 +396,8 @@
         "description": "Convierte archivos TOML a JSON online gratis. Soporte completo de TOML v1.0 con tablas, arrays y datetimes.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -373,6 +415,8 @@
         "description": "Codifica o decodifica URLs y cadenas de consulta para transmisión segura. Soporta modos encodeURIComponent y encodeURI. Gratuito, privado, en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -390,6 +434,8 @@
         "description": "Genera identificadores UUID v4 aleatorios instantáneamente. Generación masiva, opción de mayúsculas, copiar al portapapeles. Gratuito, privado, en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -407,6 +453,8 @@
         "description": "Explora JSON como árbol interactivo colapsable. Navega estructuras anidadas complejas, expande y colapsa nodos al instante. Gratis, en navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -424,6 +472,8 @@
         "description": "Formatea, embellece y minifica XML online gratis. Sangría correcta, validación de sintaxis y minificación con un clic., en el navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -441,6 +491,8 @@
         "description": "Convierte YAML a JSON online gratis. Conversión instantánea y precisa con soporte completo de YAML incluyendo archivos multi-documento, anclas y estructuras anidadas.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -458,6 +510,8 @@
         "description": "Valida la sintaxis YAML online con mensajes de error detallados y números de línea. Ve exactamente dónde está el problema. 100% en navegador.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "es-ES",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -475,6 +529,8 @@
         "description": "JSONCraft is a free suite of 22 browser-based developer tools — JSON formatter, validator, diff, YAML/CSV/TOML converters. 100% client-side.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -492,6 +548,8 @@
         "description": "Visualize JSON data as an interactive graph diagram. Explore nodes, collapse branches, pan and zoom. Free, private, no upload.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -509,6 +567,8 @@
         "description": "Generate MD5, SHA-1, SHA-256, SHA-384 and SHA-512 hashes from any text. Free online hash generator using Web Crypto API — runs in your browser.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -526,6 +586,8 @@
         "description": "Validate JSON data against a JSON Schema with detailed error reports. Supports Draft-07. All errors shown at once. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -543,6 +605,8 @@
         "description": "Convert JSON arrays to CSV online for free. Export JSON data to spreadsheet-friendly CSV with auto-flattening of nested fields. 100% client-side.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -560,6 +624,8 @@
         "description": "Convert JSON arrays to clean HTML tables with live preview. Download as HTML file or copy the code. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -577,6 +643,8 @@
         "description": "Convert JSON to TOML configuration format online for free. Clean TOML output with proper sections and typed values. Handles null values and mixed arrays automatically.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -594,6 +662,8 @@
         "description": "Convert JSON to TypeScript interfaces and types instantly. Generates clean, typed interfaces from any JSON structure. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -611,6 +681,8 @@
         "description": "Convert JSON to YAML online for free. Get clean, readable YAML output with proper indentation. Perfect for creating configuration files from JSON data. 100% client-side.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -628,6 +700,8 @@
         "description": "Test JSONPath expressions online with instant results. Evaluate queries, see match counts, and learn JSONPath with built-in examples. Free playground.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -645,6 +719,8 @@
         "description": "Test regular expressions with real-time matching, capture groups, and highlighted results. Free regex playground — runs entirely in your browser.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -662,6 +738,8 @@
         "description": "Convert Unix timestamps to human-readable dates and dates to timestamps. Live clock, UTC/local/ISO display. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -679,6 +757,8 @@
         "description": "Convert TOML configuration files to JSON online. Full TOML v1.0 support with tables, arrays, and datetimes. Browser-based, no upload needed.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -696,6 +776,8 @@
         "description": "Encode or decode URLs and query strings for safe transmission. Supports encodeURIComponent and encodeURI modes. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -713,6 +795,8 @@
         "description": "Generate random UUID v4 identifiers instantly. Bulk generation, uppercase option, copy to clipboard. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -730,6 +814,8 @@
         "description": "Explore JSON as an interactive collapsible tree. Navigate complex nested structures, expand and collapse nodes instantly. Free, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -747,6 +833,8 @@
         "description": "Format, prettify and minify XML online for free. Proper indentation, syntax validation, and one-click minification.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -764,6 +852,8 @@
         "description": "Convert YAML to JSON online for free. Instant conversion with full YAML support — multi-document, anchors, nested structures. No data uploaded.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -781,6 +871,8 @@
         "description": "Validate YAML syntax online with detailed error messages and line numbers. See parsed JSON output. Supports multi-document YAML. Free, private, browser-based.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
           "price": "0",
