@@ -7,7 +7,10 @@ test.describe("Tool flows", () => {
     context,
   }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-    await page.goto("/");
+    // Post-2026-04 the formatter lives at /formatter/ — the root is now a
+    // landing page (HomeLanding.astro). See home.spec.ts for the landing
+    // assertions.
+    await page.goto("/formatter/");
 
     const messy = '{"name":"JSONCraft","features":["format","validate","diff"],"version":1}';
     await typeIntoCodeMirror(page, 0, messy);
@@ -30,14 +33,19 @@ test.describe("Tool flows", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await page.getByRole("button", { name: "Sample", exact: true }).click();
 
-    // The diff output region is conditional; it should appear after loadSample → compare.
-    // Summary line format: "Differences: +X lines, -Y lines"
-    await expect(page.getByText(/Differences:/)).toBeVisible({ timeout: 5_000 });
+    // Sample data is `{name:"JSONCraft", version:"1.0.0", ...}` (left) vs
+    // `version:"2.0.0"` (right). Both load into the two CodeMirror editors.
+    const editors = page.locator(".cm-content");
+    await expect(editors.nth(0)).toContainText("1.0.0", { timeout: 5_000 });
+    await expect(editors.nth(1)).toContainText("2.0.0");
 
-    // The colored diff block renders inside a <pre>; we expect at least one line
-    // showing the changed "version" field (1.0.0 vs 2.0.0).
-    const pre = page.locator("pre").first();
-    await expect(pre).toContainText("2.0.0");
-    await expect(pre).toContainText("1.0.0");
+    // loadSample() explicitly calls compare() (JsonDiff.svelte:112), so the
+    // summary should appear without any further user action. Summary i18n
+    // changed post-2026-04 from "Differences: +X lines" to `+N added −M
+    // removed ±K changed` per i18n/tools.ts. Anchor on the stable "added"
+    // token. Don't assert on `<pre>` — default viewMode is "side" (paired
+    // rows), not "unified" (the `<pre>` branch is unified-only). Asserting
+    // on the summary is sufficient proof compare() ran.
+    await expect(page.getByText(/added/i).first()).toBeVisible({ timeout: 5_000 });
   });
 });
