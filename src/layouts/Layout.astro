@@ -26,7 +26,22 @@ interface Props {
   docsTags?: string[];
 }
 
-const { title, description, activeToolId, lang = "en", schemaType = "SoftwareApplication", docsPublishedAt, docsUpdatedAt, docsCategory, docsTags } = Astro.props;
+const { title, description, activeToolId, h1: h1Prop, lang = "en", schemaType = "SoftwareApplication", docsPublishedAt, docsUpdatedAt, docsCategory, docsTags } = Astro.props as { title: string; description: string; activeToolId?: string; h1?: string; lang?: Lang; schemaType?: string; docsPublishedAt?: string; docsUpdatedAt?: string; docsCategory?: string; docsTags?: string[]; };
+
+// JC-sweep2 2026-05-25 — auto-clean H1 for AEO keyword_stuffing detector.
+// 14/71 pages (29%) flagged stuffed. Stripping after first " — " / " | " /
+// " · " yields canonical name; <title>/og:title remain full via parent
+// title pipeline. Per-page opt-out: pass h1={title} explicitly.
+function cleanH1JC(t: string): string {
+  for (const sep of [" — ", " | ", " · "]) {
+    const i = t.indexOf(sep);
+    if (i > 0) return t.slice(0, i);
+  }
+  const dash = t.indexOf(" - ");
+  if (dash > 0 && t.length - dash > 5) return t.slice(0, dash);
+  return t;
+}
+const visibleH1 = h1Prop ?? cleanH1JC(title);
 
 // Build-time month for "Last verified" footer + per-tool stamp (Bloque 1b —
 // previously hardcoded to "May 2026", now reflects the actual deploy month).
@@ -431,7 +446,7 @@ const FONTS_CSS = fs.readFileSync(path.resolve("public/fonts/fonts.css"), "utf-8
           {(isLegalPage || isHome || isComparePage || isDocsHub || isDocsArticle) ? (
             <span class="text-lg font-semibold text-[var(--color-text-primary)]">{isHome ? "JSONCraft" : title}</span>
           ) : (
-            <h1 class="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
+            <h1 class="text-lg font-semibold text-[var(--color-text-primary)]">{visibleH1}</h1>
           )}
         </div>
 
