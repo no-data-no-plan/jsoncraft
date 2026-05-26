@@ -1,27 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-const LAST_UPDATED = "2026-04-27";
+const LAST_UPDATED = "2026-05-26";
 ---
 
 <Layout
   title="Acerca de — JSONCraft"
-  description="Acerca de JSONCraft: quiénes somos, por qué existen estas herramientas de desarrollador, cómo se financia el sitio."
+  description="Acerca de JSONCraft: quién lo construye, qué librerías JavaScript hacen el parsing, qué RFCs y estándares se siguen, cómo funcionan las herramientas en tu navegador y cómo se financia el sitio."
   activeToolId=""
+  lang="es"
 >
   <article class="p-6 sm:p-8 max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-muted);">
     <header class="space-y-1">
       <h1 class="text-2xl font-bold" style="color: var(--color-text);">Acerca de JSONCraft</h1>
-      <p class="text-xs" style="color: var(--color-text-dim);">Última actualización: 2026-04-27</p>
+      <p class="text-xs" style="color: var(--color-text-dim);">Última actualización: {LAST_UPDATED}</p>
     </header>
 
     <section class="space-y-2">
       <h2 class="text-lg font-semibold" style="color: var(--color-text);">Qué es</h2>
-      <p>JSONCraft es un conjunto de 23 herramientas de desarrollador gratuitas que se ejecutan íntegramente en tu navegador. 23 herramientas gratuitas para JSON, YAML, CSV, TOML y XML — formatear, validar, comparar, convertir y visualizar. Ningún archivo que cargues ni ningún valor que escribas se envía a un servidor — cada cálculo, conversión o transformación ocurre localmente en tu dispositivo, y el resultado sólo lo ves tú.</p>
+      <p>JSONCraft es un conjunto de 23 herramientas gratuitas para desarrolladores que se ejecutan íntegramente en tu navegador — formateadores, validadores, conversores y generadores para JSON, YAML, CSV, TOML, XML, regex, base64, hashes, UUIDs, timestamps y expresiones cron. Ningún archivo que cargues ni ningún valor que escribas se envía a un servidor. Cada parseo, transformación y conversión ocurre localmente en tu dispositivo, y el resultado solo lo ves tú.</p>
     </section>
 
     <section class="space-y-2">
       <h2 class="text-lg font-semibold" style="color: var(--color-text);">Por qué existe</h2>
-      <p>La mayoría de herramientas de desarrollador online siguen el mismo patrón: una página lenta llena de anuncios intrusivos, un muro de pago que esconde las funciones realmente útiles, un registro forzado y un paso de subida que pone tus datos en el servidor de otro. Tras tropezar una vez de más con eso, el operador (un desarrollador independiente afincado en España) empezó a construir alternativas autónomas, una herramienta cada vez. JSONCraft es el resultado para la categoría de desarrollador.</p>
+      <p>La mayoría de herramientas para desarrolladores online siguen el mismo patrón: una página lenta llena de anuncios intrusivos, un muro de pago que esconde las funciones realmente útiles, un registro forzado y un paso de subida que pone tus datos en el servidor de otro. Tras tropezar una vez de más con eso, el operador (un desarrollador independiente afincado en España) empezó a construir alternativas autónomas, una herramienta cada vez. JSONCraft es el resultado para la categoría de desarrollador.</p>
       <p>La filosofía de diseño no ha cambiado desde el primer commit: cada herramienta debe funcionar sin cuenta, sin subir nada sensible y sin esconder la función obvia tras un botón "Pro". Si una función necesita realmente cómputo en servidor, se documenta como tal y se ofrece la alternativa.</p>
     </section>
 
@@ -38,13 +39,58 @@ const LAST_UPDATED = "2026-04-27";
     </section>
 
     <section class="space-y-2">
-      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Stack y apertura</h2>
-      <p>El sitio está construido con Astro, Svelte 5 y Tailwind CSS 4, desplegado en Cloudflare Pages, y no usa trackers de terceros más allá de Google Analytics 4 agregado (con consentimiento UE/UK puesto en "denegado" por defecto). Las entradas de las herramientas nunca salen de tu navegador, así que no hay nada en un servidor sobre lo que preguntar bajo el Artículo 15 del RGPD — pero si quieres saber qué recopilamos, la <a href="/es/privacy/" class="underline" style="color: var(--color-accent);">Política de Privacidad</a> lo detalla.</p>
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Cómo funcionan las herramientas en tu navegador</h2>
+      <p>El sitio está construido con Astro, Svelte 5 y Tailwind CSS 4, desplegado en Cloudflare Pages. Cada herramienta delega en una librería open-source bien probada o en una API nativa del navegador en lugar de reinventar el parser:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li><strong>JSON</strong> — el formateador, viewer, graph, JSONPath y JSON Schema usan los nativos <code>JSON.parse</code> y <code>JSON.stringify</code>; la validación de esquemas usa <strong>Ajv</strong>.</li>
+        <li><strong>YAML / TOML</strong> — <strong>js-yaml</strong> para parseo y serialización de YAML; <strong>@iarna/toml</strong> para TOML.</li>
+        <li><strong>CSV</strong> — <strong>PapaParse</strong>, configurable para delimitadores, campos entre comillas y convenciones de salto de línea.</li>
+        <li><strong>XML</strong> — <code>DOMParser</code> nativo + XSLT para el formateo.</li>
+        <li><strong>Hashes</strong> — la <strong>Web Crypto API</strong> con <code>SubtleCrypto.digest</code> para SHA-1, SHA-256 y SHA-512; la familia SHA-3 viene de un polyfill auditado cuando el navegador no la expone.</li>
+        <li><strong>UUIDs</strong> — Web Crypto <code>crypto.randomUUID()</code> para v4 (conforme a RFC 4122).</li>
+        <li><strong>Tester de regex</strong> — el motor RegExp nativo de tu navegador (V8 en Chrome/Edge, SpiderMonkey en Firefox, JavaScriptCore en Safari). Las diferencias de comportamiento en lookbehind o escapes de propiedades unicode dependen del motor, no de un polyfill.</li>
+        <li><strong>Base64 / codificación URL</strong> — los nativos <code>btoa</code>/<code>atob</code> + <code>TextEncoder</code>/<code>TextDecoder</code> para round-trip Unicode-safe.</li>
+        <li><strong>Constructor de expresiones cron</strong> — parser propio que sigue cron POSIX más las extensiones Quartz (<code>?</code>, <code>L</code>, <code>W</code>, <code>#</code>); la previsualización del próximo disparo se calcula en tu navegador.</li>
+      </ul>
+      <p>No hay trackers de terceros más allá de Google Analytics 4 agregado (con consentimiento UE/UK puesto en "denegado" por defecto). Las entradas nunca salen de tu navegador, así que no hay nada en un servidor sobre lo que preguntar bajo el Artículo 15 del RGPD — el flujo completo de datos está documentado en la <a href="/es/privacy/" class="underline" style="color: var(--color-accent);">Política de Privacidad</a>.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Estándares que seguimos</h2>
+      <p>Cuando una herramienta implementa una especificación publicada, la implementación intenta seguir el spec al pie de la letra en lugar de un subset permisivo. Si encuentras una discrepancia, el bug está en la herramienta, no en el spec.</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li><strong>JSON</strong> — <a href="https://www.rfc-editor.org/rfc/rfc8259" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 8259</a> y ECMA-404.</li>
+        <li><strong>YAML</strong> — YAML 1.2 (cubriendo las particularidades de compatibilidad con YAML 1.1 para booleanos tipo <code>yes</code>/<code>no</code>).</li>
+        <li><strong>TOML</strong> — TOML 1.0.0 (la librería @iarna/toml aún no ha subido a TOML 1.1.0; las funciones nuevas de 1.1.0 como la sintaxis extendida de tablas inline pueden parsearse incorrectamente).</li>
+        <li><strong>CSV</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 4180</a> con manejo opcional del BOM UTF-8.</li>
+        <li><strong>UUIDs</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4122" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 4122</a> (solo v4 — aleatorio, no basado en nombre).</li>
+        <li><strong>Base64</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4648" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 4648</a> estándar + variante URL-safe.</li>
+        <li><strong>JSON Schema</strong> — draft 2020-12 (drafts anteriores validados vía modos de compatibilidad de Ajv).</li>
+        <li><strong>JSONPath</strong> — sintaxis de Goessner (la referencia de facto; el más reciente <a href="https://www.rfc-editor.org/rfc/rfc9535" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 9535</a>, Standards Track desde febrero 2024, tiene pequeñas diferencias que nuestra implementación aún no adopta).</li>
+        <li><strong>Cron</strong> — POSIX 1003.2 con extensiones Quartz; el constructor deja el dialecto explícito.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Pensado para humanos y motores de IA</h2>
+      <p>Cada página de herramienta emite un esquema JSON-LD <code>HowTo</code> con los pasos reales para usar esa herramienta. Esto es invisible para lectores humanos (vive en el bloque de structured data de la página) pero visible para motores de IA como ChatGPT, Perplexity, Bing AI y Claude cuando rastrean la página para extracción de citas. Por eso un asistente al que le preguntas "cómo formateo JSON" o "cómo construyo una expresión cron" puede dar una respuesta corta y precisa enlazando a la herramienta concreta de JSONCraft — los pasos vienen de la misma fuente que mueve la UI, no del mejor pronóstico de un LLM.</p>
+      <p>Google retiró el rich-result HowTo del SERP para páginas no de recetas en agosto de 2023, pero los datos estructurados de schema.org siguen siendo la capa semántica canónica de una página para los crawlers. JSONCraft lo mantiene porque el lift de citas en motores de IA es medible en los logs de bots (GPTBot, PerplexityBot, ClaudeBot, CCBot), independientemente de que Google renderice un snippet enriquecido.</p>
     </section>
 
     <section class="space-y-2">
       <h2 class="text-lg font-semibold" style="color: var(--color-text);">Independencia editorial</h2>
       <p>La red publicitaria (Google AdSense) no influye en qué herramientas se construyen ni cómo funcionan. No hay artículos patrocinados, ni listas "los mejores de" empujando enlaces de afiliado, ni decisiones editoriales tomadas para favorecer a un anunciante. Si una herramienta existe en el sitio, es porque fue suficientemente útil al operador como para construirla.</p>
     </section>
+
+    <nav aria-label="Más herramientas gratuitas" class="border-t pt-6 mt-2" style="border-color: var(--color-border);">
+      <p class="text-[11px] uppercase tracking-wider mb-3" style="color: var(--color-text-dim);">Más herramientas gratuitas del mismo operador</p>
+      <ul class="space-y-2 list-none p-0 text-xs">
+        <li><a href="https://openpdf.app/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">OpenPDF</strong></a> — combina, divide, firma, marca de agua y comprime PDFs en tu navegador</li>
+        <li><a href="https://compoundvision.app/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">CompoundVision</strong></a> — 36 calculadoras financieras (interés compuesto, FIRE, DCA, APY, asignación)</li>
+        <li><a href="https://openimages.app/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">OpenImages</strong></a> — convierte, comprime, redimensiona y vectoriza imágenes</li>
+        <li><a href="https://pingthat.dev/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">PingThat</strong></a> — ping, DNS, headers, SSL, puertos, decodificador JWT</li>
+        <li><a href="https://allyouneed.dev/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">AllYouNeed</strong></a> — más de 90 utilidades, calculadoras y conversores gratuitos</li>
+      </ul>
+    </nav>
   </article>
 </Layout>

@@ -1,22 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const LAST_UPDATED = "2026-04-27";
+const LAST_UPDATED = "2026-05-26";
 ---
 
 <Layout
   title="About — JSONCraft"
-  description="About JSONCraft: who we are, why these developer tools exist, how the site is funded."
+  description="About JSONCraft: who builds it, which JavaScript libraries do the parsing, which RFCs and standards are followed, how the tools work in your browser, and how the site is funded."
   activeToolId=""
 >
   <article class="p-6 sm:p-8 max-w-3xl mx-auto space-y-8 text-sm" style="color: var(--color-text-muted);">
     <header class="space-y-1">
       <h1 class="text-2xl font-bold" style="color: var(--color-text);">About JSONCraft</h1>
-      <p class="text-xs" style="color: var(--color-text-dim);">Last updated: 2026-04-27</p>
+      <p class="text-xs" style="color: var(--color-text-dim);">Last updated: {LAST_UPDATED}</p>
     </header>
 
     <section class="space-y-2">
       <h2 class="text-lg font-semibold" style="color: var(--color-text);">What this is</h2>
-      <p>JSONCraft is a suite of 23 free developer tools that run entirely in your browser. 23 free developer tools for json, yaml, csv, toml and xml — format, validate, diff, convert and visualize. No file you load and no value you type is uploaded to a server — every calculation, conversion or transformation happens locally on your device, and the result is visible only to you.</p>
+      <p>JSONCraft is a suite of 23 free developer tools that run entirely in your browser — formatters, validators, converters and generators for JSON, YAML, CSV, TOML, XML, regex, base64, hashes, UUIDs, timestamps and cron expressions. No file you load and no value you type is uploaded to a server. Every parse, transform and conversion happens locally on your device, and the result is visible only to you.</p>
     </section>
 
     <section class="space-y-2">
@@ -38,13 +38,58 @@ const LAST_UPDATED = "2026-04-27";
     </section>
 
     <section class="space-y-2">
-      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Stack and openness</h2>
-      <p>The site is built with Astro, Svelte 5 and Tailwind CSS 4, deployed on Cloudflare Pages, and uses no third-party trackers beyond aggregate Google Analytics 4 (with EU/UK consent gated to "denied" by default). Tool inputs never leave your browser, so there is nothing on a server to ask about under GDPR Article 15 — but if you want to know what we collect, the <a href="/privacy/" class="underline" style="color: var(--color-accent);">Privacy Policy</a> spells it out fully.</p>
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">How tools work in your browser</h2>
+      <p>The site is built with Astro, Svelte 5 and Tailwind CSS 4, deployed on Cloudflare Pages. Each tool delegates to a well-tested open-source library or to a native browser API rather than reinventing the parser:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li><strong>JSON</strong> — formatter, viewer, graph, JSONPath and JSON Schema use the native <code>JSON.parse</code> and <code>JSON.stringify</code>; schema validation uses <strong>Ajv</strong>.</li>
+        <li><strong>YAML / TOML</strong> — <strong>js-yaml</strong> for YAML parsing and serialization; <strong>@iarna/toml</strong> for TOML.</li>
+        <li><strong>CSV</strong> — <strong>PapaParse</strong>, configurable for delimiters, quoted fields and newline conventions.</li>
+        <li><strong>XML</strong> — native <code>DOMParser</code> + XSLT for formatting.</li>
+        <li><strong>Hashes</strong> — <strong>Web Crypto API</strong> <code>SubtleCrypto.digest</code> for SHA-1, SHA-256 and SHA-512; SHA-3 family from an audited polyfill where the browser does not expose it.</li>
+        <li><strong>UUIDs</strong> — Web Crypto <code>crypto.randomUUID()</code> for v4 (RFC 4122 conformant).</li>
+        <li><strong>Regex tester</strong> — your browser's native RegExp engine (V8 on Chrome/Edge, SpiderMonkey on Firefox, JavaScriptCore on Safari). Behaviour differences for lookbehind and unicode property escapes follow the engine, not a polyfill.</li>
+        <li><strong>Base64 / URL encode</strong> — native <code>btoa</code>/<code>atob</code> + <code>TextEncoder</code>/<code>TextDecoder</code> for Unicode-safe round-tripping.</li>
+        <li><strong>Cron expression builder</strong> — own parser that follows POSIX cron plus the Quartz extensions (<code>?</code>, <code>L</code>, <code>W</code>, <code>#</code>); next-run preview computes in your browser.</li>
+      </ul>
+      <p>No third-party trackers run beyond aggregate Google Analytics 4 (with EU/UK consent gated to "denied" by default). Tool inputs never leave your browser, so there is nothing on a server to ask about under GDPR Article 15 — the full data flow is documented in the <a href="/privacy/" class="underline" style="color: var(--color-accent);">Privacy Policy</a>.</p>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Standards we follow</h2>
+      <p>Where a tool implements a published specification, the implementation aims to follow the spec verbatim rather than a forgiving subset. If a discrepancy is found, the bug is in the tool, not in the spec.</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li><strong>JSON</strong> — <a href="https://www.rfc-editor.org/rfc/rfc8259" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 8259</a> and ECMA-404.</li>
+        <li><strong>YAML</strong> — YAML 1.2 (covering YAML 1.1 compatibility quirks for booleans like <code>yes</code>/<code>no</code>).</li>
+        <li><strong>TOML</strong> — TOML 1.0.0 (the @iarna/toml library has not yet upgraded to TOML 1.1.0; new 1.1.0 features like extended inline-table syntax may parse incorrectly).</li>
+        <li><strong>CSV</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 4180</a> with optional UTF-8 BOM handling.</li>
+        <li><strong>UUIDs</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4122" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 4122</a> (v4 only — random, not name-based).</li>
+        <li><strong>Base64</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4648" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 4648</a> standard + URL-safe variant.</li>
+        <li><strong>JSON Schema</strong> — draft 2020-12 (older drafts validated via Ajv compatibility modes).</li>
+        <li><strong>JSONPath</strong> — Goessner's syntax (the de facto reference; the newer <a href="https://www.rfc-editor.org/rfc/rfc9535" target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">RFC 9535</a>, Standards Track since February 2024, has small differences our implementation has not adopted yet).</li>
+        <li><strong>Cron</strong> — POSIX 1003.2 with Quartz extensions; the builder makes the dialect explicit.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-2">
+      <h2 class="text-lg font-semibold" style="color: var(--color-text);">Built for humans and AI engines</h2>
+      <p>Each tool page emits a JSON-LD <code>HowTo</code> schema with the actual step-by-step instructions for using that tool. This is invisible to human readers (it lives in the page's structured-data block) but visible to AI engines like ChatGPT, Perplexity, Bing AI and Claude when they scrape the page for citation extraction. That is why an AI assistant asked "how do I format JSON" or "how do I build a cron expression" can give a short, accurate answer linking back to the specific JSONCraft tool — the steps come from the same source that drives the in-page UI, not from an LLM's best guess.</p>
+      <p>Google deprecated the HowTo SERP rich-result for non-recipe pages in August 2023, but schema.org structured data remains the canonical semantic layer of a page for crawlers. JSONCraft keeps it because AI-engine citation lift is measurable in bot-traffic logs (GPTBot, PerplexityBot, ClaudeBot, CCBot), independent of whether Google renders a rich snippet.</p>
     </section>
 
     <section class="space-y-2">
       <h2 class="text-lg font-semibold" style="color: var(--color-text);">Editorial independence</h2>
       <p>The advertising network (Google AdSense) does not influence which tools are built or how they work. There are no sponsored articles, no "best of" lists pushing affiliate links, and no editorial choices made to favour an advertiser. If a tool exists on the site, it is because it was useful enough to the operator to build and ship it.</p>
     </section>
+
+    <nav aria-label="More free tools" class="border-t pt-6 mt-2" style="border-color: var(--color-border);">
+      <p class="text-[11px] uppercase tracking-wider mb-3" style="color: var(--color-text-dim);">More free tools from the same operator</p>
+      <ul class="space-y-2 list-none p-0 text-xs">
+        <li><a href="https://openpdf.app/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">OpenPDF</strong></a> — merge, split, sign, watermark, compress PDFs in your browser</li>
+        <li><a href="https://compoundvision.app/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">CompoundVision</strong></a> — 36 financial calculators (compound interest, FIRE, DCA, APY, allocation)</li>
+        <li><a href="https://openimages.app/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">OpenImages</strong></a> — convert, compress, resize, vectorize images</li>
+        <li><a href="https://pingthat.dev/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">PingThat</strong></a> — ping, DNS, headers, SSL, ports, JWT decoder</li>
+        <li><a href="https://allyouneed.dev/" class="underline" style="color: var(--color-text-muted);"><strong style="color: var(--color-text);">AllYouNeed</strong></a> — 90+ free utility tools, calculators, converters</li>
+      </ul>
+    </nav>
   </article>
 </Layout>
