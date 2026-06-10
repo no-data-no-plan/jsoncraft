@@ -93,6 +93,13 @@ export async function onRequest(context) {
 
   let response = await context.next();
 
+  // A 304 has no body: the browser keeps its cached HTML (old nonces), so
+  // stamping a fresh nonce-CSP header here would silently kill every inline
+  // script on revalidation (the openpdf 304-desync bug class). Pass through.
+  if (response.status === 304) {
+    return response;
+  }
+
   // Generate a per-request nonce and rewrite HTML to inject it into <script> tags.
   // Only text/html responses are touched; JS/CSS/image assets stream through as-is.
   const contentType = response.headers.get('content-type') || '';
