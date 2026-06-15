@@ -66,7 +66,7 @@ astro-static-slot {
 }
 
 html {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: "Inter", "Inter Fallback", system-ui, -apple-system, sans-serif;
   scrollbar-gutter: stable;
 }
 

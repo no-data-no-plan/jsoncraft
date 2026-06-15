@@ -1,5 +1,18 @@
 /* Self-hosted Inter and JetBrains Mono (variable weight) */
 
+/* Inter Fallback — metric-overridden Arial/Helvetica so the pre-Inter render
+   matches Inter's metrics; with font-display:swap the swap is a visual no-op
+   → no FOUT/reflow ("flash of text" on first visit). Mirrors OpenPDF/OpenImages.
+   Numbers from web.dev/articles/font-fallbacks Inter→Arial. */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local("Arial"), local("Helvetica");
+  ascent-override: 90.20%;
+  descent-override: 22.48%;
+  line-gap-override: 0%;
+  size-adjust: 107.40%;
+}
+
 /* Inter — latin-ext */
 @font-face {
   font-family: 'Inter';
