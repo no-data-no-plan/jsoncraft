@@ -7,11 +7,15 @@ export const formatLabels: Record<Format, string> = {
   csv: "CSV",
 };
 
+// Picker `accept` per source format. MIME-only where a universal type exists
+// (json/csv) so mobile browsers don't widen the picker to camera/mic; yaml/toml
+// keep extension tokens because they have no widely-recognized MIME (MIME-only
+// would grey out the file in desktop pickers). Content is validated after read.
 export const extMap: Record<Format, string> = {
-  json: ".json",
+  json: "application/json",
   yaml: ".yaml,.yml",
   toml: ".toml",
-  csv: ".csv",
+  csv: "text/csv,application/vnd.ms-excel",
 };
 
 export const downloadExtMap: Record<Format, string> = {

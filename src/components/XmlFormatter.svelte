@@ -137,7 +137,7 @@
   }
 
   async function upload() {
-    const text = await uploadFile(".xml");
+    const text = await uploadFile("application/xml,text/xml");
     if (text) { input = text; format(); }
   }
 

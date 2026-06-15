@@ -168,7 +168,7 @@
 
   async function handleUpload() {
     try {
-      const text = await uploadFile(".json");
+      const text = await uploadFile("application/json");
       handleInput(text);
       input = text;
     } catch (e: any) {
