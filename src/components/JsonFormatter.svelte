@@ -240,32 +240,32 @@
     <button
       onclick={format}
       title={`${t(lang, "format")} (${modKey}+Enter)`}
-      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors inline-flex items-center gap-1.5"
+      class="px-3 py-2.5 min-h-[44px] rounded text-sm font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors inline-flex items-center gap-1.5"
     >
       <span>{t(lang, "format")}</span>
       <kbd class="hidden sm:inline px-1 py-0.5 rounded text-[10px] font-mono bg-white/20" aria-hidden="true">{modKey}+Enter</kbd>
     </button>
     <button
       onclick={minify}
-      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
+      class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "minify")}
     </button>
     <button
       onclick={handleUpload}
-      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
+      class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "upload")}
     </button>
     <button
       onclick={clear}
-      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
+      class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "clear")}
     </button>
     <button
       onclick={handleSample}
-      class="px-3 py-1.5 rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
+      class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded text-sm font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
     >
       {t(lang, "sample")}
     </button>
@@ -322,7 +322,7 @@
         <span class="text-xs text-[var(--color-text-muted)]">{t(lang, "input")}</span>
         <button
           onclick={() => copyText(input)}
-          class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center min-h-[44px] px-2 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
           title={tt("formatter", lang, "copyInput")}
         >
           {t(lang, "copy")}
@@ -348,14 +348,14 @@
         <div class="flex items-center gap-2">
           <button
             onclick={() => copyText(output)}
-            class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            class="inline-flex items-center min-h-[44px] px-2 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
             title={tt("formatter", lang, "copyOutput")}
           >
             {t(lang, "copy")}
           </button>
           <button
             onclick={handleDownload}
-            class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            class="inline-flex items-center min-h-[44px] px-2 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
             title={tt("formatter", lang, "downloadOutput")}
           >
             {t(lang, "download")}

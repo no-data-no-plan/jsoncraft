@@ -51,7 +51,7 @@ const groups = [
       href={lang === "es" ? "/es/docs/" : "/docs/"}
       aria-current={activeToolId === "docs" ? "page" : undefined}
       class:list={[
-        "flex items-center gap-2 px-2 py-1.5 text-xs font-medium rounded transition-colors",
+        "flex items-center gap-2 px-2 py-1.5 min-h-[44px] text-xs font-medium rounded transition-colors",
         activeToolId === "docs"
           ? "text-[var(--color-accent-fg)] bg-[var(--color-bg-tertiary)]"
           : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]",
@@ -82,7 +82,7 @@ const groups = [
                 draggable="false"
                 aria-current={isActive ? "page" : undefined}
                 class:list={[
-                  "flex items-center gap-2 px-4 py-1.5 mx-2 rounded text-sm transition-colors",
+                  "flex items-center gap-2 px-4 py-1.5 mx-2 min-h-[44px] rounded text-sm transition-colors",
                   isActive
                     ? "bg-[var(--color-accent)]/15 text-[var(--color-accent-fg)] font-medium"
                     : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)]",
